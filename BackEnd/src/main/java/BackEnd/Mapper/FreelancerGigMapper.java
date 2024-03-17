@@ -1,12 +1,12 @@
 package BackEnd.Mapper;
 
-import BackEnd.DTO.FreelancerGigsDto;
+import BackEnd.DTO.FreelancerGigsDTO;
 import BackEnd.entity.FreelancerGigs;
 
 public class FreelancerGigMapper {
 
-    public static FreelancerGigsDto mapToFreelancerGigsDto(FreelancerGigs freelancerGigs){
-        return new FreelancerGigsDto(
+    public static FreelancerGigsDTO mapToFreelancerGigsDto(FreelancerGigs freelancerGigs){
+        return new FreelancerGigsDTO(
                 freelancerGigs.getGigId(),
                 freelancerGigs.getGigTitle(),
                 freelancerGigs.getGigDescription(),
@@ -14,7 +14,7 @@ public class FreelancerGigMapper {
         );
     }
 
-    public static FreelancerGigs mapToFreelancerGigs(FreelancerGigsDto freelancerGigsDto){
+    public static FreelancerGigs mapToFreelancerGigs(FreelancerGigsDTO freelancerGigsDto){
         return new FreelancerGigs(
                 freelancerGigsDto.getGigId(),
                 freelancerGigsDto.getGigTitle(),
