@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ServicePackageDTO {
+public class GigPackageDTO {
     private long packageId;
     private String packageName;
     private String packageDescription;

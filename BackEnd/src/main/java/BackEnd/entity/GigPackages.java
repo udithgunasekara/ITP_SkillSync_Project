@@ -11,8 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "service_packages")
-public class ServicePackages {
+@Table(name = "gig_packages")
+public class GigPackages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

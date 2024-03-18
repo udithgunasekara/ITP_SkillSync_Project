@@ -1,11 +1,11 @@
 package BackEnd.Mapper;
 
-import BackEnd.DTO.ServicePackageDTO;
-import BackEnd.entity.ServicePackages;
+import BackEnd.DTO.GigPackageDTO;
+import BackEnd.entity.GigPackages;
 
-public class ServicePackageMapper {
-    public static ServicePackageDTO mapToPackageDto(ServicePackages aPackage){
-        return new ServicePackageDTO(
+public class GigPackageMapper {
+    public static GigPackageDTO mapToPackageDto(GigPackages aPackage){
+        return new GigPackageDTO(
                 aPackage.getPackageId(),
                 aPackage.getPackageName(),
                 aPackage.getPackageDescription(),
@@ -13,8 +13,8 @@ public class ServicePackageMapper {
         );
     }
 
-    public static ServicePackages mapToPackage(ServicePackageDTO servicePackageDto){
-        return new ServicePackages(
+    public static GigPackages mapToPackage(GigPackageDTO servicePackageDto){
+        return new GigPackages(
                 servicePackageDto.getPackageId(),
                 servicePackageDto.getPackageName(),
                 servicePackageDto.getPackageDescription(),
