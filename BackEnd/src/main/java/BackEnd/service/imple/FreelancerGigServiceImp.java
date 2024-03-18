@@ -1,6 +1,6 @@
 package BackEnd.service.imple;
 
-import BackEnd.DTO.FreelancerGigsDto;
+import BackEnd.DTO.FreelancerGigsDTO;
 import BackEnd.Exceptions.ResourceNotFound;
 import BackEnd.Mapper.FreelancerGigMapper;
 import BackEnd.entity.FreelancerGigs;
@@ -19,14 +19,14 @@ public class FreelancerGigServiceImp implements FreelancerGigService {
     private final FreelancerGigsRepo freelancerGigsRepo;
 
     @Override
-    public FreelancerGigsDto createGig(FreelancerGigsDto freelancerGigsDto) {
+    public FreelancerGigsDTO createGig(FreelancerGigsDTO freelancerGigsDto) {
         FreelancerGigs freelancerGigs = FreelancerGigMapper.mapToFreelancerGigs(freelancerGigsDto);
         FreelancerGigs savedGig = freelancerGigsRepo.save(freelancerGigs);
         return FreelancerGigMapper.mapToFreelancerGigsDto(savedGig);
     }
 
     @Override
-    public FreelancerGigsDto getGigById(long gigId) {
+    public FreelancerGigsDTO getGigById(long gigId) {
         FreelancerGigs freelancerGigs = freelancerGigsRepo.findById(gigId).
                 orElseThrow(() -> new RuntimeException("Gig not found"));
         return FreelancerGigMapper.mapToFreelancerGigsDto(freelancerGigs);
@@ -34,13 +34,13 @@ public class FreelancerGigServiceImp implements FreelancerGigService {
 
 
     @Override
-    public List<FreelancerGigsDto> getAllGigs() {
+    public List<FreelancerGigsDTO> getAllGigs() {
         List<FreelancerGigs> freelancerGigs = freelancerGigsRepo.findAll();
         return freelancerGigs.stream().map(FreelancerGigMapper::mapToFreelancerGigsDto).
                 collect(Collectors.toList());
     }
     @Override
-    public FreelancerGigsDto updateGig(long gigId, FreelancerGigsDto updatedFreelancerGig) {
+    public FreelancerGigsDTO updateGig(long gigId, FreelancerGigsDTO updatedFreelancerGig) {
         FreelancerGigs freelancerGigs = freelancerGigsRepo.findById(gigId).
                 orElseThrow(() -> new ResourceNotFound("Gig not found with id : " + gigId));
 
