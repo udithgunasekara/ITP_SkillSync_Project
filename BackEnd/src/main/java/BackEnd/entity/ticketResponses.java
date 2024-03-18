@@ -20,6 +20,7 @@ public class ticketResponses {
     private String Subject;
     private String Description;
     @CreationTimestamp
+    @Column(nullable = false)
     private LocalDateTime createdTime;
     private String status;
 }

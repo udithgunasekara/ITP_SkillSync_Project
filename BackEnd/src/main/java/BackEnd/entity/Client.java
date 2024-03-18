@@ -1,13 +1,13 @@
 package BackEnd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -28,5 +28,7 @@ public class Client {
     private String phone;
     private String userName;
     private String country;
-    private String created_at;
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDate created_at;;
 }
