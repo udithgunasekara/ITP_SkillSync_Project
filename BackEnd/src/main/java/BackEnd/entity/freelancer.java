@@ -1,34 +1,35 @@
 package BackEnd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "freelancer" , schema = "skillsync_db")
-public class freelancer {
+@Table(name = "freelancer" )
+public class Freelancer {
     @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
-    private String fName;
-    private String lName;
+    private String lastName;
     private String email;
-    private Date dob;
-    private String NIC;
-    private Long phoneNumber;
+    private String dob;
+    private Long phone;
+    private String firstName;
+    private String userName;
+    private String password;
+    private String nic;
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDate created_at;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
