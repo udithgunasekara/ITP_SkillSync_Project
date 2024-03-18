@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/gig-packages")
 public class GigPackageController {
+
     private GigPackageService gigPackageService;
 
     //Post request to add a new package
@@ -24,9 +25,30 @@ public class GigPackageController {
 
     //Get request to get all packages
     @GetMapping
-    public ResponseEntity<List<GigPackageDTO>> getAllGigs() {
+    public ResponseEntity<List<GigPackageDTO>> getAllPackages() {
         List<GigPackageDTO> servicePackageDTO = gigPackageService.getAllPackages();
         return ResponseEntity.ok(servicePackageDTO);
+    }
+
+    //Get request to get a package by id
+    @GetMapping("/{packageId}")
+    public ResponseEntity<GigPackageDTO> getPackageById(@PathVariable long packageId) {
+        GigPackageDTO servicePackageDTO = gigPackageService.getPackageById(packageId);
+        return new ResponseEntity<>(servicePackageDTO, HttpStatus.OK);
+    }
+
+    //Put request to update a package
+    @PutMapping("/{packageId}")
+    public ResponseEntity<GigPackageDTO> updatePackage(@PathVariable long packageId, @RequestBody GigPackageDTO updatedPackage) {
+        GigPackageDTO servicePackageDTO = gigPackageService.updatePackage(packageId, updatedPackage);
+        return ResponseEntity.ok(updatedPackage);
+    }
+
+    //Delete request to delete a package
+    @DeleteMapping("/{packageId}")
+    public ResponseEntity<?> deletePackage(@PathVariable long packageId) {
+        gigPackageService.deletePackage(packageId);
+        return ResponseEntity.ok("Package deleted successfully!");
     }
 
 }
