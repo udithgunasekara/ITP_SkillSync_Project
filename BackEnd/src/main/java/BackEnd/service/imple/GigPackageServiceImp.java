@@ -49,7 +49,7 @@ public class GigPackageServiceImp implements GigPackageService {
         gigPackages.setPackageName(updatedPackage.getPackageName());
         gigPackages.setPackageDescription(updatedPackage.getPackageDescription());
         gigPackages.setPackagePrice(updatedPackage.getPackagePrice());
-
+        gigPackages.setPackageDeliveryTime(updatedPackage.getPackageDeliveryTime());
 
         GigPackages updatedGigPackage = gigPackageRepository.save(gigPackages);
         return GigPackageMapper.mapToPackageDto(updatedGigPackage);

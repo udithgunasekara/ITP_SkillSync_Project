@@ -9,7 +9,8 @@ public class GigPackageMapper {
                 aPackage.getPackageId(),
                 aPackage.getPackageName(),
                 aPackage.getPackageDescription(),
-                aPackage.getPackagePrice()
+                aPackage.getPackagePrice(),
+                aPackage.getPackageDeliveryTime()
         );
     }
 
@@ -18,7 +19,8 @@ public class GigPackageMapper {
                 servicePackageDto.getPackageId(),
                 servicePackageDto.getPackageName(),
                 servicePackageDto.getPackageDescription(),
-                servicePackageDto.getPackagePrice()
+                servicePackageDto.getPackagePrice(),
+                servicePackageDto.getPackageDeliveryTime()
         );
     }
 }
