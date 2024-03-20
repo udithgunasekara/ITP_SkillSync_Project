@@ -19,7 +19,8 @@ public class GigImages {
     @Column(name = "gig_image_id")
     private Long gigImageId;
 
-    @Column(name = "image_url")
-    private String gigImageUrl;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] gigImageData;
 
 }
