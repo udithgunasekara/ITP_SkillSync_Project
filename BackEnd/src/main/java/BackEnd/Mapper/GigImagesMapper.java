@@ -5,17 +5,17 @@ import BackEnd.entity.GigImages;
 
 public class GigImagesMapper {
 
-    public static GigImagesDTO mapTogigImagesDTO(GigImages gigImages){
+    public static GigImagesDTO mapToGigImagesDTO(GigImages gigImages) {
         return new GigImagesDTO(
                 gigImages.getGigImageId(),
-                gigImages.getGigImageUrl()
+                gigImages.getGigImageData()
         );
     }
 
-    public static GigImages mapToGigImages(GigImagesDTO gigImagesDto){
+    public static GigImages mapToGigImages(GigImagesDTO gigImagesDto) {
         return new GigImages(
                 gigImagesDto.getGigImageId(),
-                gigImagesDto.getGigImageUrl()
+                gigImagesDto.getGigImageData()
         );
     }
 }

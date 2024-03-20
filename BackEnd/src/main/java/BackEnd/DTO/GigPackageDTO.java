@@ -15,4 +15,5 @@ public class GigPackageDTO {
     private String packageName;
     private String packageDescription;
     private String packagePrice;
+    private String packageDeliveryTime;
 }

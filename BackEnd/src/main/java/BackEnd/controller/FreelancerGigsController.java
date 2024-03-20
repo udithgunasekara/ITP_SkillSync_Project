@@ -12,10 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "/freelancer-gigs")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FreelancerGigsController {
 
     private FreelancerGigService freelancerGigService;
-
     //Build add freelancer gig REST API
     @PostMapping
     public ResponseEntity<FreelancerGigsDTO> createGig(@RequestBody FreelancerGigsDTO freelancerGigsDto) {

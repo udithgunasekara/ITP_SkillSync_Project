@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class GigImagesDTO {
-    private long gigImageId;
-    private String gigImageUrl;
+
+    private Long gigImageId;
+    private byte[] gigImageData;
 
 }

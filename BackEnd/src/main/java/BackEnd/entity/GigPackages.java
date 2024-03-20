@@ -27,4 +27,7 @@ public class GigPackages {
     @Column(name = "package_price")
     private String packagePrice;
 
+    @Column(name = "package_delivery_time")
+    private String packageDeliveryTime;
+
 }
