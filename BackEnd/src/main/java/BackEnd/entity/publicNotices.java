@@ -23,12 +23,11 @@ public class publicNotices {
 //    @Lob
 //    @Column(columnDefinition = "LONGBLOB")
 //    private byte[] images;
-    @Column(nullable = false)
     private String title;
     private String description;
     private String audience;
-//    @CreationTimestamp
-//    private LocalDateTime datecreate;
-//    @UpdateTimestamp
-//    private LocalDateTime lastupdated;
+    @CreationTimestamp
+    private LocalDateTime datecreated;
+    @UpdateTimestamp
+    private LocalDateTime lastupdated;
 }
