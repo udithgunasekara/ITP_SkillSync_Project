@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -25,6 +26,12 @@ public class publicNoticesController {
     }
 
     //url: http://localhost:8082/api/notices/addnotice
+
+//"id":"12322"
+//"title":"New Chirstmas event"
+//"description":""
+//"audience":""
+
     @PostMapping("/addnotice")
     public ResponseEntity<publicNoticesDTO> addNotice(@RequestBody publicNoticesDTO noticedto){
         System.out.println(noticedto.getDatecreated());
