@@ -2,25 +2,24 @@ package BackEnd.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "freelancer_skills")
-public class FreelancerSkills {
+@Table(name = "freelancer_language")
+public class FreelancerLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
     private Long freelancerId;
-    private String skill;
+    private String language;
 
-    public FreelancerSkills() {
+    public FreelancerLanguage() {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        Id = id;
     }
 
     public Long getFreelancerId() {
@@ -31,11 +30,11 @@ public class FreelancerSkills {
         this.freelancerId = freelancerId;
     }
 
-    public String getSkill() {
-        return skill;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setSkill(String skill) {
-        this.skill = skill;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

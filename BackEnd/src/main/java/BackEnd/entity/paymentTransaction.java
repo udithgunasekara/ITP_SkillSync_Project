@@ -1,3 +1,4 @@
+/*
 package BackEnd.entity;
 
 import jakarta.persistence.*;
@@ -38,3 +39,4 @@ public class paymentTransaction {
 
 }
 
+*/

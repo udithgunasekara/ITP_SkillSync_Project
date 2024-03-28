@@ -1,26 +1,27 @@
-package BackEnd.entity;
+package BackEnd.DTO;
 
-import jakarta.persistence.*;
+import BackEnd.entity.UserCredential;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Ticket Responses",schema = "skillsync_db")
-public class ticketResponses {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TicketDto {
     private Long id;
-    private Long ticketid;
+//  private byte[] attachments;
+    private String relatedTo;
     private String Subject;
     private String Description;
-    @CreationTimestamp
-    @Column(nullable = false)
+    private UserCredential user;
     private LocalDateTime createdTime;
+    private LocalDateTime updatedTime;
     private String status;
 }

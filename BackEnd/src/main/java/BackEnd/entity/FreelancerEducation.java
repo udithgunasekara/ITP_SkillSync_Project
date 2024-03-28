@@ -3,28 +3,38 @@ package BackEnd.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Freelancer_Education")
+@Table(name = "freelancer_education")
 public class FreelancerEducation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String Education;
+    private Long id;
+    private Long freelancerId;
+    private String education;
 
-    // Getters and setters
-
-    public Long getUserId() {
-        return userId;
+    public FreelancerEducation() {
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getFreelancerId() {
+        return freelancerId;
+    }
+
+    public void setFreelancerId(Long freelancerId) {
+        this.freelancerId = freelancerId;
     }
 
     public String getEducation() {
-        return Education;
+        return education;
     }
 
-    public void setEducation(String Education) {
-        this.Education = Education;
+    public void setEducation(String education) {
+        this.education = education;
     }
 }
