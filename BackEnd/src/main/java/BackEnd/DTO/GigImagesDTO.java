@@ -12,7 +12,7 @@ import lombok.Setter;
 public class GigImagesDTO {
 
     private Long gigImageId;
-    private byte[] gigImageData;
+    private String gigImagePath;
     private Long gigId;
 
 }
