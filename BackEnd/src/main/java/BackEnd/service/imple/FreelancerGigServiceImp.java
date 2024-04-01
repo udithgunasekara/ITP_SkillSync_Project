@@ -26,7 +26,7 @@ public class FreelancerGigServiceImp implements FreelancerGigService {
     }
 
     @Override
-    public FreelancerGigsDTO getGigById(long gigId) {
+    public FreelancerGigsDTO getGigById(Long gigId) {
         FreelancerGigs freelancerGigs = freelancerGigsRepo.findById(gigId).
                 orElseThrow(() -> new RuntimeException("Gig not found"));
         return FreelancerGigMapper.mapToFreelancerGigsDto(freelancerGigs);
@@ -40,7 +40,7 @@ public class FreelancerGigServiceImp implements FreelancerGigService {
                 collect(Collectors.toList());
     }
     @Override
-    public FreelancerGigsDTO updateGig(long gigId, FreelancerGigsDTO updatedFreelancerGig) {
+    public FreelancerGigsDTO updateGig(Long gigId, FreelancerGigsDTO updatedFreelancerGig) {
         FreelancerGigs freelancerGigs = freelancerGigsRepo.findById(gigId).
                 orElseThrow(() -> new ResourceNotFound("Gig not found with id : " + gigId));
 
@@ -53,7 +53,7 @@ public class FreelancerGigServiceImp implements FreelancerGigService {
     }
 
     @Override
-    public void deleteGig(long gigId) {
+    public void deleteGig(Long gigId) {
         FreelancerGigs freelancerGigs = freelancerGigsRepo.findById(gigId).
                 orElseThrow(() -> new RuntimeException("Gig not found with id : " + gigId));
         freelancerGigsRepo.delete(freelancerGigs);

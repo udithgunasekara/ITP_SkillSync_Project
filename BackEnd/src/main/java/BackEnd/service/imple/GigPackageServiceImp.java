@@ -4,7 +4,9 @@ import BackEnd.DTO.GigPackageDTO;
 import BackEnd.Exceptions.ResourceNotFound;
 import BackEnd.Mapper.GigPackageMapper;
 
+import BackEnd.entity.FreelancerGigs;
 import BackEnd.entity.GigPackages;
+import BackEnd.repository.FreelancerGigsRepo;
 import BackEnd.repository.GigPackageRepository;
 import BackEnd.service.GigPackageService;
 import lombok.AllArgsConstructor;
@@ -19,9 +21,16 @@ import java.util.stream.Collectors;
 public class GigPackageServiceImp implements GigPackageService {
 
     private final GigPackageRepository gigPackageRepository;
+    private final FreelancerGigsRepo freelancerGigsRepo;
+
     @Override
-    public GigPackageDTO createPackage(GigPackageDTO servicePackageDto) {
+    public GigPackageDTO createPackage(Long gigId, GigPackageDTO servicePackageDto) {
+        FreelancerGigs freelancerGigs = freelancerGigsRepo.findById(gigId)
+                .orElseThrow(() -> new ResourceNotFound("Freelancer gig not found with id: " + gigId));
+
         GigPackages aServicePackage = GigPackageMapper.mapToPackage(servicePackageDto);
+        aServicePackage.setGigId(freelancerGigs);
+
         GigPackages savedPackage = gigPackageRepository.save(aServicePackage);
         return GigPackageMapper.mapToPackageDto(savedPackage);
     }
