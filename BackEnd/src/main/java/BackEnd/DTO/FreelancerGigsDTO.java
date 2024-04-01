@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class FreelancerGigsDTO {
-    private long gigId;
+    private Long gigId;
     private String gigTitle;
     private String gigDescription;
     private String gigCategory;

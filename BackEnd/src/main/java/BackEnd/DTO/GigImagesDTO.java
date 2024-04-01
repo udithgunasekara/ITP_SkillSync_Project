@@ -13,5 +13,6 @@ public class GigImagesDTO {
 
     private Long gigImageId;
     private byte[] gigImageData;
+    private Long gigId;
 
 }

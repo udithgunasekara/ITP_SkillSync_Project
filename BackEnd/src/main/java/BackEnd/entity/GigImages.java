@@ -23,4 +23,8 @@ public class GigImages {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] gigImageData;
 
+    @ManyToOne
+    @JoinColumn(name = "gig_id")
+    private FreelancerGigs gigId;
+
 }

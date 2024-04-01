@@ -8,14 +8,15 @@ public class GigImagesMapper {
     public static GigImagesDTO mapToGigImagesDTO(GigImages gigImages) {
         return new GigImagesDTO(
                 gigImages.getGigImageId(),
-                gigImages.getGigImageData()
+                gigImages.getGigImageData(),
+                gigImages.getGigId().getGigId()
         );
     }
 
     public static GigImages mapToGigImages(GigImagesDTO gigImagesDto) {
-        return new GigImages(
-                gigImagesDto.getGigImageId(),
-                gigImagesDto.getGigImageData()
-        );
+        GigImages gigImages = new GigImages();
+        gigImages.setGigImageId(gigImagesDto.getGigImageId());
+        gigImages.setGigImageData(gigImagesDto.getGigImageData());
+        return gigImages;
     }
 }

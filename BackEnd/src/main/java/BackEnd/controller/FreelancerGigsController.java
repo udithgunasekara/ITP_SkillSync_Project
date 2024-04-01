@@ -25,7 +25,7 @@ public class FreelancerGigsController {
 
     //Build get freelancer gig by id REST API
     @GetMapping("/{gigId}")
-    public ResponseEntity<FreelancerGigsDTO> getGigById(@PathVariable long gigId) {
+    public ResponseEntity<FreelancerGigsDTO> getGigById(@PathVariable Long gigId) {
         FreelancerGigsDTO freelancerGigsDto = freelancerGigService.getGigById(gigId);
         return new ResponseEntity<>(freelancerGigsDto, HttpStatus.OK);
     }
@@ -39,14 +39,14 @@ public class FreelancerGigsController {
 
     //Build update freelancer gig REST API
     @PutMapping("/{gigId}")
-    public ResponseEntity<FreelancerGigsDTO> updateGig(@PathVariable long gigId, @RequestBody FreelancerGigsDTO updatedFreelancerGig) {
+    public ResponseEntity<FreelancerGigsDTO> updateGig(@PathVariable Long gigId, @RequestBody FreelancerGigsDTO updatedFreelancerGig) {
         FreelancerGigsDTO freelancerGigsDto = freelancerGigService.updateGig(gigId, updatedFreelancerGig);
         return ResponseEntity.ok(updatedFreelancerGig);
     }
 
     //Build delete freelancer gig REST API
     @DeleteMapping("/{gigId}")
-    public ResponseEntity<?> deleteGig(@PathVariable long gigId) {
+    public ResponseEntity<?> deleteGig(@PathVariable Long gigId) {
         freelancerGigService.deleteGig(gigId);
         return ResponseEntity.ok("Gig deleted successfully!");
     }
