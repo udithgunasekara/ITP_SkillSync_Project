@@ -1,0 +1,36 @@
+ /* navigation bar */
+ .navbar{
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-nav .nav-link{
+    font-weight: bold;
+    margin-right: 18px;
+    margin-left: 0px;
+  
+  
+  }
+  
+  .navbar-nav .nav-link.active {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .nav-link.clicked {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  *{
+    margin: 0;
+    padding: 0;
+    }
+  
+  
