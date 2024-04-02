@@ -17,7 +17,7 @@ public class FreelancerGigs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long gigId;
+    private Long gigId;
 
     @Column(name = "gig_title")
     private String gigTitle;

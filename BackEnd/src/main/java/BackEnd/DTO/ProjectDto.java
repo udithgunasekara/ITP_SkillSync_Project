@@ -7,12 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class GigImagesDTO {
-
-    private Long gigImageId;
-    private String gigImagePath;
-    private Long gigId;
-
+@AllArgsConstructor
+public class ProjectDto {
+    private Long Id;
+    private String freelanceID;
+    private String clientID;
+    private String description;
 }

@@ -11,9 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class GigPackageDTO {
-    private long packageId;
+    private Long packageId;
     private String packageName;
     private String packageDescription;
     private String packagePrice;
     private String packageDeliveryTime;
+    private Long gigId;
 }

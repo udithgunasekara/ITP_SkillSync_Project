@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class FreelancerGigsDTO {
-    private Long gigId;
-    private String gigTitle;
-    private String gigDescription;
-    private String gigCategory;
+public class RatingDto {
+    private Long id;
+    private String userID;
+    private Float rating;
+    private Integer projectID;
+    private String review;
 }
+

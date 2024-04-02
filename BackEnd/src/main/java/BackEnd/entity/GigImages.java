@@ -19,8 +19,10 @@ public class GigImages {
     @Column(name = "gig_image_id")
     private Long gigImageId;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] gigImageData;
+    private String gigImagePath;
+
+    @ManyToOne
+    @JoinColumn(name = "gig_id")
+    private FreelancerGigs gigId;
 
 }

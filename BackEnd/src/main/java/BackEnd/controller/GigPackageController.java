@@ -11,15 +11,15 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(path = "/gig-packages")
+@RequestMapping(path = "/freelancer-gigs/{gigId}/gig-packages")
 public class GigPackageController {
 
     private GigPackageService gigPackageService;
 
     //Post request to add a new package
     @PostMapping
-    public ResponseEntity<GigPackageDTO> createPackage(@RequestBody GigPackageDTO servicePackageDTO) {
-        GigPackageDTO savedPackage = gigPackageService.createPackage(servicePackageDTO);
+    public ResponseEntity<GigPackageDTO> createPackage(@PathVariable Long gigId, @RequestBody GigPackageDTO servicePackageDTO) {
+        GigPackageDTO savedPackage = gigPackageService.createPackage(gigId, servicePackageDTO);
         return new ResponseEntity<>(savedPackage, HttpStatus.CREATED);
     }
 
@@ -32,21 +32,21 @@ public class GigPackageController {
 
     //Get request to get a package by id
     @GetMapping("/{packageId}")
-    public ResponseEntity<GigPackageDTO> getPackageById(@PathVariable long packageId) {
+    public ResponseEntity<GigPackageDTO> getPackageById(@PathVariable Long packageId) {
         GigPackageDTO servicePackageDTO = gigPackageService.getPackageById(packageId);
         return new ResponseEntity<>(servicePackageDTO, HttpStatus.OK);
     }
 
     //Put request to update a package
     @PutMapping("/{packageId}")
-    public ResponseEntity<GigPackageDTO> updatePackage(@PathVariable long packageId, @RequestBody GigPackageDTO updatedPackage) {
+    public ResponseEntity<GigPackageDTO> updatePackage(@PathVariable Long packageId, @RequestBody GigPackageDTO updatedPackage) {
         GigPackageDTO servicePackageDTO = gigPackageService.updatePackage(packageId, updatedPackage);
         return ResponseEntity.ok(updatedPackage);
     }
 
     //Delete request to delete a package
     @DeleteMapping("/{packageId}")
-    public ResponseEntity<?> deletePackage(@PathVariable long packageId) {
+    public ResponseEntity<?> deletePackage(@PathVariable Long packageId) {
         gigPackageService.deletePackage(packageId);
         return ResponseEntity.ok("Package deleted successfully!");
     }

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface FreelancerGigService {
     FreelancerGigsDTO createGig(FreelancerGigsDTO freelancerGigsDto);
-    FreelancerGigsDTO getGigById(long gigId);
+    FreelancerGigsDTO getGigById(Long gigId);
     List<FreelancerGigsDTO> getAllGigs();
-    FreelancerGigsDTO updateGig(long gigId, FreelancerGigsDTO updatedFreelancerGig);
-    void deleteGig(long gigId);
+    FreelancerGigsDTO updateGig(Long gigId, FreelancerGigsDTO updatedFreelancerGig);
+    void deleteGig(Long gigId);
 
 }

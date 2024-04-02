@@ -30,4 +30,8 @@ public class GigPackages {
     @Column(name = "package_delivery_time")
     private String packageDeliveryTime;
 
+    @ManyToOne
+    @JoinColumn(name = "gig_id")
+    private FreelancerGigs gigId;
+
 }

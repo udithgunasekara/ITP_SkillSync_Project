@@ -18,6 +18,8 @@ public class GigImageServiceImp implements GigImageService {
 
     private final GigImageRepo gigImageRepo;
 
+    private final String FOLDER_PATH = "/Users/drldasanayake/Documents/Y2S2";
+
     @Override
     public GigImagesDTO createGigImage(GigImagesDTO gigImagesDto) {
         GigImages gigImages = GigImagesMapper.mapToGigImages(gigImagesDto);
@@ -45,7 +47,7 @@ public class GigImageServiceImp implements GigImageService {
         GigImages gigImages = gigImageRepo.findById(gigImageId)
                 .orElseThrow(() -> new ResourceNotFound("Gig image not found with id: " + gigImageId));
 
-        gigImages.setGigImageData(updatedGigImage.getGigImageData());
+        gigImages.setGigImagePath(updatedGigImage.getGigImagePath());
 
         GigImages updatedGigImages = gigImageRepo.save(gigImages);
         return GigImagesMapper.mapToGigImagesDTO(updatedGigImages);
