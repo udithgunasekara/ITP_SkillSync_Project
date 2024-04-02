@@ -1,4 +1,4 @@
-package BackEnd.controller;
+/*package BackEnd.controller;
 
 import BackEnd.service.imple.PaypalService;
 import com.paypal.api.payments.Links;
@@ -25,7 +25,7 @@ public class PaypalController {
     }
 
     @PostMapping("/payment/create")
-    public RedirectView createPayment(
+    public RedirectView createpayment(
             @RequestParam("method") String method,
             @RequestParam("amount") String amount,
             @RequestParam("currency") String currency,
@@ -34,7 +34,7 @@ public class PaypalController {
         try {
             String cancelUrl = "http://localhost:8082/payment/cancel";
             String successUrl = "http://localhost:8082/payment/success";
-            Payment payment = paypalService.createPayment(
+            Payment payment = paypalService.createpayment(
                     Double.valueOf(amount),
                     currency,
                     method,
@@ -81,3 +81,6 @@ public class PaypalController {
         return "paymentError";
     }
 }
+
+*/
+

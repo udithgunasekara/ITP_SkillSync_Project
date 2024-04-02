@@ -1,4 +1,4 @@
-package BackEnd.service.imple;
+/*package BackEnd.service.imple;
 
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
@@ -15,7 +15,7 @@ import java.util.Locale;
 public class PaypalService {
     private final APIContext apiContext;
 
-    public Payment createPayment(
+    public Payment createpayment(
             Double total,
             String currency,
             String method,
@@ -67,3 +67,6 @@ public class PaypalService {
         return payment.execute(apiContext, paymentExecution);
     }
 }
+
+
+*/
