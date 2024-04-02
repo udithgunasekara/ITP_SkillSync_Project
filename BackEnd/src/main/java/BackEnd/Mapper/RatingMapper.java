@@ -8,7 +8,6 @@ public class RatingMapper {
     public static RatingDto mapToRatingDto(Rating rating) {
         return  new RatingDto(
                 rating.getId(),
-                rating.getAttachments(),
                 rating.getUserID(),
                 rating.getRating(),
                 rating.getProjectID(),
@@ -19,7 +18,6 @@ public class RatingMapper {
     public static Rating mapToRating(RatingDto ratingDto) {
         return new Rating(
                 ratingDto.getId(),
-                ratingDto.getAttachments(),
                 ratingDto.getUserID(),
                 ratingDto.getRating(),
                 ratingDto.getProjectID(),

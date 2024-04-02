@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RatingDto {
     private Long id;
-    private byte[] attachments;
     private String userID;
     private Float rating;
     private Integer projectID;

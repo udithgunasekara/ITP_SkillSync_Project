@@ -21,7 +21,12 @@ public class Project {
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private String freelanceID;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private String clientID;
+
     private String description;
+
 }
 

@@ -17,13 +17,17 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Lob
     @Column(columnDefinition = "LONGBLOB")
-    private byte[] attachments;
     private String userID;
 
     private Float rating;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private Integer projectID;
+
     private String review;
 
 

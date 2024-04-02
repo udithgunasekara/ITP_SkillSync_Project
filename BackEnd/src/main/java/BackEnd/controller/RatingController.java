@@ -17,7 +17,7 @@ public class RatingController {
     private RatingService ratingService;
 
     //Build Add Rating REST API
-    @PostMapping("/api/ratings")
+    @PostMapping
     public ResponseEntity<RatingDto> createRating(@RequestBody RatingDto ratingDto) {
         RatingDto savedRating = ratingService.createRating(ratingDto);
         return new ResponseEntity<>(savedRating, HttpStatus.CREATED);

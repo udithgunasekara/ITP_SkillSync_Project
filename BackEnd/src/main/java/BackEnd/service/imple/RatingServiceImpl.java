@@ -51,7 +51,6 @@ public class RatingServiceImpl implements RatingService {
         );
 
         rating.setRating(updateRating.getRating());
-        rating.setAttachments(updateRating.getAttachments());
         rating.setReview(updateRating.getReview());
         rating.setUserID(updateRating.getUserID());
         rating.setProjectID(updateRating.getProjectID());
