@@ -25,8 +25,8 @@ public class GigPackageController {
 
     //Get request to get all packages
     @GetMapping
-    public ResponseEntity<List<GigPackageDTO>> getAllPackages() {
-        List<GigPackageDTO> servicePackageDTO = gigPackageService.getAllPackages();
+    public ResponseEntity<List<GigPackageDTO>> getAllPackages(@PathVariable Long gigId) {
+        List<GigPackageDTO> servicePackageDTO = gigPackageService.getAllPackages(gigId);
         return ResponseEntity.ok(servicePackageDTO);
     }
 
@@ -45,10 +45,10 @@ public class GigPackageController {
     }
 
     //Delete request to delete a package
-    @DeleteMapping("/{packageId}")
-    public ResponseEntity<?> deletePackage(@PathVariable Long packageId) {
-        gigPackageService.deletePackage(packageId);
-        return ResponseEntity.ok("Package deleted successfully!");
+    @DeleteMapping("/del")
+    public ResponseEntity<?> deletePackagesByGigId(@PathVariable Long gigId) {
+        gigPackageService.deletePackagesByGigId(gigId);
+        return ResponseEntity.ok("Packages deleted successfully for gig with ID: " + gigId);
     }
 
 }

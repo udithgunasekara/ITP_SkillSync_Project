@@ -43,9 +43,9 @@ public class GigPackageServiceImp implements GigPackageService {
     }
 
     @Override
-    public List<GigPackageDTO> getAllPackages() {
+    public List<GigPackageDTO> getAllPackages(Long gigId) {
         List<GigPackages> gigPackages;
-        gigPackages = gigPackageRepo.findAll();
+        gigPackages = gigPackageRepo.findByGigId(gigId);
         return gigPackages.stream().map(GigPackageMapper::mapToPackageDto).
                 collect(Collectors.toList());
     }
@@ -64,10 +64,18 @@ public class GigPackageServiceImp implements GigPackageService {
         return GigPackageMapper.mapToPackageDto(updatedGigPackage);
     }
 
+
     @Override
     public void  deletePackage(Long packageId) {
         GigPackages gigPackages = gigPackageRepo.findById(packageId).
                 orElseThrow(() -> new RuntimeException("Gig package not found with id : " + packageId));
         gigPackageRepo.delete(gigPackages);
     }
+
+    @Override
+    public void deletePackagesByGigId(Long gigId) {
+        List<GigPackages> packagesToDelete = gigPackageRepo.findByGigId(gigId);
+        gigPackageRepo.deleteAll(packagesToDelete);
+    }
+
 }
