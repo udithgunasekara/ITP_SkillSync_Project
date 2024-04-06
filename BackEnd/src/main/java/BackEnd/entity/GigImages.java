@@ -19,10 +19,11 @@ public class GigImages {
     @Column(name = "gig_image_id")
     private Long gigImageId;
 
+    @Column(name = "gig_image_path")
     private String gigImagePath;
 
     @ManyToOne
-    @JoinColumn(name = "gig_id")
+    @JoinColumn(name = "gigId")
     private FreelancerGigs gigId;
 
 }

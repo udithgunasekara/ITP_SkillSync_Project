@@ -1,56 +1,47 @@
 package BackEnd.controller;
 
-import BackEnd.service.GigImageService;
 import BackEnd.DTO.GigImagesDTO;
-import lombok.AllArgsConstructor;
+import BackEnd.entity.GigImages;
+import BackEnd.service.GigImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 import java.util.List;
 
-
-@AllArgsConstructor
 @RestController
-@RequestMapping(path = "/gig-images")
-
+@RequestMapping("/freelancer-gigs/{gigId}/gig-images")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GigImageController {
 
-    private GigImageService gigImageService;
+    private final GigImageService gigImageService;
 
-    //Build add gig image REST API
-    @PostMapping
-    public ResponseEntity<GigImagesDTO> createGigImage(@RequestBody GigImagesDTO gigImageDto) {
-        GigImagesDTO savedGigImage = gigImageService.createGigImage(gigImageDto);
-        return new ResponseEntity<>(savedGigImage, HttpStatus.CREATED);
+    @Autowired
+    public GigImageController(GigImageService gigImageService) {
+        this.gigImageService = gigImageService;
     }
 
-    //Build get gig image by id REST API
-    @GetMapping("/{gigImageId}")
-    public ResponseEntity<GigImagesDTO> getGigImageById(@PathVariable long gigImageId) {
-        GigImagesDTO gigImageDto = gigImageService.getGigImageById(gigImageId);
-        return new ResponseEntity<>(gigImageDto, HttpStatus.OK);
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImages(@RequestParam("files") MultipartFile[] files, @PathVariable("gigId") Long gigId) {
+        try {
+            for (MultipartFile file : files) {
+                gigImageService.uploadImages(file, gigId);
+            }
+            return ResponseEntity.ok("Images uploaded successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload images");
+        }
     }
 
-    //Build get all gig images REST API
-    @GetMapping
-    public ResponseEntity<List<GigImagesDTO>> getAllGigImages() {
-        List<GigImagesDTO> gigImageDto = gigImageService.getAllGigImages();
-        return ResponseEntity.ok(gigImageDto);
+    @GetMapping("/my-gig-images")
+    public ResponseEntity<List<GigImagesDTO>> getImagesByGigId(@PathVariable("gigId") Long gigId) {
+        List<GigImagesDTO> images = gigImageService.getImagesByGigId(gigId);
+        if (images.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(images);
     }
-
-    //Build update gig image REST API
-    @PutMapping("/{gigImageId}")
-    public ResponseEntity<GigImagesDTO> updateGigImage(@PathVariable long gigImageId, @RequestBody GigImagesDTO updatedGigImage) {
-        GigImagesDTO gigImageDto = gigImageService.updateGigImage(gigImageId, updatedGigImage);
-        return ResponseEntity.ok(updatedGigImage);
-    }
-
-    //Build delete gig image REST API
-    @DeleteMapping("/{gigImageId}")
-    public ResponseEntity<?> deleteGigImage(@PathVariable long gigImageId) {
-        gigImageService.deleteGigImage(gigImageId);
-        return ResponseEntity.ok("Gig image deleted successfully!");
-    }
-
 }
