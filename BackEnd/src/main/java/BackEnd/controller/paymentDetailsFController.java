@@ -8,14 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @AllArgsConstructor
 @RestController
-@RequestMapping(path="/payment")
+@RequestMapping(path="/details")
 public class paymentDetailsFController {
 
     private paymentDetailsFreelancerService paymentDetailsFreelancerService;
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<paymentDetailsFreelancerDTO> addDetails(@RequestBody paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO){
         paymentDetailsFreelancerDTO savedPayDetailsF = paymentDetailsFreelancerService.addDetails(paymentDetailsFreelancerDTO);
         return new ResponseEntity<>(savedPayDetailsF, HttpStatus.CREATED);
