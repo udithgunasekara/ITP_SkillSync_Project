@@ -11,4 +11,6 @@ public interface GigPackageService {
     GigPackageDTO updatePackage(Long packageId, GigPackageDTO updatedPackage);
     void deletePackage(Long packageId);
     void deletePackagesByGigId(Long gigId);
+    String findMinPriceByGigId(Long gigId);
+    String findMinTimeByGigId(Long gigId);
 }

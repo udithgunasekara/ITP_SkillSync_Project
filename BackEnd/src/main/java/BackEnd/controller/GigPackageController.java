@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @AllArgsConstructor
@@ -51,4 +50,17 @@ public class GigPackageController {
         return ResponseEntity.ok("Packages deleted successfully for gig with ID: " + gigId);
     }
 
+    //Get request to find the minimum price of a package
+    @GetMapping("/min-price")
+    public ResponseEntity<String> findMinPriceByGigId(@PathVariable Long gigId) {
+        String minPrice = String.valueOf(gigPackageService.findMinPriceByGigId(gigId));
+        return new ResponseEntity<>(minPrice, HttpStatus.OK);
+    }
+
+    //Get request to find the minimum time of a package
+    @GetMapping("/min-time")
+    public ResponseEntity<String> findMinTimeByGigId(@PathVariable Long gigId) {
+        String minTime = String.valueOf(gigPackageService.findMinTimeByGigId(gigId));
+        return new ResponseEntity<>(minTime, HttpStatus.OK);
+    }
 }

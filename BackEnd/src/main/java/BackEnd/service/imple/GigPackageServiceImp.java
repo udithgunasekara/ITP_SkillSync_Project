@@ -78,4 +78,23 @@ public class GigPackageServiceImp implements GigPackageService {
         gigPackageRepo.deleteAll(packagesToDelete);
     }
 
+    @Override
+    public String findMinPriceByGigId(Long gigId) {
+        Double minPrice = gigPackageRepo.findMinPriceByGigId(gigId);
+        if (minPrice != null) {
+            return String.valueOf(minPrice);
+        } else {
+            return null; // Or any other default value you want to return
+        }
+    }
+
+    @Override
+    public String findMinTimeByGigId(Long gigId) {
+        Double minTime = gigPackageRepo.findMinTimeByGigId(gigId);
+        if (minTime != null) {
+            return String.valueOf(minTime);
+        } else {
+            return null; // Or any other default value you want to return
+        }
+    }
 }

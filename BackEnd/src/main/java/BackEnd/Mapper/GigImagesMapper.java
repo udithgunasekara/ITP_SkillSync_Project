@@ -1,15 +1,17 @@
 package BackEnd.Mapper;
 
 import BackEnd.DTO.GigImagesDTO;
+import BackEnd.entity.FreelancerGigs;
 import BackEnd.entity.GigImages;
 
 public class GigImagesMapper {
 
     public static GigImagesDTO mapToGigImagesDTO(GigImages gigImages) {
-        GigImagesDTO gigImagesDto = new GigImagesDTO();
-        gigImagesDto.setGigImageId(gigImages.getGigImageId());
-        gigImagesDto.setGigImagePath(gigImages.getGigImagePath());
-        return gigImagesDto;
+        return new GigImagesDTO(
+                gigImages.getGigImageId(),
+                gigImages.getGigImagePath(),
+                gigImages.getGigId().getGigId()
+        );
     }
 
     public static GigImages mapToGigImages(GigImagesDTO gigImagesDto) {
@@ -18,4 +20,5 @@ public class GigImagesMapper {
         gigImages.setGigImagePath(gigImagesDto.getGigImagePath());
         return gigImages;
     }
+
 }

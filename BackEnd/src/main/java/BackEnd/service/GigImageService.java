@@ -1,14 +1,15 @@
 package BackEnd.service;
 
 import BackEnd.DTO.GigImagesDTO;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
+// ImageUploadService.java (Interface)
 public interface GigImageService {
-    GigImagesDTO createGigImage(GigImagesDTO gigImagesDto);
-    GigImagesDTO getGigImageById(long gigImageId);
-    List<GigImagesDTO> getAllGigImages();
-    GigImagesDTO updateGigImage(long gigImageId, GigImagesDTO updatedGigImage);
-    void deleteGigImage(long gigImageId);
+    void uploadImages(MultipartFile file, Long gigId) throws IOException;
+    List<GigImagesDTO> getImagesByGigId(Long gigId);
 
 }
+

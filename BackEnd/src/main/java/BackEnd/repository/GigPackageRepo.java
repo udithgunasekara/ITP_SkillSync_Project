@@ -15,4 +15,10 @@ public interface GigPackageRepo extends JpaRepository<GigPackages, Long> {
     @Query(value = "delete from gig_packages where gig_id = :gigId", nativeQuery = true)
     void deleteByGigId(Long gigId);
 
+    @Query(value = "select min(package_price) from gig_packages where gig_id = :gigId", nativeQuery = true)
+    Double findMinPriceByGigId(Long gigId);
+
+    @Query(value = "select min(package_delivery_time) from gig_packages where gig_id = :gigId", nativeQuery = true)
+    Double findMinTimeByGigId(Long gigId);
+
 }
