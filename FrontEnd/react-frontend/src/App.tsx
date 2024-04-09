@@ -10,6 +10,7 @@ import DetailedGigs from './layouts/FreelancerWorkManagement/GigOrder/DetailedGi
 import { Footer } from './layouts/navbar&footers/Footer';
 import { Dashboard } from './layouts/Dashboard/dashboard';
 import { Navbar } from './layouts/navbar&footers/Navbar';
+import UploadedImages from './layouts/FreelancerWorkManagement/GigOrder/UploadedImages';
 
 export const App = () => {
   return (
@@ -26,6 +27,7 @@ export const App = () => {
           <Route path="/edit/:id" component={EditGig} />
           <Route path="/uploadedImages/:gigId" />
           <Route path="dashboard" component={Dashboard} />
+          <Route path="/uploadedImages"component={UploadedImages} />
         </Switch>
         <Footer />
       </div>
