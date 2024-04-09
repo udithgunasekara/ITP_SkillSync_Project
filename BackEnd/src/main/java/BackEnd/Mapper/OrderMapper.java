@@ -7,17 +7,23 @@ public class OrderMapper {
     public static OrdersDTO mapToOrdersDto(Orders orders){
         return new OrdersDTO(
                 orders.getOrderId(),
+                orders.getOrderDateTime(),
+                orders.getPackageName(),
                 orders.getOrderStatus(),
-                orders.getOrderDate(),
-                orders.getOrderDueDate()
+                orders.getCusRemarks(),
+                orders.getCusName(),
+                orders.getOrderGigId()
         );
     }
     public static Orders mapToOrders(OrdersDTO ordersDto){
-        return new Orders(
-                ordersDto.getOrderId(),
-                ordersDto.getOrderStatus(),
-                ordersDto.getOrderDate(),
-                ordersDto.getOrderDueDate()
-        );
+        Orders orders = new Orders();
+        orders.setOrderId(ordersDto.getOrderId());
+        orders.setOrderDateTime(ordersDto.getOrderDateTime());
+        orders.setPackageName(ordersDto.getPackageName());
+        orders.setOrderStatus(ordersDto.getOrderStatus());
+        orders.setCusName(ordersDto.getCusName());
+        orders.setCusRemarks(ordersDto.getCusRemarks());
+        orders.setOrderGigId(ordersDto.getOrderGigId());
+        return orders;
     }
 }

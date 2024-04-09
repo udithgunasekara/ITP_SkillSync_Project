@@ -45,4 +45,10 @@ public class OrdersController {
         return ResponseEntity.ok("Order deleted successfully!");
     }
 
+    @PutMapping("/{orderId}/status")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable long orderId, @RequestParam String newStatus) {
+        orderService.updateOrderStatus(orderId, newStatus);
+        return ResponseEntity.ok("Order status updated successfully!");
+    }
+
 }
