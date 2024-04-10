@@ -1,34 +1,37 @@
 package BackEnd.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
+@Setter
+@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Table(name = "freelancer_skills")
 public class FreelancerSkills {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long freelancerId;
+    private String username;
     private String skill;
+
+    public FreelancerSkills(String username, String skill) {
+        this.username = username;
+        this.skill = skill;
+    }
 
     public FreelancerSkills() {
     }
 
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getFreelancerId() {
-        return freelancerId;
-    }
-
-    public void setFreelancerId(Long freelancerId) {
-        this.freelancerId = freelancerId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getSkill() {

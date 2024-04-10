@@ -6,24 +6,25 @@ import jakarta.persistence.*;
 @Table(name = "clients_description")
 public class ClientDescription {
     @Id
-    private Long clientId;
+    private String username;
     @Column(columnDefinition = "TEXT")
     private String Description;
 
     public ClientDescription() {
     }
 
-    public ClientDescription(Long clientId, String description) {
-        this.clientId = clientId;
+    public ClientDescription(String username, String description) {
+        this.username = username;
         Description = description;
     }
 
-    public Long getClientId() {
-        return clientId;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getDescription() {
@@ -34,4 +35,3 @@ public class ClientDescription {
         Description = description;
     }
 }
-
