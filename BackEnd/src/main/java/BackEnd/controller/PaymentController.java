@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:3000")
 @AllArgsConstructor
 @RestController
 @RequestMapping(path ="/payment")
@@ -34,4 +34,14 @@ public class PaymentController {
         List<PaymentDTO> payments = paymentService.getAllPayment();
         return ResponseEntity.ok(payments);
     }
+
+    //search
+    @GetMapping("/search")
+    public ResponseEntity<List<PaymentDTO>> searchPayments(@RequestParam(required = false) Long transactionId,
+                                                           @RequestParam(required = false) Long projectId) {
+        List<PaymentDTO> payments = paymentService.findPaymentByTransactionID(transactionId, projectId);
+        return ResponseEntity.ok(payments);
+    }
+
+
 }

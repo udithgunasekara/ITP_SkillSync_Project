@@ -1,10 +1,11 @@
 package BackEnd.service;
 
+
 import BackEnd.DTO.PaymentDTO;
 
 import java.util.List;
 
-public interface PaymentService {
+public interface PaypalService {
 
     PaymentDTO createPayment(PaymentDTO paymentDTO);
 
@@ -13,5 +14,6 @@ public interface PaymentService {
     List<PaymentDTO> getAllPayment();
 
     List<PaymentDTO> findPaymentByTransactionID(Long transactionId, Long projectId);
+
 
 }
