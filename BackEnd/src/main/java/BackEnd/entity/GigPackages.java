@@ -16,6 +16,7 @@ public class GigPackages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "package_id")
     private Long packageId;
 
     @Column(name = "package_name")

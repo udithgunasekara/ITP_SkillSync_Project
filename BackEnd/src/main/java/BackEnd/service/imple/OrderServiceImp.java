@@ -5,6 +5,7 @@ import BackEnd.Mapper.OrderMapper;
 import BackEnd.entity.Orders;
 import BackEnd.repository.OrdersRepo;
 import BackEnd.service.OrderService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 public class OrderServiceImp implements OrderService {
 
     private final OrdersRepo ordersRepo;
+
     @Override
     public OrdersDTO createOrder(OrdersDTO ordersDto) {
         Orders orders = OrderMapper.mapToOrders(ordersDto);
@@ -41,5 +43,13 @@ public class OrderServiceImp implements OrderService {
         Orders orders = ordersRepo.findById(orderId).
                 orElseThrow(() -> new RuntimeException("Order not found with id : " + orderId));
         ordersRepo.delete(orders);
+    }
+
+    @Override
+    public void updateOrderStatus(long orderId, String newStatus) {
+        Orders orders = ordersRepo.findById(orderId).
+                orElseThrow(() -> new RuntimeException("Order not found with id : " + orderId));
+        orders.setOrderStatus(newStatus);
+        ordersRepo.save(orders);
     }
 }

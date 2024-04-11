@@ -1,33 +1,36 @@
 package BackEnd.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Setter
+@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Table(name = "freelancer_language")
 public class FreelancerLanguage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private Long freelancerId;
+    private String username;
     private String language;
+
+    public FreelancerLanguage(String username, String language) {
+        this.username = username;
+        this.language = language;
+    }
 
     public FreelancerLanguage() {
     }
 
-    public Long getId() {
-        return Id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public Long getFreelancerId() {
-        return freelancerId;
-    }
-
-    public void setFreelancerId(Long freelancerId) {
-        this.freelancerId = freelancerId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getLanguage() {

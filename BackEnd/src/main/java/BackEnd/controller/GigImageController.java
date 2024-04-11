@@ -1,13 +1,13 @@
 package BackEnd.controller;
 
 import BackEnd.DTO.GigImagesDTO;
-import BackEnd.entity.GigImages;
 import BackEnd.service.GigImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -42,6 +42,12 @@ public class GigImageController {
         if (images.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
+
+        images.forEach(image -> {
+            image.setGigImagePath(image.getGigImagePath());
+        });
+
         return ResponseEntity.ok(images);
     }
+
 }

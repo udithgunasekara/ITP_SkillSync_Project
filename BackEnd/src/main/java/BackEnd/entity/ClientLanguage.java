@@ -8,10 +8,16 @@ public class ClientLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private Long clientId;
+    private String username;
     private String language;
 
     public ClientLanguage() {
+    }
+
+    public ClientLanguage(Long id, String username, String language) {
+        Id = id;
+        this.username = username;
+        this.language = language;
     }
 
     public Long getId() {
@@ -22,12 +28,12 @@ public class ClientLanguage {
         Id = id;
     }
 
-    public Long getClientId() {
-        return clientId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getLanguage() {
@@ -38,4 +44,3 @@ public class ClientLanguage {
         this.language = language;
     }
 }
-
