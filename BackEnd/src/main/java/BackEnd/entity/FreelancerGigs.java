@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,5 +29,16 @@ public class FreelancerGigs {
 
     @Column(name = "gig_category")
     private String gigCategory;
+
+    @Column(name = "gid_date_created")
+    private LocalDateTime gigDateCreated;
+
+    @Column(name = "freelancer_username")
+    private String freelancerUsername;
+
+    @PrePersist
+    public void prePersist() {
+        gigDateCreated = LocalDateTime.now();
+    }
 
 }

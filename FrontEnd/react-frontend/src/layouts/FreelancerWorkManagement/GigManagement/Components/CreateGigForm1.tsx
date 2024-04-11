@@ -11,13 +11,13 @@ interface FormData {
 
 export const CreateGigForm1: React.FC = () => {
     const history = useHistory();
-
     const [formData, setFormData] = useState<FormData>({
         gigTitle: '',
         gigDescription: '',
         gigCategory: '',
     });
 
+    // Modified handleChange function to filter input
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         let filteredValue = value.replace(/[^a-zA-Z\s]/g, ''); 
@@ -27,22 +27,34 @@ export const CreateGigForm1: React.FC = () => {
         });
     };
     
-    
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    // Modified handleSubmit function to include logged-in user's info
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.post<{ gigId: string }>('http://localhost:8082/freelancer-gigs', formData)
-            .then(response => {
-                const gigId = response.data.gigId;
-                console.log('Data sent successfully:', response.data);
-                handleNextClick(gigId);
-            })
-            .catch(error => {
-                console.error('Error sending data:', error);
-            });
+        try {
+            // Here you will get the logged-in user's information from the authentication system
+            const loggedInUser = getUserInfo(); // Implement this function to get logged-in user info
+            
+            // Include logged-in user's username with gig data
+            const gigData = { ...formData, freelancerUsername: loggedInUser.username };
+            
+            // Send gig creation request to backend
+            const response = await axios.post<{ gigId: string }>('http://localhost:8082/freelancer-gigs', gigData);
+            
+            // Redirect to next page after successful gig creation
+            const gigId = response.data.gigId;
+            console.log('Data sent successfully:', response.data);
+            handleNextClick(gigId);
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
     };
 
     const handleNextClick = (gigId: string) => {
         history.push(`/CreateGigForm2/${gigId}`);
+    };
+
+    const getUserInfo = () => {
+        return { username: 'laxaa' }; // Replace with actual logged-in user info
     };
 
     return (
@@ -51,7 +63,6 @@ export const CreateGigForm1: React.FC = () => {
                 <h2 className="text-center mb-4" style={{ color: 'red' }}>Create a Gig</h2>
                 <form className="row g-3" onSubmit={handleSubmit}>
                     {/* Form fields */}
-                    {/* Gig Title */}
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">

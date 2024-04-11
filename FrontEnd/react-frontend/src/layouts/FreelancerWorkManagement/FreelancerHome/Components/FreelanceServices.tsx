@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { generateReport } from './ReportGeneration';
 
 export interface Gig {
   gigId: number;
   gigTitle: string;
   gigDescription: string;
+  gigCategory: string;
+  gigDateCreated: string;
   freelancerName: string;
   datePosted: string;
   deliveryTime: string;
@@ -109,22 +112,6 @@ export const FreelanceServices: React.FC = () => {
   // Get gigs for the current page
   const currentGigs = filteredGigs.slice(indexOfFirstGig, indexOfLastGig);
 
-  // Function to generate CSV data for the report
-  const generateReport = () => {
-    const csvContent = "data:text/csv;charset=utf-8,"
-      + "Freelancer Name,Gig Title,Gig Description,Date Posted\n";
-    const formattedData = gigData.map(gig => (
-      `${gig.freelancerName},${gig.gigTitle},"${gig.gigDescription}",${gig.datePosted}`
-    )).join("\n");
-
-    const encodedUri = encodeURI(csvContent + formattedData);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "gig_report.csv");
-    document.body.appendChild(link);
-    link.click();
-  };
-
   return (
     <div>
       <SearchSection onSearch={handleSearch} />
@@ -163,7 +150,7 @@ export const FreelanceServices: React.FC = () => {
           </ul>
         </nav>
         {/* Button to generate and download report */}
-        <button className="btn" onClick={generateReport}>Generate Report</button>
+        <button className="btn" onClick={() => generateReport(gigData)}>Generate Report</button>
       </section>
     </div>
   );

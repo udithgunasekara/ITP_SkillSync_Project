@@ -80,6 +80,7 @@ const FreelancerDashboard: React.FC = () => {
     if (selectedGigId !== null) {
       try {
         await axios.delete(`http://localhost:8082/freelancer-gigs/${selectedGigId}/gig-packages/del`);
+        await axios.delete(`http://localhost:8082/freelancer-gigs/${selectedGigId}/gig-images/delete`);
         await axios.delete(`http://localhost:8082/freelancer-gigs/${selectedGigId}`);
         setGigData(gigData.filter(gig => gig.gigId !== selectedGigId));
         setSelectedGigId(null);
@@ -108,14 +109,26 @@ const FreelancerDashboard: React.FC = () => {
 
   return (
     <Container fluid className="py-5">
-      <h1 className="text-center mb-4">Freelancer Dashboard</h1>
-      <h2 className="text-center mb-5">Active Gigs</h2>
-      <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null}>
+     <Row className="mb-4 align-items-center">
+  <Col xs={12}>
+    <h1 className="text-center">Freelancer Dashboard</h1>
+  </Col>
+</Row>
+<Row className="mb-4 align-items-center">
+  <Col xs={10}>
+    <h2 className="mb-0">Active Gigs</h2>
+  </Col>
+  <Col xs={2} className="d-flex justify-content-end align-items-center">
+    <Button variant="primary" size="lg" onClick={() => history.push("/CreateGigForm1")}>+ Create New Gig</Button>
+  </Col>
+</Row>
+
+      <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
-            <Row className="justify-content-center">
+            <Row xs={1} md={2} lg={4} className="g-4">
               {chunk.map((gig, gigIndex) => (
-                <Col key={gigIndex} xs={12} md={6} lg={3}>
+                <Col key={gigIndex}>
                   <Card className="h-100 shadow">
                     <Card.Img variant="top" src={`/Images/wallpaper${gig.gigId}.jpg`} style={{ height: '200px', objectFit: 'cover' }} />
                     <Card.Body>
@@ -135,18 +148,22 @@ const FreelancerDashboard: React.FC = () => {
           </Carousel.Item>
         ))}
       </Carousel>
-      <div className="d-flex justify-content-center mt-3">
-        {index > 0 && (
-          <Button variant="light" onClick={() => setIndex(index - 1)}>
-            <FaChevronLeft size={36} />
-          </Button>
-        )}
-        {index < gigChunks.length - 1 && (
-          <Button variant="light" onClick={() => setIndex(index + 1)}>
-            <FaChevronRight size={36} />
-          </Button>
-        )}
-      </div>
+
+      <Row className="justify-content-center">
+        <Col className="text-center">
+          {index > 0 && (
+            <Button variant="light" onClick={() => setIndex(index - 1)}>
+              <FaChevronLeft size={36} />
+            </Button>
+          )}
+          {index < gigChunks.length - 1 && (
+            <Button variant="light" onClick={() => setIndex(index + 1)}>
+              <FaChevronRight size={36} />
+            </Button>
+          )}
+        </Col>
+      </Row>
+
       <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmation</Modal.Title>
@@ -161,9 +178,11 @@ const FreelancerDashboard: React.FC = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
       <Alert variant="success" show={showSuccessAlert} onClose={() => setShowSuccessAlert(false)} dismissible>
         Gig deleted successfully!
       </Alert>
+
       <Orders />
     </Container>
   );

@@ -35,9 +35,16 @@ const PackageSelection: React.FC<PackageSelectionProps> = ({ setSelectedPackage 
     setSelectedPackage({ packageId, packageName });
   };
 
+  const orderOfPackages = ['Basic', 'Standard', 'Premium'];
+
+  // Sort packages based on the order defined in orderOfPackages
+  const sortedPackages = packages.sort((a, b) => {
+    return orderOfPackages.indexOf(a.packageName) - orderOfPackages.indexOf(b.packageName);
+  });
+
   return (
     <div className="card-container d-flex flex-wrap justify-content-center">
-      {packages.map((pack: Package) => (
+      {sortedPackages.map((pack: Package) => (
         <div key={pack.packageId} className='card shadow mx-2 mb-4 bg-body rounded' style={{ width: '300px', height: '350px' }}>
           <div className='card-body d-flex flex-column justify-content-between'>
             <div>

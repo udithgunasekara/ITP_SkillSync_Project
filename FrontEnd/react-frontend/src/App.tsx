@@ -7,10 +7,14 @@ import { CreateGigForm1 } from './layouts/FreelancerWorkManagement/GigManagement
 import CreateGigForm2 from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm2';
 import CreateGigForm3 from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm3';
 import DetailedGigs from './layouts/FreelancerWorkManagement/GigOrder/DetailedGigs';
+import { Footer } from './layouts/navbar&footers/Footer';
+import { Nav } from 'react-bootstrap';
+import { Navbar } from './layouts/navbar&footers/Navbar';
 
 export const App = () => {
   return (
     <Router>
+      <Navbar />
       <div>
         <Switch>
           <Route path="/CreateGigForm1" component={CreateGigForm1} />
@@ -23,6 +27,7 @@ export const App = () => {
           <Route path="/uploadedImages/:gigId" />
         </Switch>
       </div>
+      <Footer />
     </Router>
   );
 }

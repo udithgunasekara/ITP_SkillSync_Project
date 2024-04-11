@@ -50,4 +50,10 @@ public class GigImageController {
         return ResponseEntity.ok(images);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteImagesByGigId(@PathVariable("gigId") Long gigId) {
+        gigImageService.deleteImagesByGigId(gigId);
+        return ResponseEntity.ok("Images deleted successfully");
+    }
+
 }

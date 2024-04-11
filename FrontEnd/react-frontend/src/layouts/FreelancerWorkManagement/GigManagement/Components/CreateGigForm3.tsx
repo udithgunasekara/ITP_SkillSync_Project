@@ -17,7 +17,6 @@ const CreateGigForm3: React.FC = () => {
 
     const [formData, setFormData] = useState<{ packageDetails: PackageDetails }>({
         packageDetails: {
-            // Initialize with default values
             Basic: { content: '', estimatedTime: 1, price: 1 },
             Standard: { content: '', estimatedTime: 1, price: 1 },
             Premium: { content: '', estimatedTime: 1, price: 1 },
@@ -25,6 +24,7 @@ const CreateGigForm3: React.FC = () => {
     });
 
     const [agreed, setAgreed] = useState<boolean>(false);
+    const [singlePackageMode, setSinglePackageMode] = useState<boolean>(true); // Default to single-package mode
 
     const handleContentChange = (packageType: string, value: string) => {
         setFormData(prevState => ({
@@ -36,7 +36,7 @@ const CreateGigForm3: React.FC = () => {
     };
 
     const handleEstimatedTimeChange = (packageType: string, value: number) => {
-        if (value != 0) {
+        if (value !== 0) {
             setFormData(prevState => ({
                 packageDetails: {
                     ...prevState.packageDetails,
@@ -47,7 +47,7 @@ const CreateGigForm3: React.FC = () => {
     };
 
     const handlePriceChange = (packageType: string, value: number) => {
-        if (value != 0) {
+        if (value !== 0) {
             setFormData(prevState => ({
                 packageDetails: {
                     ...prevState.packageDetails,
@@ -61,16 +61,30 @@ const CreateGigForm3: React.FC = () => {
         setAgreed(e.target.checked);
     };
 
+    const handleToggleMode = () => {
+        setSinglePackageMode(prevMode => !prevMode); // Toggle between single-package mode and multi-package mode
+    };
+
     const handlePublishGig = () => {
         if (!agreed) {
             alert("Please agree to the terms to publish the gig.");
             return;
         }
-        // Send all package details to the backend
-        Object.keys(formData.packageDetails).forEach(packageType => {
+
+        if (singlePackageMode) {
+            const packageType = 'Basic'; // Always submit the Basic package in single-package mode
+
+            const packageDescription = formData.packageDetails[packageType].content.trim(); // Trim to remove leading/trailing whitespace
+
+            // Check if package description is empty
+            if (packageDescription === '') {
+                alert("Please enter content for the Basic package.");
+                return; // Skip submitting this package
+            }
+
             const payload = {
                 packageName: packageType,
-                packageDescription: formData.packageDetails[packageType].content,
+                packageDescription: packageDescription,
                 packagePrice: formData.packageDetails[packageType].price,
                 packageDeliveryTime: formData.packageDetails[packageType].estimatedTime,
             };
@@ -84,10 +98,37 @@ const CreateGigForm3: React.FC = () => {
                 .catch(error => {
                     console.error(`Error submitting ${packageType} package:`, error);
                 });
-        });
 
-        // You can add logic here to perform any additional actions after submitting all packages
-        console.log("Gig published successfully!");
+        } else {
+            // Check if any package description is empty
+            const isEmptyDescription = Object.values(formData.packageDetails).some(packageDetail => packageDetail.content.trim() === '');
+
+            if (isEmptyDescription) {
+                alert("Please enter content for all packages.");
+                return;
+            }
+
+            // Logic for multi-package mode
+            Object.keys(formData.packageDetails).forEach(packageType => {
+                const packageDescription = formData.packageDetails[packageType].content.trim();
+
+                const payload = {
+                    packageName: packageType,
+                    packageDescription: packageDescription,
+                    packagePrice: formData.packageDetails[packageType].price,
+                    packageDeliveryTime: formData.packageDetails[packageType].estimatedTime,
+                };
+
+                axios.post(`http://localhost:8082/freelancer-gigs/${gigId}/gig-packages`, payload)
+                    .then(response => {
+                        console.log(`${packageType} package was published successfully!`);
+                        handleNextClick();
+                    })
+                    .catch(error => {
+                        console.error(`Error submitting ${packageType} package:`, error);
+                    });
+            });
+        }
     };
 
     const history = useHistory();
@@ -100,33 +141,33 @@ const CreateGigForm3: React.FC = () => {
         <div>
             <section className="container mt-5">
                 <h2 className="text-center mb-4 text-danger">Publish</h2>
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    {Object.keys(formData.packageDetails).map(packageType => (
-                        <div key={packageType} className="col">
+                {singlePackageMode ? (
+                    <div className="row">
+                        <div className="col">
                             <div className="card shadow">
                                 <div className="card-body">
-                                    <h5 className="card-title text-center fw-bold " style={{ fontSize: '24px' }}>{packageType}</h5>
+                                    <h5 className="card-title text-center fw-bold" style={{ fontSize: '24px' }}>Basic</h5>
                                     <div className="form-group mb-3">
                                         <textarea
                                             className="form-control"
-                                            id={`packageContent-${packageType}`}
-                                            placeholder={`Enter content for ${packageType} package`}
-                                            value={formData.packageDetails[packageType].content}
-                                            onChange={e => handleContentChange(packageType, e.target.value)}
+                                            id="packageContent-Basic"
+                                            placeholder="Enter content for Basic package"
+                                            value={formData.packageDetails.Basic.content}
+                                            onChange={e => handleContentChange('Basic', e.target.value)}
                                             rows={7}
                                             required
                                         />
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor={`estimatedTime-${packageType}`} className="form-label">Estimated Time:</label>
+                                        <label htmlFor="estimatedTime-Basic" className="form-label">Estimated Time:</label>
                                         <div className="input-group">
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                id={`estimatedTime-${packageType}`}
-                                                placeholder={`Time for ${packageType} package`}
-                                                value={formData.packageDetails[packageType].estimatedTime}
-                                                onChange={e => handleEstimatedTimeChange(packageType, parseInt(e.target.value))}
+                                                id="estimatedTime-Basic"
+                                                placeholder="Time for Basic package"
+                                                value={formData.packageDetails.Basic.estimatedTime}
+                                                onChange={e => handleEstimatedTimeChange('Basic', parseInt(e.target.value))}
                                                 required
                                                 min="1"
                                                 step="1"
@@ -137,15 +178,15 @@ const CreateGigForm3: React.FC = () => {
                                         <small className="text-muted">Minimum 1 hour</small>
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor={`price-${packageType}`} className="form-label">Price:</label>
+                                        <label htmlFor="price-Basic" className="form-label">Price:</label>
                                         <div className="input-group">
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                id={`price-${packageType}`}
-                                                placeholder={`Enter price for ${packageType} package`}
-                                                value={formData.packageDetails[packageType].price}
-                                                onChange={e => handlePriceChange(packageType, parseFloat(e.target.value))}
+                                                id="price-Basic"
+                                                placeholder="Enter price for Basic package"
+                                                value={formData.packageDetails.Basic.price}
+                                                onChange={e => handlePriceChange('Basic', parseFloat(e.target.value))}
                                                 required
                                                 min="1"
                                                 step="0.05"
@@ -155,13 +196,83 @@ const CreateGigForm3: React.FC = () => {
                                         </div>
                                         <small className="text-muted">Minimum $1</small>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    </div>
+                ) : (
+                    // Multi-package mode
+                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        {Object.keys(formData.packageDetails).map(packageType => (
+                            <div key={packageType} className="col">
+                                <div className="card shadow">
+                                    <div className="card-body">
+                                        <h5 className="card-title text-center fw-bold" style={{ fontSize: '24px' }}>{packageType}</h5>
+                                        <div className="form-group mb-3">
+                                            <textarea
+                                                className="form-control"
+                                                id={`packageContent-${packageType}`}
+                                                placeholder={`Enter content for ${packageType} package`}
+                                                value={formData.packageDetails[packageType].content}
+                                                onChange={e => handleContentChange(packageType, e.target.value)}
+                                                rows={7}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="form-group mb-3">
+                                            <label htmlFor={`estimatedTime-${packageType}`} className="form-label">Estimated Time:</label>
+                                            <div className="input-group">
+                                                <input
+                                                    type="number"
+                                                    className="form-control"
+                                                    id={`estimatedTime-${packageType}`}
+                                                    placeholder={`Time for ${packageType} package`}
+                                                    value={formData.packageDetails[packageType].estimatedTime}
+                                                    onChange={e => handleEstimatedTimeChange(packageType, parseInt(e.target.value))}
+                                                    required
+                                                    min="1"
+                                                    step="1"
+                                                    pattern="[0-9]+" // Allows positive integers
+                                                />
+                                                <span className="input-group-text">hours</span>
+                                            </div>
+                                            <small className="text-muted">Minimum 1 hour</small>
+                                        </div>
+                                        <div className="form-group mb-3">
+                                            <label htmlFor={`price-${packageType}`} className="form-label">Price:</label>
+                                            <div className="input-group">
+                                                <input
+                                                    type="number"
+                                                    className="form-control"
+                                                    id={`price-${packageType}`}
+                                                    placeholder={`Enter price for ${packageType} package`}
+                                                    value={formData.packageDetails[packageType].price}
+                                                    onChange={e => handlePriceChange(packageType, parseFloat(e.target.value))}
+                                                    required
+                                                    min="1"
+                                                    step="0.05"
+                                                    pattern="^\d*\.?\d*$" // Allows positive float numbers
+                                                />
+                                                <span className="input-group-text">$</span>
+                                            </div>
+                                            <small className="text-muted">Minimum $1</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <div className="card mt-4 p-1 border-0">
+                    <div className="row">
+                        <div className="col-12 text-center mb-3">
+                            <button className={`btn btn-outline-primary`} onClick={handleToggleMode}>
+                                {singlePackageMode ? 'Switch to Multi-Package Mode' : 'Switch to Single-Package Mode'}
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div className="card mt-4 p-3 border-0">
+                <div className="card mt-4 p-1 border-0">
                     <h2 className="card-title text-center mb-4">Agreement</h2>
                     <p className="card-text">
                         "By submitting this gig, I agree to deliver the specified work within the agreed-upon
@@ -173,6 +284,7 @@ const CreateGigForm3: React.FC = () => {
                         <label className="form-check-label ms-2" htmlFor="agreementCheck">I agree to the terms and conditions</label>
                     </div>
                 </div>
+
                 <div className="col-12 mt-4">
                     <button className="btn btn-primary btn-lg" onClick={handlePublishGig} disabled={!agreed}>
                         Publish Gig
