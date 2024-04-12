@@ -24,4 +24,6 @@ public class Payment {
     private String paymentMethod;
     private Long projectID;
     private Double amount;
+
+
 }

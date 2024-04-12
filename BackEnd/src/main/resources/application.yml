@@ -19,10 +19,7 @@ spring:
 server:
   port: 8082
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 0b91ebdf84c7176324858859675e1b727e2230d7
 paypal:
   client-id: AVrdGThy9xERBOV2RPpdFx2mYYc2e2Z_tC98M_L6cKBPtG-WfDxkmkgyAfUrEEsMh7B-xHXg30YShcVA
   client-secret: EF-F16KtR2f8nIi9di_WUFtbYPmGupQQfm68GuyGwNf4KuULatO2NEp1VBPrkh6K0zEwh2WAo5bGUFwZ
