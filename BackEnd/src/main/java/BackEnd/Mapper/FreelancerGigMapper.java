@@ -10,7 +10,9 @@ public class FreelancerGigMapper {
                 freelancerGigs.getGigId(),
                 freelancerGigs.getGigTitle(),
                 freelancerGigs.getGigDescription(),
-                freelancerGigs.getGigCategory()
+                freelancerGigs.getGigCategory(),
+                freelancerGigs.getGigDateCreated(),
+                freelancerGigs.getFreelancerUsername()
         );
     }
 
@@ -19,7 +21,9 @@ public class FreelancerGigMapper {
                 freelancerGigsDto.getGigId(),
                 freelancerGigsDto.getGigTitle(),
                 freelancerGigsDto.getGigDescription(),
-                freelancerGigsDto.getGigCategory()
+                freelancerGigsDto.getGigCategory(),
+                freelancerGigsDto.getGigDateCreated(),
+                freelancerGigsDto.getFreelancerUsername()
         );
     }
 }

@@ -1,0 +1,65 @@
+package BackEnd.service.imple;
+
+import BackEnd.DTO.InboxDTO;
+import BackEnd.Mapper.InboxMapper;
+import BackEnd.entity.Inbox;
+import BackEnd.repository.InboxRepository;
+import BackEnd.service.InboxService;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class InboxServiceImp implements InboxService {
+
+    private final InboxRepository inboxRepository;
+
+    @Autowired
+    public InboxServiceImp(InboxRepository inboxRepository) {
+        this.inboxRepository = inboxRepository;
+    }
+
+    @Override
+    public List<InboxDTO> getAllInboxMessagesByUser(String username) {
+        List<Inbox> inbox = inboxRepository.findByusername(username);
+        return inbox.stream().map(InboxMapper::mapToInboxDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public InboxDTO saveInboxMessage(Inbox inbox) {
+        Inbox inbox1=inboxRepository.save(inbox);
+        return InboxMapper.mapToInboxDTO(inbox1);
+    }
+
+
+    @Override
+    public InboxDTO saveInboxMessageByConversationId(Long conversationId, String username, Inbox newInbox) {
+        Inbox existingInbox = inboxRepository.findByConversationIdAndUsername(conversationId, username);
+
+        if (existingInbox == null) {
+
+            throw new EntityNotFoundException("Inbox not found for conversation ID: " + conversationId + " and username: " + username);
+        }
+
+
+        existingInbox.setMessage(newInbox.getMessage());
+
+        Inbox savedInbox = inboxRepository.save(existingInbox);
+
+        return InboxMapper.mapToInboxDTO(savedInbox);
+    }
+
+    @Override
+    public InboxDTO changeIsRead(Long id) {
+        int updatedCount = inboxRepository.markAsRead(id);
+        if (updatedCount > 0) {
+            Inbox inbox = inboxRepository.findById(id).orElse(null);
+            return InboxMapper.mapToInboxDTO(inbox);
+
+        }
+        return null;
+    }
+}

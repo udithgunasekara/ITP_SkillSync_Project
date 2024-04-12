@@ -67,4 +67,12 @@ public class GigImageServiceImp implements GigImageService {
                 .map(GigImagesMapper::mapToGigImagesDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteImagesByGigId(Long gigId) {
+        List<GigImages> gigImagesList = gigImageRepo.findByGigId(gigId);
+        gigImageRepo.deleteAll(gigImagesList);
+    }
+
+
 }

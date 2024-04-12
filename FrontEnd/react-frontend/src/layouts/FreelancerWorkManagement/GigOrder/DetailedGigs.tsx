@@ -31,6 +31,12 @@ export const UserRemarksForm: React.FC = () => {
     setRemarks(e.target.value);
   };
 
+  const getUserInfo = () => {
+    return {
+      username: 'lakshan'
+    };
+  }
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!selectedPackage) {
@@ -42,11 +48,16 @@ export const UserRemarksForm: React.FC = () => {
       return;
     }
     try {
+      // Here you will get the logged-in user's information from the authentication system
+      const loggedInUser = getUserInfo(); // Implement this function to get logged-in user info
+            
+      // Include logged-in user's username with gig data
+      const gigData = {freelancerUsername: loggedInUser.username };
       await axios.post('http://localhost:8082/orders', {
         orderGigId: Number(id),
-        packageId: selectedPackage?.packageId,
         packageName: selectedPackageName,
-        cusRemarks: remarks
+        cusRemarks: remarks,
+        cusName: loggedInUser.username // Include customer name
       });
       console.log('Order placed successfully');
       window.alert('Order placed successfully');
@@ -54,7 +65,7 @@ export const UserRemarksForm: React.FC = () => {
     } catch (error) {
       console.error('Error placing order:', error);
     }
-  };
+  };  
 
   return (
     <Card className="mb-3 shadow">

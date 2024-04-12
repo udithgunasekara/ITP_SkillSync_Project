@@ -10,6 +10,6 @@ import java.util.List;
 public interface GigImageService {
     void uploadImages(MultipartFile file, Long gigId) throws IOException;
     List<GigImagesDTO> getImagesByGigId(Long gigId);
-
+    void deleteImagesByGigId(Long gigId);
 }
 
