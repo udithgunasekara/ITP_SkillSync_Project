@@ -1,6 +1,6 @@
 package BackEnd.controller;
 
-import BackEnd.DTO.ClientDto;
+import BackEnd.DTO.ClientDTO;
 import BackEnd.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(path = "/Register")
+@RequestMapping(path = "/Client")
 public class ClientController {
     private ClientService clientService;
-    @PostMapping("/posting")
-    public ResponseEntity<ClientDto> createClient(@RequestBody ClientDto clientDto){
-        ClientDto saveClient = clientService.createClient(clientDto);
+
+    //Client Registration
+    @PostMapping("/Registration")
+    public ResponseEntity<ClientDTO> createClient(@RequestBody ClientDTO clientDTO){
+        ClientDTO saveClient = clientService.createClient(clientDTO);
+
+        //can we make here a another service function for save usercredentials data (username, role, password))
+
+
         return new ResponseEntity<>(saveClient, HttpStatus.CREATED);
 
     }

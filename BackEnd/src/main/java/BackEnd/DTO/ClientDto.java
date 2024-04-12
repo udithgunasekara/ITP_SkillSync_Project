@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDto {
+public class ClientDTO {
 
     //create all the fields for the client
     private long Id;
@@ -18,12 +18,9 @@ public class ClientDto {
     private String email;
     private String dob;
     private String password;
-    private String phone;
+    private long phone;
     private String userName;
     private String country;
    // private String created_at;
-    private String role;
-
-
-
+  //  private String role;
 }

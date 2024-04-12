@@ -1,7 +1,7 @@
 package BackEnd.service;
 
-import BackEnd.DTO.ClientDto;
+import BackEnd.DTO.ClientDTO;
 
 public interface ClientService {
-    ClientDto createClient(ClientDto clientDto);
+    ClientDTO createClient(ClientDTO clientDTO);
 }
