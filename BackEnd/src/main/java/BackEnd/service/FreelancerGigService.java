@@ -11,4 +11,7 @@ public interface FreelancerGigService {
     FreelancerGigsDTO updateGig(Long gigId, FreelancerGigsDTO updatedFreelancerGig);
     void deleteGig(Long gigId);
 
+    List<FreelancerGigsDTO>  getGigsByfreelancerUsername(String freelancerUsername);
+
+    List<FreelancerGigsDTO>  findGigByFreelancerUsernameAndKeyword(String freelancerUsername,String keyword);
 }
