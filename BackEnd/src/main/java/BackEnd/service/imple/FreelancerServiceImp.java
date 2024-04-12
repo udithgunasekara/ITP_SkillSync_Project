@@ -4,7 +4,7 @@ import BackEnd.DTO.FreelancerDTO;
 import BackEnd.Exceptions.ResourceNotFound;
 import BackEnd.Mapper.FreelancerMapper;
 import BackEnd.Mapper.UserControllerMapper;
-import BackEnd.UdithImageDevArea.QualificationHandlerRepo;
+import BackEnd.repository.QualificationHandlerRepo;
 import BackEnd.entity.BannedUser;
 import BackEnd.entity.Freelancer;
 import BackEnd.entity.UserCredential;
