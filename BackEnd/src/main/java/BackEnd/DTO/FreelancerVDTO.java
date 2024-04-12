@@ -23,5 +23,7 @@ public class FreelancerVDTO {
     private String userName;
     private String password;
     private String nic;
+    private String workOn;
     private LocalDate created_at;
+    private String app_status = "In Progress";
 }
