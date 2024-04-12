@@ -27,8 +27,10 @@ public class Freelancer {
     private String userName;
     private String password;
     private String nic;
+    private String workOn;
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDate created_at;
-
+    @Column(name= "app_status")
+    private String app_status = "In Progress";
 }
