@@ -16,7 +16,9 @@ public class FreelancerVMapper {
                 freelancer.getUserName(),
                 freelancer.getPassword(),
                 freelancer.getNic(),
-                freelancer.getCreated_at()
+                freelancer.getWorkOn(),
+                freelancer.getCreated_at(),
+                freelancer.getApp_status()
         );
     }
 
@@ -31,7 +33,9 @@ public class FreelancerVMapper {
                 freelancerVDTO.getUserName(),
                 freelancerVDTO.getPassword(),
                 freelancerVDTO.getNic(),
-                freelancerVDTO.getCreated_at()
+                freelancerVDTO.getWorkOn(),
+                freelancerVDTO.getCreated_at(),
+                freelancerVDTO.getApp_status()
         );
     }
 }

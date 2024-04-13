@@ -25,7 +25,7 @@ public class Client {
     private String email;
     private String dob;
     private String password;
-    private String phone;
+    private long phone;
     private String userName;
     private String country;
     @CreationTimestamp

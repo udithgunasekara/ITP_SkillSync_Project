@@ -12,12 +12,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
+
+
+//Entity class
 public class UserCredential {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private long userId;
-    @Column(unique = true, nullable = false)
+   // @Column(nullable = false)
     private String userName;
     private String password;
-    private String role;
+    private String role ;
+
 }
