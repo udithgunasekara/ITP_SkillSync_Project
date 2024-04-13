@@ -20,7 +20,7 @@ public class Inbox {
     @Column(name = "conversation_id")
     private Long conversationId;
 
-    @Column(name = "message_id")
+    @Column(name = "message_id", columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String message;
 
     @Column(name = "is_read")

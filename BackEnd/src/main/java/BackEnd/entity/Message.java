@@ -1,6 +1,7 @@
 package BackEnd.entity;
 
 import jakarta.persistence.*;
+//import javax.persistence.TableOption;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,7 @@ public class Message {
     @Column(name = "conversation_id")
     private Long conversation;
 
-    @Column(name = "message_text")
+    @Column(name = "message_text", columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String messageText;
 
     @Column(name = "sent_at", columnDefinition = "TIMESTAMP")
