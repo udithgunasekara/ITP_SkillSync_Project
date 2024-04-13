@@ -16,7 +16,7 @@ public class FreelancerSkillsController {
     @Autowired
     private FreelancerSkillsService freelancerSkillsService;
 
-    @PostMapping("/{username}")
+    @PostMapping("/")
     public FreelancerSkillsDTO addSkillForFreelancer(@RequestBody FreelancerSkills freelancerSkills) { // Updated parameter name to lowercase skill
         return freelancerSkillsService.addFreelancerSkill(freelancerSkills);
     }
