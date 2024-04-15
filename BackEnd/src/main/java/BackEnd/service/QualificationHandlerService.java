@@ -19,5 +19,6 @@ public interface QualificationHandlerService {
 
     String updateQualificationStatus(String userName, String title, String status);
 
+    Map<String, List<byte[]>> downloadRejectedQualificationByUser(String username);
 
 }
