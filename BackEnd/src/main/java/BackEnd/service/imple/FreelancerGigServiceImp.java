@@ -59,4 +59,19 @@ public class FreelancerGigServiceImp implements FreelancerGigService {
         freelancerGigsRepo.delete(freelancerGigs);
 
     }
+
+    @Override
+    public List<FreelancerGigsDTO> getGigsByfreelancerUsername(String freelancerUsername) {
+        List<FreelancerGigs> freelancerGigs = freelancerGigsRepo.findByfreelancerUsername(freelancerUsername);
+        return freelancerGigs.stream().map(FreelancerGigMapper::mapToFreelancerGigsDto).
+                collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FreelancerGigsDTO> findGigByFreelancerUsernameAndKeyword(String freelancerUsername,String keyword) {
+        List<FreelancerGigs> freelancerGigs = freelancerGigsRepo.findGigByFreelancerUsernameAndKeyword(freelancerUsername,keyword);
+        return freelancerGigs.stream().map(FreelancerGigMapper::mapToFreelancerGigsDto).
+                collect(Collectors.toList());
+    }
+
 }

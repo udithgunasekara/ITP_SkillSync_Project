@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConversationServiceImp implements ConversationService {
@@ -26,8 +27,12 @@ public class ConversationServiceImp implements ConversationService {
 
     @Override
     public ConversationDTO getConversationByUser1AndUser2(String user1, String user2) {
-        Conversation conversation = conversationRepository.findByUser1AndUser2(user1, user2).orElseThrow(() -> new RuntimeException("users are not found"));
-        return ConversationMapper.mapToConversationDTO(conversation);
+        Optional<Conversation> conversationOptional = conversationRepository.findByUser1AndUser2(user1, user2);
+        if (conversationOptional.isPresent()) {
+            return ConversationMapper.mapToConversationDTO(conversationOptional.get());
+        } else {
+            return null;
+        }
     }
 
     @Override

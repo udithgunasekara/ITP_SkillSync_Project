@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -29,6 +30,24 @@ public class FreelancerGigsController {
         FreelancerGigsDTO freelancerGigsDto = freelancerGigService.getGigById(gigId);
         return new ResponseEntity<>(freelancerGigsDto, HttpStatus.OK);
     }
+
+    // Build get freelancer gig by freelancer username REST API
+    @GetMapping("/username/{freelancerUsername}")
+    public ResponseEntity<List<FreelancerGigsDTO>> getGigByFreelancerUsername(@PathVariable String freelancerUsername) {
+        List<FreelancerGigsDTO> freelancerGigsDto = freelancerGigService.getGigsByfreelancerUsername(freelancerUsername);
+        return new ResponseEntity<>(freelancerGigsDto, HttpStatus.OK);
+    }
+
+    // Build Search perticular users gigs using keyword REST API
+    @PostMapping("/search/{freelancerUsername}")
+    public List<FreelancerGigsDTO> searchGigsByKeyword(@PathVariable String freelancerUsername,@RequestBody Map<String, String> requestBody) {
+        String keyword = requestBody.get("keyword");
+        if (keyword == null) {
+            throw new IllegalArgumentException("Keyword parameter is required in the request body");
+        }
+        return freelancerGigService.findGigByFreelancerUsernameAndKeyword(freelancerUsername,keyword);
+    }
+
 
     //Build get all freelancer gigs REST API
     @GetMapping

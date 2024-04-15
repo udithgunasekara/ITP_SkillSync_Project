@@ -14,8 +14,11 @@ public class FreelancerDescriptionServiceImp implements FreelancerDescriptionSer
     private FreelancerDescriptionRepository freelancerDescriptionRepository;
 
     @Override
-    public FreelancerDescriptionDTO getFreelancerDescriptionByUsername(String username){
-        FreelancerDescription freelancerDescription = freelancerDescriptionRepository.findByusername(username).orElseThrow(() ->new RuntimeException("Freelance Description not found"+username));
+    public FreelancerDescriptionDTO getFreelancerDescriptionByUsername(String username) {
+        FreelancerDescription freelancerDescription = freelancerDescriptionRepository.findByusername(username).orElse(null);
+        if (freelancerDescription == null) {
+            return null;
+        }
         return FreelancerDescriptionMapper.mapToFreelancerDescriptionDTO(freelancerDescription);
     }
 
