@@ -1,5 +1,6 @@
 package BackEnd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,11 +17,15 @@ public class ticketResponses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long ticketid;
     private String Subject;
-    private String Description;
+    private String response;
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    @JsonIgnore
+    private Ticket ticket;
+
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime createdTime;
-    private String status;
 }

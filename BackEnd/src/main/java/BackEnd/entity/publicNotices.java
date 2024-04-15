@@ -24,8 +24,10 @@ public class publicNotices {
 //    @Column(columnDefinition = "LONGBLOB")
 //    private byte[] images;
     private String title;
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     private String audience;
+    private String moreDetailsLink;
     @CreationTimestamp
     private LocalDateTime datecreated;
     @UpdateTimestamp
