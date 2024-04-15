@@ -3,13 +3,17 @@ package BackEnd.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Ticket Responses",schema = "skillsync_db")
