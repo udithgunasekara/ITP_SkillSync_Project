@@ -18,6 +18,7 @@ public class publicNoticesDTO {
     private String title;
     private String description;
     private String audience;
+    private String moreDetailsLink;
     private LocalDateTime datecreated;
     private LocalDateTime lastupdated;
 }
