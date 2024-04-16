@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import ImageCarousel from './ImageCarousel';
-import UploadedImages from './UploadedImages';
 
 interface Gig {
   id: number;
@@ -22,21 +21,14 @@ interface Package {
 
 export const UserRemarksForm: React.FC = () => {
   const [remarks, setRemarks] = useState<string>('');
-  const [selectedPackage, setSelectedPackage] = useState<{ packageId: number; packageName: string } | null>(null); // Update type
+  const [selectedPackage, setSelectedPackage] = useState<{ packageId: number; packageName: string } | null>(null);
   const [selectedPackageName, setSelectedPackageName] = useState<string>('');
   const { id } = useParams<{ id: string }>();
-  const history = useHistory();
 
   const handleRemarksChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRemarks(e.target.value);
   };
 
-  const getUserInfo = () => {
-    return {
-      username: 'lakshan'
-    };
-  }
-  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!selectedPackage) {
@@ -48,31 +40,34 @@ export const UserRemarksForm: React.FC = () => {
       return;
     }
     try {
-      // Here you will get the logged-in user's information from the authentication system
-      const loggedInUser = getUserInfo(); // Implement this function to get logged-in user info
-            
-      // Include logged-in user's username with gig data
-      const gigData = {freelancerUsername: loggedInUser.username };
+      const loggedInUser = getUserInfo();
+      const gigData = { freelancerUsername: loggedInUser.username };
       await axios.post('http://localhost:8082/orders', {
         orderGigId: Number(id),
         packageName: selectedPackageName,
         cusRemarks: remarks,
-        cusName: loggedInUser.username // Include customer name
+        cusName: loggedInUser.username
       });
       console.log('Order placed successfully');
       window.alert('Order placed successfully');
-      history.push('/FreelancerMain');
     } catch (error) {
       console.error('Error placing order:', error);
     }
-  };  
+  };
+
+  const getUserInfo = () => {
+    return {
+      username: 'lakshan'
+    };
+  };
 
   return (
     <Card className="mb-3 shadow">
       <Card.Body>
         <div className='h1 text-center p-3'>Select a Package</div>
+        {/* Render PackageSelection component */}
         <PackageSelection setSelectedPackage={(packageId, packageName) => {
-          setSelectedPackage({ packageId, packageName }); // Update to pass the object
+          setSelectedPackage({ packageId, packageName });
           setSelectedPackageName(packageName);
         }} />
         <form onSubmit={handleSubmit}>
@@ -123,7 +118,7 @@ export const GigDetails: React.FC = () => {
       <Row className="mb-5">
         <Col xs={12} md={6} className="align-self-start">
           <div className="p-4">
-            <h1 className="mb-3 display-3"style={{ wordWrap: 'break-word' }}>{gig.gigTitle}</h1>
+            <h1 className="mb-3 display-3" style={{ wordWrap: 'break-word' }}>{gig.gigTitle}</h1>
             <h5 className="text-muted">@{gig.freelancerName} Freelancer Name</h5>
             <div className="border p-4 mt-4" style={{ wordWrap: 'break-word' }}>
               <h2 className="text-center mb-4">Description</h2>
@@ -133,7 +128,8 @@ export const GigDetails: React.FC = () => {
         </Col>
         <Col xs={12} md={6} className="text-center">
           <div className='my-carousel' style={{ maxWidth: '650px', marginLeft: '100px' }}>
-            <ImageCarousel />
+            {/* Pass gigId as a prop */}
+            <ImageCarousel gigId={id} />
           </div>
         </Col>
       </Row>
@@ -186,13 +182,13 @@ const PackageSelection: React.FC<{ setSelectedPackage: (packageId: number, packa
 
 const DetailedGigs: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [gigId, setGigId] = useState<number | null>(null); // State variable to hold gigId
+  const [gigId, setGigId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchGigDetail = async () => {
       try {
         const response = await axios.get<Gig>(`http://localhost:8082/freelancer-gigs/${id}`);
-        setGigId(response.data.id); // Set the gigId
+        setGigId(response.data.id);
       } catch (error) {
         console.error('Error fetching gig detail:', error);
       }

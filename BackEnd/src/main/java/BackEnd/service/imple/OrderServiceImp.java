@@ -1,11 +1,13 @@
 package BackEnd.service.imple;
 
+import BackEnd.DTO.FreelancerGigsDTO;
 import BackEnd.DTO.OrdersDTO;
+import BackEnd.Mapper.FreelancerGigMapper;
 import BackEnd.Mapper.OrderMapper;
+import BackEnd.entity.FreelancerGigs;
 import BackEnd.entity.Orders;
 import BackEnd.repository.OrdersRepo;
 import BackEnd.service.OrderService;
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -25,7 +27,7 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public OrdersDTO getOrderById(long orderId) {
+    public OrdersDTO getOrderById(Long orderId) {
         Orders orders = ordersRepo.findById(orderId).
                 orElseThrow(() -> new RuntimeException("Order not found"));
         return OrderMapper.mapToOrdersDto(orders);
@@ -38,18 +40,26 @@ public class OrderServiceImp implements OrderService {
                 collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<OrdersDTO> getAllOrdersByFreelancer(String freelancerUsername) {
+//        List<Orders> orders = ordersRepo.findAllOrdersByFreelancer(freelancerUsername);
+//        return orders.stream().map(OrderMapper::mapToOrdersDto).
+//                collect(Collectors.toList());
+//    }
+
     @Override
-    public void deleteOrder(long orderId) {
+    public void deleteOrder(Long orderId) {
         Orders orders = ordersRepo.findById(orderId).
                 orElseThrow(() -> new RuntimeException("Order not found with id : " + orderId));
         ordersRepo.delete(orders);
     }
 
     @Override
-    public void updateOrderStatus(long orderId, String newStatus) {
+    public void updateOrderStatus(Long orderId, String newStatus) {
         Orders orders = ordersRepo.findById(orderId).
                 orElseThrow(() -> new RuntimeException("Order not found with id : " + orderId));
         orders.setOrderStatus(newStatus);
         ordersRepo.save(orders);
     }
+
 }

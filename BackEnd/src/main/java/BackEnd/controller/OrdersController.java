@@ -38,6 +38,13 @@ public class OrdersController {
         return ResponseEntity.ok(ordersDto);
     }
 
+//    //Build get all orders by freelancer REST API
+//    @GetMapping("/{freelancer}")
+//    public ResponseEntity<List<OrdersDTO>> getAllOrdersByFreelancer(@PathVariable String freelancer) {
+//        List<OrdersDTO> ordersDTO = orderService.getAllOrdersByFreelancer(freelancer);
+//        return ResponseEntity.ok(ordersDTO);
+//    }
+
     //Build delete order REST API
     @DeleteMapping("/{orderId}")
     public ResponseEntity<?> deleteOrder(@PathVariable long orderId) {

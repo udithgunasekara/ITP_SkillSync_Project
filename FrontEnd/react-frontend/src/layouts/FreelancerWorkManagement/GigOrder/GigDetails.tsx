@@ -1,7 +1,8 @@
+// GigDetails.tsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import ImageCarousel from './ImageCarousel';
 
 interface GigDetailsProps {}
@@ -39,7 +40,7 @@ const GigDetails: React.FC<GigDetailsProps> = () => {
       <Row className="mb-5">
         <Col xs={12} md={6} className="align-self-start">
           <div className="p-4">
-            <h1 className="mb-3 display-3"style={{ wordWrap: 'break-word' }}>{gig.gigTitle}</h1>
+            <h1 className="mb-3 display-3" style={{ wordWrap: 'break-word' }}>{gig.gigTitle}</h1>
             <h5 className="text-muted">@{gig.freelancerName} Freelancer Name</h5>
             <div className="border p-4 mt-4" style={{ wordWrap: 'break-word' }}>
               <h2 className="text-center mb-4">Description</h2>
@@ -49,7 +50,7 @@ const GigDetails: React.FC<GigDetailsProps> = () => {
         </Col>
         <Col xs={12} md={6} className="text-center">
           <div className='my-carousel' style={{ maxWidth: '650px', marginLeft: '100px' }}>
-            <ImageCarousel />
+            {gig.id && <ImageCarousel gigId={gig.id.toString()} />} {/* Pass gigId as a string */}
           </div>
         </Col>
       </Row>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './CreateGig.css';
 import { useHistory, useParams } from 'react-router-dom';
 
 interface PackageDetails {
@@ -139,7 +138,7 @@ const CreateGigForm3: React.FC = () => {
 
     return (
         <div>
-            <section className="container mt-5">
+            <section className="container mt-5" id="containerGigCreate">
                 <h2 className="text-center mb-4 text-danger">Publish</h2>
                 {singlePackageMode ? (
                     <div className="row">
@@ -159,7 +158,7 @@ const CreateGigForm3: React.FC = () => {
                                         />
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor="estimatedTime-Basic" className="form-label">Estimated Time:</label>
+                                        <label htmlFor="estimatedTime-Basic" className="form-label" id="formLabelGigCreate">Estimated Time:</label>
                                         <div className="input-group">
                                             <input
                                                 type="number"
@@ -171,14 +170,14 @@ const CreateGigForm3: React.FC = () => {
                                                 required
                                                 min="1"
                                                 step="1"
-                                                pattern="[0-9]+" // Allows positive integers
+                                                pattern="[0-9]+"
                                             />
                                             <span className="input-group-text">hours</span>
                                         </div>
                                         <small className="text-muted">Minimum 1 hour</small>
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor="price-Basic" className="form-label">Price:</label>
+                                        <label htmlFor="price-Basic" className="form-label" id="formLabelGigCreate">Price:</label>
                                         <div className="input-group">
                                             <input
                                                 type="number"
@@ -220,7 +219,7 @@ const CreateGigForm3: React.FC = () => {
                                             />
                                         </div>
                                         <div className="form-group mb-3">
-                                            <label htmlFor={`estimatedTime-${packageType}`} className="form-label">Estimated Time:</label>
+                                            <label htmlFor={`estimatedTime-${packageType}`} className="form-label" id="formLabelGigCreate">Estimated Time:</label>
                                             <div className="input-group">
                                                 <input
                                                     type="number"
@@ -239,7 +238,7 @@ const CreateGigForm3: React.FC = () => {
                                             <small className="text-muted">Minimum 1 hour</small>
                                         </div>
                                         <div className="form-group mb-3">
-                                            <label htmlFor={`price-${packageType}`} className="form-label">Price:</label>
+                                            <label htmlFor={`price-${packageType}`} className="form-label" id="formLabelGigCreate">Price:</label>
                                             <div className="input-group">
                                                 <input
                                                     type="number"
@@ -286,7 +285,7 @@ const CreateGigForm3: React.FC = () => {
                 </div>
 
                 <div className="col-12 mt-4">
-                    <button className="btn btn-primary btn-lg" onClick={handlePublishGig} disabled={!agreed}>
+                    <button className="btn btn-primary btn-lg" id="btnPrimaryGigCreate" onClick={handlePublishGig} disabled={!agreed}>
                         Publish Gig
                     </button>
                 </div>

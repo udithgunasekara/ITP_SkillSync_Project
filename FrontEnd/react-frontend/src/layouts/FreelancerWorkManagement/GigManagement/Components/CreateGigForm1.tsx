@@ -54,19 +54,19 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const getUserInfo = () => {
-        return { username: 'laxaa' }; // Replace with actual logged-in user info
+        return { username: 'laxaayome' }; // Replace with actual logged-in user info
     };
 
     return (
         <div className="bg-light vh-100 d-flex align-items-center justify-content-center">
-            <div className="container" style={{ maxWidth: '900px' }}>
+            <div className="container" id="containerGigCreate" style={{ maxWidth: '900px' }}>
                 <h2 className="text-center mb-4" style={{ color: 'red' }}>Create a Gig</h2>
                 <form className="row g-3" onSubmit={handleSubmit}>
                     {/* Form fields */}
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label htmlFor="gigTitle" className="form-label">Gig title:</label>
+                                <label htmlFor="gigTitle" className="form-label" id="formLabelGigCreate">Gig title:</label>
                                 <p className="input-label">(Gig title should be limited to less than 50 characters.
                                     Include more keywords to achieve more reach among the buyers)</p>
                             </div>
@@ -91,7 +91,7 @@ export const CreateGigForm1: React.FC = () => {
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label htmlFor="gigDescription" className="form-label">Gig Description:</label>
+                                <label htmlFor="gigDescription" className="form-label" id="formLabelGigCreate">Gig Description:</label>
                                 <p className="input-label">(Gig description should be limited to less than 200 characters.
                                     Describe what you do in your gig in the gig description)</p>
                             </div>
@@ -116,7 +116,7 @@ export const CreateGigForm1: React.FC = () => {
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label htmlFor="category" className="form-label">Category:</label>
+                                <label htmlFor="category" className="form-label" id="formLabelGigCreate">Category:</label>
                                 <p className="input-label">Select the category for your gig:</p>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ export const CreateGigForm1: React.FC = () => {
                     </div>
                     {/* Submit Button */}
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary btn-lg" >Next</button>
+                        <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate" >Next</button>
                     </div>
                 </form>
             </div>

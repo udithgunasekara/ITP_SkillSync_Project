@@ -1,13 +1,15 @@
 package BackEnd.service;
 
+import BackEnd.DTO.FreelancerGigsDTO;
 import BackEnd.DTO.OrdersDTO;
 
 import java.util.List;
 
 public interface OrderService {
     OrdersDTO createOrder(OrdersDTO ordersDto);
-    OrdersDTO getOrderById(long orderId);
+    OrdersDTO getOrderById(Long orderId);
     List<OrdersDTO> getAllOrders();
-    void deleteOrder(long orderId);
-    void updateOrderStatus(long orderId, String newStatus);
+    //List<OrdersDTO> getAllOrdersByFreelancer(String freelancer);
+    void deleteOrder(Long orderId);
+    void updateOrderStatus(Long orderId, String newStatus);
 }

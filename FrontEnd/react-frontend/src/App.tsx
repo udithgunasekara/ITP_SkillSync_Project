@@ -20,11 +20,10 @@ export const App = () => {
           <Route path="/CreateGigForm1" component={CreateGigForm1} />
           <Route path="/CreateGigForm2/:gigId" component={CreateGigForm2} />
           <Route path="/CreateGigForm3/:gigId" component={CreateGigForm3} />
-          <Route path="/FreelancerMain" exact component={FreelancerHome} />
+          <Route path="/FreelancerMain" component={FreelancerHome} />
           <Route path="/gig/:id" component={DetailedGigs} />
           <Route path="/FreelancerDashboard" component={FreelancerDashboard} />
           <Route path="/edit/:id" component={EditGig} />
-          <Route path="/uploadedImages/:gigId" />
         </Switch>
       </div>
       <Footer />

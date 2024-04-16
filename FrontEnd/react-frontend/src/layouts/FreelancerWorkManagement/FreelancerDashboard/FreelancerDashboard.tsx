@@ -20,11 +20,15 @@ const FreelancerDashboard: React.FC = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
   const [minPrices, setMinPrices] = useState<{ [key: number]: string }>({});
   const [minTimes, setMinTimes] = useState<{ [key: number]: string }>({});
+  const [loggedInUser, setLoggedInUser] = useState<{ username: string }>({ username: '' });
 
   useEffect(() => {
     const fetchGigData = async () => {
       try {
-        const response = await axios.get<Gig[]>('http://localhost:8082/freelancer-gigs');
+        const user = getUserInfo();
+        setLoggedInUser(user);
+
+        const response = await axios.get<Gig[]>(`http://localhost:8082/freelancer-gigs/username/${user.username}`);
         const gigsWithIds = response.data.map((gig, index) => ({ ...gig, id: index + 1 }));
         setGigData(gigsWithIds);
         const minPricePromises = response.data.map(gig => fetchMinPrice(gig.gigId));
@@ -45,6 +49,10 @@ const FreelancerDashboard: React.FC = () => {
   }, []);
 
   const history = useHistory();
+
+  const getUserInfo = () => {
+    return { username: 'laxaayome' };
+  }
 
   const handleEdit = (id: number) => {
     console.log('Edit gig with ID:', id);
@@ -92,7 +100,7 @@ const FreelancerDashboard: React.FC = () => {
       }
     }
   };
-  
+
 
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
@@ -109,19 +117,19 @@ const FreelancerDashboard: React.FC = () => {
 
   return (
     <Container fluid className="py-5">
-     <Row className="mb-4 align-items-center">
-  <Col xs={12}>
-    <h1 className="text-center">Freelancer Dashboard</h1>
-  </Col>
-</Row>
-<Row className="mb-4 align-items-center">
-  <Col xs={10}>
-    <h2 className="mb-0">Active Gigs</h2>
-  </Col>
-  <Col xs={2} className="d-flex justify-content-end align-items-center">
-    <Button variant="primary" size="lg" onClick={() => history.push("/CreateGigForm1")}>+ Create New Gig</Button>
-  </Col>
-</Row>
+      <Row className="mb-4 align-items-center">
+        <Col xs={12}>
+          <h1 className="text-center">Freelancer Dashboard</h1>
+        </Col>
+      </Row>
+      <Row className="mb-4 align-items-center">
+        <Col xs={10}>
+          <h2 className="mb-0">Active Gigs</h2>
+        </Col>
+        <Col xs={2} className="d-flex justify-content-end align-items-center">
+          <Button variant="primary" size="lg" onClick={() => history.push("/CreateGigForm1")}>+ Create New Gig</Button>
+        </Col>
+      </Row>
 
       <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
@@ -133,9 +141,9 @@ const FreelancerDashboard: React.FC = () => {
                     <Card.Img variant="top" src={`/Images/wallpaper${gig.gigId}.jpg`} style={{ height: '200px', objectFit: 'cover' }} />
                     <Card.Body>
                       <Card.Title className="mb-3">{gig.gigTitle}</Card.Title>
-                      <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]}</Card.Text>
-                      <Card.Text><strong>Time Taken:</strong> ${minTimes[gig.gigId]} onwards</Card.Text>
-                      <Card.Text><strong>Freelancer:</strong> @FreelancerName</Card.Text>
+                      <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
+                      <Card.Text><strong>Time Taken:</strong> {minTimes[gig.gigId]}h</Card.Text>
+                      <Card.Text><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
                       <div className="d-grid gap-2">
                         <Button variant="primary" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
                         <Button variant="danger" onClick={() => handleDelete(gig.gigId)}>Delete</Button>

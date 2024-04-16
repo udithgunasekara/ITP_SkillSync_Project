@@ -1,26 +1,26 @@
 /* CreateGig.css */
-.container {
+#containerGigCreate {
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: #fff;
   }
   
-  .form-label {
+  #formLabelGigCreate {
     font-weight: bold;
     font-size: 20px;
   }
   
-  .btn-primary {
+  #btnPrimaryGigCreate {
     width: 100%;
   }
   
-  .btn-lg {
+  #btn-lg {
     padding: 15px;
     font-size: 18px;
   }
   
-  textarea {
+  #textarea {
     resize: vertical;
   }
   

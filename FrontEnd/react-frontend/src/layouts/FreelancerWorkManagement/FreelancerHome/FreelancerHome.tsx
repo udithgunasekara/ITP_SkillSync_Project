@@ -23,31 +23,30 @@ const FreelancerHome: React.FC = () => {
   };
 
   const backgroundStyle: React.CSSProperties = {
-    backgroundImage: "url('/Images/wallpaper1.jpg')",
+    backgroundImage: "url('/Images/BGWallpaper.jpg')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     minHeight: '100vh',
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'column',
     overflowY: 'auto',
   };
 
   const contentStyle: React.CSSProperties = {
+    marginTop: '90px',
     textAlign: 'center',
     color: 'white',
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: isHovered ? '#0056b3' : isClicked ? '#0095ff' : '#007bff',
+    backgroundColor: isHovered ? '#221733' : isClicked ? '#000000' : '#000000',
     color: 'white',
     border: 'none',
     padding: '12px 24px',
     borderRadius: '8px',
     cursor: 'pointer',
     fontSize: '20px', 
-    marginTop: '20px',
+    marginTop: '500px',
     transition: 'background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease', 
     boxShadow: isHovered ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none', 
     transform: isHovered ? 'scale(1.05)' : 'scale(1)', 
@@ -65,7 +64,7 @@ const FreelancerHome: React.FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            Get started
+            Get started {'>>'}
           </button>
         </div>
       </div>
