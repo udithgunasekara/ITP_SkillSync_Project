@@ -38,6 +38,7 @@ public class PaymentController {
         return ResponseEntity.ok(paymentDTO);
     }
 
+    //history
     @GetMapping
     public ResponseEntity<List<PaymentDTO>> getAllPayment(){
         List<PaymentDTO> payments = paymentService.getAllPayment();
