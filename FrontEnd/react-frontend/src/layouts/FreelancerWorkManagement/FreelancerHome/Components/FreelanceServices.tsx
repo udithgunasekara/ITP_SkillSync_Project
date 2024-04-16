@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { generateGigReport } from './GigsReportGeneration';
+=======
+
+>>>>>>> 00d4bab3ad94b1ceb99612a9c2b51073a91e7fa3
 
 export interface Gig {
   gigId: number;
@@ -150,7 +154,11 @@ export const FreelanceServices: React.FC = () => {
           </ul>
         </nav>
         {/* Button to generate and download report */}
+<<<<<<< HEAD
         <button className="btn" onClick={() => generateGigReport(gigData)}>Generate Report</button>
+=======
+        <button className="btn" /* onClick={() => generateReport(gigData)} */>Generate Report</button>
+>>>>>>> 00d4bab3ad94b1ceb99612a9c2b51073a91e7fa3
       </section>
     </div>
   );

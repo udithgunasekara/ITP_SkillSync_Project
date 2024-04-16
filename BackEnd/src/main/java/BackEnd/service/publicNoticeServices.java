@@ -1,6 +1,8 @@
 package BackEnd.service;
 import java.util.List;
 import BackEnd.DTO.publicNoticesDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface publicNoticeServices {
 
@@ -16,6 +18,8 @@ public interface publicNoticeServices {
 
     String deleteAllNotices();
 
-    List<publicNoticesDTO> getNoticeByAudience(String audience);
+    Page<publicNoticesDTO> getNoticeByAudience(String audience, Pageable pageable);
+
+    Page<publicNoticesDTO> searchNoticeByTitleOrDescription(String title, String description, Pageable pageable);
 
 }

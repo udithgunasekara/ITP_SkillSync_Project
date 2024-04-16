@@ -65,6 +65,7 @@ public class QualificationHandlerServiceImp implements QualificationHandlerServi
                 QualificationHandler qualification = existingQualifications.get(i);
                 qualification.setName(file.getOriginalFilename());
                 qualification.setImage(imageData);
+                qualification.setStatus("UnderReview");
                 qualificationHandlerRepo.save(qualification);
             }
             return "Image updated successfully!";
@@ -119,11 +120,7 @@ public class QualificationHandlerServiceImp implements QualificationHandlerServi
         List<QualificationHandler> qualificationHandlers = qualificationHandlerRepo.findByUserNameAndTitle(userName, title);
 
         int count = qualificationHandlers.size();
-//        if (count == 0 && status.equals("Rejected")) {
-//            qualificationHandlers.setStatus("Rejected");
-//                qualificationHandlerRepo.save(qualificationHandlers.get(0));
-//            return "Qualification Rejected";
-//        }
+
         if (status.equals("Rejected")) { // Use .equals() for String comparison
             qualificationHandlers.forEach(handler -> {
                 handler.setStatus("Rejected");
@@ -134,6 +131,24 @@ public class QualificationHandlerServiceImp implements QualificationHandlerServi
         }
         return null;
     }
+
+    @Override
+    public Map<String, List<byte[]>> downloadRejectedQualificationByUser(String username) {
+        List<QualificationHandler> dbImageDatas = qualificationHandlerRepo.findByUserNameRejected(username);
+        if (dbImageDatas.isEmpty()) {
+            throw new IllegalStateException("No image data found for username: " + username);
+        }
+
+        Map<String, List<byte[]>> imagesByTitle = new HashMap<>();
+        for (QualificationHandler imageData : dbImageDatas) {
+            byte[] compressedImage = imageData.getImage();
+            byte[] decompressedImage = ImageUtils.decompressImage(compressedImage);
+            imagesByTitle.computeIfAbsent(imageData.getTitle(), k -> new ArrayList<>()).add(decompressedImage);
+        }
+
+        return imagesByTitle;
+    }
+
 
 }
 

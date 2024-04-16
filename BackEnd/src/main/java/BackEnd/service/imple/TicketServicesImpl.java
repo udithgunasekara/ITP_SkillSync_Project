@@ -20,7 +20,7 @@ public class TicketServicesImpl implements TicketServices {
     private ModelMapper modelMapper;
 
     @Override
-    public List<TicketDto> getAllTickets(Long userid) {
+    public List<TicketDto> getAllTicketsById(Long userid) {
         List<Ticket> ticketList = ticketRepo.findByuserId(userid);
         List<TicketDto> ticketDtoList = new ArrayList<>();
         ticketList.forEach(
@@ -74,11 +74,55 @@ public class TicketServicesImpl implements TicketServices {
                 () -> new ResourceNotFound("No ticket found")
         );
         if(targetTicket.getUser().getUserId()==userid){
+//            targetTicket.getResponses().forEach(
+//                    (p) -> {
+//                        p.setTicket(null);
+//                    }
+//            );
             ticketRepo.delete(targetTicket);
             return "Ticket deleted successfully";
         }else{
             throw new ResourceNotFound("You have no permission to delete this ticket");
         }
 
+    }
+
+    @Override
+    public List<TicketDto> getAllTickets() {
+        List<Ticket> ticketList = ticketRepo.findAll();
+        System.out.println("ticketlist size: " + ticketList.size());
+        List<TicketDto> ticketDtoList = new ArrayList<>();
+        ticketList.forEach(
+                (p) -> {
+                    ticketDtoList.add(modelMapper.map(p, TicketDto.class));
+                }
+        );
+        return ticketDtoList;
+    }
+
+    @Override
+    public String changeTicketStatus(Long ticketId, String status) {
+        Ticket targetTicket = ticketRepo.findById(ticketId).orElseThrow(
+                () -> new ResourceNotFound("No ticket found")
+        );
+        if(targetTicket.getStatus().equals(status)){
+            return "Status already set to "+status;
+        }else{
+            targetTicket.setStatus(status);
+            Ticket updatedTicket = ticketRepo.save(targetTicket);
+            if (updatedTicket.getStatus().equals(status)){
+                return "status updated successfully";
+            }else{
+                return "somethong went wrong..failed to update status";
+            }
+        }
+    }
+
+    @Override
+    public TicketDto getTicketByTicketID(Long id) {
+        Ticket ticket = ticketRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFound("No ticket found...")
+        );
+        return modelMapper.map(ticket, TicketDto.class);
     }
 }

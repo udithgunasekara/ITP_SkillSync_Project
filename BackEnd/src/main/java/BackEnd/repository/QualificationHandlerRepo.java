@@ -30,4 +30,10 @@ public interface QualificationHandlerRepo extends JpaRepository<QualificationHan
     @Transactional
     @Query(value = "DELETE FROM qualification WHERE user_name = :username", nativeQuery = true)
     void deleteByUserName(@Param("username") String username);
+
+
+    @Query(value = "SELECT * FROM qualification WHERE user_name = :userName AND status = 'Rejected' ", nativeQuery = true)
+    List<QualificationHandler> findByUserNameRejected(@Param("userName") String userName);
+
+
 }
