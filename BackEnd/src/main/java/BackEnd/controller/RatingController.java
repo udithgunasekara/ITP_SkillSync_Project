@@ -37,14 +37,6 @@ public class RatingController {
         return ResponseEntity.ok(ratings);
     }
 
-    //Build Get All Ratings Of A Particular userID REST API
-    @GetMapping("/user/{userID}")
-    public ResponseEntity<List<RatingDto>> getAllRatingsByUserID(@PathVariable("userID") String userID) {
-        List<RatingDto> ratings = ratingService.getAllRatingsByuserID(userID);
-        return ResponseEntity.ok(ratings);
-    }
-
-
     //Build Update Rating REST API
     @PutMapping("{id}")
     public ResponseEntity<RatingDto> updateRating(@PathVariable("id") Long ratingId,
