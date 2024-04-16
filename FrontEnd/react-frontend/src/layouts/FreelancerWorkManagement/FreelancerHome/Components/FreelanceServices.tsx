@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { generateReport } from './ReportGeneration';
 
 export interface Gig {
   gigId: number;
@@ -9,7 +8,7 @@ export interface Gig {
   gigDescription: string;
   gigCategory: string;
   gigDateCreated: string;
-  freelancerName: string;
+  freelancerUsername: string;
   datePosted: string;
   deliveryTime: string;
 }
@@ -131,8 +130,8 @@ export const FreelanceServices: React.FC = () => {
                     <h5 className="card-title" style={{ maxWidth: '100%', height: '55px' }}>{gig.gigTitle}</h5>
                     <p className="card-text fs-6">Price: ${minPrices[gig.gigId]} onwards</p>
                     <p className="card-text fs-6">Time Taken: {minTimes[gig.gigId]}h</p>
-                    <p className="card-text fs-6">@{gig.freelancerName}Laxaa</p>
-                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto">View Details</Link>
+                    <p className="card-text fs-6">@{gig.freelancerUsername}</p>
+                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{backgroundColor: '#641C9E'}}>View Details</Link>
                   </div>
                 </div>
               </div>
@@ -150,7 +149,7 @@ export const FreelanceServices: React.FC = () => {
           </ul>
         </nav>
         {/* Button to generate and download report */}
-        <button className="btn" onClick={() => generateReport(gigData)}>Generate Report</button>
+        <button className="btn" /* onClick={() => generateReport(gigData)} */>Generate Report</button>
       </section>
     </div>
   );

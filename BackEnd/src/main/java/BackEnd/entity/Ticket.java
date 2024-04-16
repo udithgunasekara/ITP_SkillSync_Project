@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,11 +29,15 @@ public class Ticket {
 
     private String relatedTo;
     private String Subject;
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String Description;
 
     @ManyToOne
     @JoinColumn(name = "userid")
     private UserCredential user;
+
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ticketResponses> responses = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdTime;

@@ -25,6 +25,11 @@ const EditGig: React.FC = () => {
   const [gigDetails, setGigDetails] = useState<GigDetails | null>(null);
   const [packages, setPackages] = useState<Package[]>([]);
 
+  // State for error messages
+  const [gigTitleError, setGigTitleError] = useState<string>('');
+  const [gigDescriptionError, setGigDescriptionError] = useState<string>('');
+  const [packageErrors, setPackageErrors] = useState<string[]>([]);
+
   useEffect(() => {
     // Fetch gig details
     const fetchGigDetails = async () => {
@@ -67,31 +72,87 @@ const EditGig: React.FC = () => {
   };
 
   // Save changes to gig details and packages
-  const handleSave = async () => {
-    try {
-      // Update gig details
-      await axios.put(`http://localhost:8082/freelancer-gigs/${id}`, gigDetails);
+const handleSave = async () => {
+  try {
+    // Validate gig details and packages
+    if (!validateGigDetails() || !validatePackages()) return;
 
-      // Update each package individually
-      await Promise.all(packages.map(async (pkg) => {
-        await axios.put(`http://localhost:8082/freelancer-gigs/${id}/gig-packages/${pkg.packageId}`, pkg);
-      }));
+    // Show confirmation message
+    const confirmed = window.confirm('Are you sure you want to apply the changes?');
+    if (!confirmed) return;
 
-      // Navigate back to the dashboard after saving changes
-      history.push('/FreelancerDashboard');
-    } catch (error) {
-      console.error('Error saving gig data:', error);
-    }
-  };
+    // Update gig details
+    await axios.put(`http://localhost:8082/freelancer-gigs/${id}`, gigDetails);
+
+    // Update each package individually
+    await Promise.all(packages.map(async (pkg) => {
+      await axios.put(`http://localhost:8082/freelancer-gigs/${id}/gig-packages/${pkg.packageId}`, pkg);
+    }));
+
+    // Navigate back to the dashboard after saving changes
+    history.push('/FreelancerDashboard');
+  } catch (error) {
+    console.error('Error saving gig data:', error);
+  }
+};
+
 
   // Discard changes and navigate back
   const handleDiscardChanges = () => {
     history.push('/FreelancerDashboard');
   };
 
+  // Validate gig details
+  const validateGigDetails = () => {
+    let isValid = true;
+    if (!gigDetails) return false;
+
+    if (!/^[a-zA-Z\s]+$/.test(gigDetails.gigTitle) || gigDetails.gigTitle.trim() === '') {
+      setGigTitleError('Gig title must contain only alphabetical letters and cannot be empty.');
+      isValid = false;
+    } else {
+      setGigTitleError('');
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(gigDetails.gigDescription) || gigDetails.gigDescription.trim() === '') {
+      setGigDescriptionError('Gig description must contain only alphabetical letters and cannot be empty.');
+      isValid = false;
+    } else {
+      setGigDescriptionError('');
+    }
+
+    return isValid;
+  };
+
+  // Validate package
+  const validatePackage = (pkg: Package) => {
+    let errors: string[] = [];
+
+    if (!/^[a-zA-Z\s]+$/.test(pkg.packageDescription) || pkg.packageDescription.trim() === '') {
+      errors.push('Package description must contain only alphabetical letters and cannot be empty.');
+    }
+
+    if (isNaN(parseFloat(pkg.packagePrice)) || parseFloat(pkg.packagePrice) <= 0) {
+      errors.push('Package price must be a positive number and cannot be zero.');
+    }
+
+    if (isNaN(parseFloat(pkg.packageDeliveryTime)) || parseFloat(pkg.packageDeliveryTime) < 1) {
+      errors.push('Package delivery time must be a positive number greater than or equal to 1.');
+    }
+
+    setPackageErrors(errors);
+    return errors.length === 0;
+  };
+
+  // Validate all packages
+  const validatePackages = () => {
+    return packages.every(validatePackage);
+  };
+
   // Render the form for editing gig details and packages
   return (
     <div className="container mt-5">
+      {/* Gig details form */}
       {gigDetails && (
         <div className="mb-4">
           <h1>Edit Gig</h1>
@@ -104,6 +165,7 @@ const EditGig: React.FC = () => {
               value={gigDetails.gigTitle}
               onChange={(e) => handleGigDetailsChange('gigTitle', e.target.value)}
             />
+            <div className="text-danger">{gigTitleError}</div>
           </div>
           <div className="mb-3">
             <label htmlFor="description" className="form-label">Description:</label>
@@ -113,9 +175,11 @@ const EditGig: React.FC = () => {
               value={gigDetails.gigDescription}
               onChange={(e) => handleGigDetailsChange('gigDescription', e.target.value)}
             />
+            <div className="text-danger">{gigDescriptionError}</div>
           </div>
         </div>
       )}
+      {/* Package details form */}
       {packages.map((pkg, index) => (
         <div key={pkg.packageId} className="mb-4">
           <h3>Package {index + 1}</h3>
@@ -137,6 +201,7 @@ const EditGig: React.FC = () => {
               value={pkg.packageDescription}
               onChange={(e) => handlePackageChange(index, 'packageDescription', e.target.value)}
             />
+            {packageErrors[index] && <div className="text-danger">{packageErrors[index]}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor={`packagePrice-${index}`} className="form-label">Package Price:</label>
@@ -147,6 +212,7 @@ const EditGig: React.FC = () => {
               value={pkg.packagePrice}
               onChange={(e) => handlePackageChange(index, 'packagePrice', e.target.value)}
             />
+            {packageErrors[index] && <div className="text-danger">{packageErrors[index]}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor={`packageDeliveryTime-${index}`} className="form-label">Package Delivery Time:</label>
@@ -157,12 +223,14 @@ const EditGig: React.FC = () => {
               value={pkg.packageDeliveryTime}
               onChange={(e) => handlePackageChange(index, 'packageDeliveryTime', e.target.value)}
             />
+            {packageErrors[index] && <div className="text-danger">{packageErrors[index]}</div>}
           </div>
         </div>
       ))}
+      {/* Buttons */}
       <div className="d-flex justify-content-between">
-        <button className="btn btn-secondary" onClick={handleSave}>Apply Changes</button>
-        <button className="btn btn-secondary" onClick={handleDiscardChanges}>Discard Changes</button>
+        <button className="btn btn-secondary" style={{backgroundColor: 'black'}} onClick={handleDiscardChanges}>Discard Changes</button>
+        <button className="btn btn-secondary" style={{backgroundColor: 'red'}} onClick={handleSave}>Apply Changes</button>
       </div>
     </div>
   );

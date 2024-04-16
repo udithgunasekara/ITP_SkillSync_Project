@@ -36,6 +36,7 @@ public class QualificationHandlerController {
         return ResponseEntity.status(HttpStatus.OK).body(uploadResults);
     }
 
+    //update re submission images
     @PutMapping("/update")
     public ResponseEntity<?> updateImage(@RequestParam("image") List<MultipartFile> files,
                                          @RequestParam("username") String userName,
@@ -50,29 +51,6 @@ public class QualificationHandlerController {
         String result = qualificationHandlerService.addSocialLinks(socialLinksDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-
-    //Under construction 4/11/24
-
-//    @GetMapping("/image/{userName}")
-//    public ResponseEntity<List<String>> getQualificationImage(@PathVariable String userName) {
-//        List<byte[]> imageContents = qualificationHandlerService.downloadQualification(userName);
-//
-//        if (imageContents.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        // Collect Base64-encoded representations
-//        List<String> base64Images = new ArrayList<>();
-//        for (byte[] imageData : imageContents) {
-//            String base64Image = Base64.getEncoder().encodeToString(imageData);
-//            base64Images.add(base64Image);
-//        }
-//
-//        // Return JSON array of images
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .body(base64Images);
-//    }
 
    //For updating title and each images
     @GetMapping("/image/{userName}")
@@ -94,6 +72,28 @@ public class QualificationHandlerController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(base64Images);
+    }
+
+    //Get rejected titles and images using username
+    @GetMapping("/Rejected/{username}")
+    public ResponseEntity<Map<String, List<String>>> getRejectedImageByUser(@PathVariable String username) {
+        Map<String, List<byte[]>> titleImagesMap = qualificationHandlerService.downloadRejectedQualificationByUser(username);
+
+        if (titleImagesMap.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Map<String, List<String>> titleBase64ImagesMap = new HashMap<>();
+        titleImagesMap.forEach((title, images) -> {
+            List<String> base64Images = images.stream()
+                    .map(image -> Base64.getEncoder().encodeToString(image))
+                    .collect(Collectors.toList());
+            titleBase64ImagesMap.put(title, base64Images);
+        });
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(titleBase64ImagesMap);
     }
 
 

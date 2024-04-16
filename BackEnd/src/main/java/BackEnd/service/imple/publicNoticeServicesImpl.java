@@ -7,6 +7,8 @@ import BackEnd.repository.publicNotcesRepo;
 import BackEnd.service.publicNoticeServices;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,9 +38,9 @@ public class publicNoticeServicesImpl implements publicNoticeServices{
 
         publicNotices notice = publicnoticerepository.save(addnotice);
 
-       publicNoticesDTO noticesdto = modelmapper.map(notice,publicNoticesDTO.class);
+        publicNoticesDTO noticesdto = modelmapper.map(notice,publicNoticesDTO.class);
 
-       return noticesdto;
+        return noticesdto;
     }
 
     //find notice by id
@@ -55,23 +57,23 @@ public class publicNoticeServicesImpl implements publicNoticeServices{
         publicNotices notice = publicnoticerepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("No notices found..failed to update")
         );
-       notice.setTitle(updateinfo.getTitle());
-       notice.setDescription(updateinfo.getDescription());
-       notice.setAudience(updateinfo.getAudience());
+        notice.setTitle(updateinfo.getTitle());
+        notice.setDescription(updateinfo.getDescription());
+        notice.setAudience(updateinfo.getAudience());
 
-       publicNotices updatednotice = publicnoticerepository.save(notice);
+        publicNotices updatednotice = publicnoticerepository.save(notice);
 
-       return modelmapper.map(updatednotice, publicNoticesDTO.class);
+        return modelmapper.map(updatednotice, publicNoticesDTO.class);
 
     }
 
     @Override
     public String deleteNoticeById(Long id) {
-         publicNotices targetnotice = publicnoticerepository.findById(id).orElseThrow(
-                 () -> new ResourceNotFound("No notices found")
-         );
-         publicnoticerepository.delete(targetnotice);
-         return "Notice deleted successfully";
+        publicNotices targetnotice = publicnoticerepository.findById(id).orElseThrow(
+                () -> new ResourceNotFound("No notices found")
+        );
+        publicnoticerepository.delete(targetnotice);
+        return "Notice deleted successfully";
 
     }
 
@@ -82,14 +84,22 @@ public class publicNoticeServicesImpl implements publicNoticeServices{
     }
 
     @Override
-    public List<publicNoticesDTO> getNoticeByAudience(String audience) {
-        List<publicNotices> notices = publicnoticerepository.findByAudience(audience);
-        List<publicNoticesDTO> noticesDTO = new ArrayList<>();
-
-        notices.forEach(
-                (p) -> {noticesDTO.add(modelmapper.map(p,publicNoticesDTO.class)) ; }
+    public Page<publicNoticesDTO> getNoticeByAudience(String audience, Pageable pageable) {
+        Page<publicNotices> notices = publicnoticerepository.findByAudience(audience,pageable);
+        Page<publicNoticesDTO> noticesDTO = notices.map(
+                (p) -> {return modelmapper.map(p,publicNoticesDTO.class);}
         );
 
+        return noticesDTO;
+    }
+
+
+    @Override
+    public Page<publicNoticesDTO> searchNoticeByTitleOrDescription(String title, String description, Pageable pageable) {
+        Page<publicNotices> notices = publicnoticerepository.findByTitleContainingOrDescriptionContaining(title, description,pageable);
+        Page<publicNoticesDTO> noticesDTO = notices.map(
+                (p) -> {return modelmapper.map(p,publicNoticesDTO.class);}
+        );
         return noticesDTO;
     }
 

@@ -14,4 +14,6 @@ public interface UserCredentialRepo extends JpaRepository<UserCredential, Long> 
 
     @Query(value = "SELECT * FROM user_credential WHERE user_name = :username", nativeQuery = true)
     Optional<UserCredential> findByUsername(@Param("username") String username);
+
+    UserCredential findByUserNameAndRole(String userName, String role);
 }

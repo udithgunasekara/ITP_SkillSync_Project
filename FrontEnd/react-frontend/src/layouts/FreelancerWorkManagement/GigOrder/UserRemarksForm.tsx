@@ -32,9 +32,8 @@ const UserRemarksForm: React.FC<UserRemarksFormProps> = () => {
         cusRemarks: remarks,
         cusName: cusName, // Include the customer name in the request payload
       });
-      console.log('Order placed successfully');
       window.alert('Order placed successfully');
-      history.push('/FreelancerMain');
+      history.push('/FreelancerHome');
     } catch (error) {
       console.error('Error placing order:', error);
     }

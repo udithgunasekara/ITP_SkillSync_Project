@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import './CreateGig.css';
 import { useHistory, useParams } from 'react-router-dom';
 
 const CreateGigForm2: React.FC = () => {
@@ -50,19 +49,19 @@ const CreateGigForm2: React.FC = () => {
     }
 
     return (
-        <div className="container" style={{ maxWidth: '900px', maxHeight: '900px', marginTop: '150px' }}>
+        <div className="container" id="containerGigCreate" style={{ maxWidth: '900px', maxHeight: '900px', marginTop: '150px', marginBottom: '210px' }}>
             <h2 className="text-center mb-4" style={{ color: 'red' }}>Upload Images</h2>
             <form onSubmit={handleSubmit} className="row g-3">
                 {[...Array(6)].map((_, index) => (
                     <div key={index} className="col-md-6">
                         <div className="form-group">
-                            <label htmlFor={`image${index}`} className="form-label">Upload Image {index + 1}:</label>
+                            <label htmlFor={`image${index}`} className="form-label" id="formLabelGigCreate">Upload Image {index + 1}:</label>
                             <input type="file" className="form-control" id={`image${index}`} onChange={(e) => handleImageChange(e, index)} />
                         </div>
                     </div>
                 ))}
                 <div className="col-12">
-                    <button type="submit" className="btn btn-primary btn-lg">Next</button>
+                    <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate">Next</button>
                 </div>
             </form>
         </div>
