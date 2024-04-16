@@ -144,7 +144,7 @@ export const CreateGigForm1: React.FC = () => {
                     </div>
                     {/* Submit Button */}
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary btn-lg" >Next</button>
+                        <button type="submit" className="btn btn-primary btn-lg" style={{width:"100%"}}>Next</button>
                     </div>
                 </form>
             </div>
