@@ -43,6 +43,14 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
+    public List<RatingDto> getAllRatingsByuserID(String userID) {
+        List<Rating> ratings = ratingRepository.findByUserID(userID);
+        return ratings.stream().map((rating) -> RatingMapper.mapToRatingDto(rating))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
     public RatingDto updateRating(Long ratingId, RatingDto updateRating) {
 
         //Validation

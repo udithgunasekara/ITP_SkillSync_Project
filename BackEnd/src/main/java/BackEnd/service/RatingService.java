@@ -11,6 +11,8 @@ public interface RatingService {
 
     List<RatingDto> getAllRatings();
 
+    List<RatingDto> getAllRatingsByuserID(String userID);
+
     RatingDto updateRating(Long ratingId, RatingDto updateRating);
 
     void deleteRating(Long ratingId);
