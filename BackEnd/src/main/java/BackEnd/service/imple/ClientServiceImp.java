@@ -1,8 +1,10 @@
 package BackEnd.service.imple;
 
 import BackEnd.DTO.ClientDTO;
+import BackEnd.DTO.LoginDTO;
 import BackEnd.Mapper.ClientMapper;
 import BackEnd.Mapper.UserControllerMapper;
+import BackEnd.entity.Freelancer;
 import BackEnd.entity.UserCredential;
 import BackEnd.repository.UserCredentialRepo;
 import BackEnd.entity.Client;
@@ -30,6 +32,15 @@ public class ClientServiceImp implements ClientService {
         UserCredential savedUserCredential = userCredentialRepo.save(userCredential);
 
         return ClientMapper.mapToClientDTO(saveClient);
+    }
+
+    @Override
+    public boolean validateLogin(LoginDTO loginDTO) {
+        Client client = clientRepo.findByUserName(loginDTO.getUsername());
+        if (client != null && client.getPassword().equals(loginDTO.getPassword())) {
+            return true;
+        }
+        return false;
     }
 
 }
