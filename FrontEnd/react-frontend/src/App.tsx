@@ -25,47 +25,45 @@ import { SearchNoticesPage } from './layouts/SearchNotices/SearchNoticesPage';
 export const App = () => {
   return (
     <Router>
-<<<<<<< HEAD
-      <Navbar />
-      <div>
-        <Switch>
-          <Route path="/CreateGigForm1" component={CreateGigForm1} />
-          <Route path="/CreateGigForm2/:gigId" component={CreateGigForm2} />
-          <Route path="/CreateGigForm3/:gigId" component={CreateGigForm3} />
-          <Route path="/FreelancerMain" component={FreelancerHome} />
-          <Route path="/gig/:id" component={DetailedGigs} />
-          <Route path="/FreelancerDashboard" component={FreelancerDashboard} />
-          <Route path="/edit/:id" component={EditGig} />
-        </Switch>
-=======
-
       <div className='d-flex flex-column min-vh-100'>
         <div className='flex-grow-1'>
           <Switch>
             <Route path="/CreateGigForm1">
               <Navbar />
               <CreateGigForm1 />
+              <Footer />
             </Route>
             <Route path="/CreateGigForm2/:gigId">
+              <Navbar />
               <CreateGigForm2 />
+              <Footer />
             </Route>
             <Route path="/CreateGigForm3/:gigId">
+              <Navbar />
+
               <CreateGigForm3 />
+              <Footer />
             </Route>
             <Route path="/FreelancerMain" exact>
+              <Navbar />
               <FreelancerHome />
+              <Footer />
             </Route>
             <Route path="/gig/:id">
+              <Navbar />
               <DetailedGigs />
+              <Footer />
             </Route>
             <Route path="/FreelancerDashboard">
+              <Navbar />
               <FreelancerDashboard />
+              <Footer />
             </Route>
             <Route path="/edit/:id">
+              <Navbar />
               <EditGig />
+              <Footer />
             </Route>
-            <Route path="/uploadedImages/:gigId" />
-
 
             {/* dilshan gmamge(do not change) */}
 
@@ -128,9 +126,7 @@ export const App = () => {
             {/* end of dilshan gamage files */}
           </Switch>
         </div>
->>>>>>> 00d4bab3ad94b1ceb99612a9c2b51073a91e7fa3
       </div>
-      <Footer />
     </Router>
   );
 }

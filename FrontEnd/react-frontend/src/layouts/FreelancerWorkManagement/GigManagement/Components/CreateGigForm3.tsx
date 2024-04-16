@@ -138,7 +138,7 @@ const CreateGigForm3: React.FC = () => {
 
     return (
         <div>
-            <section className="container mt-5" id="containerGigCreate">
+            <section className="container mt-5 .below-navbar" id="containerGigCreate">
                 <h2 className="text-center mb-4 text-danger">Publish</h2>
                 {singlePackageMode ? (
                     <div className="row">

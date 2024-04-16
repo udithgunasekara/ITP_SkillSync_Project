@@ -1,9 +1,5 @@
 /* CreateGig.css */
-<<<<<<< HEAD
 #containerGigCreate {
-=======
-#container1 {
->>>>>>> 00d4bab3ad94b1ceb99612a9c2b51073a91e7fa3
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -15,13 +11,9 @@
     font-size: 20px;
   }
   
-<<<<<<< HEAD
   #btnPrimaryGigCreate {
     width: 100%;
   }
-=======
-  
->>>>>>> 00d4bab3ad94b1ceb99612a9c2b51073a91e7fa3
   
   #btn-lg {
     padding: 15px;

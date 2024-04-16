@@ -49,7 +49,7 @@ const CreateGigForm2: React.FC = () => {
     }
 
     return (
-        <div className="container" id="containerGigCreate" style={{ maxWidth: '900px', maxHeight: '900px', marginTop: '150px' }}>
+        <div className="container" id="containerGigCreate" style={{ maxWidth: '900px', maxHeight: '900px', marginTop: '150px', marginBottom: '210px' }}>
             <h2 className="text-center mb-4" style={{ color: 'red' }}>Upload Images</h2>
             <form onSubmit={handleSubmit} className="row g-3">
                 {[...Array(6)].map((_, index) => (
