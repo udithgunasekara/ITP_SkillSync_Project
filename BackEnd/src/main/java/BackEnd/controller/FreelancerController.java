@@ -28,6 +28,7 @@ public class FreelancerController {
 
 
     //Getting all freelancers who are in "Inprogress" state
+    //url: http://localhost:8080/Freelancer/AllInProgress
     @GetMapping("AllInProgress")
     public ResponseEntity<List<FreelancerDTO>> getAllInprogressFreelancers(){
         List<FreelancerDTO> freelancer = freelancerService.getAllInprogressFreelancers();
