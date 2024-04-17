@@ -1,5 +1,5 @@
 .header{
-    background-image: url("../../images/header1.png");
+    background-image: url("../../../images/header1.png");
     opacity: var(--mainOpacity);
     height: 20em !important;
 }

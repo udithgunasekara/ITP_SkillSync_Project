@@ -174,6 +174,7 @@ const EditGig: React.FC = () => {
               id="title"
               value={gigDetails.gigTitle}
               onChange={(e) => handleGigDetailsChange('gigTitle', e.target.value)}
+              maxLength={50}
             />
             <div className="text-danger">{gigTitleError}</div>
           </div>
@@ -184,6 +185,7 @@ const EditGig: React.FC = () => {
               id="description"
               value={gigDetails.gigDescription}
               onChange={(e) => handleGigDetailsChange('gigDescription', e.target.value)}
+              maxLength={200}
             />
             <div className="text-danger">{gigDescriptionError}</div>
           </div>
@@ -210,6 +212,7 @@ const EditGig: React.FC = () => {
               id={`packageDescription-${index}`}
               value={pkg.packageDescription}
               onChange={(e) => handlePackageChange(index, 'packageDescription', e.target.value)}
+              maxLength={100}
             />
           </div>
           <div className="mb-3">
