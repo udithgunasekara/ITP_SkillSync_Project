@@ -7,7 +7,6 @@ import FreelancerHome from './layouts/FreelancerWorkManagement/FreelancerHome/Fr
 import { CreateGigForm1 } from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm1';
 import CreateGigForm2 from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm2';
 import CreateGigForm3 from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm3';
-import DetailedGigs from './layouts/FreelancerWorkManagement/GigOrder/DetailedGigs';
 import { Footer } from './layouts/navbar&footers/Footer';
 import { Navbar } from './layouts/navbar&footers/Navbar';
 import { Dashboard } from './layouts/AdminTaskManagement/Dashboard/dashboard';
@@ -24,6 +23,7 @@ import { SearchNoticesPage } from './layouts/AdminTaskManagement/SearchNotices/S
 import { UserSpecificTicketResponse } from './layouts/AdminTaskManagement/HelpDesk/Components/UserSpecificTicketResponse';
 import { UserTicketResponsepage } from './layouts/AdminTaskManagement/HelpDesk/UserTicketResponsepage';
 import { SupportNavBar } from './layouts/AdminTaskManagement/HelpDesk/Components/SupportNavBar';
+import { GigOrder } from './layouts/FreelancerWorkManagement/GigOrder/GigOrder';
 
 export const App = () => {
   return (
@@ -53,7 +53,7 @@ export const App = () => {
             </Route>
             <Route path="/gig/:id">
               <Navbar />
-              <DetailedGigs />
+              <GigOrder />
               <Footer />
             </Route>
             <Route path="/FreelancerDashboard">

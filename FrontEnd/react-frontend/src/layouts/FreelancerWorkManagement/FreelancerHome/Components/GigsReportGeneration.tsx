@@ -1,18 +1,47 @@
 import { Gig } from "./FreelanceServices";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+// Extend jsPDF with the autoTable plugin
+interface jsPDFWithAutoTable extends jsPDF {
+    autoTable: (options: any) => jsPDF;
+}
+
+// Initialize the autoTable plugin
+const doc = new jsPDF() as jsPDFWithAutoTable;
 
 export const generateGigReport = (gigData: Gig[]) => {
-    // Create CSV content
-    const csvContent = "Freelancer Name,Gig Title,Gig Description,Gig Category,Gig Date Created\n";
-    const formattedData = gigData.map(gig => (
-        `${gig.freelancerUsername},${gig.gigTitle},"${gig.gigDescription}",${gig.gigCategory},${gig.gigDateCreated}`
-    )).join("\n");
+    // Set font styles
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
 
-    // Generate CSV file
-    const encodedUri = encodeURI('data:text/csv;charset=utf-8,' + csvContent + formattedData);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "gig_report.csv");
-    document.body.appendChild(link);
-    link.click();
+    // Add title
+    doc.setTextColor(33, 150, 243); // Set title color to blue
+    doc.text("Freelancer gigs report", 105, 20, { align: 'center' });
 
+    // Set font styles for table content
+    doc.setFont("helvetica");
+    doc.setFontSize(12);
+
+    // Table data
+    const data = gigData.map(gig => [
+        gig.freelancerUsername,
+        gig.gigTitle,
+        gig.gigDescription,
+        gig.gigCategory,
+        gig.gigDateCreated
+    ]);
+
+    // Add table using autoTable plugin
+    doc.autoTable({
+        head: [['Freelancer Name', 'Gig Title', 'Gig Description', 'Gig Category', 'Gig Date Created']],
+        body: data,
+        startY: 30,
+        theme: 'grid',
+        styles: { cellPadding: 3, fontSize: 10, valign: 'middle', halign: 'center' },
+        columnStyles: { 0: { fontStyle: 'bold' } } // Make the first column bold
+    });
+
+    // Save PDF
+    doc.save("gig_report.pdf");
 };
