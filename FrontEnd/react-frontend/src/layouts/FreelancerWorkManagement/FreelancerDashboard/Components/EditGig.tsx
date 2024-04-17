@@ -28,7 +28,7 @@ const EditGig: React.FC = () => {
   // State for error messages
   const [gigTitleError, setGigTitleError] = useState<string>('');
   const [gigDescriptionError, setGigDescriptionError] = useState<string>('');
-  const [packageErrors, setPackageErrors] = useState<string[]>([]);
+  const [packageError, setPackageError] = useState<string>('');
 
   useEffect(() => {
     // Fetch gig details
@@ -72,30 +72,29 @@ const EditGig: React.FC = () => {
   };
 
   // Save changes to gig details and packages
-const handleSave = async () => {
-  try {
-    // Validate gig details and packages
-    if (!validateGigDetails() || !validatePackages()) return;
+  const handleSave = async () => {
+    try {
+      // Validate gig details and packages
+      if (!validateGigDetails() || !validatePackages()) return;
 
-    // Show confirmation message
-    const confirmed = window.confirm('Are you sure you want to apply the changes?');
-    if (!confirmed) return;
+      // Show confirmation message
+      const confirmed = window.confirm('Are you sure you want to apply the changes?');
+      if (!confirmed) return;
 
-    // Update gig details
-    await axios.put(`http://localhost:8082/freelancer-gigs/${id}`, gigDetails);
+      // Update gig details
+      await axios.put(`http://localhost:8082/freelancer-gigs/${id}`, gigDetails);
 
-    // Update each package individually
-    await Promise.all(packages.map(async (pkg) => {
-      await axios.put(`http://localhost:8082/freelancer-gigs/${id}/gig-packages/${pkg.packageId}`, pkg);
-    }));
+      // Update each package individually
+      await Promise.all(packages.map(async (pkg) => {
+        await axios.put(`http://localhost:8082/freelancer-gigs/${id}/gig-packages/${pkg.packageId}`, pkg);
+      }));
 
-    // Navigate back to the dashboard after saving changes
-    history.push('/FreelancerDashboard');
-  } catch (error) {
-    console.error('Error saving gig data:', error);
-  }
-};
-
+      // Navigate back to the dashboard after saving changes
+      history.push('/FreelancerDashboard');
+    } catch (error) {
+      console.error('Error saving gig data:', error);
+    }
+  };
 
   // Discard changes and navigate back
   const handleDiscardChanges = () => {
@@ -125,33 +124,44 @@ const handleSave = async () => {
   };
 
   // Validate package
-  const validatePackage = (pkg: Package) => {
-    let errors: string[] = [];
+  const validatePackage = (pkg: Package, index: number) => {
+    let error = '';
 
     if (!/^[a-zA-Z\s]+$/.test(pkg.packageDescription) || pkg.packageDescription.trim() === '') {
-      errors.push('Package description must contain only alphabetical letters and cannot be empty.');
+      error += 'Package description must contain only alphabetical letters and cannot be empty. ';
     }
 
     if (isNaN(parseFloat(pkg.packagePrice)) || parseFloat(pkg.packagePrice) <= 0) {
-      errors.push('Package price must be a positive number and cannot be zero.');
+      error += 'Package price must be a positive number and cannot be zero. ';
     }
 
     if (isNaN(parseFloat(pkg.packageDeliveryTime)) || parseFloat(pkg.packageDeliveryTime) < 1) {
-      errors.push('Package delivery time must be a positive number greater than or equal to 1.');
+      error += 'Package delivery time must be a positive number greater than or equal to 1. ';
     }
 
-    setPackageErrors(errors);
-    return errors.length === 0;
+    return error;
   };
 
   // Validate all packages
   const validatePackages = () => {
-    return packages.every(validatePackage);
+    let isValid = true;
+    let errors = '';
+
+    packages.forEach((pkg, index) => {
+      const error = validatePackage(pkg, index);
+      if (error) {
+        isValid = false;
+        errors += `Package ${index + 1}: ${error} `;
+      }
+    });
+
+    setPackageError(errors);
+    return isValid;
   };
 
   // Render the form for editing gig details and packages
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" id="containerGigCreate">
       {/* Gig details form */}
       {gigDetails && (
         <div className="mb-4">
@@ -201,7 +211,6 @@ const handleSave = async () => {
               value={pkg.packageDescription}
               onChange={(e) => handlePackageChange(index, 'packageDescription', e.target.value)}
             />
-            {packageErrors[index] && <div className="text-danger">{packageErrors[index]}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor={`packagePrice-${index}`} className="form-label">Package Price:</label>
@@ -212,7 +221,6 @@ const handleSave = async () => {
               value={pkg.packagePrice}
               onChange={(e) => handlePackageChange(index, 'packagePrice', e.target.value)}
             />
-            {packageErrors[index] && <div className="text-danger">{packageErrors[index]}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor={`packageDeliveryTime-${index}`} className="form-label">Package Delivery Time:</label>
@@ -223,10 +231,13 @@ const handleSave = async () => {
               value={pkg.packageDeliveryTime}
               onChange={(e) => handlePackageChange(index, 'packageDeliveryTime', e.target.value)}
             />
-            {packageErrors[index] && <div className="text-danger">{packageErrors[index]}</div>}
           </div>
         </div>
       ))}
+      {/* Error messages */}
+      {packageError && (
+        <div className="text-danger mb-3">{packageError}</div>
+      )}
       {/* Buttons */}
       <div className="d-flex justify-content-between">
         <button className="btn btn-secondary" style={{backgroundColor: 'black'}} onClick={handleDiscardChanges}>Discard Changes</button>

@@ -38,10 +38,10 @@ public class OrdersController {
         return ResponseEntity.ok(ordersDto);
     }
 
-//    //Build get all orders by freelancer REST API
-//    @GetMapping("/{freelancer}")
-//    public ResponseEntity<List<OrdersDTO>> getAllOrdersByFreelancer(@PathVariable String freelancer) {
-//        List<OrdersDTO> ordersDTO = orderService.getAllOrdersByFreelancer(freelancer);
+   // Endpoint to get all orders by a specific freelancer
+//    @GetMapping("/{freelancerUsername}")
+//    public ResponseEntity<List<OrdersDTO>> getAllOrdersByFreelancer(@PathVariable String freelancerUsername) {
+//        List<OrdersDTO> ordersDTO = orderService.getAllOrdersByFreelancer(freelancerUsername);
 //        return ResponseEntity.ok(ordersDTO);
 //    }
 

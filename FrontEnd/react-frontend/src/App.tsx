@@ -40,7 +40,6 @@ export const App = () => {
             </Route>
             <Route path="/CreateGigForm3/:gigId">
               <Navbar />
-
               <CreateGigForm3 />
               <Footer />
             </Route>

@@ -23,12 +23,12 @@ const CreateGigForm2: React.FC = () => {
                 }
             });
             console.log('Images uploaded successfully:', response.data);
+            handleNextClick(gigId);
     
         } catch (error) {
             console.error('Error uploading images:', error);
-            // Optionally, you can handle errors here
+            window.alert('At least one image should be uploaded')
         }
-        handleNextClick(gigId);
     };
     
     
@@ -49,6 +49,7 @@ const CreateGigForm2: React.FC = () => {
     }
 
     return (
+        <div className="">
         <div className="container" id="containerGigCreate" style={{ maxWidth: '900px', maxHeight: '900px', marginTop: '150px', marginBottom: '210px' }}>
             <h2 className="text-center mb-4" style={{ color: 'red' }}>Upload Images</h2>
             <form onSubmit={handleSubmit} className="row g-3">
@@ -64,6 +65,7 @@ const CreateGigForm2: React.FC = () => {
                     <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate">Next</button>
                 </div>
             </form>
+        </div>
         </div>
     );
 };

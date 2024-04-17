@@ -62,7 +62,6 @@ export const CreateGigForm1: React.FC = () => {
             <div className="container" id="containerGigCreate" style={{ maxWidth: '900px' }}>
                 <h2 className="text-center mb-4" style={{ color: 'red' }}>Create a Gig</h2>
                 <form className="row g-3" onSubmit={handleSubmit}>
-                    {/* Form fields */}
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">
