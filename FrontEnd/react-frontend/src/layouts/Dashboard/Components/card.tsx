@@ -52,8 +52,7 @@ export const Cardcontent: React.FC<{ notice: PublicNoticesModel, key: number }> 
                         {props.notice.moreDetailsLink !== null ?
                             <p>
                                 for more details visit: <a href={props.notice.moreDetailsLink}>{props.notice.moreDetailsLink}</a>
-                            </p> :
-                             ""
+                            </p> :""
                         }
                     </div>
                     <h6></h6>

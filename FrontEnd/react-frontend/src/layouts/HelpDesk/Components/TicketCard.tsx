@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TicketModel from "../../../Model/TicketModel";
 import axios from "axios";
 import './Ticketcardstyle.css';
+import { Link } from "react-router-dom";
 
 export const TicketCard: React.FC<{ ticket: TicketModel, key: number; onDelete: (ticketId: number) => void }> = (props) => {
     const [expanded, setExpanded] = useState(false);
@@ -101,7 +102,7 @@ export const TicketCard: React.FC<{ ticket: TicketModel, key: number; onDelete: 
                         </div>
                         <div className="row mt-3">
                             <div className="col  d-flex justify-content-center">
-                                <button className="btn btn-primary me-2">More Details</button>
+                                <Link to={`/tickets/${props.ticket.id}`}><button className="btn btn-primary me-2">More Details?</button></Link>
                                 <button className="btn btn-danger" onClick={() => deleteTicket(props.ticket.id)}>Delete Ticket</button>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 package BackEnd.service;
 
 import BackEnd.DTO.FreelancerDTO;
+import BackEnd.DTO.LoginDTO;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface FreelancerService {
     void deleteFreelancerByUsername(String username);
 
     String acceptFreelancer(String username);
+
+    boolean validateLogin(LoginDTO loginDTO);
 
 //    FreelancerDTO getFreelancerById(Long id);
 //

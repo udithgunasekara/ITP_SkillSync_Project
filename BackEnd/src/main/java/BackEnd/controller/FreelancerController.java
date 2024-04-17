@@ -1,6 +1,7 @@
 package BackEnd.controller;
 
 import BackEnd.DTO.FreelancerDTO;
+import BackEnd.DTO.LoginDTO;
 import BackEnd.service.FreelancerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class FreelancerController {
 
 
     //Getting all freelancers who are in "Inprogress" state
+    //url: http://localhost:8080/Freelancer/AllInProgress
     @GetMapping("AllInProgress")
     public ResponseEntity<List<FreelancerDTO>> getAllInprogressFreelancers(){
         List<FreelancerDTO> freelancer = freelancerService.getAllInprogressFreelancers();
@@ -56,6 +58,14 @@ public class FreelancerController {
         return ResponseEntity.ok("Freelancer Account Accepted Successfully: " + username);
     }
 
+    //freelancer login validation
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+        if (freelancerService.validateLogin(loginDTO)) {
+            return ResponseEntity.ok("Login Successful");
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
 
 
 

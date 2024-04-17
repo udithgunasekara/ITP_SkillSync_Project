@@ -1,5 +1,6 @@
 package BackEnd.Mapper;
 
+import BackEnd.DTO.LoginDTO;
 import BackEnd.entity.BannedUser;
 import BackEnd.DTO.FreelancerDTO;
 import BackEnd.entity.Freelancer;
@@ -51,6 +52,15 @@ public class FreelancerMapper {
 
             return bannedUser;
         }
+
+        public static Freelancer mapToFreelancerLogin(LoginDTO loginDTO){
+            Freelancer freelancer = new Freelancer();
+            freelancer.setUserName(loginDTO.getUsername());
+            freelancer.setPassword(loginDTO.getPassword());
+            return freelancer;
+        }
+
+
 
 
 
