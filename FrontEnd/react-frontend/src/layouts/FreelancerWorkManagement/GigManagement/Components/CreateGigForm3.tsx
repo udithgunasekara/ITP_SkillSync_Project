@@ -26,10 +26,11 @@ const CreateGigForm3: React.FC = () => {
     const [singlePackageMode, setSinglePackageMode] = useState<boolean>(true); // Default to single-package mode
 
     const handleContentChange = (packageType: string, value: string) => {
+        const trimmedValue = value.slice(0,100);
         setFormData(prevState => ({
             packageDetails: {
                 ...prevState.packageDetails,
-                [packageType]: { ...prevState.packageDetails[packageType], content: value },
+                [packageType]: { ...prevState.packageDetails[packageType], content: trimmedValue },
             },
         }));
     };

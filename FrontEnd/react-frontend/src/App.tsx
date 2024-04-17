@@ -10,17 +10,20 @@ import CreateGigForm3 from './layouts/FreelancerWorkManagement/GigManagement/Com
 import DetailedGigs from './layouts/FreelancerWorkManagement/GigOrder/DetailedGigs';
 import { Footer } from './layouts/navbar&footers/Footer';
 import { Navbar } from './layouts/navbar&footers/Navbar';
-import { Dashboard } from './layouts/Dashboard/dashboard';
-import { DashboardPage } from './layouts/Admin/DashboardPage';
-import { EditNoticePage } from './layouts/Admin/EditNoticePage';
-import { NewNoticePage } from './layouts/Admin/NewNoticePage';
-import { RespondToTicketPage } from './layouts/Admin/RespondToTicketPage';
-import { EditNoticeForm } from './layouts/Admin/components/EditNoticeForm';
-import { RespondToTicekt } from './layouts/Admin/components/RespondtoticketComponents/RespondToTicekt';
-import { Helpdesk } from './layouts/HelpDesk/Helpdesk';
-import { NewTicket } from './layouts/HelpDesk/NewTicket';
-import { RaisedTicketPage } from './layouts/HelpDesk/RaisedTicketPage';
-import { SearchNoticesPage } from './layouts/SearchNotices/SearchNoticesPage';
+import { Dashboard } from './layouts/AdminTaskManagement/Dashboard/dashboard';
+import { DashboardPage } from './layouts/AdminTaskManagement/Admin/DashboardPage';
+import { EditNoticePage } from './layouts/AdminTaskManagement/Admin/EditNoticePage';
+import { NewNoticePage } from './layouts/AdminTaskManagement/Admin/NewNoticePage';
+import { RespondToTicketPage } from './layouts/AdminTaskManagement/Admin/RespondToTicketPage';
+import { EditNoticeForm } from './layouts/AdminTaskManagement/Admin/components/EditNoticeForm';
+import { RespondToTicekt } from './layouts/AdminTaskManagement/Admin/components/RespondtoticketComponents/RespondToTicekt';
+import { Helpdesk } from './layouts/AdminTaskManagement/HelpDesk/Helpdesk';
+import { NewTicket } from './layouts/AdminTaskManagement/HelpDesk/NewTicket';
+import { RaisedTicketPage } from './layouts/AdminTaskManagement/HelpDesk/RaisedTicketPage';
+import { SearchNoticesPage } from './layouts/AdminTaskManagement/SearchNotices/SearchNoticesPage';
+import { UserSpecificTicketResponse } from './layouts/AdminTaskManagement/HelpDesk/Components/UserSpecificTicketResponse';
+import { UserTicketResponsepage } from './layouts/AdminTaskManagement/HelpDesk/UserTicketResponsepage';
+import { SupportNavBar } from './layouts/AdminTaskManagement/HelpDesk/Components/SupportNavBar';
 
 export const App = () => {
   return (
@@ -40,7 +43,6 @@ export const App = () => {
             </Route>
             <Route path="/CreateGigForm3/:gigId">
               <Navbar />
-
               <CreateGigForm3 />
               <Footer />
             </Route>
@@ -89,9 +91,15 @@ export const App = () => {
               <NewTicket />
             </Route>
 
-            <Route path='/tickets'>
+            <Route path='/tickets' exact>
               <RaisedTicketPage />
             </Route>
+
+            <Route path='/tickets/:ticketId' exact>
+              <SupportNavBar />
+              <UserTicketResponsepage />
+            </Route>
+
 
             <Route path='/admin' exact>
               <Navbar />

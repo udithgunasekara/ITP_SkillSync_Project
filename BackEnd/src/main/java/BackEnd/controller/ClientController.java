@@ -1,6 +1,7 @@
 package BackEnd.controller;
 
 import BackEnd.DTO.ClientDTO;
+import BackEnd.DTO.LoginDTO;
 import BackEnd.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,16 @@ public class ClientController {
         ClientDTO saveClient = clientService.createClient(clientDTO);
 
         //can we make here a another service function for save usercredentials data (username, role, password))
-
-
         return new ResponseEntity<>(saveClient, HttpStatus.CREATED);
 
+    }
+
+    //Client Login
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+        if (clientService.validateLogin(loginDTO)) {
+            return ResponseEntity.ok("Login Successful");
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
     }
 }

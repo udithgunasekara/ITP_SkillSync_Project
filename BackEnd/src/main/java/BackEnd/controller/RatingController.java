@@ -23,6 +23,12 @@ public class RatingController {
         return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
     }
 
+    @GetMapping("/user/{userID}")
+   public ResponseEntity<List<RatingDto>> getAllRatingsByUserID(@PathVariable("userID") String userID) {
+        List<RatingDto> ratings = ratingService.getAllRatingsByuserID(userID);
+        return ResponseEntity.ok(ratings);
+   }
+
     //Build Get Rating REST API
     @GetMapping("{id}")
     public ResponseEntity<RatingDto> getRatingById(@PathVariable("id") Long ratingId) {

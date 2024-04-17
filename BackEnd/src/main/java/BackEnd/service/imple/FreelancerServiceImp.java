@@ -1,6 +1,7 @@
 package BackEnd.service.imple;
 
 import BackEnd.DTO.FreelancerDTO;
+import BackEnd.DTO.LoginDTO;
 import BackEnd.Exceptions.ResourceNotFound;
 import BackEnd.Mapper.FreelancerMapper;
 import BackEnd.Mapper.UserControllerMapper;
@@ -99,6 +100,19 @@ public class FreelancerServiceImp implements FreelancerService {
         freelancerRepo.save(freelancer);
         return null;
     }
+
+    //freelancer Login checking
+    @Override
+    public boolean validateLogin(LoginDTO loginDTO) {
+        Freelancer freelancer = freelancerRepo.findByUserName(loginDTO.getUsername());
+        if (freelancer != null && freelancer.getPassword().equals(loginDTO.getPassword())) {
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 
 }

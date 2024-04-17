@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 
-export const SearchSection = () => {
-    const [searchInput, setSearchInput] = useState("");
+export const SearchSection: React.FC = () => {
+    const [searchInput, setSearchInput] = useState<string>("");
 
-    const handleInputChange = (event: { target: { value: any; }; }) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
-        // Check if the input contains only alphabetical letters using a regular expression
-        if (/^[a-zA-Z]*$/.test(inputValue)) {
-            setSearchInput(inputValue);
-        }
+        const alphabetOnly = inputValue.replace(/[^a-zA-Z]/g, ''); // Remove any non-alphabetical characters
+        setSearchInput(alphabetOnly);
     };
 
     const handleSearch = () => {
