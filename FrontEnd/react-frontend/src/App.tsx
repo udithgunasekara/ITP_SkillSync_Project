@@ -21,6 +21,9 @@ import { Helpdesk } from './layouts/HelpDesk/Helpdesk';
 import { NewTicket } from './layouts/HelpDesk/NewTicket';
 import { RaisedTicketPage } from './layouts/HelpDesk/RaisedTicketPage';
 import { SearchNoticesPage } from './layouts/SearchNotices/SearchNoticesPage';
+import { UserSpecificTicketResponse } from './layouts/HelpDesk/Components/UserSpecificTicketResponse';
+import { UserTicketResponsepage } from './layouts/HelpDesk/UserTicketResponsepage';
+import { SupportNavBar } from './layouts/HelpDesk/Components/SupportNavBar';
 
 export const App = () => {
   return (
@@ -89,9 +92,15 @@ export const App = () => {
               <NewTicket />
             </Route>
 
-            <Route path='/tickets'>
+            <Route path='/tickets' exact>
               <RaisedTicketPage />
             </Route>
+
+            <Route path='/tickets/:ticketId' exact>
+              <SupportNavBar/>
+              <UserTicketResponsepage/>
+            </Route>
+            
 
             <Route path='/admin' exact>
               <Navbar />

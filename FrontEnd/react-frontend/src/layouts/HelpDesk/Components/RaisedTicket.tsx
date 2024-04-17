@@ -88,7 +88,7 @@ export const RaisedTicket = () => {
 
             </div>
 
-            {ticket.map((element) => (
+            {ticket.slice().reverse().map((element) => (
                 <TicketCard key={element.id} ticket={element} onDelete={(ticketId) => {
                     setTicket(ticket.filter((ticket) => ticket.id !== ticketId));
                 }} />
