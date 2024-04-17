@@ -113,7 +113,7 @@ export const VIewTiceketPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {ticket.map((element,index) => (
+                    {ticket.slice().reverse().map((element,index) => (
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
                             <td >{element.id}</td>
