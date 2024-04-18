@@ -24,6 +24,7 @@ import { UserSpecificTicketResponse } from './layouts/AdminTaskManagement/HelpDe
 import { UserTicketResponsepage } from './layouts/AdminTaskManagement/HelpDesk/UserTicketResponsepage';
 import { SupportNavBar } from './layouts/AdminTaskManagement/HelpDesk/Components/SupportNavBar';
 import { GigOrder } from './layouts/FreelancerWorkManagement/GigOrder/GigOrder';
+import { FormGenerate } from './layouts/AdminTaskManagement/HelpDesk/formGenerate/FormGenerate';
 
 export const App = () => {
   return (
@@ -129,6 +130,11 @@ export const App = () => {
             <Route path='/admin/ticketrespond/:ticketId' exact>
               <Navbar />
               <RespondToTicekt />
+            </Route>
+
+            {/* test file  */}
+            <Route path='/report' exact>
+              <FormGenerate/>
             </Route>
 
             {/* end of dilshan gamage files */}

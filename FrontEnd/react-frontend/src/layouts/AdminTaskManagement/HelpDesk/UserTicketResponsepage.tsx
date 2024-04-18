@@ -6,6 +6,8 @@ import { SpinnerLoading } from "../../../utils/SpinnerLoading";
 import { AdminNavbar } from "../Admin/components/AdminNavbar";
 import { SpecificTicketResponse } from "../Admin/components/RespondtoticketComponents/SpecificTicketResponse";
 import { UserSpecificTicketResponse } from "./Components/UserSpecificTicketResponse";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { Report } from './formGenerate/Report';
 
 export const UserTicketResponsepage = () => {
     const { ticketId } = useParams<{ ticketId: string }>();
@@ -153,59 +155,9 @@ export const UserTicketResponsepage = () => {
         );
     }
 
-    const hendleShowForm = async () => {
-        setShowForm((prev) => !prev);
-    };
-
-    const handleChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-            response: "",
-            ticket: {
-                id: ticketId
-            },
-            subject: ticket.subject
-        }
-        )
-        setFormData(prevState => ({ ...prevState, [name]: value }));
-        console.log(e.target.value);
-    };
-
-
-
     console.log(formData);
 
-
-    const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            const response = await fetch("http://localhost:8082/ticketresponse/addticketresponse", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-            if (response.ok) {
-                alert("response posted successfully");
-                setFormData({
-                    response: "",
-                    ticket: {
-                        id: ""
-                    },
-                    subject: ""
-                    // imageLink: "",
-                });
-                (document.getElementById('responsetextarea') as HTMLTextAreaElement).value = "";
-                formRef.current?.reset();
-
-            } else {
-                alert("Failed to post notice. Please try again");
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    }
+  
 
 
     return (
@@ -325,14 +277,26 @@ export const UserTicketResponsepage = () => {
 
                             <div className="card  mx-auto mt-5" style={{ width: "80%", borderRadius: "20px" }}>
                                 <div className="card-body">
-                                    <button className="btn btn-primary m-1  d-flex align-items-center justify-content-center" style={{ width: "100%", textAlign: "center" }} title="download report">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-download me-2" viewBox="0 0 16 16">
-                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
-                                        </svg>
-                                        download
+                                    <PDFDownloadLink document={<Report ticketdata={ticket} ticketresponse={tresponses} />} fileName="report.pdf">
+                                        {({ loading }) => (loading ?
+                                            <button className="btn btn-primary m-1  d-flex align-items-center justify-content-center" style={{ width: "100%", textAlign: "center" }} title="download report" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-download me-2" viewBox="0 0 16 16">
+                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                                                </svg>
+                                                loading download
+                                            </button> :
+                                            <button className="btn btn-primary m-1  d-flex align-items-center justify-content-center" style={{ width: "100%", textAlign: "center" }} title="download report" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-download me-2" viewBox="0 0 16 16">
+                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                                                </svg>
+                                                download report
+                                            </button>)}
+                                    </PDFDownloadLink>
 
-                                    </button>
+
+
                                 </div>
                             </div>
 
