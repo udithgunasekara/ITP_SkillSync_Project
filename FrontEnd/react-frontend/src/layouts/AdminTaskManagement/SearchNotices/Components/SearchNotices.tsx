@@ -21,7 +21,7 @@ export const SearchBook: React.FC<{ notice: PublicNoticesModel, key: number }> =
                 </div>
                 <div className="d-flex justify-content-center">
                     <img className="card-img-bottom"
-                        src="https://images.pexels.com/photos/1656564/pexels-photo-1656564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        src={props.notice.imagelink}
                         alt="Card image"
                         style={{ width: "80%", height: "90%" }} />
                 </div>

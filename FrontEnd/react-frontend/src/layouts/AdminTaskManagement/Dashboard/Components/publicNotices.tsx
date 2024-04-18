@@ -34,7 +34,8 @@ export const PublicNotices = () => {
           audience: responsedata[element].audience,
           datecreated: responsedata[element].datecreated,
           lastupdated: responsedata[element].lastupdated,
-          moreDetailsLink: responsedata[element].moreDetailsLink
+          moreDetailsLink: responsedata[element].moreDetailsLink,
+          imagelink: responsedata[element].imagelink
         });
       }
 

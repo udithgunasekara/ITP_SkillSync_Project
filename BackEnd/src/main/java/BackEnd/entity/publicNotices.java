@@ -32,4 +32,5 @@ public class publicNotices {
     private LocalDateTime datecreated;
     @UpdateTimestamp
     private LocalDateTime lastupdated;
+    private String imagelink;
 }

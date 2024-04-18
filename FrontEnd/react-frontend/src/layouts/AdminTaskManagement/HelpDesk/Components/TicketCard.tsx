@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import TicketModel from "../../../../Model/TicketModel";
 import axios from "axios";
 import './Ticketcardstyle.css';
 import { Link } from "react-router-dom";
 
 export const TicketCard: React.FC<{ ticket: TicketModel, key: number; onDelete: (ticketId: number) => void }> = (props) => {
+    
+    const userid = 2; //change this to change user
     const [expanded, setExpanded] = useState(false);
 
-
+    
     const date = new Date(props.ticket.createdTime).getDate();
     const month = new Date(props.ticket.createdTime).getMonth() + 1;
     const year = new Date(props.ticket.createdTime).getFullYear();
@@ -26,7 +28,7 @@ export const TicketCard: React.FC<{ ticket: TicketModel, key: number; onDelete: 
 
     const deleteTicket = async (id: number) => {
         try {
-            await axios.delete(`http://localhost:8082/ticket/deleteticket?id=${props.ticket.id}&userid=2`);
+            await axios.delete(`http://localhost:8082/ticket/deleteticket?id=${props.ticket.id}&userid=${userid}`);
             props.onDelete(id);
             alert("Ticket Deleted Successfully");
 

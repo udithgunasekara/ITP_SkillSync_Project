@@ -6,6 +6,8 @@ import { TicketCard } from './TicketCard';
 
 export const RaisedTicket = () => {
 
+    const userid = 2;
+
     const [ticket, setTicket] = useState<TicketModel[]>([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);

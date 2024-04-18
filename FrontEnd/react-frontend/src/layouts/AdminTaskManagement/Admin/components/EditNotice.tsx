@@ -33,7 +33,8 @@ export const EditNotice = () => {
                     description: responsedata[element].description,
                     datecreated: responsedata[element].datecreated,
                     moreDetailsLink: responsedata[element].moreDetailsLink,
-                    lastupdated: responsedata[element].lastupdated
+                    lastupdated: responsedata[element].lastupdated,
+                    imagelink: responsedata[element].imagelink
                 });
             }
 
@@ -78,6 +79,7 @@ export const EditNotice = () => {
                         <th scope="col">Audience</th>
                         <th scope="col">Description</th>
                         <th scope="col">Created Date</th>
+                        <th scope="col">Image link</th>
                         <th scope="col">More Details</th>
                         <th scope="col">action</th>
 

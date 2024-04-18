@@ -45,7 +45,8 @@ export const SearchNoticesPage = () => {
                     audience: responsedata[element].audience,
                     datecreated: responsedata[element].datecreated,
                     lastupdated: responsedata[element].lastupdated,
-                    moreDetailsLink: responsedata[element].moreDetailsLink
+                    moreDetailsLink: responsedata[element].moreDetailsLink,
+                    imagelink: responsedata[element].imagelink
                 });
             }
 
@@ -98,8 +99,8 @@ export const SearchNoticesPage = () => {
 
 
     return (
-        <div className="container">
-            <div>
+        <div className="container below-navbar">
+            <div className="container pt-3">
                 <div className="row mt-5">
                     <div className="col-6">
                         <div className="d-flex">

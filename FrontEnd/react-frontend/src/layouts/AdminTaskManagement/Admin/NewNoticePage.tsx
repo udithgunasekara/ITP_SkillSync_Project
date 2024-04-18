@@ -10,16 +10,26 @@ export const NewNoticePage = () => {
         title: "",
         audience: "",
         description: "",
-        moreDetailsLink: ""
-        // imageLink: "",
+        moreDetailsLink: "",
+        imagelink: ""
     });
 
     const formRef = useRef<HTMLFormElement>(null);
 
-    const handleChange = async (e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement> ) => {
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({ ...prevState, [name]: value }));
-        console.log(e.target.value);
+        let sanitizedInput: string = "";
+
+        if (/[^a-zA-Z0-9\s]/.test(e.target.value)) {
+            sanitizedInput = e.target.value.replace(/[^\w\s]/g, '');
+        } else {
+            sanitizedInput = "ok";
+        }
+        if (sanitizedInput !== "") {
+            setFormData(prevState => ({ ...prevState, [name]: value }));
+            console.log(e.target.value);
+        }
+
     };
 
     // const handlefilechange = async (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -27,34 +37,39 @@ export const NewNoticePage = () => {
     //     setFormData(prevState => ({ ...prevState, imageLink: file }));
     // }
 
-    const handlesubmt = async (e:React.FormEvent<HTMLFormElement>) => {
+    const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try{
-            const response = await fetch("http://localhost:8082/notices/addnotice", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-            if(response.ok){
-                alert("Notice posted successfully");
-                setFormData({
-                    title: "",
-                    audience: "",
-                    description: "",
-                    moreDetailsLink: ""
-                    // imageLink: "",
+        if (formData.title !== "" || formData.audience !== "" || formData.description !== "") {
+            try {
+                const response = await fetch("http://localhost:8082/notices/addnotice", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
                 });
-                formRef.current?.reset();
-                
-            }else{
-                alert("Failed to post notice. Please try again");
+                if (response.ok) {
+                    alert("Notice posted successfully");
+                    setFormData({
+                        title: "",
+                        audience: "",
+                        description: "",
+                        moreDetailsLink: "",
+                        imagelink: ""
+                    });
+                    formRef.current?.reset();
+
+                } else {
+                    alert("Failed to post notice. Please try again");
+                }
+            } catch (err) {
+                console.log(err);
             }
-        }catch(err){
-            console.log(err);
+        } else {
+            alert("Please fill all the fields");
         }
     }
+
 
 
     console.log(formData);
@@ -65,38 +80,47 @@ export const NewNoticePage = () => {
             <div className=" align-items-center below-navbar-admin">
                 <div className="raiseticketform">
                     <div className="container">
-                        <h1 className="d-flex justify-content-center text-dark pt-3">Post new Notice</h1>               
+                        <h1 className="d-flex justify-content-center text-dark pt-3">Post new Notice</h1>
 
                         <form className="ticketform" ref={formRef} onSubmit={handlesubmt}>
 
                             <div className="form-floating mb-3">
-                                <input type="text" name="title" className="form-control" id="noticetitle" placeholder="title" onChange={handleChange}/>
+                                <input type="text" name="title" className={`form-control ${formData?.title ? '' : 'is-invalid'}`} id="noticetitle" placeholder="title" value={formData?.title} onChange={handleChange} required />
                                 <label htmlFor="noticetitle">Title</label>
+                                <div className="invalid-feedback" >
+                                    Please provide a Title.
+                                </div>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <select className="form-select" name="audience" id="audience" aria-label="Related To" required aria-placeholder="select option" onChange={handleChange}>
-                                    <option>Select the audience</option>
+                                <select className={`form-select ${formData?.audience ? '' : 'is-invalid'}`} name="audience" id="audience" aria-label="Related To" value={formData?.audience} required aria-placeholder="select option" onChange={handleChange}>
+                                    <option selected disabled value="">select audience</option>
                                     <option value="Freelancer">Freelancer</option>
                                     <option value="client">client</option>
                                     <option value="payment">all</option>
                                 </select>
+                                <div className="invalid-feedback">
+                                    select a audience
+                                </div>
                                 <label htmlFor="audience" className="form-label">Audience</label>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <textarea className="form-control" name="description" id="description" rows={6} placeholder="Enter description" style={{ height: "200px" }} onChange={handleChange}/>
+                                <textarea className={`form-control ${formData?.description ? '' : 'is-invalid'}`} name="description" id="description" rows={6} placeholder="Enter description" value={formData?.description} required style={{ height: "200px" }} onChange={handleChange} />
                                 <label htmlFor="description" className="form-label">Description</label>
+                                <div className="invalid-feedback">
+                                    Please provide description.
+                                </div>
                             </div>
 
                             <div className="form-floating mb-3">
                                 <input type="text" name="moreDetailsLink" className="form-control" id="moredetails" placeholder="more details link" onChange={handleChange} />
-                                <label htmlFor="moredetails">Link for more details</label>
+                                <label htmlFor="moredetails">Link for more details(optional)</label>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <input type="text" name="imageLink" className="form-control" id="imagelink" placeholder="more details link" />
-                                <label htmlFor="imagelink">Image link</label>
+                                <input type="text" name="imagelink" className="form-control" id="imagelink" placeholder="more details link" onChange={handleChange} />
+                                <label htmlFor="imagelink">Image link (optional)</label>
                             </div>
 
 

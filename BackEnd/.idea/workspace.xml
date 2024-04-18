@@ -5,7 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b086d2a-6886-4446-9837-ada4673a1713" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/DTO/publicNoticesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/DTO/publicNoticesDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/controller/publicNoticesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/controller/publicNoticesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/entity/publicNotices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/entity/publicNotices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/service/imple/publicNoticeServicesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/service/imple/publicNoticeServicesImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/DTO/publicNoticesDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/DTO/publicNoticesDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/controller/publicNoticesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/controller/publicNoticesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/entity/publicNotices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/entity/publicNotices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/service/imple/publicNoticeServicesImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/service/imple/publicNoticeServicesImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/Model/publicNoticesModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/Model/publicNoticesModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/NewNoticePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/NewNoticePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/AdminDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/AdminDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/EditNotice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/EditNotice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/EditNoticeForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/EditNoticeForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/EditNoticeRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/EditNoticeRow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/RespondtoticketComponents/RespondToTicekt.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Admin/components/RespondtoticketComponents/RespondToTicekt.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Dashboard/Components/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Dashboard/Components/card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Dashboard/Components/publicNotices.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/Dashboard/Components/publicNotices.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/HelpDesk/Components/RaiseTicketForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/HelpDesk/Components/RaiseTicketForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/HelpDesk/Components/RaisedTicket.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/HelpDesk/Components/RaisedTicket.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/HelpDesk/Components/TicketCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/HelpDesk/Components/TicketCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/SearchNotices/Components/SearchNotices.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/SearchNotices/Components/SearchNotices.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/SearchNotices/SearchNoticesPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/src/layouts/AdminTaskManagement/SearchNotices/SearchNoticesPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,27 +73,27 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.BackEnd.executor": "Run",
-    "git-widget-placeholder": "Development",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/my works/git copy/BackEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BackEnd.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Development&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/my works/git copy/BackEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BackEnd" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="demo" />
@@ -102,6 +131,8 @@
       <workItem from="1713206683239" duration="69000" />
       <workItem from="1713206759161" duration="3185000" />
       <workItem from="1713316225653" duration="9178000" />
+      <workItem from="1713398602712" duration="5048000" />
+      <workItem from="1713423207968" duration="1480000" />
     </task>
     <servers />
   </component>

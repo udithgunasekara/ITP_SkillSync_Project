@@ -6,9 +6,10 @@ class PublicNoticesModel {
     datecreated:Date;
     lastupdated:Date;
     moreDetailsLink:string;
+    imagelink:string;
     
 
-    constructor(id:number, title:string, description:string, audience:string, datecreated:Date, lastupdated:Date,moreDetailsLink:string) {
+    constructor(id:number, title:string, description:string, audience:string, datecreated:Date, lastupdated:Date,moreDetailsLink:string,imagelink:string) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -16,6 +17,7 @@ class PublicNoticesModel {
         this.datecreated = datecreated;
         this.lastupdated = lastupdated;
         this.moreDetailsLink= moreDetailsLink;
+        this.imagelink= imagelink;
     }
 
 }
