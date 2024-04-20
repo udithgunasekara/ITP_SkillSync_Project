@@ -10,7 +10,7 @@ export const SearchBook: React.FC<{ notice: PublicNoticesModel, key: number }> =
                         <p className="card-text">
                             {props.notice.description}
                         </p>
-                        {props.notice.moreDetailsLink !== null ?
+                        {props.notice.moreDetailsLink !== null && props.notice.moreDetailsLink !== "" ?
                             <p>
                                 for more details visit: <a href={props.notice.moreDetailsLink}>{props.notice.moreDetailsLink}</a>
                             </p> :

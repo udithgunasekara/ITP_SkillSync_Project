@@ -10,8 +10,8 @@ export const NewNoticePage = () => {
         title: "",
         audience: "",
         description: "",
-        moreDetailsLink: "",
-        imagelink: ""
+        moreDetailsLink: null,
+        imagelink: null
     });
 
     const formRef = useRef<HTMLFormElement>(null);
@@ -54,8 +54,8 @@ export const NewNoticePage = () => {
                         title: "",
                         audience: "",
                         description: "",
-                        moreDetailsLink: "",
-                        imagelink: ""
+                        moreDetailsLink: null,
+                        imagelink: null
                     });
                     formRef.current?.reset();
 
