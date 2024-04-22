@@ -37,7 +37,8 @@ public class FreelancerMapper {
                     freelancer.getPhone(),
                     freelancer.getUserName(),
                     freelancer.getPassword(),
-                    freelancer.getWorkOn()
+                    freelancer.getWorkOn(),
+                    freelancer.getCreated_at()
             );
         }
 

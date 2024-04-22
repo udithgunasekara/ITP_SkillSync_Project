@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class FreelancerDTO {
     private String userName;
     private String password;
     private String workOn;
+    private LocalDate created_at;
   //  private String role;
 
 }
