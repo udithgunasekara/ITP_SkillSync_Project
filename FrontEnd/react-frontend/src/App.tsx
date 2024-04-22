@@ -16,7 +16,7 @@ import { NewNoticePage } from './layouts/AdminTaskManagement/Admin/NewNoticePage
 import { RespondToTicketPage } from './layouts/AdminTaskManagement/Admin/RespondToTicketPage';
 import { EditNoticeForm } from './layouts/AdminTaskManagement/Admin/components/EditNoticeForm';
 import { RespondToTicekt } from './layouts/AdminTaskManagement/Admin/components/RespondtoticketComponents/RespondToTicekt';
-import { Helpdesk } from './layouts/AdminTaskManagement/HelpDesk/Helpdesk';
+import { HelpdeskPage } from './layouts/AdminTaskManagement/HelpDesk/HelpdeskPage';
 import { NewTicket } from './layouts/AdminTaskManagement/HelpDesk/NewTicket';
 import { RaisedTicketPage } from './layouts/AdminTaskManagement/HelpDesk/RaisedTicketPage';
 import { SearchNoticesPage } from './layouts/AdminTaskManagement/SearchNotices/SearchNoticesPage';
@@ -85,7 +85,7 @@ export const App = () => {
             </Route>
 
             <Route path='/support' exact>
-              <Helpdesk />
+              <HelpdeskPage />
             </Route>
 
             <Route path='/raiseticket' exact>
