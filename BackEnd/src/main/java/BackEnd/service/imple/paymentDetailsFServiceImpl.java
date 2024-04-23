@@ -2,17 +2,14 @@ package BackEnd.service.imple;
 
 import BackEnd.DTO.paymentDetailsFreelancerDTO;
 import BackEnd.Exceptions.ResourceNotFound;
-import BackEnd.Mapper.PaymentMapper;
 import BackEnd.Mapper.paymentDetailsFreelancerMapper;
-import BackEnd.entity.Payment;
 import BackEnd.entity.paymentDetailsFreelancer;
 import BackEnd.repository.paymentDetailsFreelancerRepo;
 import BackEnd.service.paymentDetailsFreelancerService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 
 @Service
 
@@ -44,6 +41,10 @@ public class paymentDetailsFServiceImpl implements paymentDetailsFreelancerServi
                         new ResourceNotFound("Details is not exists with given id : " + id));
         return paymentDetailsFreelancerMapper.mapTopaymentDetailsFreelancerDTO(paymentDetailsFreelancer);
     }
+
+
+
+
 
     @Override
     public paymentDetailsFreelancerDTO updateDetails(Long id, paymentDetailsFreelancerDTO updatedDetails) {

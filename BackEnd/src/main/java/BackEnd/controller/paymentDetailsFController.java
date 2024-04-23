@@ -22,13 +22,16 @@ public class paymentDetailsFController {
         return new ResponseEntity<>(savedPayDetailsF, HttpStatus.CREATED);
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<paymentDetailsFreelancerDTO> getDetailsById(@PathVariable("id") Long id){
         paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO = paymentDetailsFreelancerService.getDetailsById(id);
         return ResponseEntity.ok(paymentDetailsFreelancerDTO);
     }
 
-    @PutMapping("/update/{id}")
+
+
+
+    @PutMapping("/{id}")
     public ResponseEntity<paymentDetailsFreelancerDTO> updateDetails(@PathVariable("id") Long id,
                                                                      @RequestBody paymentDetailsFreelancerDTO updatedDetails){
         paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO = paymentDetailsFreelancerService.updateDetails(id, updatedDetails);
@@ -36,7 +39,7 @@ public class paymentDetailsFController {
         return ResponseEntity.ok(paymentDetailsFreelancerDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDetails(@PathVariable("id") Long id){
         paymentDetailsFreelancerService.deleteDetails(id);
         return ResponseEntity.ok("Details deleted sucessfully!");

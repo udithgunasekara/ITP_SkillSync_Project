@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b086d2a-6886-4446-9837-ada4673a1713" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react-frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bf869a72-42a7-4dcf-a3b3-8884b5cf6a80.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bf869a72-42a7-4dcf-a3b3-8884b5cf6a80.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/Config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/Config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/controller/paymentDetailsFController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/controller/paymentDetailsFController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/service/imple/paymentDetailsFServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/service/imple/paymentDetailsFServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BackEnd/service/paymentDetailsFreelancerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BackEnd/service/paymentDetailsFreelancerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/controller/paymentDetailsFController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/controller/paymentDetailsFController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd/service/imple/paymentDetailsFServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd/service/imple/paymentDetailsFServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,27 +52,27 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.BackEnd.executor": "Run",
-    "git-widget-placeholder": "Development",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/my works/git copy/BackEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BackEnd.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Development&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/ITP_/BackEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BackEnd" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="demo" />
@@ -77,7 +85,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-7d648f2c" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
   </component>
@@ -102,6 +110,13 @@
       <workItem from="1713206683239" duration="69000" />
       <workItem from="1713206759161" duration="3185000" />
       <workItem from="1713316225653" duration="9178000" />
+      <workItem from="1713410407610" duration="3215000" />
+      <workItem from="1713434130169" duration="662000" />
+      <workItem from="1713680587902" duration="2934000" />
+      <workItem from="1713689271909" duration="172000" />
+      <workItem from="1713689521002" duration="746000" />
+      <workItem from="1713775822613" duration="28000" />
+      <workItem from="1713776199568" duration="1188000" />
     </task>
     <servers />
   </component>

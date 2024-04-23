@@ -1,7 +1,7 @@
 package BackEnd.service;
 
-import BackEnd.DTO.PaymentDTO;
 import BackEnd.DTO.paymentDetailsFreelancerDTO;
+import BackEnd.entity.paymentDetailsFreelancer;
 
 public interface paymentDetailsFreelancerService  {
     paymentDetailsFreelancerDTO addDetails(paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO);
