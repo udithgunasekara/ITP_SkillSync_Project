@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { generateGigReport } from './GigsReportGeneration';
+import SearchSection from './SearchSection'; // Import SearchSection from the new file
 
 export interface Gig {
   gigId: number;
@@ -22,6 +23,7 @@ export const FreelanceServices: React.FC = () => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [minPrices, setMinPrices] = useState<{ [key: number]: string }>({});
   const [minTimes, setMinTimes] = useState<{ [key: number]: string }>({});
+  const [showNoResults, setShowNoResults] = useState(false); // State to control displaying no results message
 
   useEffect(() => {
     const fetchGigData = async () => {
@@ -87,7 +89,7 @@ export const FreelanceServices: React.FC = () => {
       console.error(`Error fetching minimum time for gig ${gigId}:`, error);
       return ''; // Return empty string if there's an error
     }
-  }
+  };
 
   // Function to handle search button click
   const handleSearch = (query: string) => {
@@ -101,7 +103,8 @@ export const FreelanceServices: React.FC = () => {
 
   // Calculate total number of pages
   const filteredGigs = gigData.filter(gig =>
-    gig.gigTitle.toLowerCase().includes(searchQuery.toLowerCase())
+    gig.gigTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    gig.gigCategory.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const totalPages = Math.ceil(filteredGigs.length / gigsPerPage);
 
@@ -112,9 +115,19 @@ export const FreelanceServices: React.FC = () => {
   // Get gigs for the current page
   const currentGigs = filteredGigs.slice(indexOfFirstGig, indexOfLastGig);
 
+  // Show message when there are no search results
+  useEffect(() => {
+    setShowNoResults(filteredGigs.length === 0 && searchQuery !== '');
+  }, [filteredGigs, searchQuery]);
+
   return (
     <div>
       <SearchSection onSearch={handleSearch} />
+      {showNoResults && (
+        <div style={{ margin: '20px', padding: '10px', backgroundColor: '#f8d7da', color: '#721c24', border: '1px solid #f5c6cb', borderRadius: '5px' }}>
+          No results found for '{searchQuery}'
+        </div>
+      )}
       <section className="containerx" style={{ marginLeft: '50px' }}>
         <div className="row">
           {currentGigs.map((gig: Gig, index: number) => (
@@ -132,7 +145,7 @@ export const FreelanceServices: React.FC = () => {
                     <p className="card-text fs-6">Price: ${minPrices[gig.gigId]} onwards</p>
                     <p className="card-text fs-6">Time Taken: {minTimes[gig.gigId]}h</p>
                     <p className="card-text fs-6">@{gig.freelancerUsername}</p>
-                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{backgroundColor: '#641C9E'}}>View Details</Link>
+                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{ backgroundColor: '#641C9E' }}>View Details</Link>
                   </div>
                 </div>
               </div>
@@ -153,45 +166,5 @@ export const FreelanceServices: React.FC = () => {
         <button className="btn" onClick={() => generateGigReport(gigData)} >Generate Report</button>
       </section>
     </div>
-  );
-};
-
-interface Props {
-  onSearch: (query: string) => void;
-}
-
-export const SearchSection: React.FC<Props> = ({ onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(searchQuery);
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
-
-  return (
-    <section className="containerx" style={{ margin: '30px' }}>
-      <div className="row">
-        <div className="col-md-6">
-          <form onSubmit={handleSearch}>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search services..."
-                value={searchQuery}
-                onChange={handleInputChange}
-              />
-              <div className="input-group-append">
-                <button className="btn btn-primary" type="submit">Search</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
   );
 };

@@ -11,7 +11,6 @@ export const Cardcontent: React.FC<{ notice: PublicNoticesModel, key: number }> 
 
     const [createdDate, setCreatedDate] = useState(0);
 
-
     const [diffinSerconds, setDiffinSeconds] = useState(0);
 
     useEffect(() => {
@@ -39,8 +38,8 @@ export const Cardcontent: React.FC<{ notice: PublicNoticesModel, key: number }> 
     return (
 
 
-        <div className='container d-flex justify-content-center '>
-            <div className="card mt-5" style={{ width: "80%" }}>
+        <div className='container d-flex justify-content-center mb-5'>
+            <div className="card mt-3" style={{ width: "80%",borderRadius:"20px", borderColor:"rgba(70, 11, 120, 0.7)", borderWidth:"4px", boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.4)"}}>
                 <div className="card-body">
                     <div className="text-left"> {/* Wrapper for text and button */}
                         <h4 className="card-title">{props.notice.title}</h4>
@@ -49,7 +48,7 @@ export const Cardcontent: React.FC<{ notice: PublicNoticesModel, key: number }> 
                         <p className="card-text">
                             {props.notice.description}
                         </p>
-                        {props.notice.moreDetailsLink !== null ?
+                        {props.notice.moreDetailsLink !== "" && props.notice.moreDetailsLink !== null ?
                             <p>
                                 for more details visit: <a href={props.notice.moreDetailsLink}>{props.notice.moreDetailsLink}</a>
                             </p> : ""
@@ -57,11 +56,12 @@ export const Cardcontent: React.FC<{ notice: PublicNoticesModel, key: number }> 
                     </div>
                     <h6></h6>
                 </div>
-                <div className="d-flex justify-content-center">
-                    <img className="card-img-bottom"
-                        src="https://images.pexels.com/photos/1656564/pexels-photo-1656564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Card image"
-                        style={{ width: "80%", height: "90%" }} />
+                <div className="d-flex justify-content-center " >
+                    {props.notice.imagelink !== "" && props.notice.imagelink !== null ?
+                        <img className="card-img-bottom "  
+                            src={props.notice.imagelink}
+                            alt="Card image"
+                            style={{ width: "80%", height: "90%" ,borderRadius:"20px"}} /> : ""}
                 </div>
             </div>
 

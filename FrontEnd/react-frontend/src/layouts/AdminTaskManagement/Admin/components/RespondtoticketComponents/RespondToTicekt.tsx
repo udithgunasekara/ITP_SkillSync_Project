@@ -211,7 +211,7 @@ export const RespondToTicekt = () => {
 
 
     return (
-        <div className="container-fluid  below-navbar-admin" style={{ width: "90vw", height: "fit-content", backgroundColor: "rgba(192, 187, 201, 30%)" }} >
+        <div className="container-fluid  below-navbar-admin" style={{ width: "90vw", height: "fit-content", minHeight:"100vh", backgroundColor: "rgba(192, 187, 201, 30%)" }} >
             <AdminNavbar />
             <div className="row" style={{ padding: "0", margin: "0", minHeight: "fit-content" }}>
 
@@ -327,14 +327,14 @@ export const RespondToTicekt = () => {
 
                             <div className="card  mx-auto mt-5" style={{ width: "80%", borderRadius: "20px" }}>
                                 <div className="card-body">
-                                    <button className="btn btn-primary m-1  d-flex align-items-center justify-content-center" style={{ width: "100%", textAlign: "center" }} title="download report">
+                                    {/* <button className="btn btn-primary m-1  d-flex align-items-center justify-content-center" style={{ width: "100%", textAlign: "center" }} title="download report">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-download me-2" viewBox="0 0 16 16">
                                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
                                             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
                                         </svg>
                                         download
 
-                                    </button>
+                                    </button> */}
                                     <button className="btn btn-success m-1 d-flex align-items-center justify-content-center" style={{ width: "100%", textAlign: "center" }} onClick={hendleShowForm} title="respond to ticekt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-input-cursor-text me-2" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M5 2a.5.5 0 0 1 .5-.5c.862 0 1.573.287 2.06.566.174.099.321.198.44.286.119-.088.266-.187.44-.286A4.17 4.17 0 0 1 10.5 1.5a.5.5 0 0 1 0 1c-.638 0-1.177.213-1.564.434a3.5 3.5 0 0 0-.436.294V7.5H9a.5.5 0 0 1 0 1h-.5v4.272c.1.08.248.187.436.294.387.221.926.434 1.564.434a.5.5 0 0 1 0 1 4.17 4.17 0 0 1-2.06-.566A5 5 0 0 1 8 13.65a5 5 0 0 1-.44.285 4.17 4.17 0 0 1-2.06.566.5.5 0 0 1 0-1c.638 0 1.177-.213 1.564-.434.188-.107.335-.214.436-.294V8.5H7a.5.5 0 0 1 0-1h.5V3.228a3.5 3.5 0 0 0-.436-.294A3.17 3.17 0 0 0 5.5 2.5.5.5 0 0 1 5 2" />

@@ -60,6 +60,8 @@ public class publicNoticeServicesImpl implements publicNoticeServices{
         notice.setTitle(updateinfo.getTitle());
         notice.setDescription(updateinfo.getDescription());
         notice.setAudience(updateinfo.getAudience());
+        notice.setMoreDetailsLink(updateinfo.getMoreDetailsLink());
+        notice.setImagelink(updateinfo.getImagelink());
 
         publicNotices updatednotice = publicnoticerepository.save(notice);
 

@@ -21,4 +21,5 @@ public class publicNoticesDTO {
     private String moreDetailsLink;
     private LocalDateTime datecreated;
     private LocalDateTime lastupdated;
+    private String imagelink;
 }

@@ -7,7 +7,6 @@ import FreelancerHome from './layouts/FreelancerWorkManagement/FreelancerHome/Fr
 import { CreateGigForm1 } from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm1';
 import CreateGigForm2 from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm2';
 import CreateGigForm3 from './layouts/FreelancerWorkManagement/GigManagement/Components/CreateGigForm3';
-import DetailedGigs from './layouts/FreelancerWorkManagement/GigOrder/DetailedGigs';
 import { Footer } from './layouts/navbar&footers/Footer';
 import { Navbar } from './layouts/navbar&footers/Navbar';
 import { Dashboard } from './layouts/AdminTaskManagement/Dashboard/dashboard';
@@ -17,13 +16,15 @@ import { NewNoticePage } from './layouts/AdminTaskManagement/Admin/NewNoticePage
 import { RespondToTicketPage } from './layouts/AdminTaskManagement/Admin/RespondToTicketPage';
 import { EditNoticeForm } from './layouts/AdminTaskManagement/Admin/components/EditNoticeForm';
 import { RespondToTicekt } from './layouts/AdminTaskManagement/Admin/components/RespondtoticketComponents/RespondToTicekt';
-import { Helpdesk } from './layouts/AdminTaskManagement/HelpDesk/Helpdesk';
+import { HelpdeskPage } from './layouts/AdminTaskManagement/HelpDesk/HelpdeskPage';
 import { NewTicket } from './layouts/AdminTaskManagement/HelpDesk/NewTicket';
 import { RaisedTicketPage } from './layouts/AdminTaskManagement/HelpDesk/RaisedTicketPage';
 import { SearchNoticesPage } from './layouts/AdminTaskManagement/SearchNotices/SearchNoticesPage';
 import { UserSpecificTicketResponse } from './layouts/AdminTaskManagement/HelpDesk/Components/UserSpecificTicketResponse';
 import { UserTicketResponsepage } from './layouts/AdminTaskManagement/HelpDesk/UserTicketResponsepage';
 import { SupportNavBar } from './layouts/AdminTaskManagement/HelpDesk/Components/SupportNavBar';
+import { GigOrder } from './layouts/FreelancerWorkManagement/GigOrder/GigOrder';
+import { FormGenerate } from './layouts/AdminTaskManagement/HelpDesk/formGenerate/FormGenerate';
 
 export const App = () => {
   return (
@@ -53,7 +54,7 @@ export const App = () => {
             </Route>
             <Route path="/gig/:id">
               <Navbar />
-              <DetailedGigs />
+              <GigOrder />
               <Footer />
             </Route>
             <Route path="/FreelancerDashboard">
@@ -84,7 +85,7 @@ export const App = () => {
             </Route>
 
             <Route path='/support' exact>
-              <Helpdesk />
+              <HelpdeskPage />
             </Route>
 
             <Route path='/raiseticket' exact>
@@ -129,6 +130,11 @@ export const App = () => {
             <Route path='/admin/ticketrespond/:ticketId' exact>
               <Navbar />
               <RespondToTicekt />
+            </Route>
+
+            {/* test file  */}
+            <Route path='/report' exact>
+              <FormGenerate/>
             </Route>
 
             {/* end of dilshan gamage files */}

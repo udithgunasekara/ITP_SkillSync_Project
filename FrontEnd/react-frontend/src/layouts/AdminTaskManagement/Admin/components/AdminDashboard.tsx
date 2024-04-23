@@ -26,8 +26,8 @@ export const AdminDashboard = () => {
                     <div className="card text-dark bg-light mb-3 mx-auto " style={{ maxWidth: "25rem" }}>
                         <div className="card-header">Freelancers joined within this week</div>
                         <div className="card-body">
-                            <h5 className="card-title">Light card title</h5>
-                            <p className="card-text">Some quick example </p>
+                            <h5 className="card-title"></h5>
+                            <p className="card-text">related data will be displayed here </p>
                         </div>
                     </div>
                 </div>
@@ -37,8 +37,8 @@ export const AdminDashboard = () => {
                     <div className="card text-dark bg-light mb-3 mx-auto" style={{ maxWidth: "25rem" }}>
                         <div className="card-header">Total jobs posted within this week</div>
                         <div className="card-body">
-                            <h5 className="card-title">Light card title</h5>
-                            <p className="card-text">Some quick example </p>
+                            <h5 className="card-title"></h5>
+                            <p className="card-text">related data will be displayed here </p>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@ export const AdminDashboard = () => {
                     <div className="card text-dark bg-light mb-3 mx-auto " style={{ maxWidth: "25rem" }}>
                         <div className="card-header">Freelancers joined within this week</div>
                         <div className="card-body">
-                            <h5 className="card-title">Light card title</h5>
-                            <p className="card-text">Some quick example </p>
+                            <h5 className="card-title"></h5>
+                            <p className="card-text">related data will be displayed here </p>
                         </div>
                     </div>
                 </div>

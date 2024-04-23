@@ -34,7 +34,8 @@ export const PublicNotices = () => {
           audience: responsedata[element].audience,
           datecreated: responsedata[element].datecreated,
           lastupdated: responsedata[element].lastupdated,
-          moreDetailsLink: responsedata[element].moreDetailsLink
+          moreDetailsLink: responsedata[element].moreDetailsLink,
+          imagelink: responsedata[element].imagelink
         });
       }
 
@@ -69,12 +70,18 @@ export const PublicNotices = () => {
     <div className="container">
       <div className="container-fluid py-0 text-black d-flex justify-content-between align-items-center">
         <h1 className="display-5 fw-bold ms-4">Public Notices</h1>
-        <Link className="btn btn-lg main-color text-white rounded-pill " to={`/dashboard/search`}>
-          <h5 > <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+        <Link 
+        className="btn btn-lg main-color text-white p-3 d-flex align-items-center justify-content-center" 
+        style={{borderRadius:"50%", width: "60px", height: "60px"}} 
+        to={`/dashboard/search`}>
+
+           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-          </svg> Search</h5>
+          </svg> 
+          
         </Link>
       </div>
+      <hr style={{color:"purple"}} />
 
       {data.slice().reverse().map((element) => (
 

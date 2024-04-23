@@ -34,6 +34,7 @@ public class publicNoticesController {
         System.out.println(noticedto.getMoreDetailsLink());
         publicNoticesDTO newNotice = publicNoticesServices.addNotice(noticedto);
         System.out.println(newNotice.getTitle());
+        System.out.println(newNotice.getImagelink());
         return new ResponseEntity<>(newNotice, HttpStatus.CREATED);
     }
 

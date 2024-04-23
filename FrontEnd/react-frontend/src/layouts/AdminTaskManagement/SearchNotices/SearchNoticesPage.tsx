@@ -3,6 +3,7 @@ import PublicNoticesModel from "../../../Model/publicNoticesModel";
 import { SpinnerLoading } from "../../../utils/SpinnerLoading";
 import axios from "axios";
 import { SearchBook } from "./Components/SearchNotices";
+import { Cardcontent } from "../Dashboard/Components/card";
 
 export const SearchNoticesPage = () => {
 
@@ -45,7 +46,8 @@ export const SearchNoticesPage = () => {
                     audience: responsedata[element].audience,
                     datecreated: responsedata[element].datecreated,
                     lastupdated: responsedata[element].lastupdated,
-                    moreDetailsLink: responsedata[element].moreDetailsLink
+                    moreDetailsLink: responsedata[element].moreDetailsLink,
+                    imagelink: responsedata[element].imagelink
                 });
             }
 
@@ -98,18 +100,20 @@ export const SearchNoticesPage = () => {
 
 
     return (
-        <div className="container">
-            <div>
+        <div className="container below-navbar">
+            <div className="container pt-3">
                 <div className="row mt-5">
                     <div className="col-6">
                         <div className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="search"
+                            <input className="form-control me-2" type="search" placeholder="search using keywords in title or description" aria-label="search"
                                 onChange={e => serachTermHandler(e.target.value)}
                             />
-                            <button className="btn btn-outline-success"
+                            <button className="btn btn-success"
                                 onClick={() => searchHandleChange()}
                             >
-                                Search
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -117,8 +121,9 @@ export const SearchNoticesPage = () => {
                     <div className="mt-3">
                         <h5>Number of Results:({totalNumberOfElements})</h5>
                     </div>
-                    {data.map(element => (
-                        <SearchBook notice={element} key={element.id} />
+                    {data.slice().reverse().map(element => (
+                        <Cardcontent notice={element} key={element.id} />
+                        // <SearchBook notice={element} key={element.id} />
                     ))}
 
                 </div>

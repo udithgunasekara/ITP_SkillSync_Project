@@ -53,6 +53,9 @@ export const EditNoticeRow: React.FC<{ element: PublicNoticesModel, index: numbe
 
             <td>{dateconverter(props.element.datecreated)}</td>
             <td>{
+                props.element.imagelink ? <a href={props.element.imagelink}>Link</a> : "No Link Available"
+            }</td>
+            <td>{
                 props.element.moreDetailsLink ? <a href={props.element.moreDetailsLink}>Link</a> : "No Link Available"
             }</td>
             <td>

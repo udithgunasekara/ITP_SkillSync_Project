@@ -1,46 +1,48 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from 'react';
 
-export const SearchSection: React.FC = () => {
-    const [searchInput, setSearchInput] = useState<string>("");
+interface Props {
+  onSearch: (query: string) => void;
+}
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const inputValue = event.target.value;
-        const alphabetOnly = inputValue.replace(/[^a-zA-Z]/g, ''); // Remove any non-alphabetical characters
-        setSearchInput(alphabetOnly);
-    };
+const SearchSection: React.FC<Props> = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState('');
 
-    const handleSearch = () => {
-        // Handle search functionality here
-        console.log("Search input:", searchInput);
-    };
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch(searchQuery);
+  };
 
-    return (
-        <section className="container my-4">
-            <div className="row">
-                <div className="col-md-6">
-                    <form>
-                        <div className="input-group mb-3">
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                placeholder="Search services..." 
-                                value={searchInput} 
-                                onChange={handleInputChange} 
-                            />
-                            <div className="input-group-append">
-                                <button 
-                                    className="btn btn-primary" 
-                                    style={{ backgroundColor: '#480B78' }} 
-                                    type="button" 
-                                    onClick={handleSearch} // Call handleSearch function when button is clicked
-                                >
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    // Regular expression to match only alphabetical letters
+    const regex = /^[A-Za-z\s]*$/;
+    if (regex.test(input)) {
+      setSearchQuery(input);
+    }
+  };
+
+  return (
+    <section className="containerx" style={{ margin: '30px' }}>
+      <div className="row">
+        <div className="col-md-6">
+          <form onSubmit={handleSearch}>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search gigs using gig title or gig category..."
+                value={searchQuery}
+                onChange={handleInputChange}
+              />
+              <div className="input-group-append">
+                <button className="btn btn-primary" type="submit">Search</button>
+              </div>
             </div>
-        </section>
-    );
+          </form>
+        </div>
+      </div>
+    </section>
+  );
 };
+
+export default SearchSection;
