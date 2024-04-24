@@ -25,6 +25,23 @@ import { UserTicketResponsepage } from './layouts/AdminTaskManagement/HelpDesk/U
 import { SupportNavBar } from './layouts/AdminTaskManagement/HelpDesk/Components/SupportNavBar';
 import { GigOrder } from './layouts/FreelancerWorkManagement/GigOrder/GigOrder';
 import { FormGenerate } from './layouts/AdminTaskManagement/HelpDesk/formGenerate/FormGenerate';
+import { FreelancerLoginComponent } from './layouts/UserVerificationManagement/UserLogin/Components/FreelancerLoginComponent';
+import { ClientLoginComponent } from './layouts/UserVerificationManagement/UserLogin/Components/ClientLoginComponent';
+
+import FreelancerRegComponent from './layouts/UserVerificationManagement/UserRegistration/FreelancerRegComponent'
+import ClientRegComponent from './layouts/UserVerificationManagement/UserRegistration/ClientRegComponent'
+import QualificationComponent from './layouts/UserVerificationManagement/QualificationUpload/QualificationComponent'
+import QualificationPage from './layouts/UserVerificationManagement/QualficationPage/QualificationPage'
+import QualificationUploadPage from './layouts/UserVerificationManagement/QualificationUpload/QualificationUploadPage'
+import ApplicantListPage from './layouts/UserVerificationManagement/ApplicationReviewPage/Components/ApplicantListPage'
+import QualificationReview from './layouts/UserVerificationManagement/ApplicationReviewPage/Components/QualificationReview'
+import InProgress from './layouts/UserVerificationManagement/UserRegistration/InProgress'
+import ResubmissionUpload from './layouts/UserVerificationManagement/QualificationUpload/ResubmissionUpload'
+import UserTest from './layouts/UserVerificationManagement/UserLogin/Components/UserTest';
+
+
+
+
 
 export const App = () => {
   return (
@@ -138,6 +155,65 @@ export const App = () => {
             </Route>
 
             {/* end of dilshan gamage files */}
+
+
+            {/* Starting supeshala's files */}
+
+            <Route path='/Freelancer/Login' exact>
+            <Navbar />
+              <FreelancerLoginComponent/>
+              <Footer />
+            </Route>
+  
+            <Route path='/Client/Login' exact>
+              <ClientLoginComponent/>
+            </Route>
+
+            <Route path='/Freelancer/Registration' exact>
+              <FreelancerRegComponent/>
+            </Route>
+
+            <Route path='/Client/Registration' exact>
+              <ClientRegComponent/>
+            </Route>
+
+            {/* dummy site */}
+            {/* http://localhost:3000/Freelancer/QualificationUploader */}
+            <Route path='/Freelancer/QualificationUploader'  exact>
+              <QualificationComponent/>
+            </Route>
+
+            <Route path='/upload-qualification'  exact>
+              <QualificationUploadPage/> 
+            </Route>
+
+            <Route path='/QualificationPage'  exact>
+              <QualificationPage/>
+            </Route>
+
+            <Route path='/Applicant/Page'  exact>
+              <ApplicantListPage/>
+            </Route>
+
+            <Route path='/Applicant/review/:username'  exact>
+              <QualificationReview/>
+            </Route>
+
+            <Route path='/InProgressPage'  exact>
+              <InProgress/>
+            </Route>
+
+            <Route path='/ReSubmission/:username'  exact>
+              <ResubmissionUpload />
+            </Route>
+
+            <Route path='/UserTestPage' exact>
+              <UserTest/>
+            </Route>
+
+            {/* Ending supeshala's files */}
+
+
           </Switch>
         </div>
       </div>

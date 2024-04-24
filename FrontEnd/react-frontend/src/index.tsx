@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QualificationsProvider } from './layouts/UserVerificationManagement/QualificationUpload/QualificationsContext'
 import './index.css';
 import {App} from './App';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <BrowserRouter>
+   <QualificationsProvider>
     <App />
+    </QualificationsProvider>
   </BrowserRouter>
 );
 
