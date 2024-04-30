@@ -15,15 +15,26 @@ import lombok.Setter;
 @Table(name = "freelancer_skills")
 public class FreelancerSkills {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String skill;
 
-    public FreelancerSkills(String username, String skill) {
+    public FreelancerSkills(Long id, String username, String skill) {
+        this.id = id;
         this.username = username;
         this.skill = skill;
     }
 
     public FreelancerSkills() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

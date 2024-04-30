@@ -14,10 +14,13 @@ import lombok.Setter;
 @Table(name = "freelancer_language")
 public class FreelancerLanguage {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String language;
 
-    public FreelancerLanguage(String username, String language) {
+    public FreelancerLanguage(Long id, String username, String language) {
+        this.id = id;
         this.username = username;
         this.language = language;
     }
