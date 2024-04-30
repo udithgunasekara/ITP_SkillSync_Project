@@ -1,0 +1,379 @@
+.profile-div{
+    margin-top: 20px;
+}
+.profile-image {
+    max-width: 200px; /* Set the maximum width of the image */
+    max-height: 400px; /* Set the maximum height of the image */
+    border-radius: 50%;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    left: 540px;
+    display: block;
+    border-radius: 50%;
+    border: solid;
+    border-width: thin; 
+}
+.image-upload-div {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Adjust the width as needed */
+    max-width: 400px;
+    justify-content: space-between;
+    margin-left: 440px;
+    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .choose-file-btn {
+    width: 240px; /* Adjust the width as needed */
+    flex-grow: 0; /* Prevents the button from growing to fill the space */
+    border: 2px solid #E8DAF2;
+    border-radius: 4px;
+    border-width: 2px;
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  
+  .choose-file-btn:hover {
+    border-color: #0056b3;
+  }
+  
+  .image-upload {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #8436C2;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+  
+  .image-upload:hover {
+    background-color: #0056b3;
+  }
+  
+  .image-upload:focus, .choose-file-btn:focus {
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.5);
+  }
+  
+  /* Optional: in case you are using the Font Awesome icon in the button */
+  .image-upload .fa-file-upload {
+    margin-right: 5px;
+  }
+  
+  .detail-card {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    width: 100%;
+    max-width: 1300px;
+    background-color: #E2EBF5;
+}
+.detail-div-1{
+  padding-left: 900px;
+  margin-top: -55px;
+  padding-bottom: 10px;
+  color: #333;
+  line-height: 1.6;
+}
+.detail-div-2{
+padding-left: 900px;
+margin-top: 0px;
+padding-bottom: 10px;
+color: #333;
+line-height: 1.6;
+}
+.username{
+    padding-left: 550px;
+    padding-right: 550px;
+    padding-top: 20px;
+}
+.switch-btn{
+    background-color: #8436C2;
+    color: white;
+    position: absolute;
+    top: 170px;
+    border: none;
+    padding: 15px 20px;
+    margin-left: 1000px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.Description-div{
+    background-color: #E2EBF5;
+}
+.show-gigs{
+    width: 100%;
+    max-width: 1320px;
+    padding-left: 20px;
+    position: absolute;
+    margin-top: -24px;
+}
+.detail-card p, .detail-card h2 {
+    color: #333;
+    line-height: 1.6;
+}
+
+.delete-education,.Add-education,.delete-skill,.Add-skill,.Add-language,.Add-description,.Delete-language {
+    background-color: #8436C2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-education:hover,.Add-education:hover,.delete-skill:hover,.Add-skill:hover,.Add-language:hover,.Add-description:hover,.Delete-language:hover {
+    background-color: #BE83ED;
+}
+
+
+
+.group .overlap-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.group .overlap-group button {
+    flex: 1; /* makes each button take equal space */
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.About-me {
+    background-color: #E2EBF5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul p {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    position: relative;
+}
+
+.About-me-btn, .Reviews-btn, .My-Gigs, .My-Freelancer-dashboard {
+    background-color: #8436c2;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.About-me-btn:hover, .Reviews-btn:hover, .My-Gigs:hover, .My-Freelancer-dashboard:hover {
+    background-color: #AC69E2;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  label {
+    margin-bottom: 10px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  .Add-Description-btn-free {
+    padding: 10px 20px;
+    margin-top: 30px;
+    background-color: #8436C2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 50px;
+  }
+  
+  .Add-Description-btn-free:hover {
+    background-color: #45a049;
+  }
+
+  .freelancer-Description-cancel{
+    background-color: #8436c2;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 300px;
+    margin-top: -40px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.freelancer-Description-cancel:hover{
+    background-color: #da190b;
+}
+ .description-edit-form-free{
+    margin-top: -80px;
+    width: 500px;
+ } 
+ .add-language-div {
+    margin-bottom: 20px;
+  }
+  
+  .language-input {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .add-language-btn {
+    padding: 8px 16px;
+    background-color: #8436c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-language-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-language {
+    padding: 8px 16px;
+    background-color: #8436c2;
+    color: white;
+    border: none;
+    margin-left: 200px;
+    margin-top: -42px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancel-language:hover {
+    background-color: #da190b;
+  }
+
+  .Add-edu-for-free {
+    width: 50%;
+    margin-left: 20px;
+    margin-bottom: -20px;
+  }
+  
+  .Institute,
+  .Title,
+  .major,
+  .year {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .add-education-btn {
+    background-color: #8436C2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-education-btn:hover {
+    background-color: #45a049;
+  }
+
+  .cancel-Edu {
+    padding: 8px 16px;
+    background-color: #8436c2;
+    margin-left: 130px;
+    margin-top: -40px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancel-Edu:hover {
+    background-color: #da190b;
+  }
+
+  .Skill--edit-form-free {
+    margin-bottom: 20px;
+  }
+  
+  .skill-input {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .add-skill-btn {
+    padding: 8px 16px;
+    background-color: #8436c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-skill-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-skill {
+    padding: 8px 16px;
+    background-color: #8436c2;
+    margin-left: 140px;
+    margin-top: -40px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancel-skill:hover {
+    background-color: #da190b;
+  }
+  
+  .free-review-div{
+    margin-top: -30px;
+  }
