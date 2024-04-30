@@ -51,9 +51,11 @@ interface NewEducation {
   year: string;
 }
 
+
+
 const FreelancerDetails: React.FC = () => {
   const { username } = useParams<{ username: string }>();
-  const registeruser = 'vinujahansindu';
+  const registeruser = sessionStorage.getItem('username');
   const [freelancer, setFreelancer] = useState<Freelancer | null>(null);
   const [client, setClient] = useState<Client | null>(null);
   const [languages, setLanguages] = useState<Language[]>([]);
