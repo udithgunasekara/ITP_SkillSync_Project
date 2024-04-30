@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { deleteExam, listExams } from '../service/ExamsService';
-import skillexam from './skillExam.jpg'
+import skillexam from '../Image/skillExam.jpg'
 import jsPDF from 'jspdf';
 import { listUserResult } from '../service/UserResultService';
 import { Link } from 'react-router-dom';
