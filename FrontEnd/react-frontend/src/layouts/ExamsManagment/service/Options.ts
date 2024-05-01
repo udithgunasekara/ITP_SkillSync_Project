@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const REST_API_BASE_URL_OPTIONS = "http://localhost:8080/api/options";
+const REST_API_BASE_URL_OPTIONS = "http://localhost:8082/api/options";
 
 interface Option {
   optionId: string;

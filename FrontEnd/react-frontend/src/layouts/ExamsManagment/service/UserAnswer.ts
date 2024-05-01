@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const REST_API_BASE_URL_USERANSWER = "http://localhost:8080/api/userAnswers";
+const REST_API_BASE_URL_USERANSWER = "http://localhost:8082/api/userAnswers";
 
 interface userAnswers {
     userNamePk: string;

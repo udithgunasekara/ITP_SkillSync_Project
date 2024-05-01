@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 
-const REST_API_BASE_URL_USERATTEMPTS = "http://localhost:8080/api/userAttempts";
+const REST_API_BASE_URL_USERATTEMPTS = "http://localhost:8082/api/userAttempts";
 
 interface userAttempts {
-    userNamePk: string;
-    examIdPk: string;
+    userName: string;
+    examId: string;
     noOfAttempts: string;
 }
 

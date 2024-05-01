@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const REST_API_BASE_URL_QUESTIONS = "http://localhost:8080/api/questions";
+const REST_API_BASE_URL_QUESTIONS = "http://localhost:8082/api/questions";
 
 
 interface Question {
