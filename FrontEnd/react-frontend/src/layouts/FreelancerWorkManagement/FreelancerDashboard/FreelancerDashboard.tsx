@@ -13,6 +13,7 @@ export interface Gig {
 
 const FreelancerDashboard: React.FC = () => {
 
+  const username = sessionStorage.getItem('username')
   const [gigData, setGigData] = useState<Gig[]>([]);
   const [index, setIndex] = useState<number>(0);
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
@@ -51,7 +52,7 @@ const FreelancerDashboard: React.FC = () => {
   const history = useHistory();
 
   const getUserInfo = () => {
-    return { username: 'laxaayome' };
+    return { username: username ? username : 'defaultUsername' };
   }
 
   const handleEdit = (id: number) => {

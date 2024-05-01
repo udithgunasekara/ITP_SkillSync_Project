@@ -54,7 +54,7 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const getUserInfo = () => {
-        return { username: 'laxaayome' }; // Replace with actual logged-in user info
+        return { username: sessionStorage.getItem('username') }; // Replace with actual logged-in user info
     };
 
     return (
