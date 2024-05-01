@@ -12,8 +12,8 @@ interface Conversation {
 
 const ConversationForm: React.FC = () => {
   const { username } = useParams<{ username: string }>();
-  const registeruser = 'vinujahansindu';
-  const [user1, setUser1] = useState<string>(registeruser);
+  const registeruser = sessionStorage.getItem('username');
+  const [user1, setUser1] = useState<string>(registeruser || "");
   const [user2, setUser2] = useState<string>(username);
   const [startedAt, setStartedAt] = useState<string>(new Date().toISOString().split('T')[0]);
   const [conversations, setConversation] = useState<Conversation | null>(null);

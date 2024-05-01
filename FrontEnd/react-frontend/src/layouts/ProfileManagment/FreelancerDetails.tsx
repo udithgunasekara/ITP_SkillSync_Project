@@ -59,6 +59,7 @@ const FreelancerDetails: React.FC = () => {
   const [freelancer, setFreelancer] = useState<Freelancer | null>(null);
   const [client, setClient] = useState<Client | null>(null);
   const [languages, setLanguages] = useState<Language[]>([]);
+  const [language, setLanguage] = useState<string>('');
   const [skills, setSkills] = useState<Skill[]>([]);
   const [skill, setSkill] = useState<string>('');
   const [description, setDescription] = useState<string | null>(null);
@@ -296,8 +297,8 @@ const FreelancerDetails: React.FC = () => {
 
   const handleLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    if (/^[a-zA-Z]*$/.test(inputValue)) {
-      setLanguages([{ id: Date.now(), language: inputValue }]);
+    if (/^[a-zA-Z\s]*$/.test(inputValue)) {
+      setLanguage(inputValue);
     }
   };
 
@@ -331,8 +332,12 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   };
   const handlelanguagesSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (language.trim() === '') {
+      alert('Please enter a valid language.');
+      return;
+    }
     try {
-      await axios.post(`http://localhost:8082/Freelancer/language`, {username: username, language: languages[0].language});
+      await axios.post<any>(`http://localhost:8082/Freelancer/language`, {username: username, language: language.trim()});
       alert('Language added successfully');
       window.location.reload();
     } catch (error) {
@@ -456,6 +461,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
       
 
+      <div className='Languages-div'>
       <h2>Languages</h2>
       {(registeruser===username) && (!showlang) && (<button onClick={handleLanguageEditClick} className='Add-language'>Add language</button>)}
       
@@ -464,15 +470,17 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         <div className='add-language-div'>
       <form onSubmit={handlelanguagesSubmit}>
       <input
-            type="text"
-            onChange={handleLanguageChange}
-            required
-            className='language-input'
-          />
-        <br/>
-        <button type="submit" className='add-language-btn'>Add Language</button>
-        <button onClick={handleLanguageEditCancelClick} className='cancel-language'>cancel</button>
-      </form>
+        type="text"
+        value={language}
+        onChange={handleLanguageChange}
+        required
+        className='language-input'
+      />
+      <br/>
+      <button type="submit" className='add-language-btn'>Add Language</button>
+      {/* Assuming handleLanguageEditCancelClick is defined somewhere */}
+      <button onClick={handleLanguageEditCancelClick} className='cancel-language'>cancel</button>
+    </form>
         </div>
       )}
 {!showlang && (
@@ -491,44 +499,47 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     )}
   </ul>
 )}
-
-
-      <h2>Skills</h2>
-
-      {(registeruser===username) && (!showskill) && (<button onClick={handleSkillEditClick} className='Add-skill'>Add Skills</button>)}
-      
-      {showskill && (
-        <div className='Skill--edit-form-free'>
-        <form onSubmit={handleSkillSubmit}>
-        <input
-        type="text"
-        value={skill}
-        onChange={handleChange}
-        required
-        className='skill-input'
-        placeholder="Enter skill"
-      /><br/>
-          <button type="submit" className='add-skill-btn'>Add Skill</button>
-          <button onClick={handleSkillEditCancelClick} className='cancel-skill'>cancel</button>
-        </form>
       </div>
-      )}
 
+<div className='Skill-div'>
+  
+<h2>Skills</h2>
 
-     {!showskill && (
-  <ul>
-    {skills && skills.length > 0 ? (
-      skills.map((skill, index) => ( // Using index as fallback key
-        <p key={skill.id || index}>
-          {skill.skill} <button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>
-        </p>
-      ))
-    ) : (
-      <p>No skills available.</p>
-    )}
-  </ul>
+{(registeruser===username) && (!showskill) && (<button onClick={handleSkillEditClick} className='Add-skill'>Add Skills</button>)}
+
+{showskill && (
+  <div className='Skill--edit-form-free'>
+  <form onSubmit={handleSkillSubmit}>
+  <input
+  type="text"
+  value={skill}
+  onChange={handleChange}
+  required
+  className='skill-input'
+  placeholder="Enter skill"
+/><br/>
+    <button type="submit" className='add-skill-btn'>Add Skill</button>
+    <button onClick={handleSkillEditCancelClick} className='cancel-skill'>cancel</button>
+  </form>
+</div>
 )}
 
+
+{!showskill && (
+<ul>
+{skills && skills.length > 0 ? (
+skills.map((skill, index) => ( // Using index as fallback key
+  <p key={skill.id || index}>
+    {skill.skill} <button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>
+  </p>
+))
+) : (
+<p>No skills available.</p>
+)}
+</ul>
+)}
+
+</div>
       <h2>Education</h2>
       {(registeruser===username) && (!showedu) && (<button onClick={handleEduEditClick} className='Add-education'>Add Education institute</button>)}
       
