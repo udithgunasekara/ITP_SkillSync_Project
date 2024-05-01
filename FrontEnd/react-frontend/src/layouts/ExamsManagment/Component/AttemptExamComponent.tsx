@@ -6,7 +6,7 @@ import { getUserAttemptsById, saveUserAttempts, updateUserAttempts } from '../se
 
 const AttemptExamComponent: React.FC = () => {
     const {examIdPk = ''} = useParams<{ examIdPk: string }>();
-    const userNamePk = sessionStorage.getItem('userName') || '';
+    const userNamePk = sessionStorage.getItem('username') || '';
     const [result, setResult] = useState('');
     const enrolledExam = sessionStorage.getItem('examIdPk') || null;
     const [examName, setExamName] = useState('');

@@ -22,8 +22,6 @@ interface UserResult {
 const ListExamComponents: React.FC = () => {
   const [exams, setExams] = useState<Exam[]>([]);
   const [userResults, setUserResult] = useState<UserResult[]>([]);
-  let userName = 'vaas';
-  sessionStorage.setItem('userName', userName);
   let role = 'moderaor';
   sessionStorage.setItem('role', role);
   const [showServices, setShowServices] = useState(false);
