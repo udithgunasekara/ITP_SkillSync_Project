@@ -15,6 +15,8 @@ const AttemptExamComponent: React.FC = () => {
     const [timeLimt, setTimeLimit] = useState('');
     const [noOfUserAttempts, setNoOfUserAttempts] = useState('');
     const [canAttempt, setCanAttempt] = useState<boolean>();
+    const examId = examIdPk;
+    const userName = userNamePk;
 
     getExam(examIdPk)
     .then((response) => {
@@ -40,6 +42,7 @@ const AttemptExamComponent: React.FC = () => {
     getUserAttemptsById(userNamePk, examIdPk)
     .then((response) => {
       setNoOfUserAttempts(response.data.noOfAttempts);
+      console.log(response.data.noOfAttempts)
       if(noOfUserAttempts){
         if(parseInt(noOfExamAttempts) <= parseInt(noOfUserAttempts)){
           setCanAttempt(false);
@@ -68,11 +71,13 @@ const AttemptExamComponent: React.FC = () => {
   }, [noOfUserAttempts, noOfExamAttempts]);
 
     function saveOrUpdateUserAttemptsById(){
-      let noOfAttempts = noOfUserAttempts;
-      const userAttempts = {userNamePk, examIdPk, noOfAttempts};
+      let noOfAttempts = '1';
       if(noOfUserAttempts){
-        noOfAttempts = (parseInt(noOfAttempts) + 1).toString();
-        updateUserAttempts(userNamePk, examIdPk, userAttempts)
+        noOfAttempts = (parseInt(noOfUserAttempts) + 1).toString();
+      }
+      const userAttempts = {userName, examId, noOfAttempts};
+      if(noOfUserAttempts){
+        updateUserAttempts(userName, examId, userAttempts)
         .then((response) => {
           console.log(response.data)
         })
@@ -80,7 +85,6 @@ const AttemptExamComponent: React.FC = () => {
           console.error(error);
         });
       }else{
-        noOfAttempts = '1';
         saveUserAttempts(userAttempts)
         .then((response) => {
           console.log(response.data)
