@@ -23,7 +23,7 @@ interface Language {
 
 const ClientDetails: React.FC = () => {
   const { username } = useParams<{ username: string }>();
-  const registeruser = 'vinujahansindu';
+  const registeruser = sessionStorage.getItem('username');
   const [freelancer, setFreelancer] = useState<Client | null>(null);
   const [client, setClient] = useState<Client | null>(null);
   const [languages, setLanguages] = useState<Language[]>([]);

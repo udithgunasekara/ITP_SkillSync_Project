@@ -44,7 +44,9 @@ import QuestionsComponent from './layouts/ExamsManagment/Component/QuestionsComp
 import OptionsComponent from './layouts/ExamsManagment/Component/OptionsComponent';
 import AttemptExamComponent from './layouts/ExamsManagment/Component/AttemptExamComponent';
 import DisplayQuestionAndAnswers from './layouts/ExamsManagment/Component/DisplayQuestionAndAnswers';
-
+import ClientDetails from './layouts/ProfileManagment/ClientDetails';
+import FreelancerDetails from './layouts/ProfileManagment/FreelancerDetails';
+import Message from './layouts/ProfileManagment/Message';
 
 
 
@@ -266,6 +268,20 @@ export const App = () => {
               <Footer />
             </Route>
             {/*Vaas files End*/}
+            {/*vinuja's files */}
+            <Route path="/clients/:username" >
+              <Navbar/>
+              <ClientDetails/>
+            </Route>
+            <Route path="/freelancers/:username" >
+              <Navbar/>
+              <FreelancerDetails/>
+            </Route>
+            <Route path="/Message/:username/:username2/:conversation">
+              <Navbar/>
+              <Message/>
+            </Route>
+            {/*vinuja's files end*/}
           </Switch>
         </div>
       </div>

@@ -22,7 +22,7 @@ export const ClientLoginComponent = () => {
         ClientLogin(client).then((response) => {
             console.log("Login response:", response.data);
             alert('Login Successful!');
-            navigate.push('/UserTestPage');
+            navigate.push(`/clients/${username}`);
             
         }).catch((error) => {
             console.error("Login error:", error.response || error);
