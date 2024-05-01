@@ -25,7 +25,7 @@ const DisplayQuestionAndAnswers: React.FC = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [savedAnswersMap, setSavedAnswersMap] = useState<Map<string, string>>(new Map());
     const [examFinished, setExamFinished] = useState<boolean>(sessionStorage.getItem('examFinished') === 'true');
-    const userNamePk = sessionStorage.getItem('userName') || '';
+    const userNamePk = sessionStorage.getItem('username') || '';
     const result = "pending";
     sessionStorage.setItem('examIdPk', examIdPk);
     const navigationInDisplayQuestion = useHistory();
