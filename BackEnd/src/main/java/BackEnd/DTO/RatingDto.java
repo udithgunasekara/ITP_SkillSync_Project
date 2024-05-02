@@ -15,5 +15,6 @@ public class RatingDto {
     private Float rating;
     private Integer projectID;
     private String review;
+    private Integer starRating;  // Add this field
 }
 

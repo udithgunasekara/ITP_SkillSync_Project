@@ -13,8 +13,12 @@ public interface RatingService {
 
     List<RatingDto> getAllRatingsByuserID(String userID);
 
+    List<RatingDto> searchReviewsByKeyword(String keyword);
+
     RatingDto updateRating(Long ratingId, RatingDto updateRating);
 
     void deleteRating(Long ratingId);
+
+    /*String generatePDFReport(String userID);*/
 }
 

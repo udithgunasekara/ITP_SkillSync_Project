@@ -30,7 +30,7 @@ public class Rating {
 
     private String review;
 
-
+    private Integer starRating;  // Add this field
 
 
 }

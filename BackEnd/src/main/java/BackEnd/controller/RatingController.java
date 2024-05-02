@@ -43,6 +43,12 @@ public class RatingController {
         return ResponseEntity.ok(ratings);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<RatingDto>> searchReviews(@RequestParam("keyword") String keyword) {
+        List<RatingDto> ratings = ratingService.searchReviewsByKeyword(keyword);
+        return ResponseEntity.ok(ratings);
+    }
+
     //Build Update Rating REST API
     @PutMapping("{id}")
     public ResponseEntity<RatingDto> updateRating(@PathVariable("id") Long ratingId,
@@ -57,6 +63,17 @@ public class RatingController {
         ratingService.deleteRating(ratingId);
         return ResponseEntity.ok("Rating deleted successfully!.");
     }
+
+    /*@GetMapping("/report/{userID}")
+    public ResponseEntity<String> generateUserReport(@PathVariable("userID") String userID) {
+        try {
+            String reportFilePath = ratingService.generatePDFReport(userID);
+            return ResponseEntity.ok(reportFilePath);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to generate report");
+        }
+    }*/
+
 
 }
 
