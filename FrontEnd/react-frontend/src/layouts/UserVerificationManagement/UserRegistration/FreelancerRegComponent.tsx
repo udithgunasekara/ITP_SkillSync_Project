@@ -32,6 +32,7 @@ const FreelancerRegComponent = () => {
 
     //set up session storage
     sessionStorage.setItem('username', userName);
+    sessionStorage.setItem('email', email );
 
     function saveFreelancer(e: any) {
         e.preventDefault();

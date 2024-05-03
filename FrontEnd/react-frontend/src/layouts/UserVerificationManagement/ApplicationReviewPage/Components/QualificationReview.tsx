@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './QualificationReview.css';
+import { RequestEmail, SuspendEmail } from '../../MailSender/emailService';
+
 import background from './backgroundRev.jpg';
+import { title } from 'process';
 
 interface User {
   userName: string;
@@ -37,6 +40,9 @@ const QualificationReview = () => {
         alert('Account Approved successfully!');
         navigate.push('/Applicant/Page');
       }
+
+    
+
     } catch (error) {
       console.error('Error during approval:', error);
     }
@@ -52,9 +58,37 @@ const QualificationReview = () => {
         alert('Account Suspended successfully!');
         navigate.push('/Applicant/Page');
       }
+
+      console.log('Here above the mail sending')
+      if (user?.email) {
+
+        const emailParams = {
+          to_email: user.email // Use username as recipient
+        };
+  
+        SuspendEmail(emailParams);
+      }
+      console.log('Here below the mail sending')
     } catch (error) {
       console.error('Error during suspension:', error);
     }
+  };
+
+
+  const handleResubmission = async () =>{
+    
+    console.log('Here above the mail sending')
+    if (user?.email) {
+
+      const emailParams = {
+        to_email: user.email // Use username as recipient
+      };
+
+      RequestEmail(emailParams);
+    }
+    console.log('Here below the mail sending')
+    
+
   };
 
   const handleReject = async (title: string) => {
@@ -70,6 +104,8 @@ const QualificationReview = () => {
         alert('Qualification Rejected successfully!');
         window.location.reload();
       }
+
+     
     } catch (error) {
       console.error('Error during rejection:', error);
     }
@@ -181,7 +217,7 @@ const QualificationReview = () => {
         <button className="rev_button-approve btn btn-success" onClick={handleApprove}>
           Approve
         </button>
-        <button className="rev_button-resubmit btn btn-warning"> 
+        <button className="rev_button-resubmit btn btn-warning" onClick ={handleResubmission}> 
           ReSubmission
         </button>
         <button className="rev_button-suspend btn btn-danger" onClick={handleSuspend}>
