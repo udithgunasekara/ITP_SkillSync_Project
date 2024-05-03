@@ -62,4 +62,10 @@ public class InboxServiceImp implements InboxService {
         }
         return null;
     }
+
+    @Override
+    public List<InboxDTO> getAllInboxMessagesByconversationId(Long conversationId) {
+        List<Inbox> inbox = inboxRepository.findByconversationId(conversationId);
+        return inbox.stream().map(InboxMapper::mapToInboxDTO).collect(Collectors.toList());
+    }
 }

@@ -47,6 +47,12 @@
   .choose-file-btn:hover {
     border-color: #0056b3;
   }
+
+  .Skill-div{
+    position: relative;
+    left: 1000px;
+    bottom: 150px;
+  }
   
   .image-upload {
     padding: 8px 16px;
@@ -192,6 +198,10 @@ ul p {
 
 .About-me-btn:hover, .Reviews-btn:hover, .My-Gigs:hover, .My-Freelancer-dashboard:hover {
     background-color: #AC69E2;
+}
+.Languages-div{
+  position: relative;
+  top: 30px;
 }
 
 

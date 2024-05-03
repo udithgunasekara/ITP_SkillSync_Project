@@ -18,4 +18,6 @@ public interface InboxRepository extends JpaRepository<Inbox,Long> {
     int markAsRead(@Param("id") Long id);
 
     Inbox findByConversationIdAndUsername(Long conversationId, String username);
+
+    List<Inbox> findByconversationId(Long conversationId);
 }

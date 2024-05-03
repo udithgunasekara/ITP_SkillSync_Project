@@ -18,6 +18,10 @@
     padding-top: 30px;
     position: relative;
   }
+  .one-user-row-inbox-a,.one-user-row-inbox-a:hover{
+    color: inherit; /* or color: transparent; */
+    text-decoration: none;
+  }
   
   /* Create a custom scrollbar */
   .inbox-div::-webkit-scrollbar {

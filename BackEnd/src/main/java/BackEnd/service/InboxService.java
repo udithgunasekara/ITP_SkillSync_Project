@@ -15,4 +15,6 @@ public interface InboxService {
 
 
     public InboxDTO changeIsRead(Long id);
+
+    List<InboxDTO> getAllInboxMessagesByconversationId(Long conversationId);
 }

@@ -24,6 +24,7 @@ function Message() {
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const [imageURL, setImageURL] = useState<string | null>(null);
   const messageDisplayRef = useRef<HTMLDivElement>(null);
+  const defaultImageUrl = 'https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'; 
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -31,18 +32,19 @@ function Message() {
         const response = await axios.get<Message[]>(`http://localhost:8082/api/messages/${conversation}`);
         setMessages(response.data);
 
-        const inboxresponse = await axios.get(`http://localhost:8082/api/inbox/${username}`);
+        const inboxresponse = await axios.get(`http://localhost:8082/api/inbox/conversation/${conversation}`);
         setInbox(inboxresponse.data);
 
-        const image = await axios.get(`http://localhost:8082/api/images/${username2}`, {
+        try {
+          const image = await axios.get(`http://localhost:8082/api/images/${username2}`, {
           responseType: 'blob', 
         });
         if (image.data) {
           const imageUrl = URL.createObjectURL(image.data);
           setImageURL(imageUrl);
-        } else {
-          const defaultImageUrl = 'https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'; 
-          setImageURL(defaultImageUrl);
+        }
+        } catch (error) {
+          console.error(`Error fetching image for ${username2}:`, error);
         }
 
         scrollToBottom();
@@ -86,7 +88,6 @@ function Message() {
           read: false,
           archived: false,
         });
-
         const inboxresponse2 = await axios.post(`http://localhost:8082/api/inbox/${conversation}/${username2}`, {
           conversationId: conversation,
           username: username,
@@ -95,8 +96,8 @@ function Message() {
           read: false,
           archived: false,
         });
-        console.log('Message sent successfully:', inboxresponse2.data, inboxresponse.data);
-      } else {
+        console.log('Message sent successfully:', inboxresponse.data, inboxresponse2.data);
+      }else {
         const inboxresponse = await axios.post('http://localhost:8082/api/inbox', {
           conversationId: conversation,
           username: username,
@@ -114,7 +115,6 @@ function Message() {
           read: false,
           archived: false,
         });
-        window.location.reload();
         console.log('Message sent successfully:', inboxresponse2.data, inboxresponse.data);
       }
       window.location.reload();
@@ -140,7 +140,7 @@ function Message() {
         <Inbox />
           <div className='message-div'>
             <div className='msg-profile-div'>
-              {imageURL && <img src={imageURL} alt="Uploaded" style={{ maxWidth: '100%' }} className='profile-image-msg' />}
+              {imageURL ? (<img src={imageURL} alt="Uploaded" style={{ maxWidth: '100%' }} className='profile-image-msg' />):(<img src={defaultImageUrl} alt="Uploaded" style={{ maxWidth: '100%' }} className='profile-image-msg' />)}
               <h2 className='user2-username'>@{username2}</h2>
               <hr />
             </div>

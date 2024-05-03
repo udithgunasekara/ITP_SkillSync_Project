@@ -27,6 +27,12 @@ public class InboxController {
         return inboxService.getAllInboxMessagesByUser(username);
     }
 
+    @GetMapping("/conversation/{conversationId}")
+    public List<InboxDTO> getInboxByconversationId(@PathVariable Long conversationId) {
+        return inboxService.getAllInboxMessagesByconversationId(conversationId);
+    }
+
+
     @PostMapping
     public InboxDTO saveInboxMessage(@RequestBody Inbox inbox) {
         return inboxService.saveInboxMessage(inbox);

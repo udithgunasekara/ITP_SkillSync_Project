@@ -8,6 +8,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 interface InboxMessage {
   user2: string;
   message: string;
+  conversationId: string; // Assuming conversationId is a property of InboxMessage
 }
 
 function Inbox() {
@@ -41,13 +42,25 @@ function Inbox() {
         const response = await axios.get(`http://localhost:8082/api/images/${user}`, {
           responseType: 'blob',
         });
+        if (response.data) {
+          setImagesURL(prev => ({
+            ...prev,
+            [user]: URL.createObjectURL(response.data)
+          }));
+        } else {
+          // Set default image URL when no image data is available
+          setImagesURL(prev => ({
+            ...prev,
+            [user]: defaultImageUrl
+          }));
+        }
+      } catch (error) {
+        console.error(`Error fetching image for ${user}:`, error);
+        // Set default image URL on error
         setImagesURL(prev => ({
           ...prev,
-          [user]: response.data ? URL.createObjectURL(response.data) : defaultImageUrl
+          [user]: defaultImageUrl
         }));
-      } catch (error) {
-        setImagesURL(prev => ({ ...prev, [user]: defaultImageUrl }));
-        console.error(`Error fetching image for ${user}:`, error);
       }
     };
 
@@ -65,11 +78,17 @@ function Inbox() {
       <div className='inbox-div'>
         <ul>
           {inboxMessages.map((message, index) => (
-            <div key={index} className='one-user-row-inbox'>
-              {imagesURL[message.user2] && <img src={imagesURL[message.user2]} alt="Profile" style={{ maxWidth: '100px' }} className='profile-image-inbox'/>}
-              <h3 className='inbox-user-name'>@{message.user2}</h3> 
-              <p className='latest-msg'>{message.message}</p>
-            </div>
+            <a className='one-user-row-inbox-a' href={`http://localhost:3000/Message/${username}/${message.user2}/${message.conversationId}`} key={index}>
+              <div className='one-user-row-inbox'>
+                {imagesURL[message.user2] ? (
+                  <img src={imagesURL[message.user2]} alt="Profile" style={{ maxWidth: '100px' }} className='profile-image-inbox'/>
+                ) : (
+                  <img src={defaultImageUrl} alt="Default Profile" style={{ maxWidth: '100%' }} className='profile-image-inbox' />
+                )}
+                <h3 className='inbox-user-name'>@{message.user2}</h3> 
+                <p className='latest-msg'>{message.message}</p>
+              </div>
+            </a>
           ))}
         </ul>    
       </div> 
