@@ -38,7 +38,15 @@ import QualificationReview from './layouts/UserVerificationManagement/Applicatio
 import InProgress from './layouts/UserVerificationManagement/UserRegistration/InProgress'
 import ResubmissionUpload from './layouts/UserVerificationManagement/QualificationUpload/ResubmissionUpload'
 import UserTest from './layouts/UserVerificationManagement/UserLogin/Components/UserTest';
-
+import ListExamComponents from './layouts/ExamsManagment/Component/ListExamComponents';
+import ExamComponent from './layouts/ExamsManagment/Component/ExamComponent';
+import QuestionsComponent from './layouts/ExamsManagment/Component/QuestionsComponent';
+import OptionsComponent from './layouts/ExamsManagment/Component/OptionsComponent';
+import AttemptExamComponent from './layouts/ExamsManagment/Component/AttemptExamComponent';
+import DisplayQuestionAndAnswers from './layouts/ExamsManagment/Component/DisplayQuestionAndAnswers';
+import ClientDetails from './layouts/ProfileManagment/ClientDetails';
+import FreelancerDetails from './layouts/ProfileManagment/FreelancerDetails';
+import Message from './layouts/ProfileManagment/Message';
 
 
 
@@ -213,7 +221,67 @@ export const App = () => {
 
             {/* Ending supeshala's files */}
 
-
+            {/*Vaas file begin*/}
+            <Route path="/exams">
+              <Navbar />
+              <ListExamComponents />
+              <Footer />
+            </Route>
+            <Route path="/add-exam">
+              <Navbar />
+              <ExamComponent />
+              <Footer />
+            </Route>
+            <Route path="/edit-exam/:id">
+              <Navbar />
+              <ExamComponent />
+              <Footer />
+            </Route>
+            <Route path="/add-Question/:examId">
+              <Navbar />
+              <QuestionsComponent />
+              <Footer />
+            </Route>
+            <Route path="/edit-Question/:questionId/:examId">
+              <Navbar />
+              <QuestionsComponent />
+              <Footer />
+            </Route>
+            <Route path="/add-Option/:examId/:questionId">
+              <Navbar />
+              <OptionsComponent />
+              <Footer />
+            </Route>
+            <Route path="/edit-Option/:examId/:questionId/:optionId">
+              <Navbar />
+              <OptionsComponent />
+              <Footer />
+            </Route>
+            <Route path="/attempt-exam/:examIdPk">
+              <Navbar />
+              <AttemptExamComponent />
+              <Footer />
+            </Route>
+            <Route path="/take-exam/:examIdPk">
+              <Navbar />
+              <DisplayQuestionAndAnswers />
+              <Footer />
+            </Route>
+            {/*Vaas files End*/}
+            {/*vinuja's files */}
+            <Route path="/clients/:username" >
+              <Navbar/>
+              <ClientDetails/>
+            </Route>
+            <Route path="/freelancers/:username" >
+              <Navbar/>
+              <FreelancerDetails/>
+            </Route>
+            <Route path="/Message/:username/:username2/:conversation">
+              <Navbar/>
+              <Message/>
+            </Route>
+            {/*vinuja's files end*/}
           </Switch>
         </div>
       </div>

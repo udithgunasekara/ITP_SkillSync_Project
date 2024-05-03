@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 interface UserRemarksFormProps { }
 
 const UserRemarksForm: React.FC<UserRemarksFormProps> = () => {
+  const username = sessionStorage.getItem('username')
   const [remarks, setRemarks] = useState<string>('');
   const [selectedPackage, setSelectedPackage] = useState<{ packageId: number; packageName: string } | null>(null);
   const [selectedPackageName, setSelectedPackageName] = useState<string>('');
@@ -47,7 +48,7 @@ const UserRemarksForm: React.FC<UserRemarksFormProps> = () => {
 
   const getUserInfo = () => {
     return {
-      username: 'lakshan'
+      username: username ? username : 'defaultUsername'
     };
   };
 

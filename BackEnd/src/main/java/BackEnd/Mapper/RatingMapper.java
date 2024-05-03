@@ -11,7 +11,8 @@ public class RatingMapper {
                 rating.getUserID(),
                 rating.getRating(),
                 rating.getProjectID(),
-                rating.getReview()
+                rating.getReview(),
+                rating.getStarRating() // Include starRating
         );
     }
 
@@ -21,7 +22,8 @@ public class RatingMapper {
                 ratingDto.getUserID(),
                 ratingDto.getRating(),
                 ratingDto.getProjectID(),
-                ratingDto.getReview()
+                ratingDto.getReview(),
+                ratingDto.getStarRating() // Include starRating
         );
     }
 
