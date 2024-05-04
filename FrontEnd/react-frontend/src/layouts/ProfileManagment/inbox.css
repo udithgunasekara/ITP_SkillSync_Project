@@ -22,6 +22,17 @@
     color: inherit; /* or color: transparent; */
     text-decoration: none;
   }
+  .notification{
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    background-color: tomato;
+    border-radius: 50%;
+    border: tomato;
+    border-style: solid;
+    width: 15px;
+    height: 15px;
+  }
   
   /* Create a custom scrollbar */
   .inbox-div::-webkit-scrollbar {

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './inbox.css';
+import { MDBBadge} from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 interface InboxMessage {
   user2: string;
   message: string;
-  conversationId: string; // Assuming conversationId is a property of InboxMessage
+  conversationId: string;
+  read: boolean;
 }
 
 function Inbox() {
@@ -80,6 +82,8 @@ function Inbox() {
           {inboxMessages.map((message, index) => (
             <a className='one-user-row-inbox-a' href={`http://localhost:3000/Message/${username}/${message.user2}/${message.conversationId}`} key={index}>
               <div className='one-user-row-inbox'>
+              {(!message.read) &&(<div className='notification'>
+              </div>)}
                 {imagesURL[message.user2] ? (
                   <img src={imagesURL[message.user2]} alt="Profile" style={{ maxWidth: '100px' }} className='profile-image-inbox'/>
                 ) : (
@@ -87,6 +91,7 @@ function Inbox() {
                 )}
                 <h3 className='inbox-user-name'>@{message.user2}</h3> 
                 <p className='latest-msg'>{message.message}</p>
+                
               </div>
             </a>
           ))}
