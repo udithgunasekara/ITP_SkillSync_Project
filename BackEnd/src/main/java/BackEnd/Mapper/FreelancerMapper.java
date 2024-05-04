@@ -38,7 +38,8 @@ public class FreelancerMapper {
                     freelancer.getUserName(),
                     freelancer.getPassword(),
                     freelancer.getWorkOn(),
-                    freelancer.getCreated_at()
+                    freelancer.getCreated_at(),
+                    freelancer.getInterviews()
             );
         }
 
