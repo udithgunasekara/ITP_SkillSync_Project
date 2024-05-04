@@ -24,6 +24,7 @@ public class paymentDetailsFreelancer {
     private String address;
     private String city;
     private Integer postalCode;
+    private String userName;
 
     @Column(name = "paypal_address", unique = true)
     private String paypalAddress;

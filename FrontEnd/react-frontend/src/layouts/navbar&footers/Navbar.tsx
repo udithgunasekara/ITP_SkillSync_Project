@@ -43,6 +43,8 @@ export const Navbar = () => {
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" >
                                 <li><a className="dropdown-item " href="#">Profile</a></li>
+                                <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/details'}>Billing and Information</NavLink></li>
+                                <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/payment'}>Transaction History</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/support'}>Help Desk</NavLink></li>
                                 {/* Add more dropdown items here if needed */}
                             </ul>

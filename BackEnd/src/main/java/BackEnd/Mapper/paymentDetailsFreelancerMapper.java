@@ -14,7 +14,8 @@ public class paymentDetailsFreelancerMapper {
                 paymentDetailsFreelancer.getAddress(),
                 paymentDetailsFreelancer.getCity(),
                 paymentDetailsFreelancer.getPostalCode(),
-                paymentDetailsFreelancer.getPaypalAddress()
+                paymentDetailsFreelancer.getPaypalAddress(),
+                paymentDetailsFreelancer.getUserName()
         );
     }
 
@@ -27,7 +28,8 @@ public class paymentDetailsFreelancerMapper {
                 paymentDetailsFreelancerDTO.getAddress(),
                 paymentDetailsFreelancerDTO.getCity(),
                 paymentDetailsFreelancerDTO.getPostalCode(),
-                paymentDetailsFreelancerDTO.getPaypalAddress()
+                paymentDetailsFreelancerDTO.getPaypalAddress(),
+                paymentDetailsFreelancerDTO.getUserName()
         );
     }
 
