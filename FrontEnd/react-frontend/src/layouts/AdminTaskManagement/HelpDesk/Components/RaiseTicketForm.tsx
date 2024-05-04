@@ -3,7 +3,9 @@ import "./RaiseTicketFormstyle.css";
 import { useHistory } from "react-router-dom";
 export const RaiseTicketForm = () => {
 
-    const userid = 2 //change this to change user
+    // const userid = sessionStorage.getItem('id') //change this to change user
+    const userid = "2"; //change this to change user
+
     const history = useHistory();
 
     const [formData, setFormData] = useState({
