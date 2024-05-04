@@ -18,7 +18,8 @@ public class FreelancerVMapper {
                 freelancer.getNic(),
                 freelancer.getWorkOn(),
                 freelancer.getCreated_at(),
-                freelancer.getApp_status()
+                freelancer.getApp_status(),
+                freelancer.getInterviews()
         );
     }
 
@@ -35,7 +36,8 @@ public class FreelancerVMapper {
                 freelancerVDTO.getNic(),
                 freelancerVDTO.getWorkOn(),
                 freelancerVDTO.getCreated_at(),
-                freelancerVDTO.getApp_status()
+                freelancerVDTO.getApp_status(),
+                freelancerVDTO.getInterviews()
         );
     }
 }
