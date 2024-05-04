@@ -2,13 +2,15 @@ package BackEnd.service;
 
 import BackEnd.DTO.paymentDetailsFreelancerDTO;
 import BackEnd.entity.paymentDetailsFreelancer;
+import org.springframework.stereotype.Service;
+
 
 public interface paymentDetailsFreelancerService  {
     paymentDetailsFreelancerDTO addDetails(paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO);
 
-    paymentDetailsFreelancerDTO getDetailsById(Long id);
+    paymentDetailsFreelancerDTO getDetailsByUserName(String userName);
 
-    paymentDetailsFreelancerDTO updateDetails(Long id, paymentDetailsFreelancerDTO updatedDetails);
+    paymentDetailsFreelancerDTO updateDetails(String userName, paymentDetailsFreelancerDTO updatedDetails);
 
-    void deleteDetails(Long id);
+    void deleteDetails(String userName);
 }

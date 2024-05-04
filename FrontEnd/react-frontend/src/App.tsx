@@ -49,6 +49,15 @@ import FreelancerDetails from './layouts/ProfileManagment/FreelancerDetails';
 import Message from './layouts/ProfileManagment/Message';
 import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 
+import PaymentComponent from './layouts/PaymentManagement/components/PaymentComponent';
+import PaymentHistoryComponent from './layouts/PaymentManagement/components/PaymentHistoryComponent';
+import SelectPaymentType from './layouts/PaymentManagement/views/SelectPaymentType';
+import CardPaymentProceed from './layouts/PaymentManagement/views/CardPaymentProceed';
+import PayPalProceed from './layouts/PaymentManagement/views/PayPalProceed';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PaymentDetailsFComponent from './layouts/PaymentManagement/components/PaymentDetailsFComponent';
+import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
+import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 
 
 
@@ -288,6 +297,64 @@ export const App = () => {
               <Message/>
             </Route>
             {/*vinuja's files end*/}
+
+
+            {/* starting nipuni's file */}
+            <Route path='/payment-details' >
+              <Navbar />
+              <SelectPaymentType />
+              <Footer />
+            </Route>
+
+            <Route path='/payment' >
+              <Navbar />
+              <PaymentHistoryComponent  />
+              <Footer />
+            </Route>
+
+            <Route path='/make-payment' >
+              <Navbar />
+              <PaymentComponent />
+              <Footer />
+            </Route>
+
+            <Route path='/card-payment' >
+              <Navbar />
+              <CardPaymentProceed  />
+              <Footer />
+            </Route>
+
+            <Route path='/paypal-payment' >
+              <Navbar />
+              <PayPalProceed   />
+              <Footer />
+            </Route>
+
+            <Route path='/details' >
+              <Navbar />
+              <PaymentDetailsFComponent   />
+              <Footer />
+            </Route>
+
+            <Route path='/edit-details/:id' >
+              <Navbar />
+              <PaymentDetailsFComponent   />
+              <Footer />
+            </Route>
+
+            <Route path='/viewDetails/:id' >
+              <Navbar />
+              <DetailsPage  />
+              <Footer />
+            </Route>
+
+            <Route path='/transaction-details' >
+              <Navbar />
+              <TransactionDetails />
+              <Footer />
+            </Route>
+            {/* End nipuni's file */}
+
           </Switch>
         </div>
       </div>

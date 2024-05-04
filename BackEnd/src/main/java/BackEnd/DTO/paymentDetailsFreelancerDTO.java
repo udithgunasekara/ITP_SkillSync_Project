@@ -18,6 +18,6 @@ public class paymentDetailsFreelancerDTO {
     private String city;
     private Integer postalCode;
     private String paypalAddress;
-
+    private String userName;
 
 }

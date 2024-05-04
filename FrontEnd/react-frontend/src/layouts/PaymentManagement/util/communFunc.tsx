@@ -1,0 +1,62 @@
+// import {toast} from "react-toastify";
+
+// export const notifyMessage = (msg, type) => {
+
+//     if (type === 0) {
+//         toast.error(msg, {
+//             icon: true,
+//             hideProgressBar: false,
+//         });
+//     } else if (type === 1) {
+//         toast.success(msg, {
+//             icon: true,
+//             hideProgressBar: false,
+//         });
+//     } else if (type === 2) {
+//         toast.warning(msg, {
+//             icon: true,
+//             hideProgressBar: false,
+//         });
+//     } else if (type === 3) {
+//         toast.info(msg, {
+//             icon: true,
+//             hideProgressBar: false,
+//         });
+//     } else {
+//         toast.error(msg, {
+//             icon: true,
+//             hideProgressBar: false,
+//         });
+//     }
+// };
+
+import { toast } from "react-toastify";
+
+export const notifyMessage = (msg: string, type: number) => {
+    if (type === 0) {
+        toast.error(msg, {
+            icon: undefined, // Set icon to undefined
+            hideProgressBar: false,
+        });
+    } else if (type === 1) {
+        toast.success(msg, {
+            icon: undefined, // Set icon to undefined
+            hideProgressBar: false,
+        });
+    } else if (type === 2) {
+        toast.warning(msg, {
+            icon: undefined, // Set icon to undefined
+            hideProgressBar: false,
+        });
+    } else if (type === 3) {
+        toast.info(msg, {
+            icon: undefined, // Set icon to undefined
+            hideProgressBar: false,
+        });
+    } else {
+        toast.error(msg, {
+            icon: undefined, // Set icon to undefined
+            hideProgressBar: false,
+        });
+    }
+};
