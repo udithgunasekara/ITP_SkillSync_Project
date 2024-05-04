@@ -268,7 +268,7 @@ export const App = () => {
               <DisplayQuestionAndAnswers />
               <Footer />
             </Route>
-            <Route path="/exams">
+            <Route path="/add-interview">
               <Navbar />
               <SheduleInterviewComponent />
               <Footer />
