@@ -47,6 +47,7 @@ import DisplayQuestionAndAnswers from './layouts/ExamsManagment/Component/Displa
 import ClientDetails from './layouts/ProfileManagment/ClientDetails';
 import FreelancerDetails from './layouts/ProfileManagment/FreelancerDetails';
 import Message from './layouts/ProfileManagment/Message';
+import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 
 import PaymentComponent from './layouts/PaymentManagement/components/PaymentComponent';
 import PaymentHistoryComponent from './layouts/PaymentManagement/components/PaymentHistoryComponent';
@@ -274,6 +275,11 @@ export const App = () => {
             <Route path="/take-exam/:examIdPk">
               <Navbar />
               <DisplayQuestionAndAnswers />
+              <Footer />
+            </Route>
+            <Route path="/exams">
+              <Navbar />
+              <SheduleInterviewComponent />
               <Footer />
             </Route>
             {/*Vaas files End*/}
