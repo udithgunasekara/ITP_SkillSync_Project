@@ -9,12 +9,17 @@ const CreateGigForm2: React.FC = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-    
-        const formData = new FormData();
-        for (let i = 0; i < imageFiles.length; i++) {
-            formData.append('files', imageFiles[i]);
+
+        if (imageFiles.length === 1) {
+            window.alert('Please upload at least two images.');
+            return;
         }
-    
+
+        const formData = new FormData();
+        imageFiles.forEach((file) => {
+            formData.append('image', file); // Append each file with the key "image"
+        });
+
         try {
             const response = await axios.post(`http://localhost:8082/freelancer-gigs/${gigId}/gig-images/upload`, formData, {
                 headers: {
@@ -25,10 +30,10 @@ const CreateGigForm2: React.FC = () => {
             handleNextClick(gigId);
         } catch (error) {
             console.error('Error uploading images:', error);
-            window.alert('At least one image should be uploaded')
+            window.alert('Failed to upload images. Please try again.');
         }
     };
-    
+
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
         const file = e.target.files && e.target.files[0];
         if (file) {
@@ -42,7 +47,7 @@ const CreateGigForm2: React.FC = () => {
 
     const handleNextClick = (gigId: string) => {
         history.push(`/CreateGigForm3/${gigId}`);
-    }
+    };
 
     return (
         <div className="">
@@ -73,3 +78,4 @@ const CreateGigForm2: React.FC = () => {
 };
 
 export default CreateGigForm2;
+

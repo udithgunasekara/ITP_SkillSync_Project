@@ -1,59 +1,73 @@
 package BackEnd.controller;
 
-import BackEnd.DTO.GigImagesDTO;
 import BackEnd.service.GigImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/freelancer-gigs/{gigId}/gig-images")
 @CrossOrigin(origins = "http://localhost:3000")
 public class GigImageController {
 
-    private final GigImageService gigImageService;
-
     @Autowired
-    public GigImageController(GigImageService gigImageService) {
-        this.gigImageService = gigImageService;
-    }
+    private GigImageService gigImageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImages(@RequestParam("files") MultipartFile[] files, @PathVariable("gigId") Long gigId) {
-        try {
-            for (MultipartFile file : files) {
-                gigImageService.uploadImages(file, gigId);
-            }
-            return ResponseEntity.ok("Images uploaded successfully");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload images");
-        }
+    public ResponseEntity<List<String>> uploadGigImages(@PathVariable Long gigId,
+                                                        @RequestParam("image") List<MultipartFile> files) {
+        List<String> uploadResults = files.stream()
+                .map(file -> {
+                    return gigImageService.uploadGigImages(gigId, file);
+                })
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(uploadResults);
     }
 
     @GetMapping("/my-gig-images")
-    public ResponseEntity<List<GigImagesDTO>> getImagesByGigId(@PathVariable("gigId") Long gigId) {
-        List<GigImagesDTO> images = gigImageService.getImagesByGigId(gigId);
-        if (images.isEmpty()) {
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<Map<String, List<String>>> displayGigImages(@PathVariable Long gigId) {
+        Map<String, List<byte[]>> gigImageMap = gigImageService.displayGigImages(gigId);
+
+        if (gigImageMap.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
 
-        images.forEach(image -> {
-            image.setGigImagePath(image.getGigImagePath());
+        Map<String, List<String>> titleBase64ImagesMap = new HashMap<>();
+        gigImageMap.forEach((title, images) -> {
+            List<String> base64Images = images.stream()
+                    .map(image -> Base64.getEncoder().encodeToString(image))
+                    .collect(Collectors.toList());
+            titleBase64ImagesMap.put(title, base64Images);
         });
 
-        return ResponseEntity.ok(images);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(titleBase64ImagesMap);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteImagesByGigId(@PathVariable("gigId") Long gigId) {
-        gigImageService.deleteImagesByGigId(gigId);
-        return ResponseEntity.ok("Images deleted successfully");
+    @GetMapping("/first-gig-image")
+    public ResponseEntity<String> displayGigImage(@PathVariable Long gigId) {
+        byte[] imageBytes = gigImageService.displayFirstImage(gigId);
+
+        if (imageBytes == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(base64Image);
     }
+
 
 }

@@ -20,7 +20,6 @@ export const FreelanceServices: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const gigsPerPage = 8;
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [minPrices, setMinPrices] = useState<{ [key: number]: string }>({});
   const [minTimes, setMinTimes] = useState<{ [key: number]: string }>({});
   const [showNoResults, setShowNoResults] = useState(false); // State to control displaying no results message
@@ -30,10 +29,6 @@ export const FreelanceServices: React.FC = () => {
       try {
         const response = await axios.get<Gig[]>('http://localhost:8082/freelancer-gigs');
         setGigData(response.data);
-        // Fetch images for all gigs
-        const imagePromises = response.data.map(gig => fetchFirstImage(gig.gigId));
-        const imageUrls = await Promise.all(imagePromises);
-        setImageUrls(imageUrls);
 
         const minPricePromises = response.data.map(gig => fetchMinPrice(gig.gigId));
         const minPrices = await Promise.all(minPricePromises);
@@ -52,24 +47,6 @@ export const FreelanceServices: React.FC = () => {
 
     fetchGigData();
   }, []);
-
-  const fetchFirstImage = async (gigId: number): Promise<string> => {
-    try {
-      const response = await axios.get<any[]>(`http://localhost:8082/freelancer-gigs/${gigId}/gig-images/my-gig-images`);
-      if (response.data.length > 0) {
-        // Get the first image URL
-        const imageUrl = response.data[0].gigImagePath; // Access gigImagePath property
-        console.log('Fetched image URL for gig ID', gigId, ':', imageUrl);
-        return imageUrl;
-      } else {
-        // If no images found for the gig, return a placeholder or empty string
-        return ''; // or return a placeholder image URL
-      }
-    } catch (error) {
-      console.error('Error fetching first image:', error);
-      return ''; // Return empty string if there's an error
-    }
-  };
 
   const fetchMinPrice = async (gigId: number): Promise<string> => {
     try {
@@ -130,15 +107,16 @@ export const FreelanceServices: React.FC = () => {
       )}
       <section className="containerx" style={{ marginLeft: '50px' }}>
         <div className="row">
-          {currentGigs.map((gig: Gig, index: number) => (
+          {currentGigs.map((gig: Gig) => (
             <div key={gig.gigId} className="col-lg-3 col-md-4 col-sm-6 mb-4" style={{ width: '400px', padding: '30px' }}>
               <div className="card shadow">
                 <img
-                  src={imageUrls[index]}
+                  src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'}
                   className="card-img-top"
                   alt="Service Image"
                   style={{ maxWidth: '100%', height: '200px' }}
                 />
+
                 <div className="card border-0">
                   <div className="card-body d-flex flex-column align-items-center" style={{ lineHeight: '1' }}>
                     <h5 className="card-title" style={{ maxWidth: '100%', height: '55px' }}>{gig.gigTitle}</h5>
@@ -168,3 +146,4 @@ export const FreelanceServices: React.FC = () => {
     </div>
   );
 };
+

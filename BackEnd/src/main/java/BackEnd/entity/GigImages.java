@@ -1,5 +1,6 @@
 package BackEnd.entity;
 
+import BackEnd.DTO.GigImagesDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,11 +20,11 @@ public class GigImages {
     @Column(name = "gig_image_id")
     private Long gigImageId;
 
-    @Column(name = "gig_image_path")
-    private String gigImagePath;
+    @Lob
+    @Column(name = "image", length = 1999999999)
+    private byte gigImage[];
 
-    @ManyToOne
-    @JoinColumn(name = "gigId")
-    private FreelancerGigs gigId;
+    @Column(name = "gig_id")
+    private Long gigId;
 
 }
