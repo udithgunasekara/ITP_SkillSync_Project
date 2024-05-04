@@ -69,5 +69,10 @@ public class GigImageController {
                 .body(base64Image);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteGigImages(@PathVariable Long gigId) {
+        String deleteResult = gigImageService.deleteGigImages(gigId);
+        return ResponseEntity.ok(deleteResult);
+    }
 
 }

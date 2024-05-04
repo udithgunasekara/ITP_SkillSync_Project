@@ -139,7 +139,7 @@ const FreelancerDashboard: React.FC = () => {
               {chunk.map((gig, gigIndex) => (
                 <Col key={gigIndex}>
                   <Card className="h-100 shadow">
-                    <Card.Img variant="top" src={`/Images/wallpaper${gig.gigId}.jpg`} style={{ height: '200px', objectFit: 'cover' }} />
+                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '100%', objectFit: 'cover' }} />
                     <Card.Body>
                       <Card.Title className="mb-3">{gig.gigTitle}</Card.Title>
                       <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>

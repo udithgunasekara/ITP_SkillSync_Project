@@ -9,5 +9,6 @@ public interface GigImageService {
     String uploadGigImages(Long gigId, MultipartFile file);
     Map<String, List<byte[]>> displayGigImages(Long gigId);
     byte[] displayFirstImage(Long gigId);
+    String deleteGigImages(Long gigId);
 }
 

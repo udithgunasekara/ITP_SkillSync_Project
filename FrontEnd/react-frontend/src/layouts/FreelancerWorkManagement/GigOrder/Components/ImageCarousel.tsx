@@ -39,12 +39,11 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ gigId }) => {
   }, [gigId]);
 
   return (
-    <div>
-      <Carousel style={{ maxWidth: '900px', maxHeight: '900px', margin: '0 auto' }}>
+    <div className="image-carousel-container">
+      <Carousel className="carousel-custom">
         {images.map((image, index) => (
           <Carousel.Item key={index}>
-            {/* Assuming image.gigImage is a base64 string */}
-            <img className="d-block w-100" src={`data:image/jpeg;base64,${image.gigImage}`} alt={`Slide ${index}`} />
+            <img style={{ maxWidth: '100%', height: '400px' }} src={`data:image/jpeg;base64,${image.gigImage}`} alt={`Slide ${index}`} />
           </Carousel.Item>
         ))}
       </Carousel>
@@ -53,4 +52,3 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ gigId }) => {
 };
 
 export default ImageCarousel;
-

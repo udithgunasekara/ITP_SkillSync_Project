@@ -114,7 +114,7 @@ export const FreelanceServices: React.FC = () => {
                   src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'}
                   className="card-img-top"
                   alt="Service Image"
-                  style={{ maxWidth: '100%', height: '200px' }}
+                  style={{ maxWidth: '100%', height: '100%' }}
                 />
 
                 <div className="card border-0">

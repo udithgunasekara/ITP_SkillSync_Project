@@ -67,4 +67,15 @@ public class GigImageServiceImp implements GigImageService {
         return ImageUtils.decompressImage(compressedImage);
     }
 
+    @Override
+    public String deleteGigImages(Long gigId) {
+        List<GigImages> gigImages = gigImageRepo.findByGigId(gigId);
+        if (gigImages.isEmpty()) {
+            throw new ResourceNotFound("No image data found for gig: " + gigId);
+        }
+
+        gigImageRepo.deleteAll(gigImages);
+        return "Gig Images deleted successfully!";
+    }
+
 }
