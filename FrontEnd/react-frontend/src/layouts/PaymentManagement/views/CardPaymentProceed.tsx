@@ -80,8 +80,9 @@ const CardPaymentProceed = () => {
     };
 
     const validateName = (name: string, setNameError: Function, fieldName: string) => {
-        if (name.trim() === "") {
-            setNameError(`Please enter your ${fieldName}`);
+        const nameRegex = /^[A-Za-z]+$/; // Letters only
+        if (!nameRegex.test(name)) {
+            setNameError(`Please enter a valid ${fieldName}`);
             return false;
         }
         setNameError('');
