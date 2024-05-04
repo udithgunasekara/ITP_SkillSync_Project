@@ -23,7 +23,7 @@ public class Exams {
     @Column(name = "exam_name")
     private String examName;
 
-    @Column(name = "exam_description")
+    @Column(name = "exam_description", length = 1000)
     private String examDescription;
 
     @Column(name = "attempts")
