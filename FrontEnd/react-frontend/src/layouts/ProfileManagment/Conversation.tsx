@@ -51,7 +51,7 @@ const ConversationForm: React.FC = () => {
     if (conversations?.conversationId) {
       window.location.href = `http://localhost:3000/Message/${user1}/${user2}/${conversations.conversationId}`;
     } else if (conversations1?.conversationId) {
-      window.location.href = `http://localhost:3000/Message/${user2}/${user1}/${conversations1.conversationId}`;
+      window.location.href = `http://localhost:3000/Message/${user1}/${user2}/${conversations1.conversationId}`;
     } else {
       try {
         const response = await axios.post('http://localhost:8082/api/conversations', {

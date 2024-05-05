@@ -35,6 +35,11 @@ function Message() {
         const inboxresponse = await axios.get(`http://localhost:8082/api/inbox/conversation/${conversation}`);
         setInbox(inboxresponse.data);
 
+        if(inboxresponse.data.length!==0){
+          const readornot = await axios.patch(`http://localhost:8082/api/inbox/changeIsRead/${conversation}/${username}`);
+          console.log("message read",readornot.data);
+        }
+
         try {
           const image = await axios.get(`http://localhost:8082/api/images/${username2}`, {
           responseType: 'blob', 
@@ -85,13 +90,13 @@ function Message() {
           username: username,
           user2: username2,
           message: newMessage,
-          read: false,
+          read: true,
           archived: false,
         });
         const inboxresponse2 = await axios.post(`http://localhost:8082/api/inbox/${conversation}/${username2}`, {
           conversationId: conversation,
-          username: username,
-          user2: username2,
+          username: username2,
+          user2: username,
           message: newMessage,
           read: false,
           archived: false,

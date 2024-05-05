@@ -26,9 +26,9 @@
     position: absolute;
     right: 10px;
     top: 40px;
-    background-color: tomato;
+    background-color: #FF0000;
     border-radius: 50%;
-    border: tomato;
+    border: #FF0000;
     border-style: solid;
     width: 15px;
     height: 15px;
@@ -60,7 +60,7 @@
   .inbox-user-name {
     font-size: 20px;
     margin-top: -50px;
-    margin-left: 100px;
+    margin-left: 75px;
   }
   
   .latest-msg {

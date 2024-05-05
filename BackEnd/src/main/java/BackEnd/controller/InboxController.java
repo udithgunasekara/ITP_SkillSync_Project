@@ -48,9 +48,9 @@ public class InboxController {
         }
     }
 
-    @PatchMapping("/changeIsRead/{conversationId}")
-    public ResponseEntity<InboxDTO> changeIsRead(@PathVariable Long conversationId) {
-        InboxDTO updatedInbox = inboxService.changeIsRead(conversationId);
+    @PatchMapping("/changeIsRead/{conversationId}/{username}")
+    public ResponseEntity<InboxDTO> changeIsRead(@PathVariable Long conversationId,@PathVariable String username) {
+        InboxDTO updatedInbox = inboxService.changeIsRead(conversationId,username);
         return updatedInbox != null ? ResponseEntity.ok(updatedInbox) : ResponseEntity.notFound().build();
     }
 }
