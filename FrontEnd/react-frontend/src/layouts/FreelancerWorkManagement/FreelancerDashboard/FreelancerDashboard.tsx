@@ -135,11 +135,11 @@ const FreelancerDashboard: React.FC = () => {
       <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
-            <Row xs={1} md={2} lg={4} className="g-4">
+            <Row xs={2} md={3} lg={5} className="g-4">
               {chunk.map((gig, gigIndex) => (
                 <Col key={gigIndex}>
                   <Card className="h-100 shadow">
-                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '100%', objectFit: 'cover' }} />
+                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '50%', objectFit: 'cover' }} />
                     <Card.Body>
                       <Card.Title className="mb-3">{gig.gigTitle}</Card.Title>
                       <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>

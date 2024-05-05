@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
@@ -8,12 +8,27 @@ import { useHistory } from 'react-router-dom';
 interface UserRemarksFormProps { }
 
 const UserRemarksForm: React.FC<UserRemarksFormProps> = () => {
-  const username = sessionStorage.getItem('username')
+  const username = sessionStorage.getItem('username');
   const [remarks, setRemarks] = useState<string>('');
   const [selectedPackage, setSelectedPackage] = useState<{ packageId: number; packageName: string } | null>(null);
   const [selectedPackageName, setSelectedPackageName] = useState<string>('');
+  const [freelancerUsername, setFreelancerUsername] = useState<string>(''); // State to store freelancer username
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+
+  useEffect(() => {
+    // Fetch gig details when the component mounts
+    const fetchGigDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8082/freelancer-gigs/${id}`);
+        setFreelancerUsername(response.data.freelancerUsername); // Set freelancer username from gig details
+      } catch (error) {
+        console.error('Error fetching gig details:', error);
+      }
+    };
+
+    fetchGigDetails();
+  }, [id]);
 
   const handleRemarksChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRemarks(e.target.value);
@@ -31,12 +46,12 @@ const UserRemarksForm: React.FC<UserRemarksFormProps> = () => {
     }
     try {
       const loggedInUser = getUserInfo();
-      const gigData = { freelancerUsername: loggedInUser.username };
       await axios.post('http://localhost:8082/orders', {
         orderGigId: Number(id),
         packageName: selectedPackageName,
         cusRemarks: remarks,
-        cusName: loggedInUser.username
+        cusName: loggedInUser.username,
+        orderFreelancerUsername: freelancerUsername, // Submit freelancer username
       });
       console.log('Order placed successfully');
       window.alert('Order placed successfully');

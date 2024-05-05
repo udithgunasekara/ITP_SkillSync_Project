@@ -12,7 +12,8 @@ public class OrderMapper {
                 orders.getOrderStatus(),
                 orders.getCusRemarks(),
                 orders.getCusName(),
-                orders.getOrderGigId()
+                orders.getOrderGigId(),
+                orders.getOrderFreelancerUsername()
         );
     }
     public static Orders mapToOrders(OrdersDTO ordersDto){
@@ -24,6 +25,7 @@ public class OrderMapper {
         orders.setCusName(ordersDto.getCusName());
         orders.setCusRemarks(ordersDto.getCusRemarks());
         orders.setOrderGigId(ordersDto.getOrderGigId());
+        orders.setOrderFreelancerUsername(ordersDto.getOrderFreelancerUsername());
         return orders;
     }
 }

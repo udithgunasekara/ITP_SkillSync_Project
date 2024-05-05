@@ -40,12 +40,12 @@ public class OrderServiceImp implements OrderService {
                 collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<OrdersDTO> getAllOrdersByFreelancer(String freelancerUsername) {
-//        List<Orders> orders = ordersRepo.findAllOrdersByFreelancer(freelancerUsername);
-//        return orders.stream().map(OrderMapper::mapToOrdersDto).
-//                collect(Collectors.toList());
-//    }
+    @Override
+    public List<OrdersDTO> getAllOrdersByFreelancer(String orderFreelancerUsername) {
+        List<Orders> orders = ordersRepo.findAllByOrderFreelancerUsername(orderFreelancerUsername);
+        return orders.stream().map(OrderMapper::mapToOrdersDto).
+                collect(Collectors.toList());
+    }
 
     @Override
     public void deleteOrder(Long orderId) {

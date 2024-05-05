@@ -21,4 +21,5 @@ public class OrdersDTO {
     private String cusRemarks;
     private String cusName;
     private String orderGigId;
+    private String orderFreelancerUsername;
 }
