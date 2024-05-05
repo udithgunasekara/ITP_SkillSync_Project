@@ -10,7 +10,7 @@ export const validatePassword = (password: string): boolean => {
 };
 
 export const validateName = (name: string): boolean => {
-    const nameRegex = /^[a-zA-Z]+(?:['-.\s][a-zA-Z]+)*$/;
+    const nameRegex = /^[a-zA-Z]+$/;
     return nameRegex.test(name);
 };
 

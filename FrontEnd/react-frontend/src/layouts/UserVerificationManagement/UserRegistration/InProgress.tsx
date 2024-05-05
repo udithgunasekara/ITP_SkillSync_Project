@@ -33,6 +33,7 @@ const InProgress: React.FC<InProgressProps> = () => {
         <p className='mt-1' style={{ color: 'gray', fontSize: '20px' }}>
           Moderator will review your documents and approve your account.
         </p>
+        <p> check your E-mail whether moderator request a resubmission</p>
         <div>
           <button className='btn btn-primary mt-3'>Back To Home</button>
         </div>

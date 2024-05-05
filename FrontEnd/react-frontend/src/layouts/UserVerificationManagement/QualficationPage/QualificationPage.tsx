@@ -48,7 +48,7 @@ const QualificationPage: FC = () => {
 
     createSocialLink(socialLinkData).then((response) => {
       console.log(response.data);
-      navigate.push('/InProgressPage');
+      navigate.push('/OTPVerificationPage');
     });
   };
 
