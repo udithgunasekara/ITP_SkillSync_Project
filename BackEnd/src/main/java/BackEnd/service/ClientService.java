@@ -6,5 +6,5 @@ import BackEnd.DTO.LoginDTO;
 public interface ClientService {
     ClientDTO createClient(ClientDTO clientDTO);
 
-    boolean validateLogin(LoginDTO loginDTO);
+    Long validateLogin(LoginDTO loginDTO);
 }

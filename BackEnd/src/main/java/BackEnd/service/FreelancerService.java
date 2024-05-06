@@ -18,7 +18,9 @@ public interface FreelancerService {
 
     String acceptFreelancer(String username);
 
-    boolean validateLogin(LoginDTO loginDTO);
+    Long validateLogin(LoginDTO loginDTO);
+
+    Boolean checkAccountStatus(String username);
 
 //    FreelancerDTO getFreelancerById(Long id);
 //
