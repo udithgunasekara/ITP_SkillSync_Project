@@ -32,6 +32,8 @@ public class Exams {
     @Column(name = "timeLimit")
     private Long timeLimit;
 
+    private Long creditPoint;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "exam_fk")
     private List<Questions> questions;
