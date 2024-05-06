@@ -1,12 +1,11 @@
 .col-md-4{padding-left: 70px;}
 .Search{padding-left: 1000px;}
-.search{
+.search-btn{
     background-color: #8436c2;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
-    margin-left: 220px;
-    margin-top: -40px;
+    margin-left: 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
