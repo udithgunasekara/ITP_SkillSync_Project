@@ -53,12 +53,12 @@ const Orders: React.FC = () => {
 
   return (
     <Container fluid style={{ padding: 0 }}>
-      <h1 className="text-center mt-4 mb-5" style={{ color: '#6c757d' }}>Orders</h1>
-      <p className="text-center mt-3" style={{ color: '#6c757d' }}>Click on the order ID to view the respective gig</p>
-      <Table responsive striped bordered hover style={{ fontSize: '1.2rem', margin: 0, backgroundColor: '#f8f9fa', color: '#6c757d' }}>
+      <h1 className="text-center mt-4 mb-3" style={{ color: '#6c757d' }}>Orders</h1>
+      <p className="text-center mt-3" style={{ color: '#6c757d' }}>Note: Click on the order ID to view the respective gig</p>
+      <Table responsive striped bordered hover style={{ fontSize: '1rem', margin: 0, backgroundColor: '#f8f9fa', color: '#6c757d' }}>
         <thead>
           <tr>
-            <th>#</th>
+            <th>Related Gig</th>
             <th>Package Name</th>
             <th>Customer Remarks</th>
             <th>Date & Time</th>
@@ -70,7 +70,7 @@ const Orders: React.FC = () => {
         <tbody>
           {orders.map((order, index) => (
             <tr key={index}>
-              <td><Link to={`/gig/${order.orderGigId}`} style={{ textDecoration: 'none', color: '#6c757d' }}>#{order.orderId}</Link></td>
+              <td><Link to={`/gig/${order.orderGigId}`} style={{ textDecoration: 'none', color: '#6c757d' }}>View Gig</Link></td>
               <td>{order.packageName}</td>
               <td>{order.cusRemarks}</td>
               <td>{order.orderDateTime}</td>

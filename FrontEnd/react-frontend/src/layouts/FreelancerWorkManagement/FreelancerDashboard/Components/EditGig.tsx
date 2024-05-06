@@ -243,8 +243,8 @@ const EditGig: React.FC = () => {
       )}
       {/* Buttons */}
       <div className="d-flex justify-content-between">
-        <button className="btn btn-secondary" style={{backgroundColor: 'black'}} onClick={handleDiscardChanges}>Discard Changes</button>
-        <button className="btn btn-secondary" style={{backgroundColor: 'red'}} onClick={handleSave}>Apply Changes</button>
+        <button className="btn btn-danger" onClick={handleDiscardChanges}>Discard Changes</button>
+        <button className="btn btn-success"  onClick={handleSave}>Apply Changes</button>
       </div>
     </div>
   );

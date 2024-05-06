@@ -30,6 +30,12 @@ export const CreateGigForm1: React.FC = () => {
         e.preventDefault();
         try {
             const loggedInUser = getUserInfo();
+            // Check if user is logged in as a freelancer
+            if (!loggedInUser) {
+                alert('You have to login as a freelancer to create a gig.');
+                history.push('/Freelancer/Login');
+                return;
+            }
             const gigData = { ...formData, freelancerUsername: loggedInUser.username };
             const response = await axios.post<{ gigId: string }>('http://localhost:8082/freelancer-gigs', gigData);
             const gigId = response.data.gigId;
@@ -57,7 +63,7 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const containerStyle: React.CSSProperties = {
-        maxWidth: '56.25em', 
+        maxWidth: '56.25em', // 900px converted to em units
     };
 
     const buttonStyle: React.CSSProperties = {

@@ -147,7 +147,7 @@ const CreateGigForm3: React.FC = () => {
                         <div className="col">
                             <div className="card shadow">
                                 <div className="card-body">
-                                    <h5 className="card-title text-center fw-bold" style={{ fontSize: '1.5em' }}>Basic</h5>
+                                    <h5 className="card-title text-center fw-bold" style={{ fontSize: '24px' }}>Basic</h5>
                                     <div className="form-group mb-3">
                                         <textarea
                                             className="form-control"
@@ -208,7 +208,7 @@ const CreateGigForm3: React.FC = () => {
                             <div key={packageType} className="col">
                                 <div className="card shadow">
                                     <div className="card-body">
-                                        <h5 className="card-title text-center fw-bold" style={{ fontSize: '1.5em' }}>{packageType}</h5>
+                                        <h5 className="card-title text-center fw-bold" style={{ fontSize: '24px' }}>{packageType}</h5>
                                         <div className="form-group mb-3">
                                             <textarea
                                                 className="form-control"
@@ -264,7 +264,7 @@ const CreateGigForm3: React.FC = () => {
                         ))}
                     </div>
                 )}
-                <div className="card mt-4 p-1 border-0">
+                <div className="mt-4 p-1 border-0">
                     <div className="row">
                         <div className="col-12 text-center mb-3">
                             <button className={`btn btn-outline-primary`} onClick={handleToggleMode}>
@@ -274,8 +274,8 @@ const CreateGigForm3: React.FC = () => {
                     </div>
                 </div>
                 <div className="card mt-4 p-1 border-0">
-                    <h2 className="card-title text-center mb-4">Agreement</h2>
-                    <p className="card-text">
+                    <h2 className="card-title text-center mb-3">Agreement</h2>
+                    <p className="card-text mb-3" style={{ fontSize: '1em', paddingLeft:'1em' }}>
                         "By submitting this gig, I agree to deliver the specified work within the agreed-upon
                         timeline and to the best of my ability. Payment terms are as agreed upon in our
                         communication. I retain the right to use this work as part of my portfolio, unless otherwise discussed."

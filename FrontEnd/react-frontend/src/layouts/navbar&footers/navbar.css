@@ -8,6 +8,7 @@
     font-weight: bold;
     margin-right: 18px;
     margin-left: 0px;
+    position: relative;
   
   
   }
@@ -33,4 +34,9 @@
     padding: 0;
     }
   
+      /* top navbar */
+  .navbar-top {
+    position: fixed; /* or fixed or absolute */
+    z-index: 1008; /* Ensure the topmost navbar is above other elements */
+  }
   
