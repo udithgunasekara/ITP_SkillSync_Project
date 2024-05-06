@@ -39,17 +39,19 @@ const FreelancerHome: React.FC = () => {
   };
 
   const buttonStyle: React.CSSProperties = {
+    position: 'absolute', // Set position to absolute
+    bottom: '2em', // Adjust bottom spacing as needed
+    left: '50%', // Center the button horizontally
+    transform: 'translateX(-50%)', // Center the button horizontally
     backgroundColor: isHovered ? '#221733' : isClicked ? '#000000' : '#000000',
     color: 'white',
     border: 'none',
-    padding: '12px 24px',
-    borderRadius: '8px',
+    padding: '0.75em 1.5em',
+    borderRadius: '0.5em',
     cursor: 'pointer',
-    fontSize: '20px', 
-    marginTop: '500px',
-    transition: 'background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease', 
-    boxShadow: isHovered ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none', 
-    transform: isHovered ? 'scale(1.05)' : 'scale(1)', 
+    fontSize: '1.25em',
+    transition: 'background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
+    boxShadow: isHovered ? '0 0.25em 0.375em rgba(0, 0, 0, 0.1)' : 'none',
   };
 
   return (
