@@ -231,8 +231,8 @@ const ClientDetails: React.FC = () => {
       <div className='detail-card'>
       <p>Name: {client.firstName} {client.lastName}</p>
       <hr/>
-      <p className='detail-div-1'>Country: {client.country}</p>
-      <p className='detail-div-2'>Registered Date: {monthName} {year}</p>
+      <p id='detail-div-1'>Country: {client.country}</p>
+      <p id='detail-div-2'>Registered Date: {monthName} {year}</p>
 
       {freelancer && freelancer.email === client.email && (
         <button onClick={handleAccountswichingClick} className='switch-btn'>Freelancer Mode</button>
@@ -258,15 +258,15 @@ const ClientDetails: React.FC = () => {
     </div>
       {(ShowAboutme) && (<div>
       <div>
-          <h2>Description</h2>
+      <h2 id='description-title-client'>Description</h2>
+      {(registeruser===username) && (!showForm) && (<button onClick={handleButtonClick} className='Add-description'>Edit description</button>)}
+      
       {(!showForm) && description ? (
+          <p id='description-para-client'>{description}</p>
         
-          <p>{description}</p>
-        
-      ):(<p>no description found!!</p>)}
+      ):(<p id='description-para-client'>no description found!!</p>)}
       </div>
 
-      {(registeruser===username) && (!showForm) && (<button onClick={handleButtonClick} className='Add-description'>Edit description</button>)}
       
       {showForm && (
         <div className='add-description-div'>
@@ -281,12 +281,12 @@ const ClientDetails: React.FC = () => {
             />
           </label>
           <button type="submit" className='add-discription'>Save Description</button>
-          <button onClick={handleCancelClick} className='cancel-description'>cancel</button>
+          <button onClick={handleCancelClick} className='cancel-description' id='cancel-description'>cancel</button>
         </form>
       </div>
       )}
 
-      <h2>Languages</h2>
+      <h2 className='language-title-client' id='language-title-client'>Languages</h2>
       {(registeruser===username) && (!showlang) && (<button onClick={handleLanguageEditClick} className='add-language'>Add language</button>)}
       
       {showlang && (
@@ -311,20 +311,20 @@ const ClientDetails: React.FC = () => {
       )}
 
 {!showlang && (
-  <ul>
-    {languages && languages.length > 0 ? (
-      languages.map((language, index) => (
-        <p key={language.id || index}>
-          {language.language}{' '}
-          <button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language'>
-            <MDBIcon fas icon="trash-alt" />
-          </button>
-        </p>
-      ))
-    ) : (
-      <p>No Language available.</p>
-    )}
-  </ul>
+  <ul className="languages-list">
+  {languages && languages.length > 0 ? (
+    languages.map((language, index) => (
+      <span key={language.id || index} className="language-item">
+        {language.language}{' '}
+        <button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language' id='Delete-language'>
+          <MDBIcon fas icon="trash-alt" />
+        </button>
+      </span>
+    ))
+  ) : (
+    <p className='language-item'>No Language available.</p>
+  )}
+</ul>
 )}
       </div>)}
       </div>

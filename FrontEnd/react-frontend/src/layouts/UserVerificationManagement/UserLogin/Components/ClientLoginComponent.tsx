@@ -21,6 +21,9 @@ export const ClientLoginComponent = () => {
 
         ClientLogin(client).then((response) => {
             console.log("Login response:", response.data);
+            sessionStorage.setItem('id', response.data);
+            sessionStorage.setItem('role', 'client');
+
             alert('Login Successful!');
             navigate.push(`/clients/${username}`);
             

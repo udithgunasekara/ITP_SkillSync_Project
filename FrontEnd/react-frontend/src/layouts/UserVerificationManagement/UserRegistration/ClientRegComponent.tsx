@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 // Assume createClient is a similar service function as createFreelancer for registering clients.
-import { createClient } from '../Services/UserManagementService';
+import { OTPSending, createClient } from '../Services/UserManagementService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import './ClientReg.css';
 import { validateEmail, validatePassword, validateName, validateUsername, validateDOB, validatePhone } from './FormValidation';
+import { useHistory } from 'react-router-dom';
 
 const ClientRegComponent = () => {
 
+
+        const history = useHistory();
     // Initializing state for each backend variable
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -31,6 +34,8 @@ const ClientRegComponent = () => {
 
     //set up session storage
     sessionStorage.setItem('username', userName);
+    sessionStorage.setItem('email', email );
+    sessionStorage.setItem('role', 'client');
 
 
 
@@ -40,7 +45,7 @@ const ClientRegComponent = () => {
          // Validation
          //name validation
             if (!validateName(firstNameError) || !validateName(lastNameError)) {
-                alert('Invalid name');
+                alert('Invalid naaame');
                 return;
 
                 //email validation
@@ -73,8 +78,14 @@ const ClientRegComponent = () => {
        const client = { firstName, lastName, email, dob, nic, phone, userName, password, country };
        console.log(client);
 
+       //sending email
+       OTPSending(email).then((response) => {
+        console.log(response.data);
+       });
+
        createClient(client).then((response) => {
           console.log(response.data);
+          history.push('/OTPVerificationPage');
        });
     };
 
@@ -93,7 +104,7 @@ const ClientRegComponent = () => {
                                                         <input type="text" className="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required value={firstName} 
                                                         onChange={(e) => {
                                                             setFirstName(e.target.value);
-                                                            setFirstNameError(validateName(e.target.value) ? '' : 'Invalid first name');
+                                                            //setFirstNameError(validateName(e.target.value) ? '' : 'Invalid first name');
                                                     }} />
                                                     <div style={{ color: 'red' }}>{firstNameError}</div>
                                                 </div>
@@ -142,7 +153,7 @@ const ClientRegComponent = () => {
                                                         <input type="text" className="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required value={lastName} 
                                                         onChange={(e) => {
                                                             setLastName(e.target.value);
-                                                            setLastNameError(validateName(e.target.value) ? '' : 'Invalid last name');
+                                                            //setLastNameError(validateName(e.target.value) ? '' : 'Invalid last name');
                                                     }} />
                                                 </div>
                                                 <div className="mb-3">

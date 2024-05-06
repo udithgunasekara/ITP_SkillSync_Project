@@ -105,10 +105,10 @@ export const FreelanceServices: React.FC = () => {
           No results found for '{searchQuery}'
         </div>
       )}
-      <section className="containerx" style={{ marginLeft: '50px' }}>
+      <section className="containerx" style={{marginRight: '3.4375em'}}>
         <div className="row">
           {currentGigs.map((gig: Gig) => (
-            <div key={gig.gigId} className="col-lg-3 col-md-4 col-sm-6 mb-4" style={{ width: '400px', padding: '30px' }}>
+            <div key={gig.gigId} className="col-lg-3 col-md-4 col-sm-6 mb-7" style={{ maxWidth: '100%', height: '100%' }}>
               <div className="card shadow">
                 <img
                   src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'}
@@ -118,12 +118,12 @@ export const FreelanceServices: React.FC = () => {
                 />
 
                 <div className="card border-0">
-                  <div className="card-body d-flex flex-column align-items-center" style={{ lineHeight: '1' }}>
+                <div className="card-body d-flex flex-column align-items-center" style={{ lineHeight: '1', padding: '1.5rem' }}>
                     <h5 className="card-title" style={{ maxWidth: '100%', height: '55px' }}>{gig.gigTitle}</h5>
                     <p className="card-text fs-6">Price: ${minPrices[gig.gigId]} onwards</p>
                     <p className="card-text fs-6">Time Taken: {minTimes[gig.gigId]}h</p>
                     <p className="card-text fs-6">@{gig.freelancerUsername}</p>
-                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{ backgroundColor: '#641C9E' }}>View Details</Link>
+                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{ backgroundColor: '#641C9E' }}>View Details {'>>'}</Link>
                   </div>
                 </div>
               </div>

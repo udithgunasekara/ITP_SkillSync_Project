@@ -104,7 +104,7 @@ const FreelancerGigsDetails: React.FC = () => {
       <div className='Search'>
         <form onSubmit={handleSubmit}>
           <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Search" className='search-input'/>
-          <button type="submit" className='search'><MDBIcon fas icon="search" /></button>
+          <button type="submit" className='search-btn'><MDBIcon fas icon="search" /></button>
         </form>
       </div>
       <br />

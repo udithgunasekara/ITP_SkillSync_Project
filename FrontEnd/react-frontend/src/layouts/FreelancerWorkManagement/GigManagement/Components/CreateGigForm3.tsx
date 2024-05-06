@@ -13,6 +13,7 @@ interface PackageDetails {
 const CreateGigForm3: React.FC = () => {
 
     const { gigId } = useParams<{ gigId: string }>();
+    const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
 
     const [formData, setFormData] = useState<{ packageDetails: PackageDetails }>({
         packageDetails: {
@@ -263,7 +264,7 @@ const CreateGigForm3: React.FC = () => {
                         ))}
                     </div>
                 )}
-                <div className="card mt-4 p-1 border-0">
+                <div className="mt-4 p-1 border-0">
                     <div className="row">
                         <div className="col-12 text-center mb-3">
                             <button className={`btn btn-outline-primary`} onClick={handleToggleMode}>
@@ -273,8 +274,8 @@ const CreateGigForm3: React.FC = () => {
                     </div>
                 </div>
                 <div className="card mt-4 p-1 border-0">
-                    <h2 className="card-title text-center mb-4">Agreement</h2>
-                    <p className="card-text">
+                    <h2 className="card-title text-center mb-3">Agreement</h2>
+                    <p className="card-text mb-3" style={{ fontSize: '1em', paddingLeft:'1em' }}>
                         "By submitting this gig, I agree to deliver the specified work within the agreed-upon
                         timeline and to the best of my ability. Payment terms are as agreed upon in our
                         communication. I retain the right to use this work as part of my portfolio, unless otherwise discussed."

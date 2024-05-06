@@ -61,10 +61,22 @@ public class FreelancerController {
     //freelancer login validation
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-        if (freelancerService.validateLogin(loginDTO)) {
-            return ResponseEntity.ok("Login Successful");
+        Long id = freelancerService.validateLogin(loginDTO);
+        if (freelancerService.validateLogin(loginDTO)!=null) {
+            //return id of the user
+            //convert long id to string
+            String idAsString = Long.toString(id);
+
+            return ResponseEntity.ok(idAsString);
         }
         return ResponseEntity.status(401).body("Unauthorized");
+    }
+
+    //check the account status when freelancer login
+    @GetMapping("/checkAccountStatus")
+    public ResponseEntity<Boolean> checkAccountStatus(@RequestParam("username") String username){
+        boolean status = freelancerService.checkAccountStatus(username);
+        return ResponseEntity.ok(status);
     }
 
 

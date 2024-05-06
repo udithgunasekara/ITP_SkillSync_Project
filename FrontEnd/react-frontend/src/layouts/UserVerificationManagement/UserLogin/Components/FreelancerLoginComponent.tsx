@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FreelancerLogin } from '../Service/LoginService'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { checkAccountStatus } from '../../Services/UserManagementService';
 
-export const FreelancerLoginComponent = () => {
+export const FreelancerLoginComponent =  () => {
     // Initializing state for login variables
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    //const [id, setId] = useState(''); // [1
     const navigate = useHistory();
+
 
     //setup session storage
     sessionStorage.setItem('username', username)
@@ -16,14 +19,34 @@ export const FreelancerLoginComponent = () => {
         e.preventDefault();
 
         // Including all state variables in the freelancer object
-        const freelancer = { username, password };
+        const freelancer = { username, password, };
         console.log(freelancer); // For debug purposes
 
         FreelancerLogin(freelancer).then((response) => {
             console.log("Login response:", response.data);
-            alert('Login Successful!');
-            navigate.push('/UserTestPage');
+            //set id
+            sessionStorage.setItem('id', response.data)
+            sessionStorage.setItem('role', 'freelancer')
 
+            alert('login successful ');
+ 
+            /// Check account status after login
+            checkAccountStatus(username).then((response) => {
+                // Assuming response.data is the boolean account status
+                const status = response.data;
+                if (status === true) {
+                    console.log("Account status accepted");
+                    // If the account status is accepted, navigate to UserTestPage
+                    navigate.push('/UserTestPage');
+                } else {
+                    console.log("Account status accepted");
+                    // If the account status is not accepted, navigate to AccountNotAcceptedPage
+                    navigate.push('/InProgressPage');
+                }
+            }).catch((error) => {
+                console.error("Error checking account status:", error);
+               
+            });
 
         }).catch((error) => {
             console.error("Login error:", error.response || error);

@@ -35,12 +35,13 @@ public class ClientServiceImp implements ClientService {
     }
 
     @Override
-    public boolean validateLogin(LoginDTO loginDTO) {
+    public Long validateLogin(LoginDTO loginDTO) {
         Client client = clientRepo.findByUserName(loginDTO.getUsername());
+        long userid = client.getId();
         if (client != null && client.getPassword().equals(loginDTO.getPassword())) {
-            return true;
+            return userid;
         }
-        return false;
+        return null ;
     }
 
 }

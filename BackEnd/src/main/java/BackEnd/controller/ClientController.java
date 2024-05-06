@@ -30,8 +30,13 @@ public class ClientController {
     //Client Login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-        if (clientService.validateLogin(loginDTO)) {
-            return ResponseEntity.ok("Login Successful");
+        Long id = clientService.validateLogin(loginDTO);
+        if (clientService.validateLogin(loginDTO)!=null) {
+            //return id of the user
+            //convert long id to string
+            String idAsString = Long.toString(id);
+
+            return ResponseEntity.ok(idAsString);
         }
         return ResponseEntity.status(401).body("Unauthorized");
     }

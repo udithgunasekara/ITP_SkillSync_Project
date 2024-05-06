@@ -204,10 +204,7 @@ const FreelancerDetails: React.FC = () => {
     setShowMyFreelancerdashboard(false);
   };
   const ShowMyFreelancerdashboardButtonClick = () => {
-    setShowAboutme(false);
-    setShowReviews(false);
-    setShowMyGigs(false);
-    setShowMyFreelancerdashboard(true);
+    window.location.href = ('http://localhost:3000/FreelancerDashboard')
   };
   const handleLanguageEditClick = () => {
     setShowLang(true);
@@ -437,13 +434,13 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     </div>
     {(ShowAboutme) && (<div className='About-me'>
     <div className='Description-div'>
-          <h2>Description</h2>
-
-      {(!showForm) && description ? (
-          <p>{description}</p>   
-      ):(<p>no description found!!</p>)}
+          
       </div>
-      {(registeruser===username) && (!showForm) && (<button onClick={handleButtonClick} className='Add-description'>Edit description</button>)}
+      <h2 id='desc-free-title'>Description</h2>
+          {(registeruser===username) && (!showForm) && (<button onClick={handleButtonClick} className='Add-description'>Edit description</button>)}
+      {(!showForm) && description ? (
+          <p id='desc-free-para'>{description}</p>   
+      ):(<p id='desc-free-para'>no description found!!</p>)}
       
       {showForm && (
         <div className='description-edit-form-free'>
@@ -452,6 +449,8 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
             onChange={(e) => setDescription(e.target.value)}
             rows={5}
             cols={50}
+            className='description-input'
+            placeholder='Enter description'
           />
         <button type="submit" className='Add-Description-btn-free'>Save Description</button>
         <button onClick={handleCancelClick} className='freelancer-Description-cancel'>cancel</button>
@@ -462,13 +461,13 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       
 
       <div className='Languages-div'>
-      <h2>Languages</h2>
+      <h2 id='lang-free-title'>Languages</h2>
       {(registeruser===username) && (!showlang) && (<button onClick={handleLanguageEditClick} className='Add-language'>Add language</button>)}
       
       
       {showlang && (
         <div className='add-language-div'>
-      <form onSubmit={handlelanguagesSubmit}>
+      <form onSubmit={handlelanguagesSubmit} className='lang--edit-form-free'>
       <input
         type="text"
         value={language}
@@ -487,12 +486,12 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   <ul>
     {languages && languages.length > 0 ? (
       languages.map((language, index) => (
-        <p key={language.id || index}>
+        <span id='lang-list-free' key={language.id || index}>
           {language.language}{' '}
           <button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language'>
             <MDBIcon fas icon="trash-alt" />
           </button>
-        </p>
+        </span>
       ))
     ) : (
       <p>No Language available.</p>
@@ -503,7 +502,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
 <div className='Skill-div'>
   
-<h2>Skills</h2>
+<h2 id='skill-free-title'>Skills</h2>
 
 {(registeruser===username) && (!showskill) && (<button onClick={handleSkillEditClick} className='Add-skill'>Add Skills</button>)}
 
@@ -529,23 +528,25 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 <ul>
 {skills && skills.length > 0 ? (
 skills.map((skill, index) => ( // Using index as fallback key
-  <p key={skill.id || index}>
+  <span id='skill-free-list' key={skill.id || index}>
     {skill.skill} <button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>
-  </p>
+  </span>
 ))
 ) : (
-<p>No skills available.</p>
-)}
-</ul>
+<p id='skill-free-list'>No skills available.</p>
 )}
 
+</ul>
+)}
+<hr/>
+
 </div>
-      <h2>Education</h2>
+      <h2 id='edu-title'>Education</h2>
       {(registeruser===username) && (!showedu) && (<button onClick={handleEduEditClick} className='Add-education'>Add Education institute</button>)}
       
       {showedu && (
         <div className='Add-edu-for-free'>
-        <form onSubmit={handleEduSubmit}>
+        <form onSubmit={handleEduSubmit} className='edu--edit-form-free'>
         <input
               type="text"
               name="institute"
@@ -612,9 +613,10 @@ skills.map((skill, index) => ( // Using index as fallback key
       {(!showedu) && (<ul>
   {education && education.length > 0 ? (
     education.map((edu) => (
-      <li key={edu.id}>
+      <li id='edu-list' key={edu.id}>
+        <hr/>
         <p>{edu.institute} - {edu.title} {edu.major}    <button onClick={() => handleDeleteEducation(edu.id)} className='delete-education'><MDBIcon fas icon="trash-alt" /></button></p>
-        <p>{edu.year}</p>
+        <p>Graduated on {edu.year}</p>
       </li>
     ))
   ) : (
