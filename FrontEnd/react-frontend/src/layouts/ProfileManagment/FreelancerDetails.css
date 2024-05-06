@@ -205,17 +205,14 @@ ul p {
 }
 
 
-form {
+.description-edit-form-free, .Skill--edit-form-free, .edu--edit-form-free, .lang--edit-form-free{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
   
-  label {
-    margin-bottom: 10px;
-  }
   
-  textarea {
+  .description-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

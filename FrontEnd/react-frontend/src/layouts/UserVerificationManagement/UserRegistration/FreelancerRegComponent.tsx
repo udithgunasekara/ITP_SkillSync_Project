@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createFreelancer } from '../Services/UserManagementService';
+import { OTPSending, createFreelancer } from '../Services/UserManagementService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory, useLocation } from 'react-router-dom';
 import { validateEmail, validatePassword, validateName, validateUsername, validateDOB, validatePhone } from './FormValidation';
@@ -33,6 +33,7 @@ const FreelancerRegComponent = () => {
     //set up session storage
     sessionStorage.setItem('username', userName);
     sessionStorage.setItem('email', email );
+    sessionStorage.setItem('role', 'freelancer');
 
     function saveFreelancer(e: any) {
         e.preventDefault();
@@ -73,6 +74,12 @@ const FreelancerRegComponent = () => {
         // Including all state variables in the employee object
         const freelancer = { firstName, lastName, email, dob, nic, phone, userName, password, workOn };
         console.log(freelancer);
+
+         //sending email
+       OTPSending(email).then((response) => {
+        console.log(response.data);
+       });
+
 
         createFreelancer(freelancer).then((response) => {
             console.log(response.data);

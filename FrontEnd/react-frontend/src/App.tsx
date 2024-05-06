@@ -58,6 +58,7 @@ import PayPalProceed from './layouts/PaymentManagement/views/PayPalProceed';
 import PaymentDetailsFComponent from './layouts/PaymentManagement/components/PaymentDetailsFComponent';
 import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
+import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
 
 
 
@@ -226,6 +227,10 @@ export const App = () => {
 
             <Route path='/UserTestPage' exact>
               <UserTest/>
+            </Route>
+
+            <Route path='/OTPVerificationPage' exact>
+              <OTPVerification/>
             </Route>
 
             {/* Ending supeshala's files */}
