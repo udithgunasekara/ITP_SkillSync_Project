@@ -85,7 +85,6 @@ export const App = () => {
             <Route path="/FreelancerMain" exact>
               <Navbar />
               <FreelancerHome />
-              <Footer />
             </Route>
             <Route path="/gig/:id">
               <Navbar />

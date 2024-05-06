@@ -13,6 +13,7 @@ interface PackageDetails {
 const CreateGigForm3: React.FC = () => {
 
     const { gigId } = useParams<{ gigId: string }>();
+    const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
 
     const [formData, setFormData] = useState<{ packageDetails: PackageDetails }>({
         packageDetails: {

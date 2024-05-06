@@ -53,7 +53,7 @@ const FreelancerHome: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='.below-navbar'>
       <div style={backgroundStyle}>
         <div style={contentStyle}>
           <h1 style={{ fontSize: '64px' }}>Welcome to Freelancer Services</h1>
