@@ -1,6 +1,17 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useHistory} from "react-router-dom";
 
 export const Navbar = () => {
+    const history = useHistory();
+
+    const handleLogout = () => {
+        // Clear the authentication token from local storage
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('id');
+        sessionStorage.removeItem('role');
+        sessionStorage.removeItem('email');
+    
+        history.push('/FreelancerMain');
+      };
 
 
     return (
@@ -46,7 +57,8 @@ export const Navbar = () => {
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/details'}>Billing and Information</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/payment'}>Transaction History</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/support'}>Help Desk</NavLink></li>
-                                {/* Add more dropdown items here if needed */}
+                                <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/support'} onClick={handleLogout}>LogOut</NavLink></li>
+                               {/* Add more dropdown items here if needed */}
                             </ul>
                         </li>
 

@@ -49,9 +49,20 @@ const CreateGigForm2: React.FC = () => {
         history.push(`/CreateGigForm3/${gigId}`);
     };
 
+    const containerStyle: React.CSSProperties = {
+        maxWidth: '56.25em', 
+        maxHeight: '56.25em', 
+        marginTop: '9.375em', 
+        marginBottom: '13.125em', 
+    };
+
+    const buttonStyle: React.CSSProperties = {
+        fontSize: '1.25em', 
+    };
+
     return (
         <div className="">
-            <div className="container" id="containerGigCreate" style={{ maxWidth: '900px', maxHeight: '900px', marginTop: '150px', marginBottom: '210px' }}>
+            <div className="container" id="containerGigCreate" style={containerStyle}>
                 <h2 className="text-center mb-4" style={{ color: 'red' }}>Upload Images</h2>
                 <form onSubmit={handleSubmit} className="row g-3">
                     {[...Array(6)].map((_, index) => (
@@ -69,7 +80,7 @@ const CreateGigForm2: React.FC = () => {
                         </div>
                     ))}
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate">Next</button>
+                        <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate" style={buttonStyle}>Next</button>
                     </div>
                 </form>
             </div>
@@ -78,4 +89,3 @@ const CreateGigForm2: React.FC = () => {
 };
 
 export default CreateGigForm2;
-
