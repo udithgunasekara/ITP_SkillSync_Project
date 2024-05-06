@@ -147,7 +147,7 @@ const CreateGigForm3: React.FC = () => {
                         <div className="col">
                             <div className="card shadow">
                                 <div className="card-body">
-                                    <h5 className="card-title text-center fw-bold" style={{ fontSize: '24px' }}>Basic</h5>
+                                    <h5 className="card-title text-center fw-bold" style={{ fontSize: '1.5em' }}>Basic</h5>
                                     <div className="form-group mb-3">
                                         <textarea
                                             className="form-control"
@@ -208,7 +208,7 @@ const CreateGigForm3: React.FC = () => {
                             <div key={packageType} className="col">
                                 <div className="card shadow">
                                     <div className="card-body">
-                                        <h5 className="card-title text-center fw-bold" style={{ fontSize: '24px' }}>{packageType}</h5>
+                                        <h5 className="card-title text-center fw-bold" style={{ fontSize: '1.5em' }}>{packageType}</h5>
                                         <div className="form-group mb-3">
                                             <textarea
                                                 className="form-control"
