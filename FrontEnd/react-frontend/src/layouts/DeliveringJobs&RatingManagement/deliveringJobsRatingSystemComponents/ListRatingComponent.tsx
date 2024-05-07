@@ -53,6 +53,8 @@ const ListRatingComponent: React.FC = () => {
 
     const addNewRating = () => {
         navigator.push('/add-rating');
+        
+        
     };
 
     const updateRating = (id: number) => {
@@ -89,6 +91,11 @@ const ListRatingComponent: React.FC = () => {
         }
     };
 
+    const handleNewRating = (newRating: Rating) => {
+        setRatings((prevRatings) => [newRating, ...prevRatings]); // Add the new rating to the beginning of the array
+    };
+    
+
     const resetRatings = async () => {
         try {
             const response = await listRatings(); // Fetch all ratings
@@ -120,6 +127,9 @@ const ListRatingComponent: React.FC = () => {
 
     return (
         <div className='container'>
+            <br />
+            <br />
+            <br />
             <h2 className='text-center'>List of Ratings</h2>
             <div className='mb-3'>
                 <form className='d-flex' onSubmit={handleSearch}>

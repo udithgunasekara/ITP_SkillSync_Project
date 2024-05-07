@@ -11,8 +11,7 @@ import {
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './gig.css';
-import FreelancerGigs from './FreelanceReportDownload';
-
+import ReportGenerator from './FreelanceReportDownload';
 interface Gig {
   gigId: string;
   gigTitle: string;
@@ -60,6 +59,7 @@ const FreelancerGigsDetails: React.FC = () => {
     handleSearch();
   };
 
+
   const truncateString = (str: string, num: number): string => {
     if (str.length <= num) {
       return str;
@@ -88,7 +88,7 @@ const FreelancerGigsDetails: React.FC = () => {
                   <MDBCardText>
                     <b>Category :</b>{gig.gigCategory}
                   </MDBCardText>
-                  <MDBBtn href='#'>see more</MDBBtn>
+                  <MDBBtn href={`http://localhost:3000/gig/${gig.gigId}`}>see more</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
             </div>
@@ -120,8 +120,9 @@ const FreelancerGigsDetails: React.FC = () => {
           renderGigCards()
         )
       )}
-      <FreelancerGigs/>
+      <ReportGenerator/>
     </div>
+
   );
 };
 

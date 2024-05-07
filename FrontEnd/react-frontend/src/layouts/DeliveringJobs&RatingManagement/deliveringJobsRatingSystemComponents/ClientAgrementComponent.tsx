@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // Import the useNavigate hook from 'react-router-dom' if you plan to use it
 // import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ const ClientAgreementComponent: React.FC = () => {
     // const navigate = useNavigate();
 
     const [isChecked, setIsChecked] = useState<boolean>(false); // State to track checkbox value
+    const navigate = useHistory();
 
     // Function to handle the checkbox change event
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -14,33 +16,56 @@ const ClientAgreementComponent: React.FC = () => {
     };
 
     // Function to handle the button click
-    /*const handleProceedToPayment = (): void => {
+   const handleProceedToPayment = (): void => {
         // If using useNavigate, navigate to the payment route
-        // navigate('/');
-    };*/
+        navigate.push('/payment-details');
+    };
 
     return (
         <div className="card" style={{ textAlign: 'center' }}>
             <div className="card-body" style={{ width: '500px', margin: '0 auto' }}>
+                <br />
+                <br />
                 <h2 style={{ textAlign: 'center' }}>Client Agreement</h2>
                 <form>
                     <div className="form-group mb-2">
                         <br />
-                        <br />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore 
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-                        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                        qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore 
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p style={{ textAlign: 'left' }}>1. Parties
+This Agreement is between [Client Name] ("Client") and [Marketplace Name], the operator of the marketplace ("Marketplace").
+<br />
+2. Services
+Client agrees to use the Marketplace to hire freelancers for project-based work. The specific terms of each project will be outlined in a separate project agreement between the Client and the Freelancer.
+<br />
+3. Payment
+Client agrees to pay the Freelancer the agreed-upon fee for the services rendered through the Marketplace.
+Payments will be made through the Marketplace’s payment system.
+The Marketplace may hold funds in escrow until the project is completed to the satisfaction of both parties.
+<br />
+4. Intellectual Property
+Ownership of work and deliverables will be as agreed between the Client and Freelancer in the project agreement.
+Any disputes regarding ownership shall be resolved in accordance with the project agreement.
+<br />
+5. Confidentiality
+Client agrees to keep any confidential information received from the Freelancer private and secure.
+Confidentiality obligations may be outlined in further detail in the project agreement.
+<br />
+6. Dispute Resolution
+Any disputes arising from this agreement shall be resolved through arbitration or mediation as outlined in the project agreement.
+<br />
+7. Limitation of Liability
+The Marketplace is not liable for any issues that arise between the Client and the Freelancer.
+Client agrees to indemnify and hold the Marketplace harmless from any claims related to the services provided by the Freelancer.
+<br />
+8. Termination
+This agreement may be terminated by either party with written notice.
+Upon termination, the Marketplace may retain records of the Client's activity for legal and operational purposes.
+<br />
+9. Governing Law
+This Agreement shall be governed by and interpreted in accordance with the laws of [State/Country].
+<br />
+10. Miscellaneous
+This agreement, along with any project agreement, represents the entire agreement between the parties.
+Any changes to this agreement must be made in writing and signed by both parties.</p>
 
                         <br />
                         <br />
@@ -63,7 +88,7 @@ const ClientAgreementComponent: React.FC = () => {
                         <div>
                             <button
                                 className="btn btn-info btn-block"
-                                // onClick={handleProceedToPayment} // Uncomment and implement the function if needed
+                                onClick={handleProceedToPayment} // Uncomment and implement the function if needed
                                 onMouseOver={(e) => {
                                     e.currentTarget.style.boxShadow = '0px 8px 8px rgba(0, 0, 0, 0.2)';
                                 }}

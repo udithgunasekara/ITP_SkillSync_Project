@@ -86,9 +86,6 @@ export const RaiseTicketForm = () => {
                     <div className="form-floating mb-3">
                         <input type="email" className={`form-control ${formData?.email ? '' : 'is-invalid'}`}  name="email" id="form-control" required placeholder="name@example.com" onChange={handleChange} />
                         <label htmlFor="form-control">Email address</label>
-                        <div className="invalid-feedback ps-1 pe-1" style={{backgroundColor:"red",color:"white",maxWidth:"fit-content", borderRadius:"20px"}}>
-                            Please provide a email address.
-                        </div>
                         <p className="text-light fw-bold">Make sure you enter a valid email that we can contact you if needed</p>
                     </div>
 
@@ -100,26 +97,17 @@ export const RaiseTicketForm = () => {
                             <option value="payment related">payment related</option>
                             <option value="other">other</option>
                         </select>
-                        <div className="invalid-feedback ps-1 pe-1" style={{backgroundColor:"red",color:"white",maxWidth:"fit-content", borderRadius:"20px"}}>
-                            Please select one.
-                        </div>
                         <label htmlFor="relatedTo" className="form-label">Related To</label>
                     </div>
 
                     <div className="form-floating mb-3 ">
                         <input type="text" className={`form-control ${formData?.subject ? '' : 'is-invalid'}`} name="subject" id="subject" placeholder="Enter subject" value={formData?.subject} required onChange={handleChange} />
                         <label htmlFor="subject">Subject</label>
-                        <div className="invalid-feedback ps-1 pe-1" style={{backgroundColor:"red",color:"white",maxWidth:"fit-content", borderRadius:"20px"}}>
-                            Please provide a subject.
-                        </div>
                     </div>
 
                     <div className="form-floating mb-3">
                         <textarea className={`form-control ${formData?.description ? '' : 'is-invalid'}`} name="description" id="description" rows={3} value={formData?.description} placeholder="Enter description" required style={{ height: "100px" }} onChange={handleChange}></textarea>
                         <label htmlFor="description" className="form-label">Description</label>
-                        <div className="invalid-feedback ps-1 pe-1" style={{backgroundColor:"red",color:"white",maxWidth:"fit-content", borderRadius:"20px"}}>
-                            Please provide a description.
-                        </div>
                     </div>
 
                     <div className="mb-3">
