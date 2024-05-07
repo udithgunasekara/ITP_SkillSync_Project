@@ -35,20 +35,27 @@ interface Option {
   optionTxt: string;
   questionId: string;
 }
+interface ExamImageData {
+  imageURL: string;
+  imageBytes: Blob;
+}
 
 export const listExams = (): Promise<AxiosResponse<Exam[]>> => axios.get<Exam[]>(REST_API_BASE_URL);
 
 export const getExam = (examid: string): Promise<AxiosResponse<Exam>> => axios.get<Exam>(`${REST_API_BASE_URL}/${examid}`);
 
-export const getExamImage = async (examid: string): Promise<string> => {
+
+export const getExamImage = async (examid: string): Promise<ExamImageData> => {
   try {
     const response = await axiosInstance.get(`/exams/badge/${examid}`, {
       responseType: 'blob',
     });
     if (response.data) {
-      return URL.createObjectURL(response.data);
+      const imageURL = URL.createObjectURL(response.data);
+      return { imageURL, imageBytes: response.data };
     } else {
-      return 'https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg';
+      const defaultImageURL = 'https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg';
+      return { imageURL: defaultImageURL, imageBytes: new Blob() };
     }
   } catch (error) {
     console.error('Error fetching image:', error);
@@ -56,10 +63,11 @@ export const getExamImage = async (examid: string): Promise<string> => {
   }
 };
 
-export const updateExam = async (examid: string, exam: Exam): Promise<string> => {
+
+export const updateExam = async (examid: string, exam: Exam, file: File): Promise<string> => {
   const formData = new FormData();
   if (exam.badge) {
-    formData.append('file', exam.badge);
+    formData.append('file', file);
   }
 
   try {
