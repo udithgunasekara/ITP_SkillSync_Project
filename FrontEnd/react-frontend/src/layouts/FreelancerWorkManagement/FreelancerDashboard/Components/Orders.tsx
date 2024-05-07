@@ -48,7 +48,7 @@ const Orders: React.FC = () => {
   };
 
   const handleDeliverButtonClick = () => {
-    history.push(`/FreelancerMain`);
+    history.push(`/freelancerAgreement`);
   };
 
   return (
