@@ -189,8 +189,7 @@ const ClientDetails: React.FC = () => {
   };
 
   const ShowMyjobsClick = () => {
-    setShowAboutme(false);
-    setShowMyjobs(true);
+    window.location.href = 'http://localhost:3000/jobs';
   };
 
   const handleDeleteLanguage = async (language: string) => {

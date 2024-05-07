@@ -205,7 +205,7 @@ const FreelancerDetails: React.FC = () => {
     setShowMyFreelancerdashboard(false);
   };
   const ShowMyFreelancerdashboardButtonClick = () => {
-    window.location.href = ('http://localhost:3000/FreelancerDashboard')
+    window.location.href = ('http://localhost:3000/FreelancerDashboard');
   };
   const handleLanguageEditClick = () => {
     setShowLang(true);
