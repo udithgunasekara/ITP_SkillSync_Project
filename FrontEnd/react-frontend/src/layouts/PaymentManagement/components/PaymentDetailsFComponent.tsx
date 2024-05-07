@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { addDetails, getDetails } from '../services/PaymentDetailsFService';
 import { useParams, useHistory } from 'react-router-dom';
+import { notifyMessage } from "../util/communFunc";
 
 interface Errors {
   userName?: string;
@@ -11,10 +12,10 @@ interface Errors {
   city?: string;
   postalCode?: string;
   paypalAddress?: string;
-
 }
 
 const PaymentDetailsFComponent: React.FC = () => {
+  const [id, setId] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [fullName, setFullName] = useState<string>('');
   const [country, setCountry] = useState<string>('');
@@ -24,39 +25,43 @@ const PaymentDetailsFComponent: React.FC = () => {
   const [postalCode, setPostalCode] = useState<string>('');
   const [paypalAddress, setPaypalAddress] = useState<string>('');
   const [errors, setErrors] = useState<Errors>({});
-  const { userName: routeUserName } = useParams<{ userName: string }>();
+ // const { userName: routeUserName } = useParams<{ userName: string }>();
+  const [routeUserName, setrouteUserName] = useState<string>(sessionStorage.getItem('username') || '');
   const navigator = useHistory();
 
   useEffect(() => {
     if (routeUserName) {
-        // Fetch details if an id is present in the URL
-        fetchDetails(routeUserName);
+      // Fetch details if an id is present in the URL
+      fetchDetails(routeUserName);
     }
-}, [routeUserName]);
+  }, [routeUserName]);
 
-const fetchDetails = async (userName: string) => {
+  const fetchDetails = async (userName: string) => {
     try {
-        const data = await getDetails(userName);
-        if (data) {
-            setUserName(data.userName);
-            setFullName(data.fullName);
-            setCountry(data.country);
-            setState(data.state);
-            setAddress(data.address);
-            setCity(data.city);
-            setPostalCode(data.postalCode);
-            setPaypalAddress(data.paypalAddress);
-        } else {
-            console.error(`No details found for userName: ${userName}`);
-        }
+      const data = await getDetails(userName);
+      if (data) {
+        setUserName(data.userName);
+        setFullName(data.fullName);
+        setCountry(data.country);
+        setState(data.state);
+        setAddress(data.address);
+        setCity(data.city);
+        setPostalCode(data.postalCode);
+        setPaypalAddress(data.paypalAddress);
+      } else {
+        console.error(`No details found for userName: ${userName}`);
+      }
     } catch (error) {
-        console.error('Error fetching details:', error);
+      console.error('Error fetching details:', error);
     }
-};
+  };
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>): void {
     const { name, value } = e.target;
     switch (name) {
+      case 'id':
+        setId(value); 
+        break;
       case 'userName':
         setUserName(value);
         break;
@@ -135,7 +140,7 @@ const fetchDetails = async (userName: string) => {
     e.preventDefault();
     if (validateForm()) {
       const detail = {
-        id:'',
+        id,
         userName,
         fullName,
         country,
@@ -146,10 +151,11 @@ const fetchDetails = async (userName: string) => {
         paypalAddress,
       };
       
-      alert('Details added successfully');
+      //alert('Details added successfully');
       addDetails(detail)
         .then(response => {
           const newUserName = response.data.userName;
+          notifyMessage('Details Added Successfully', 1);
           navigator.push(`/viewDetails/${newUserName}`);
         })
         .catch(error => {
@@ -159,9 +165,8 @@ const fetchDetails = async (userName: string) => {
     }
   }
 
-
-
   function resetForm(): void {
+    setId('');
     setUserName('');
     setFullName('');
     setCountry('');
@@ -179,15 +184,24 @@ const fetchDetails = async (userName: string) => {
   }
 
   const handleFullName = (e: ChangeEvent<HTMLInputElement>): void => {
-    setFullName(e.target.value);
+    const value = e.target.value;
+    if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+      setFullName(value);
+    }
   };
 
   const handleCountry = (e: ChangeEvent<HTMLInputElement>): void => {
-    setCountry(e.target.value);
+    const value = e.target.value;
+    if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+      setCountry(value);
+    }
   };
 
   const handleState = (e: ChangeEvent<HTMLInputElement>): void => {
-    setState(e.target.value);
+    const value = e.target.value;
+    if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+      setState(value);
+    }
   };
 
   const handleAddress = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -195,32 +209,47 @@ const fetchDetails = async (userName: string) => {
   };
 
   const handleCity = (e: ChangeEvent<HTMLInputElement>): void => {
-    setCity(e.target.value);
+    const value = e.target.value;
+    if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+      setCity(value);
+    }
   };
 
   const handlePostalCode = (e: ChangeEvent<HTMLInputElement>): void => {
-    setPostalCode(e.target.value);
+    const value = e.target.value;
+    if (/^\d*$/.test(value) || value === '') {
+      setPostalCode(value);
+    }
   };
+  
 
   const handlePaypalAddress = (e: ChangeEvent<HTMLInputElement>): void => {
-    setPaypalAddress(e.target.value);
+    let value = e.target.value;
+    // Add "@gmail.com" if "@" is not present and the input is not empty
+    if (!value.includes('@') && value.trim() !== '') {
+      value += '@gmail.com';
+    }
+    setPaypalAddress(value);
   };
+  
 
   return (
-    <div className="container">
+    <div className="container" >
       <br /><br />
-      <div className="row">
-        <div className="card col-md-6 offset-md-3 offset-md-3">
+      <div className="row" >
+        <div className="card col-md-6 offset-md-3 offset-md-3" style={{ background: 'linear-gradient(to right, #f9f2fa, #dbb2ce)' }}>
           <h2 className="text-center">{userName ? 'Update Billing Information' : 'Billing Information'}</h2>
-          <div className="card-body">
+          <div className="card-body" >
             <form onSubmit={handleSubmit}>
+              
+              {/* id input with validation */}
               <div className="form-group mb-2">
-                <label htmlFor="id" className="form-label">UserName</label>
+                <label htmlFor="userName" className="form-label">ID</label>
                 <input
                   type="text"
                   id="id"
                   name="id"
-                  value={userName}
+                  value={id}
                   onChange={handleInputChange}
                   className="form-control"
                   style={{
@@ -235,8 +264,30 @@ const fetchDetails = async (userName: string) => {
                 )}
               </div>
 
-                 {/* Full Name input with validation */}
-                 <div className="form-group mb-2">
+                {/* username */}
+                  <div className="form-group mb-2">
+                    <label htmlFor="userName" className="form-label">User Name</label>
+                    <input
+                      type="text"
+                      id="userName"
+                      name="userName"
+                      value={userName}
+                      onChange={handleInputChange}
+                      className="form-control"
+                      style={{
+                        backgroundColor: '#f9f9f9',
+                        borderColor: '#ccc',
+                        borderRadius: '4px',
+                        padding: '8px'
+                      }}
+                    />
+                    {errors.userName && (
+                      <div className="text-danger">{errors.userName}</div>
+                    )}
+                  </div>
+              
+              {/* Full Name input with validation */}
+              <div className="form-group mb-2">
                                 <label htmlFor="fullName" className="form-label">Full Name</label>
                                 <input
                                     type="text"

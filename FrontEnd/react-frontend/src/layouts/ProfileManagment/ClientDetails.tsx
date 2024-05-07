@@ -117,7 +117,7 @@ const ClientDetails: React.FC = () => {
     if (freelancer && freelancer.email === client?.email) {
       window.location.href = `http://localhost:3000/freelancers/${username}`;
     } else {
-      window.location.href = '/registration';
+      window.location.href = 'http://localhost:3000/Freelancer/Login';
     }
   };
 
@@ -189,8 +189,7 @@ const ClientDetails: React.FC = () => {
   };
 
   const ShowMyjobsClick = () => {
-    setShowAboutme(false);
-    setShowMyjobs(true);
+    window.location.href = 'http://localhost:3000/jobs';
   };
 
   const handleDeleteLanguage = async (language: string) => {
@@ -278,9 +277,11 @@ const ClientDetails: React.FC = () => {
               rows={5}
               cols={50}
               className='description-input'
+              placeholder='Enter the description'
             />
           </label>
-          <button type="submit" className='add-discription'>Save Description</button>
+          <br/>
+          <button type="submit" id='add-discription'>Save Description</button>
           <button onClick={handleCancelClick} className='cancel-description' id='cancel-description'>cancel</button>
         </form>
       </div>
@@ -299,11 +300,12 @@ const ClientDetails: React.FC = () => {
               onChange={handlelangChange}
               required
               className='lang-input'
+              placeholder='Enter language'
             />
           </label>
           <br/>
           <button type="submit" className='add-lang-btn'>Add Language</button>
-          <button onClick={handleLanguageEditCancelClick} className='cancel-language'>cancel</button>
+          <button onClick={handleLanguageEditCancelClick} id='cancel-language'>cancel</button>
         </form>
       </div>
         

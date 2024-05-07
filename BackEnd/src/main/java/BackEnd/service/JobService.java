@@ -15,6 +15,6 @@ public interface JobService {
 
     void deleteJobPosting(int id);
 
-//    List<JobDto> searchJobs(String query);
+    List<JobDto> searchJobs(String query);
 
 }

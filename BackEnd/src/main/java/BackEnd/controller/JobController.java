@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 @AllArgsConstructor
 @RestController //handle HTTP requests
 @RequestMapping("/api/jobs") //define the base URL for all the REST APIs
@@ -59,17 +59,17 @@ public class JobController {
         return ResponseEntity.ok("JobPosting deleted successfully!.");
     }
 
-//    @GetMapping("/search")
-//    public ResponseEntity<List<JobDto>> searchJobs(@RequestParam String query) {
-//        try {
-//            List<JobDto> jobs = jobService.searchJobs(query);
-//            return ResponseEntity.ok(jobs);
-//        } catch (Exception e) {
-//            // Log the error
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<List<JobDto>> searchJobs(@RequestParam String query) {
+        try {
+            List<JobDto> jobs = jobService.searchJobs(query);
+            return ResponseEntity.ok(jobs);
+        } catch (Exception e) {
+            // Log the error
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 
 }

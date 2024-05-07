@@ -38,17 +38,17 @@ const Freelancerreview: React.FC = () => {
 
         // Render full stars
         for (let i = 1; i <= fullStars; i++) {
-            stars.push(<MDBIcon key={i} fas icon="star" style={{ color: 'orange' }} />);
+            stars.push(<MDBIcon key={i} fas icon="star" size='lg' style={{ color: 'orange' }} />);
         }
 
         // Render half-colored star if there is a fractional part
         if (halfStar > 0) {
-            stars.push(<MDBIcon key="half" fas icon="star-half-alt" style={{ color: 'orange' }} />); // Half-colored star
+            stars.push(<MDBIcon key="half" fas icon="star-half-alt" size='lg' style={{ color: 'orange' }} />); // Half-colored star
         }
 
         // Render empty stars to fill the rest
         for (let i = stars.length + 1; i <= 5; i++) {
-            stars.push(<MDBIcon far icon="star"  key={i} style={{ color: 'orange' }}/>);
+            stars.push(<MDBIcon far icon="star" size='lg'  key={i} style={{ color: 'orange' }}/>);
         }
 
         return stars;

@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 const CreateGigForm2: React.FC = () => {
     const history = useHistory();
@@ -10,7 +12,7 @@ const CreateGigForm2: React.FC = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        if (imageFiles.length === 1) {
+        if (imageFiles.length < 2) {
             window.alert('Please upload at least two images.');
             return;
         }
@@ -45,45 +47,110 @@ const CreateGigForm2: React.FC = () => {
         }
     };
 
+    const handleDeleteImage = (index: number) => {
+        setImageFiles(prevState => {
+            const newImageFiles = [...prevState];
+            newImageFiles.splice(index, 1);
+            return newImageFiles;
+        });
+    };
+
     const handleNextClick = (gigId: string) => {
         history.push(`/CreateGigForm3/${gigId}`);
     };
 
     const containerStyle: React.CSSProperties = {
-        maxWidth: '56.25em', 
-        maxHeight: '56.25em', 
-        marginTop: '9.375em', 
-        marginBottom: '13.125em', 
+        maxWidth: '800px',
+        margin: 'auto',
+        marginTop: '80px'
     };
 
-    const buttonStyle: React.CSSProperties = {
-        fontSize: '1.25em', 
+    const rowStyle: React.CSSProperties = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        marginTop: '20px'
+    };
+
+    const imageWrapperStyle: React.CSSProperties = {
+        width: '30%',
+        position: 'relative',
+        marginBottom: '20px',
+    };
+
+    const noteStyle: React.CSSProperties = {
+        fontSize: '0.9em',
+        color: '#666',
+        marginTop: '10px',
+        padding: '10px',
+        backgroundColor: '#f9f9f9',
+        borderRadius: '5px',
+        border: '1px solid #ccc',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    };
+
+    const imageStyle: React.CSSProperties = {
+        width: '100%',
+        height: '200px',
+        objectFit: 'cover',
+        borderRadius: '5px'
+    };
+
+    const deleteButtonStyle: React.CSSProperties = {
+        position: 'absolute',
+        top: '5px',
+        right: '5px',
+        padding: '5px',
+        borderRadius: '50%',
+        background: '#fff',
+        border: 'none',
+        cursor: 'pointer',
+        zIndex: 1,
+        width: '30px',
+        height: '30px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     };
 
     return (
-        <div className="">
-            <div className="container" id="containerGigCreate" style={containerStyle}>
-                <h2 className="text-center mb-4" style={{ color: 'red' }}>Upload Images</h2>
-                <form onSubmit={handleSubmit} className="row g-3">
+        <div className="container" id="containerGigCreate" style={containerStyle}>
+            <h2 className="text-center mb-4 text-danger">Upload Images</h2>
+            <ul style={noteStyle}>
+                <li>*Please upload photos of your past projects.</li>
+                <li>*Minimum of 2 images are required.</li>
+                <li>*Only JPG and PNG formats are accepted.</li>
+            </ul>
+            <form onSubmit={handleSubmit}>
+                <div style={rowStyle}>
                     {[...Array(6)].map((_, index) => (
-                        <div key={index} className="col-md-6">
-                            <div className="form-group">
-                                <label htmlFor={`image${index}`} className="form-label" id="formLabelGigCreate">Upload Image {index + 1}:</label>
-                                <input
-                                    type="file"
-                                    className="form-control"
-                                    id={`image${index}`}
-                                    accept="image/jpeg, image/png" // Accept only JPG and PNG files
-                                    onChange={(e) => handleImageChange(e, index)}
-                                />
-                            </div>
+                        <div key={index} style={imageWrapperStyle}>
+                            {imageFiles[index] ? (
+                                <>
+                                    <img src={URL.createObjectURL(imageFiles[index])} alt={`Image ${index + 1}`} style={imageStyle} />
+                                    <button type="button" onClick={() => handleDeleteImage(index)} style={deleteButtonStyle}>
+                                        <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', fontSize: '20px' }} />
+                                    </button>
+                                </>
+                            ) : (
+                                <label htmlFor={`image${index}`} style={{ width: '100%', height: '200px', border: '2px dashed #ccc', borderRadius: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '3em', color: '#ccc' }}>+</span>
+                                </label>
+                            )}
+                            <input
+                                type="file"
+                                id={`image${index}`}
+                                accept="image/jpeg, image/png"
+                                style={{ display: 'none' }}
+                                onChange={(e) => handleImageChange(e, index)}
+                            />
                         </div>
                     ))}
-                    <div className="col-12">
-                        <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate" style={buttonStyle}>Next</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div className="text-center mt-4">
+                    <button type="submit" className="btn btn-primary btn-lg">Next</button>
+                </div>
+            </form>
         </div>
     );
 };

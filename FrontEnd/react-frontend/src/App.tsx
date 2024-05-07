@@ -47,7 +47,21 @@ import DisplayQuestionAndAnswers from './layouts/ExamsManagment/Component/Displa
 import ClientDetails from './layouts/ProfileManagment/ClientDetails';
 import FreelancerDetails from './layouts/ProfileManagment/FreelancerDetails';
 import Message from './layouts/ProfileManagment/Message';
-import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
+import ListRatingComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ListRatingComponent'
+import RatingComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/RatingComponent'
+import ViewRatingComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ViewRatingComponent'
+import FreelancerAgrementComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/FreelancerAgrementComponent'
+import ClientAgrementComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ClientAgrementComponent'
+import ListProjectComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ListProjectComponent'
+
+
+import ViewJobPostComponent from './layouts/ClientSideJobListingManagement/Component/ViewJobPostComponent';
+import JobComponent from './layouts/ClientSideJobListingManagement/Component/JobComponent';
+import ListJobComponent from './layouts/ClientSideJobListingManagement/Component/ListJobComponent';
+import SearchJobComponent from './layouts/ClientSideJobListingManagement/Component/SearchJobComponent';
+import FreelancerViewComponent from './layouts/ClientSideJobListingManagement/Component/FreelancerViewComponent';
+import JobApplyForm from './layouts/ClientSideJobListingManagement/Component/JobApplyForm';
+import JobAcceptanceComponent from './layouts/ClientSideJobListingManagement/Component/JobAcceptanceComponent';
 
 import PaymentComponent from './layouts/PaymentManagement/components/PaymentComponent';
 import PaymentHistoryComponent from './layouts/PaymentManagement/components/PaymentHistoryComponent';
@@ -59,7 +73,6 @@ import PaymentDetailsFComponent from './layouts/PaymentManagement/components/Pay
 import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
-
 
 
 export const App = () => {
@@ -86,6 +99,7 @@ export const App = () => {
             <Route path="/FreelancerMain" exact>
               <Navbar />
               <FreelancerHome />
+              <Footer />
             </Route>
             <Route path="/gig/:id">
               <Navbar />
@@ -229,10 +243,6 @@ export const App = () => {
               <UserTest/>
             </Route>
 
-            <Route path='/OTPVerificationPage' exact>
-              <OTPVerification/>
-            </Route>
-
             {/* Ending supeshala's files */}
 
             {/*Vaas file begin*/}
@@ -281,20 +291,17 @@ export const App = () => {
               <DisplayQuestionAndAnswers />
               <Footer />
             </Route>
-            <Route path="/add-interview">
-              <Navbar />
-              <SheduleInterviewComponent />
-              <Footer />
-            </Route>
             {/*Vaas files End*/}
             {/*vinuja's files */}
             <Route path="/clients/:username" >
               <Navbar/>
               <ClientDetails/>
+              <Footer />
             </Route>
             <Route path="/freelancers/:username" >
               <Navbar/>
               <FreelancerDetails/>
+              <Footer />
             </Route>
             <Route path="/Message/:username/:username2/:conversation">
               <Navbar/>
@@ -302,6 +309,92 @@ export const App = () => {
             </Route>
             {/*vinuja's files end*/}
 
+            {/*Nilmani's files */}
+            {/* //http://localhost:3000/ratings */}
+            <Route path="/ratings">
+              <Navbar />
+              <ListRatingComponent />
+              <Footer />
+            </Route>
+            {/* //http://localhost:3000/add-rating */}
+            <Route path="/add-rating">
+              <Navbar />
+              <RatingComponent />
+              <Footer />
+            </Route>
+            {/* //http://localhost:3000/edit-rating/1 */}
+            <Route path="/edit-rating/:id">
+              <Navbar />
+              <RatingComponent />
+              <Footer />
+            </Route>
+            {/* //http://localhost:3000/view-rating/1 */}
+            <Route path="/view-rating/:id">
+              <Navbar />
+              <ViewRatingComponent />
+              <Footer />
+            </Route>
+            {/* //http://localhost:3000/freelancerAgreement */}
+            <Route path="/freelancerAgreement">
+              <Navbar />
+              <FreelancerAgrementComponent />
+              <Footer />
+            </Route>
+            {/* //http://localhost:3000/clientAgreement */}
+            <Route path="/clientAgreement">
+              <Navbar />
+              <ClientAgrementComponent />
+              <Footer />
+            </Route>
+            {/* //http://localhost:3000/projects */}
+            <Route path="/projects">
+
+            <Route path='/edit-details/:userName' >
+              <Navbar />
+              <ListProjectComponent />
+              <Footer />
+            </Route>
+            {/*Nilmani's files end*/}
+
+            {/*Geesarani */}
+            <Route path='/view-jobpost/:id'>
+                <Navbar/>
+                <ViewJobPostComponent />
+                <Footer />
+              </Route> 
+              <Route path='/create-newJobPost'>
+                <JobComponent />
+                <Footer />
+              </Route>
+              <Route path='/jobs'>
+                <Navbar/>
+                <ListJobComponent />
+                <Footer />
+              </Route>
+              <Route path='/searchjobs'>
+                <SearchJobComponent />
+                <Footer />
+              </Route>
+              <Route path='/edit-jobpost/:id'>
+                <JobComponent />
+                <Footer />
+              </Route>
+              <Route path='/freelancerView-jobpost/:id'>
+                <Navbar/>
+                <FreelancerViewComponent />
+                <Footer />
+              </Route>
+              <Route path='/applyJobPost'>
+                <Navbar />
+                <JobApplyForm /> 
+                <Footer />
+              </Route>  
+              <Route path='/jobrequests'>
+                <Navbar />
+                <JobAcceptanceComponent /> 
+                <Footer />
+              </Route> 
+             {/*Geesarani*/}
 
             {/* starting nipuni's file */}
             <Route path='/payment-details' >
@@ -340,13 +433,13 @@ export const App = () => {
               <Footer />
             </Route>
 
-            <Route path='/edit-details/:id' >
+            <Route path='/edit-details/:userName' >
               <Navbar />
               <PaymentDetailsFComponent   />
               <Footer />
             </Route>
 
-            <Route path='/viewDetails/:id' >
+            <Route path='/viewDetails/:userName' >
               <Navbar />
               <DetailsPage  />
               <Footer />
@@ -358,6 +451,7 @@ export const App = () => {
               <Footer />
             </Route>
             {/* End nipuni's file */}
+
 
           </Switch>
         </div>

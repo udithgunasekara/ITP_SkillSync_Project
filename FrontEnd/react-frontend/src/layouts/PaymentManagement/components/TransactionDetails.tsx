@@ -1,8 +1,7 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { PDFDownloadLink, PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-
-
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet , Image} from '@react-pdf/renderer';
+import PAYMENT_SUCCESS from '../image/PAYMENT-SUCCESS.png'
 
 interface TransactionDetails {
   transactionID: string;
@@ -16,6 +15,8 @@ const TransactionPDF: React.FC<{ transactionDetails: TransactionDetails }> = ({ 
   <Document>
     <Page style={styles.page}>
       <View style={styles.section}>
+        <Text style={styles.paymentReceipt}>Payment Receipt</Text>
+      <Image src={PAYMENT_SUCCESS} style={styles.image} />
         <Text>Transaction ID: {transactionDetails.transactionID}</Text>
         <Text>Project ID: {transactionDetails.projectID}</Text>
         <Text>Payment Method: {transactionDetails.paymentMethod}</Text>
@@ -37,12 +38,23 @@ const TransactionDetails: React.FC = () => {
   };
 
   return (
-    <div className='main-section'>
-      <div className='row'>
+    <div className='main-section' style={{ background: 'linear-gradient(to right, #dbb2ce, #f9f2fa )' }}>
+      <div className='row' >
         <h2 className='text-center mt-5'>Transaction Details</h2>
-        <div className='card col-md-6 mt-5 offset-md-3'>
-          <div className='card-body my-2'>
+        <div className='card col-md-6 mt-5 offset-md-3' >
+        <h3 className='text-center mt-5'>Payment Receipt</h3>
+        
+        <img 
+          src={PAYMENT_SUCCESS}
+          alt="Payment_success"
+          
+        />
+
+          <div className='card-body my-2' >
+            
             <div className='d-flex justify-content-between'>
+              
+
               <div>
                 <h5>Transaction ID</h5>
               </div>
@@ -83,20 +95,18 @@ const TransactionDetails: React.FC = () => {
               </div>
             </div>
 
-           
-              {/* Display Download Receipt as a button */}
-              <PDFDownloadLink document={<TransactionPDF transactionDetails={transactionDetails} />} fileName="payment_receipt.pdf">
-                {({ blob, url, loading, error }) => (
-                  <button className='btn btn-info download-receipt-btn'>
-                    {loading ? 'Loading document...' : 'Download Receipt'}
-                  </button>
-                )}
-              </PDFDownloadLink>
-              <hr />
-              <button className='btn btn-info history-btn' onClick={() => goToHistory()}>
-                Go to History
-              </button>
-           
+            {/* Display Download Receipt as a button */}
+            <PDFDownloadLink document={<TransactionPDF transactionDetails={transactionDetails} />} fileName="payment_receipt.pdf">
+              {({ blob, url, loading, error }) => (
+                <button className='btn btn-info download-receipt-btn'>
+                  {loading ? 'Loading document...' : 'Download Receipt'}
+                </button>
+              )}
+            </PDFDownloadLink>
+            <hr />
+            <button className='btn btn-info history-btn' onClick={() => goToHistory()}>
+              Go to History
+            </button>
           </div>
         </div>
       </div>
@@ -107,13 +117,21 @@ const TransactionDetails: React.FC = () => {
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
-    backgroundColor: '#E4E4E4',
+    backgroundColor: '#fcfafa',
     padding: 10,
   },
   section: {
     margin: 10,
     padding: 10,
     flexGrow: 1,
+  },
+  image: {
+    marginBottom: 10, // Adjust as needed
+  },
+  paymentReceipt: {
+    fontSize: 20, // Increase the font size as needed
+    marginBottom: 20, // Adjust as needed
+    textAlign: 'center'
   },
 });
 

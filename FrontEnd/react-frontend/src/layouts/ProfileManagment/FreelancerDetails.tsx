@@ -17,6 +17,7 @@ interface Freelancer {
   lastName: string;
   email: string;
   created_at: string;
+  level: string;
 }
 
 interface Client {
@@ -178,7 +179,7 @@ const FreelancerDetails: React.FC = () => {
     if (client && client.email === freelancer?.email) {
       window.location.href = `http://localhost:3000/clients/${username}`;
     } else {
-      window.location.href = '/registration'; // Assuming this is the correct route for the registration page
+      window.location.href = 'http://localhost:3000/Client/Login'; 
     }
   };
 
@@ -204,7 +205,7 @@ const FreelancerDetails: React.FC = () => {
     setShowMyFreelancerdashboard(false);
   };
   const ShowMyFreelancerdashboardButtonClick = () => {
-    window.location.href = ('http://localhost:3000/FreelancerDashboard')
+    window.location.href = ('http://localhost:3000/FreelancerDashboard');
   };
   const handleLanguageEditClick = () => {
     setShowLang(true);
@@ -413,6 +414,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       
       <p>Name: {freelancer.firstName} {freelancer.lastName}</p>
       <hr/>
+      <p>level: {freelancer.level}</p>
       <p className='detail-div-1'>Country: {client?.country}</p>
       <p className='detail-div-2'>Registered Date: {monthName} {year}</p>
 
@@ -494,7 +496,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         </span>
       ))
     ) : (
-      <p>No Language available.</p>
+      <p id='lang-list-free'>No Language available.</p>
     )}
   </ul>
 )}
@@ -620,7 +622,7 @@ skills.map((skill, index) => ( // Using index as fallback key
       </li>
     ))
   ) : (
-    <p>No education data available</p>
+    <p id='edu-list'>No education data available</p>
   )}
 </ul>
 )}

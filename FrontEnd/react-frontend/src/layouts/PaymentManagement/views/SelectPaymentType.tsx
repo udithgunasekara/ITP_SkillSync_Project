@@ -10,24 +10,29 @@ const SelectPaymentType = () => {
     const total = queryParams.get('total') || 0;
     const projectId = queryParams.get('projectId');
     const [selectedPayment, setSelectedPayment] = useState<string>(''); 
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const handlePaymentSelection = (paymentType: string) => { 
         setSelectedPayment(paymentType);
+        setErrorMessage('');
     };
 
     const handleNext = () => {
+        if (!selectedPayment) {
+            setErrorMessage('Please select a payment method');
+            return; // Don't proceed further
+        }
+
         if (selectedPayment === 'CARD') {
             navigate.push('/card-payment', { state: { amount: total, projectId } });
         } else if (selectedPayment === 'PAYPAL') {
             navigate.push('/paypal-payment', { state: { amount: total } });
-        } else {
-            console.error('Please select a payment method');
         }
     };
 
     return (
-        <div className="main-section">
-            <div className="row">
+        <div className="main-section" style={{ background: 'linear-gradient(to right, #f9f2fa, #dbb2ce)' }}>
+            <div className="row" >
                 <h2 className="text-center mt-5">Select Payment Method</h2>
 
                 <div className="col-md-6 mt-5 offset-md-3">
@@ -62,6 +67,7 @@ const SelectPaymentType = () => {
                                 </label>
 
                             </div>
+                            {errorMessage && <div className="text-danger mt-2">{errorMessage}</div>}
                         </div>
                     </div>
 
