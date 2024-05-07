@@ -73,6 +73,7 @@ import PaymentDetailsFComponent from './layouts/PaymentManagement/components/Pay
 import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
+import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
 
 
 export const App = () => {
@@ -347,7 +348,6 @@ export const App = () => {
               <Footer />
             </Route>
             {/* //http://localhost:3000/projects */}
-            <Route path="/projects">
 
             <Route path='/edit-details/:userName' >
               <Navbar />
