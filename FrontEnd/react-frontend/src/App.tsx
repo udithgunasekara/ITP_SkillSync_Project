@@ -63,6 +63,18 @@ import FreelancerViewComponent from './layouts/ClientSideJobListingManagement/Co
 import JobApplyForm from './layouts/ClientSideJobListingManagement/Component/JobApplyForm';
 import JobAcceptanceComponent from './layouts/ClientSideJobListingManagement/Component/JobAcceptanceComponent';
 
+import PaymentComponent from './layouts/PaymentManagement/components/PaymentComponent';
+import PaymentHistoryComponent from './layouts/PaymentManagement/components/PaymentHistoryComponent';
+import SelectPaymentType from './layouts/PaymentManagement/views/SelectPaymentType';
+import CardPaymentProceed from './layouts/PaymentManagement/views/CardPaymentProceed';
+import PayPalProceed from './layouts/PaymentManagement/views/PayPalProceed';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PaymentDetailsFComponent from './layouts/PaymentManagement/components/PaymentDetailsFComponent';
+import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
+import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
+import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
+
+
 export const App = () => {
   return (
     <Router>
@@ -336,6 +348,8 @@ export const App = () => {
             </Route>
             {/* //http://localhost:3000/projects */}
             <Route path="/projects">
+
+            <Route path='/edit-details/:userName' >
               <Navbar />
               <ListProjectComponent />
               <Footer />
@@ -370,7 +384,7 @@ export const App = () => {
                 <FreelancerViewComponent />
                 <Footer />
               </Route>
-              <Route path='/applyJobPost/:customerUsername'>
+              <Route path='/applyJobPost'>
                 <Navbar />
                 <JobApplyForm /> 
                 <Footer />
@@ -381,6 +395,63 @@ export const App = () => {
                 <Footer />
               </Route> 
              {/*Geesarani*/}
+
+            {/* starting nipuni's file */}
+            <Route path='/payment-details' >
+              <Navbar />
+              <SelectPaymentType />
+              <Footer />
+            </Route>
+
+            <Route path='/payment' >
+              <Navbar />
+              <PaymentHistoryComponent  />
+              <Footer />
+            </Route>
+
+            <Route path='/make-payment' >
+              <Navbar />
+              <PaymentComponent />
+              <Footer />
+            </Route>
+
+            <Route path='/card-payment' >
+              <Navbar />
+              <CardPaymentProceed  />
+              <Footer />
+            </Route>
+
+            <Route path='/paypal-payment' >
+              <Navbar />
+              <PayPalProceed   />
+              <Footer />
+            </Route>
+
+            <Route path='/details' >
+              <Navbar />
+              <PaymentDetailsFComponent   />
+              <Footer />
+            </Route>
+
+            <Route path='/edit-details/:userName' >
+              <Navbar />
+              <PaymentDetailsFComponent   />
+              <Footer />
+            </Route>
+
+            <Route path='/viewDetails/:userName' >
+              <Navbar />
+              <DetailsPage  />
+              <Footer />
+            </Route>
+
+            <Route path='/transaction-details' >
+              <Navbar />
+              <TransactionDetails />
+              <Footer />
+            </Route>
+            {/* End nipuni's file */}
+
 
           </Switch>
         </div>

@@ -165,11 +165,11 @@ const CardPaymentProceed = () => {
     
 
     return (
-        <div className="main-section">
-            <div className="row">
+        <div className="main-section" style={{ background: 'linear-gradient(to right, #f9f2fa, #dbb2ce)' }}>
+            <div className="row" >
                 <h2 className="text-center mt-5">Add Payment Details</h2>
 
-                <div className="card col-md-6 mt-5 px-5 pt-3 pb-5 offset-md-3">
+                <div className="card col-md-6 mt-5 px-5 pt-3 pb-5 offset-md-3" style={{ background: 'linear-gradient(to right, #dbb2ce, #f9f2fa )' }}>
                     <h6>Credit/Debit Card</h6>
                     <div className="card-body mt-2 mx-5">
                         <h6 className="mt-3">Amount: {propsData.amount ?? 0}$</h6>
@@ -186,109 +186,142 @@ const CardPaymentProceed = () => {
                                 setCardNumber(truncatedInput);
                             }}
                             onBlur={validateCardNumber}
-                            className={`w-100 mt-2 ${cardNumberError ? 'error' : ''}`}
+                            className={`form-control ${cardNumberError ? 'is-invalid' : ''}`}
                             placeholder="Card Number"
                             pattern="\d{12}"
                         />
                         {cardNumberError && (
-                            <div className="error-text" style={{ color: 'red' }}>
+                            <div className="invalid-feedback">
                                 {cardNumberError}
                             </div>
                         )}
 
-                        <div className="w-100 d-flex justify-content-between">
+                        <div className="row mt-3">
                             {/* Expiry month input with error display */}
-                            <input
-                                type="text"
-                                value={expiryDate.substring(0, 2)}
-                                onChange={(e) => {
-                                    const input = e.target.value.replace(/\D/g, ''); // Allow only digits
-                                    const truncatedInput = input.slice(0, 2); // Limit to 2 characters
-                                    // Ensure the value is between 01 and 12
-                                    const validInput = Math.min(Math.max(parseInt(truncatedInput, 10), 1), 12);
-                                    setExpiryDate(validInput.toString().padStart(2, '0') + '/' + expiryDate.substring(3)); // Combine with year
-                                }}
-                                onBlur={validateExpiryDate}
-                                className={`w-48 mt-2 ${expiryDateError ? 'error' : ''}`}
-                                placeholder="MM"
-                                maxLength={2} // Limit to 2 characters
-                            />
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    value={expiryDate.substring(0, 2)}
+                                    onChange={(e) => {
+                                        const input = e.target.value.replace(/\D/g, ''); // Allow only digits
+                                        const truncatedInput = input.slice(0, 2); // Limit to 2 characters
+                                        // Ensure the value is between 01 and 12
+                                        const validInput = Math.min(Math.max(parseInt(truncatedInput, 10), 1), 12);
+                                        setExpiryDate(validInput.toString().padStart(2, '0') + '/' + expiryDate.substring(3)); // Combine with year
+                                    }}
+                                    onBlur={validateExpiryDate}
+                                    className={`form-control ${expiryDateError ? 'is-invalid' : ''}`}
+                                    placeholder="Expiry Month"
+                                    maxLength={2} // Limit to 2 characters
+                                    onKeyPress={(e) => {
+                                        // Prevent non-numeric characters
+                                        if (isNaN(Number(e.key))) {
+                                            e.preventDefault();
+                                        }
+                                    }}
+                                />
+                                {expiryDateError && (
+                                    <div className="invalid-feedback">
+                                        {expiryDateError}
+                                    </div>
+                                )}
+                            </div>
 
                             {/* Expiry year input with error display */}
-                            <input
-                                type="text"
-                                value={expiryDate.substring(3)}
-                                onChange={(e) => {
-                                    const input = e.target.value.replace(/\D/g, ''); // Allow only digits
-                                    const truncatedInput = input.slice(0, 2); // Limit to YY format
-                                    setExpiryDate(expiryDate.substring(0, 2) + '/' + truncatedInput); // Combine with month
-                                }}
-                                onBlur={validateExpiryDate}
-                                className={`w-48 mt-2 ${expiryDateError ? 'error' : ''}`}
-                                placeholder="YY"
-                                maxLength={2} // Limit to YY format
-                            />
-                            {expiryDateError && (
-                                <div className="error-text" style={{ color: 'red' }}>
-                                    {expiryDateError}
-                                </div>
-                            )}
-
-                            {/* Security code input with error display */}
-                            <input
-                                type="number"
-                                value={securityCode}
-                                onChange={(e) => setSecurityCode(e.target.value)}
-                                onBlur={validateSecurityCode}
-                                className="w-48 mt-3"
-                                placeholder="Security Code"
-                            />
-                            {securityCodeError && (
-                                <div className="error-text" style={{ color: 'red' }}>
-                                    {securityCodeError}
-                                </div>
-                            )}
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    value={expiryDate.substring(3)}
+                                    onChange={(e) => {
+                                        const input = e.target.value.replace(/\D/g, ''); // Allow only digits
+                                        const truncatedInput = input.slice(0, 2); // Limit to YY format
+                                        setExpiryDate(expiryDate.substring(0, 2) + '/' + truncatedInput); // Combine with month
+                                    }}
+                                    onBlur={validateExpiryDate}
+                                    className={`form-control ${expiryDateError ? 'is-invalid' : ''}`}
+                                    placeholder="Expiry Year"
+                                    maxLength={2} // Limit to YY format
+                                    onKeyPress={(e) => {
+                                        // Prevent non-numeric characters
+                                        if (isNaN(Number(e.key))) {
+                                            e.preventDefault();
+                                        }
+                                    }}
+                                />
+                            </div>
                         </div>
 
-                        <div className="w-100 d-flex justify-content-between">
-                            {/* First name input with error display */}
+                        {/* Security code input with error display */}
                             <input
-                                type="text"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                                onBlur={() => validateName(firstName, setFirstNameError, "first name")}
-                                className="w-48 mt-3"
-                                placeholder="First Name"
+                                type="text" 
+                                value={securityCode}
+                                onChange={(e) => {
+                                    // Allow only numeric characters
+                                    const input = e.target.value.replace(/\D/g, '');
+                                    // Limit input to 3 characters
+                                    const truncatedInput = input.slice(0, 3);
+                                    setSecurityCode(truncatedInput);
+                                }}
+                                onBlur={validateSecurityCode}
+                                className={`form-control mt-3 ${securityCodeError ? 'is-invalid' : ''}`}
+                                placeholder="CVV"
                             />
-                            {firstNameError && (
-                                <div className="error-text" style={{ color: 'red' }}>
-                                    {firstNameError}
-                                </div>
-                            )}
+
+                        {securityCodeError && (
+                            <div className="invalid-feedback">
+                                {securityCodeError}
+                            </div>
+                        )}
+
+                        <div className="row mt-3">
+                            {/* First name input with error display */}
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => {
+                                        const input = e.target.value.replace(/[^A-Za-z]/ig, ''); // Allow only letters
+                                        setFirstName(input);
+                                    }}
+                                    onBlur={() => validateName(firstName, setFirstNameError, "first name")}
+                                    className={`form-control ${firstNameError ? 'is-invalid' : ''}`}
+                                    placeholder="First Name"
+                                />
+                                {firstNameError && (
+                                    <div className="invalid-feedback">
+                                        {firstNameError}
+                                    </div>
+                                )}
+                            </div>
 
                             {/* Last name input with error display */}
-                            <input
-                                type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                onBlur={() => validateName(lastName, setLastNameError, "last name")}
-                                className="w-48 mt-3"
-                                placeholder="Last Name"
-                            />
-                            {lastNameError && (
-                                <div className="error-text" style={{ color: 'red' }}>
-                                    {lastNameError}
-                                </div>
-                            )}
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => {
+                                        const input = e.target.value.replace(/[^A-Za-z]/ig, ''); // Allow only letters
+                                        setLastName(input);
+                                    }}
+                                    onBlur={() => validateName(lastName, setLastNameError, "last name")}
+                                    className={`form-control ${lastNameError ? 'is-invalid' : ''}`}
+                                    placeholder="Last Name"
+                                />
+                                {lastNameError && (
+                                    <div className="invalid-feedback">
+                                        {lastNameError}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="col-md-6 mt-5 offset-md-3 d-flex justify-content-end">
-                    <button onClick={() => window.history.back()} className="bg-red main-btn mx-5">
+                    <button onClick={() => window.history.back()} className="btn btn-danger mx-2">
                         Back
                     </button>
-                    <button onClick={proceedPaymentHandler} className="bg-green main-btn">
+                    <button onClick={proceedPaymentHandler} className="btn btn-success">
                         Proceed Payment
                     </button>
                 </div>
