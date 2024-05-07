@@ -50,8 +50,9 @@ const ResubmissionUpload: React.FC = () => {
   };
 
   return (
-    <div className="container mt-4 bg-light shadow p-3 mb-5 rounded" style={{ backgroundColor: '#f8f9fa' }}>
-    <h1 className="mb-4 text-center" style={{ color: '#AC69E2' }}>Resubmit Rejected Qualifications</h1>
+    <div>
+    <div className="container mt-4 shadow p-3 mb-5 rounded" style={{ background: '#F2F3F4', height:'100%', width:'1800px'}}>
+    <h1 className="mb-4 text-center" style={{ color: '#000000', marginTop: '30px' }}>Resubmit Rejected Qualifications</h1>
     
       {Object.entries(qualifications).length > 0 ? (
         Object.entries(qualifications).map(([title, images]) => (
@@ -84,8 +85,9 @@ const ResubmissionUpload: React.FC = () => {
           </div>
         ))
       ) : (
-        <p className="text-center">No rejected qualifications to display.</p>
+        <p className="text-center">No Re Requested Qualifications Here</p>
       )}
+    </div>
     </div>
   );
 };
