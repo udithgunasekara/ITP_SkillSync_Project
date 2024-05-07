@@ -10,6 +10,7 @@ interface Job {
     skills: string;
     budget: string;
     description: string;
+    customerUsername: string;
 }
 
 // Define an interface for the route parameters
@@ -51,12 +52,18 @@ const JobComponent: React.FC = () => {
     const [customSkill, setCustomSkill] = useState('');
     const [skillsError, setSkillsError] = useState(''); 
     const [scopeError, setScopeError] = useState<string>('');
-
+    const [customerUsername, setCustomerUsername] = useState('');
     const navigate = useHistory();
 
     const {id} = useParams<RouteParams>();
 
     useEffect(() => {
+        const username = sessionStorage.getItem('username');
+
+        if(username){
+            setCustomerUsername(username);
+        }
+        
         if(id){
             getJobPostingById(id).then((response) => {
                 setJobTitle(response.data.jobTitle);
@@ -177,7 +184,7 @@ const JobComponent: React.FC = () => {
             return;
         }
 
-        const job = { jobTitle, scope, skills:skillsString, budget, description, postedTime: currentTimestamp};
+        const job = { jobTitle, scope, skills:skillsString, budget, description, postedTime: currentTimestamp, customerUsername};
         console.log(job);
 
         if(id){

@@ -38,4 +38,7 @@ public class Job {
     @Column(name = "Posted_time")
     private  Timestamp postedTime;
 
+    @Column(name = "customer_username")
+    private String customerUsername;
+
 }

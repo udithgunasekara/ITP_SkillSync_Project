@@ -13,7 +13,8 @@ public class JobMapper {
                 job.getScope(),
                 job.getBudget(),
                 job.getDescription(),
-                job.getPostedTime()
+                job.getPostedTime(),
+                job.getCustomerUsername()
         );
     }
 
@@ -25,7 +26,8 @@ public class JobMapper {
                 jobDto.getScope(),
                 jobDto.getBudget(),
                 jobDto.getDescription(),
-                jobDto.getPostedTime()
+                jobDto.getPostedTime(),
+                jobDto.getCustomerUsername()
         );
     }
 

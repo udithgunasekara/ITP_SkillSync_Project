@@ -19,11 +19,12 @@ interface Job {
     budget: number;
     skills: string;
     scope: string;
+    customerUsername: string;
 }
 
 const FreelancerViewComponent: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const [job, setJob] = useState<Job>({ id: '', jobTitle: '', postedTime: '', description: '', budget: 0, skills: '', scope: '' });
+    const [job, setJob] = useState<Job>({ id: '', jobTitle: '', postedTime: '', description: '', budget: 0, skills: '', scope: '', customerUsername: ''});
 
     const navigator = useHistory();
 
@@ -55,7 +56,7 @@ const FreelancerViewComponent: React.FC = () => {
 
     const handleApply = () => {
         
-        navigator.push('/applyJobPost'); 
+        navigator.push(`/applyJobPost/${job.customerUsername}`); 
     };
 
     return (
@@ -86,7 +87,10 @@ const FreelancerViewComponent: React.FC = () => {
                                     <span style={{ fontWeight: '600' }}>{job.scope}</span>
                                 </p>
                                 <hr />
-
+                                <p>
+                                    <span>Customer - </span>  
+                                    <span style={{ fontWeight: '600' }}>{job.customerUsername}</span>
+                                </p>
                                 <div className="row mt-4 justify-content-center">
                                     <div className="col-md-3" style={{ paddingLeft: '5px', paddingRight: '5px' }}>
                                         

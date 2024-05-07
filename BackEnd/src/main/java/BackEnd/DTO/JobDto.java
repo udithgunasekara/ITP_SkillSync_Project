@@ -20,5 +20,6 @@ public class JobDto {
     private String budget;
     private String description;
     private Timestamp postedTime;
+    private String customerUsername;
 
 }
