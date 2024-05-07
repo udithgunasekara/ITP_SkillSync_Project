@@ -21,7 +21,7 @@ public class TicketController {public TicketServices ticketServices;
 
     //url : http://localhost:8082/ticket/alltickets/12323
     @GetMapping("/alltickets/{userid}")
-    public ResponseEntity<List<TicketDto>> getAllTickets(@PathVariable Long userid){
+    public ResponseEntity<List<TicketDto>> getAllTicketsByuserid(@PathVariable Long userid){
         System.out.println("userid: "+userid);
         List<TicketDto> ticketlist = ticketServices.getAllTicketsById(userid);
         return ResponseEntity.ok(ticketlist);

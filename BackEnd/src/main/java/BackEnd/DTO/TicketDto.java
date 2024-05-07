@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class TicketDto {
 
     private Long id;
+    private String email;
 //    private byte[] attachments;
     private String relatedTo;
     private String Subject;
