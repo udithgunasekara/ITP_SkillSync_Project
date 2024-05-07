@@ -59,6 +59,7 @@ const FreelancerGigsDetails: React.FC = () => {
     handleSearch();
   };
 
+
   const truncateString = (str: string, num: number): string => {
     if (str.length <= num) {
       return str;
@@ -87,7 +88,7 @@ const FreelancerGigsDetails: React.FC = () => {
                   <MDBCardText>
                     <b>Category :</b>{gig.gigCategory}
                   </MDBCardText>
-                  <MDBBtn href='#'>see more</MDBBtn>
+                  <MDBBtn href={`http://localhost:3000/gig/${gig.gigId}`}>see more</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
             </div>
