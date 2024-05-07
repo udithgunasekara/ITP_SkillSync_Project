@@ -112,30 +112,46 @@ const FreelancerAgreementComponent: React.FC = () => {
 
     // Agreement text constant
     const agreementText: string = `
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-    sunt in culpa qui officia deserunt mollit anim id est laborum.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-    sunt in culpa qui officia deserunt mollit anim id est laborum. 
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-    sunt in culpa qui officia deserunt mollit anim id est laborum.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-    sunt in culpa qui officia deserunt mollit anim id est laborum.
+    1. Parties
+This Agreement is between [Freelancer Name] ("Freelancer") and [Marketplace Name], the operator of 
+the marketplace ("Marketplace").
+
+2. Services
+Freelancer agrees to provide services to clients through the Marketplace as described in each 
+project agreement.
+Freelancer shall perform services in a professional and timely manner.
+
+3. Payment
+Payments will be processed through the Marketplace’s payment system.
+Freelancer shall be paid the agreed-upon fee upon completion and acceptance of work by the client.
+
+4. Intellectual Property
+Ownership of work and deliverables will be as agreed between the Freelancer and Client in 
+the project agreement.
+Freelancer grants the Client the right to use, modify, and distribute work as specified in 
+the project agreement.
+
+5. Confidentiality
+Freelancer agrees to keep any confidential information received from the Client private 
+and secure.
+Confidentiality obligations may be outlined in further detail in the project agreement.
+
+6. Dispute Resolution
+Any disputes arising from this agreement shall be resolved through arbitration or 
+mediation as outlined in the project agreement.
+
+7. Limitation of Liability
+The Marketplace is not liable for any issues that arise between the Freelancer and 
+the Client.
+Freelancer agrees to indemnify and hold the Marketplace harmless from any claims 
+related to the services provided.
+
+8. Termination
+This agreement may be terminated by either party with written notice.
+Upon termination, the Marketplace may retain records of the Freelancer's activity 
+for legal and operational purposes.
+
+
     `;
 
     // Handle checkbox change event
@@ -195,6 +211,8 @@ const FreelancerAgreementComponent: React.FC = () => {
         <div className="card" style={{ textAlign: 'center' }}>
             <div className="card-body" style={{ width: '500px', margin: '0 auto' }}>
             <div>
+                <br />
+                <br />
             {/* Headline styled as requested */}
             <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '2rem' }}>
                 AGREEMENT

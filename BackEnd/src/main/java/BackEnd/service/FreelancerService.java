@@ -25,6 +25,9 @@ public interface FreelancerService {
 //    FreelancerDTO getFreelancerById(Long id);
 //
 //    List<FreelancerDTO> getAllFreelancers();
+    List<FreelancerDTO> getAllAcceptedFreelancers();
 //
 //    List<FreelancerDTO> getInProgressFreelancers();
+
+
 }

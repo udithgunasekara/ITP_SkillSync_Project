@@ -11,6 +11,7 @@ interface Job {
   description: string;
   budget: number;
   postedTime: string; 
+  customerUsername: string;
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -191,6 +192,10 @@ const SearchJobComponent: React.FC = () => {
                         <p className="card-text" style={{ fontSize: '15px'}}>{job.description}</p>
                         <p className="card-text" style={{ fontSize: '14px'}}>
                           <span>fixed price - </span>
+                          <span style={{ fontWeight: '600' }}>{job.budget}$</span>
+                        </p>
+                        <p className="card-text" style={{ fontSize: '14px'}}>
+                          <span>Customer - {job.customerUsername}</span>
                           <span style={{ fontWeight: '600' }}>{job.budget}$</span>
                         </p>
 

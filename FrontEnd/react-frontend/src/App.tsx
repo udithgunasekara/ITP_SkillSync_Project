@@ -370,7 +370,7 @@ export const App = () => {
                 <FreelancerViewComponent />
                 <Footer />
               </Route>
-              <Route path='/applyJobPost'>
+              <Route path='/applyJobPost/:customerUsername'>
                 <Navbar />
                 <JobApplyForm /> 
                 <Footer />

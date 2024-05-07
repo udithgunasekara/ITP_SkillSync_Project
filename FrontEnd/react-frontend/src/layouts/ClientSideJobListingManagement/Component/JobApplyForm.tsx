@@ -24,7 +24,7 @@ const JobApplyForm: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const [freelancerNameError, setFreelancerNameError] = useState('');
     const [messageError, setMessageError] = useState('');
-
+    const customerUsername = useParams<{ customerUsername: string }>().customerUsername;
     const navigate = useHistory();
     
     const handleName = (e: ChangeEvent<HTMLInputElement>) => {

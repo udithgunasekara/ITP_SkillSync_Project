@@ -39,6 +39,8 @@ const ListProjectComponent: React.FC = () => {
 
     return (
         <div className='container'>
+            <br />
+            <br />
             <h2 className='text-center'>List of Projects</h2>
             <table className='table table-scriped table-bordered'>
                 <thead>

@@ -123,5 +123,13 @@ public class FreelancerServiceImp implements FreelancerService {
         }
     }
 
+    @Override
+    public List<FreelancerDTO> getAllAcceptedFreelancers() {
+        List<Freelancer> freelancers = freelancerRepo.findAllAcceptedFreelancers();
+        return freelancers.stream()
+                .map(FreelancerMapper::mapToFreelancerDTO)
+                .collect(Collectors.toList());
+    }
+
 
 }

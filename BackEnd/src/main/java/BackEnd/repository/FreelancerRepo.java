@@ -24,7 +24,8 @@ public interface FreelancerRepo extends JpaRepository<Freelancer, Long> {
     @Query(value = "SELECT app_status FROM freelancer WHERE user_name = :username", nativeQuery = true)
    String findAcceptedFreelancer(@Param("username") String username);
 
-
+    @Query(value = "SELECT * FROM freelancer WHERE app_status = 'Accept'", nativeQuery = true)
+    List<Freelancer> findAllAcceptedFreelancers();
 
 
 

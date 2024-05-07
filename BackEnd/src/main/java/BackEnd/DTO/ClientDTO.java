@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -21,6 +24,6 @@ public class ClientDTO {
     private long phone;
     private String userName;
     private String country;
-   // private String created_at;
+    private LocalDate created_at;
   //  private String role;
 }
