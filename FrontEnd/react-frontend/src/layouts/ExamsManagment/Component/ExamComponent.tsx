@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { createExam, getExam, updateExam } from '../service/ExamsService';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { createExam, getExam, getExamImage, updateExam } from '../service/ExamsService';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { deleteQuestionById } from '../service/QuestionService';
 
@@ -21,9 +21,13 @@ const ExamComponent: React.FC = () => {
   const [examDescription, setExamDescription] = useState('');
   const [noOfAttempts, setNoOfAttempts] = useState('');
   const [timeLimit, setTime] = useState('');
+  const [badge, setBadge] = useState<File | null>(null);
+  const [badgeURL, setBadgeURL] = useState<string>('');
+  const [creditPoint, setCreditPoint] = useState('');
+  const [badgeName, setBadgeName] = useState('');
 
   const [questions, setQuestions] = useState<Question[]>([]);
-  
+
   const { id = '' } = useParams<{ id: string }>();
 
   const navigateInExam = useHistory();
@@ -32,80 +36,92 @@ const ExamComponent: React.FC = () => {
     examName: '',
     examDescription: '',
     noOfAttempts: '',
-    timeLimit
+    timeLimit: '',
+    creditPoint: '',
   });
 
   useEffect(() => {
     getExamById(id);
+    if (id) {
+      fetchBadgeImage(id);
+    }
   }, [id]);
 
-  function getExamById(id: string) {
-  if (id) {
-    getExam(id)
-      .then((response) => {
-        setExamName(response.data.examName);
-        setExamDescription(response.data.examDescription);
-        setNoOfAttempts(response.data.noOfAttempts);
-        setTime(response.data.timeLimit);
-        if (response.data.questions) {
-          setQuestions(response.data.questions);
-        } else {
-          setQuestions([]);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  async function fetchBadgeImage(examId: string) {
+    try {
+      const badgeURL = await getExamImage(examId);
+      setBadgeURL(badgeURL);
+    } catch (error) {
+      console.error('Error fetching badge image:', error);
+    }
   }
-}
+
+  function getExamById(id: string) {
+    if (id) {
+      getExam(id)
+        .then((response) => {
+          setExamName(response.data.examName);
+          setExamDescription(response.data.examDescription);
+          setNoOfAttempts(response.data.noOfAttempts);
+          setTime(response.data.timeLimit);
+          setCreditPoint(response.data.creditPoint);
+          setBadgeName(response.data.badgeName);
+          if (response.data.questions) {
+            setQuestions(response.data.questions);
+          } else {
+            setQuestions([]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }
 
   function saveOrUpdateExam(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     if (validateForm()) {
-      const exam = { id, examName, examDescription, noOfAttempts, questions, timeLimit };
+      const exam = { id, examName, examDescription, noOfAttempts, questions, creditPoint, badge, badgeName, timeLimit };
       console.log(exam);
-
       if (id) {
         updateExam(id, exam)
           .then((response) => {
-            console.log(response.data);
+            console.log(response);
             navigateInExam.push("/exams");
           })
           .catch((error) => {
             console.error(error);
           });
       } else {
-        createExam(exam)
-          .then((response) => {
-            console.log(response.data);
-            navigateInExam.push("/exams");
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        if (badge) {
+          createExam(exam, badge)
+            .then((response) => {
+              console.log(response);
+              navigateInExam.push("/exams");
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          console.error("Badge is required!");
+        }
       }
     }
   }
 
   function validateForm(): boolean {
     let valid = true;
-
     const errorsCopy = { ...errors };
-
     const attemptsString = String(noOfAttempts);
-
     const timeLimitString = String(timeLimit);
-
     const examNameRegex = /^[a-zA-Z\s]*$/;
 
     if (examName.trim() && examNameRegex.test(examName)) {
       errorsCopy.examName = '';
     } else {
-      if(examName.trim()){
+      if (examName.trim()) {
         errorsCopy.examName = 'invalid input type only letters!';
-        
-      }else{
+      } else {
         errorsCopy.examName = 'Exam name is required!';
       }
       valid = false;
@@ -121,9 +137,9 @@ const ExamComponent: React.FC = () => {
     if (attemptsString.trim() && parseInt(attemptsString) > 0) {
       errorsCopy.noOfAttempts = '';
     } else {
-      if(attemptsString.trim()){
+      if (attemptsString.trim()) {
         errorsCopy.noOfAttempts = 'No Of Attempts must be grater than 0!';
-      }else{
+      } else {
         errorsCopy.noOfAttempts = 'No Of Attempts is required!';
       }
       valid = false;
@@ -132,10 +148,21 @@ const ExamComponent: React.FC = () => {
     if (timeLimitString.trim() && parseInt(timeLimitString) > 0) {
       errorsCopy.timeLimit = '';
     } else {
-      if(attemptsString.trim()){
+      if (attemptsString.trim()) {
         errorsCopy.timeLimit = 'Time Limt must be grater than 0!';
-      }else{
+      } else {
         errorsCopy.timeLimit = 'Time Limit is required!';
+      }
+      valid = false;
+    }
+
+    if (creditPoint.trim() && parseInt(creditPoint) >= 0) {
+      errorsCopy.creditPoint = '';
+    } else {
+      if (creditPoint.trim()) {
+        errorsCopy.creditPoint = 'Credit Point must be grater than or equal to 0!';
+      } else {
+        errorsCopy.creditPoint = 'Credit Point is required!';
       }
       valid = false;
     }
@@ -154,8 +181,6 @@ const ExamComponent: React.FC = () => {
   }
 
   function removeQuestion(id: string, examid: string) {
-    console.log(id);
-
     deleteQuestionById(id)
       .then(() => {
         getExamById(examid);
@@ -171,9 +196,9 @@ const ExamComponent: React.FC = () => {
         <div className='container'>
           <h2 className='text-center'>Add Question</h2>
           <Link to={`/add-Question/${id}`}>
-          <button className='btn btn-primary mb-2'>
-            Add Question
-          </button>
+            <button className='btn btn-primary mb-2'>
+              Add Question
+            </button>
           </Link>
           <table className='table table-striped table-bordered'>
             <thead>
@@ -190,9 +215,9 @@ const ExamComponent: React.FC = () => {
                     {question.questionTxt}
                     <br></br>
                     <Link to={`/add-Option/${question.examId}/${question.questionId}`}>
-                    <button className='btn btn-info'>
-                      Add Option
-                    </button>
+                      <button className='btn btn-info'>
+                        Add Option
+                      </button>
                     </Link>
                   </td>
                   <td>
@@ -206,13 +231,12 @@ const ExamComponent: React.FC = () => {
                   </td>
                   <td>
                     <Link to={`/edit-Question/${question.questionId}/${question.examId}`}>
-                    <button
-                      className='btn btn-info'
-                    >
-                      Manage
-                    </button>
+                      <button
+                        className='btn btn-info'
+                      >
+                        Manage
+                      </button>
                     </Link>
-                    
                     <button
                       className='btn btn-danger'
                       onClick={() => removeQuestion(question.questionId, question.examId)}
@@ -231,9 +255,15 @@ const ExamComponent: React.FC = () => {
     return null;
   }
 
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files.length > 0) {
+      setBadge(e.target.files[0]);
+    }
+  }
+
   return (
-    <div className='container'><br></br><br></br><br></br>
-      <br></br>
+    <div className='container'>
+      <br></br><br></br><br></br><br></br>
       <div className='row'>
         <div className='card col-md-6 offset-md-3 0ffset-md-3'>
           {pageTitle()}
@@ -291,6 +321,35 @@ const ExamComponent: React.FC = () => {
                 ></input>
                 {errors.timeLimit && <div className='invalid-feedback'>{errors.timeLimit}</div>}
               </div>
+
+              <div className='form-group mb-2'>
+                <label className='form-lable'>Credit Points : </label>
+                <input
+                  type='number'
+                  placeholder='Enter credit points'
+                  name='creditPoint'
+                  value={creditPoint}
+                  className={`form-control ${errors.creditPoint ? 'is-invalid' : ''}`}
+                  onChange={(e) => setCreditPoint(e.target.value)}
+                ></input>
+                {errors.creditPoint && <div className='invalid-feedback'>{errors.creditPoint}</div>}
+              </div>
+
+              <div className='form-group mb-2'>
+                <label className='form-lable'>Badge : </label>
+                <input
+                  type='file'
+                  accept='image/*'
+                  onChange={handleFileChange}
+                  className={`form-control`}
+                />
+              </div>
+              {badgeURL && (
+                <div className="form-group mb-2">
+                  <img src={badgeURL} alt={badgeName} style={{ width: '100px' }} />
+                </div>
+              )}
+
               <button className='btn btn-success' type='submit'>
                 Submit
               </button>
