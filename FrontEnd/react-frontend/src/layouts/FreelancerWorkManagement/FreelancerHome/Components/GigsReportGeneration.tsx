@@ -73,7 +73,7 @@ export const generateGigReport = (gigData: Gig[]) => {
         doc.text("Thank you for doing business with us !!!", doc.internal.pageSize.width - 135, doc.internal.pageSize.height - 10);
         doc.text(`Date: ${currentDate}`, 20, doc.internal.pageSize.height - 30);
         // Signature in bottom right
-        doc.text("Signature: _ _ _ _ _ _ _ _ _ _ _ _", doc.internal.pageSize.width - 60, doc.internal.pageSize.height - 30);
+        doc.text("Signature: _ _ _ _ _ _ _ _ _ _ _ _", doc.internal.pageSize.width - 70, doc.internal.pageSize.height - 30);
 
         // Save PDF
         doc.save("gig_report.pdf");
