@@ -1,8 +1,6 @@
 package BackEnd.DTO;
 
 import BackEnd.entity.Questions;
-import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,8 @@ public class ExamsDTO {
     private String examDescription;
     private Long noOfAttempts;
     private Long timeLimit;
+    private String badgeName;
+    private byte[] badge;
     private Long creditPoint;
     private List<Questions> questions;
 }

@@ -12,6 +12,8 @@ public class ExamsMapper {
                 exams.getExamDescription(),
                 exams.getNoOfAttempts(),
                 exams.getTimeLimit(),
+                exams.getBadgeName(),
+                exams.getBadge(),
                 exams.getCreditPoint(),
                 exams.getQuestions()
         );
@@ -24,6 +26,8 @@ public class ExamsMapper {
                 examsDTO.getExamDescription(),
                 examsDTO.getNoOfAttempts(),
                 examsDTO.getTimeLimit(),
+                examsDTO.getBadgeName(),
+                examsDTO.getBadge(),
                 examsDTO.getCreditPoint(),
                 examsDTO.getQuestions()
         );

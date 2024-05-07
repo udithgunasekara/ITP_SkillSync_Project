@@ -32,6 +32,12 @@ public class Exams {
     @Column(name = "timeLimit")
     private Long timeLimit;
 
+    private String badgeName;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] badge;
+
     private Long creditPoint;
 
     @OneToMany(cascade = CascadeType.ALL)

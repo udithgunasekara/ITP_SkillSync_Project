@@ -27,9 +27,7 @@ public class ExamsServiceIMPL implements ExamsService {
 
     @Override
     public ExamsDTO getExamById(Long examid) {
-        Exams exams = examsRepository.findById(examid).orElseThrow(
-                () -> new ResourceNotFound("Exam is not exists with given id : " + examid)
-        );
+        Exams exams = examsRepository.findById(examid).orElse(null);
         return ExamsMapper.mapToExamsDTO(exams);
     }
 
@@ -42,6 +40,10 @@ public class ExamsServiceIMPL implements ExamsService {
         exams.setExamName(examsDTO.getExamName());
         exams.setExamDescription(examsDTO.getExamDescription());
         exams.setNoOfAttempts(examsDTO.getNoOfAttempts());
+        exams.setTimeLimit(examsDTO.getTimeLimit());
+        exams.setCreditPoint(examsDTO.getCreditPoint());
+        exams.setBadgeName(examsDTO.getBadgeName());
+        exams.setBadge(examsDTO.getBadge());
 
         Exams updatedexamobj = examsRepository.save(exams);
 
