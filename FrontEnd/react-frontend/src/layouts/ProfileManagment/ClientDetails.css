@@ -29,7 +29,8 @@
 #language-title-client {
   font-size: 1.5em;
   font-weight: bold;
-  padding-bottom: 1.25em;
+  padding-top: 1.25em;
+  padding-bottom: 0.625em;
   color: black;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -221,8 +222,16 @@
 
 .add-lang-btn,
 .add-language,
-.cancel-language,
 .Add-description {
+  background-color: #8436c2;
+  color: #fff;
+  border: none;
+  border-radius: 0.3125em;
+  padding: 0.625em 1.25em;
+  cursor: pointer;
+  margin-right: 0.625em;
+}
+#cancel-language{
   background-color: #8436c2;
   color: #fff;
   border: none;
@@ -237,7 +246,7 @@
   background-color: #AC69E2;
 }
 
-.cancel-language:hover {
+#cancel-language:hover {
   background-color: #da190b;
 }
 
@@ -289,22 +298,24 @@
 .description-input {
   width: 100%;
   padding: 0.625em;
+  margin-top: -40px;
   margin-bottom: 0.625em;
   border: 0.0625em solid #ccc;
   border-radius: 0.3125em;
   box-sizing: border-box;
 }
 
-.add-discription {
+#add-discription {
   background-color: #8436c2;
   color: #fff;
   border: none;
   border-radius: 0.3125em;
   padding: 0.625em 1.25em;
+  margin-bottom: 50px;
   cursor: pointer;
   margin-right: 0.625em;
 }
 
-.add-discription:hover {
+#add-discription:hover {
   background-color: #45a049;
 }
