@@ -1,6 +1,7 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import './FreelancerReprt.css'
 
 const ReportGenerator: React.FC = () => {
     const generateReport = async () => {
@@ -103,7 +104,7 @@ const ReportGenerator: React.FC = () => {
 
     return (
         <div>
-            <button onClick={generateReport}>Generate Report</button>
+            <button className='report-download' onClick={generateReport}>Generate Report</button>
         </div>
     );
 };
