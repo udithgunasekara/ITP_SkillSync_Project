@@ -30,6 +30,10 @@ const GigDetails: React.FC = () => {
     fetchGigDetail();
   }, [id]);
 
+  const handleContactBtn = async()=>{
+    window.location.href = `http://localhost:3000/freelancers/${gig?.freelancerUsername}`;
+  }
+
   if (!gig) {
     return <div>Loading...</div>;
   }
@@ -42,7 +46,7 @@ const GigDetails: React.FC = () => {
             <h1 className="mb-3 display-3" style={{ wordWrap: 'break-word' }}>{gig.gigTitle}</h1>
             <h5 className="text-muted">Category: {gig.gigCategory}</h5>
             <h5 className="text-muted">@{gig.freelancerUsername}</h5>
-            <button className='btn btn-primary mt-4' data-bs-toggle='modal' data-bs-target='#userRemarksModal'>Contact me</button>
+            <button className='btn btn-primary mt-4' onClick={handleContactBtn}>Contact me</button>
             <div className="border p-4 mt-4" style={{ wordWrap: 'break-word' }}>
               <h2 className="text-center mb-4">Description</h2>
               <p>{gig.gigDescription}</p>
