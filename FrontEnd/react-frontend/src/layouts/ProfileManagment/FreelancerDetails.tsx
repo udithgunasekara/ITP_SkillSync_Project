@@ -494,7 +494,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         </span>
       ))
     ) : (
-      <p>No Language available.</p>
+      <p id='lang-list-free'>No Language available.</p>
     )}
   </ul>
 )}
@@ -620,7 +620,7 @@ skills.map((skill, index) => ( // Using index as fallback key
       </li>
     ))
   ) : (
-    <p>No education data available</p>
+    <p id='edu-list'>No education data available</p>
   )}
 </ul>
 )}

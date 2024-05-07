@@ -291,10 +291,12 @@ export const App = () => {
             <Route path="/clients/:username" >
               <Navbar/>
               <ClientDetails/>
+              <Footer />
             </Route>
             <Route path="/freelancers/:username" >
               <Navbar/>
               <FreelancerDetails/>
+              <Footer />
             </Route>
             <Route path="/Message/:username/:username2/:conversation">
               <Navbar/>
