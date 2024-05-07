@@ -55,6 +55,7 @@ const JobComponent: React.FC = () => {
     const navigate = useHistory();
 
     const {id} = useParams<RouteParams>();
+    //const id = sessionStorage.getItem(id);
 
     useEffect(() => {
         if(id){

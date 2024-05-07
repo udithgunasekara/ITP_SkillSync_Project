@@ -53,6 +53,7 @@ const ListJobComponent: React.FC = () => {
 
     const downloadReport = () => {
         const doc = new jsPDF();
+
         doc.setFontSize(16); // Set font size for the heading
         doc.text('Skillsync', doc.internal.pageSize.getWidth() / 2, 10, { align: 'center'}); // Centered heading
         doc.setLineWidth(0.5); // Set border width
