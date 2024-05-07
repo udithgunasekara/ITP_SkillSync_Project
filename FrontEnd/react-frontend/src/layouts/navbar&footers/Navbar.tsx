@@ -1,10 +1,21 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useHistory} from "react-router-dom";
 
 export const Navbar = () => {
+    const history = useHistory();
+
+    const handleLogout = () => {
+        // Clear the authentication token from local storage
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('id');
+        sessionStorage.removeItem('role');
+        sessionStorage.removeItem('email');
+    
+        history.push('/FreelancerMain');
+      };
 
 
     return (
-        <nav className='navbar navbar-top navbar-expand-lg navbar-dark main-color fixed-top' >
+        <nav className='navbar navbar-top navbar-expand-lg navbar-dark main-color fixed-top' style={{padding:"0",position:"fixed",zIndex:"1008"}}>
             <div className='container-fluid'>
                 {/* <span className='navbar-brand'><h4>Project</h4></span> */}
 
@@ -41,12 +52,13 @@ export const Navbar = () => {
                                     height="30"
                                     alt="User Profile" />
                             </a>
-                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" >
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{position: "absolute", zIndex: 1005}}>
                                 <li><a className="dropdown-item " href="#">Profile</a></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/details'}>Billing and Information</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/payment'}>Transaction History</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/support'}>Help Desk</NavLink></li>
-                                {/* Add more dropdown items here if needed */}
+                                <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/support'} onClick={handleLogout}>LogOut</NavLink></li>
+                               {/* Add more dropdown items here if needed */}
                             </ul>
                         </li>
 

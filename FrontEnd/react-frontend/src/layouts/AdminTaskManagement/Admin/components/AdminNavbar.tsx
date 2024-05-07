@@ -12,7 +12,7 @@ export const AdminNavbar = () => {
     const pathname = location.pathname;
     return (
         <div className="below-navbar" style={{width:"100vw"}}>
-            <nav className="navbar navbar-second below-navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{height:"50px"}}>
+            <nav className="navbar navbar-second below-navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{height:"50px", position: "fixed", zIndex: 1002}}>
 
                 <div className="container-fluid">
 

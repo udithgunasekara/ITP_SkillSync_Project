@@ -1,4 +1,4 @@
-import { AdminDashboard } from "./components/AdminDashboard";
+import { AdminDashboard } from "./components/AdminDashboard/AdminDashboard";
 import { AdminNavbar } from "./components/AdminNavbar";
 import { AdminSideBar } from "./components/AdminSideBar";
 import { EditNotice } from "./components/EditNotice";

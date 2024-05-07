@@ -11,8 +11,7 @@ import {
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './gig.css';
-import FreelancerGigs from './FreelanceReportDownload';
-
+import ReportGenerator from './FreelanceReportDownload';
 interface Gig {
   gigId: string;
   gigTitle: string;
@@ -120,8 +119,9 @@ const FreelancerGigsDetails: React.FC = () => {
           renderGigCards()
         )
       )}
-      <FreelancerGigs/>
+      <ReportGenerator/>
     </div>
+
   );
 };
 

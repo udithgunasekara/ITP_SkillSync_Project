@@ -1,0 +1,7 @@
+BackEnd/target/classes/BackEnd/controller/BadgeController.class
+BackEnd/target/classes/BackEnd/DTO/BadgeDTO.class
+BackEnd/target/classes/BackEnd/Mapper/BadgeMapper.class
+BackEnd/target/classes/BackEnd/entity/Badge.class
+BackEnd/target/classes/BackEnd/repository/BadgeRepository.class
+BackEnd/target/classes/BackEnd/service/imple/BadgeServiceIMPL.class
+BackEnd/target/classes/BackEnd/service/BadgeService.class
