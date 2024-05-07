@@ -73,12 +73,12 @@ public class JobServiceImpl implements JobService{
         jobRepository.deleteById(id);
     }
 
-//    @Override
-//    public List<JobDto> searchJobs(String query) {
-//        List<Job> jobs = jobRepository.searchJobs(query);
-//        return jobs.stream()
-//                .map(JobMapper::mapToJobDto)
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public List<JobDto> searchJobs(String query) {
+        List<Job> jobs = jobRepository.searchJobs(query);
+        return jobs.stream()
+                .map(JobMapper::mapToJobDto)
+                .collect(Collectors.toList());
+    }
 
 }
