@@ -13,7 +13,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/SkillSync_DB?createDatabaseIfNotExist=true
     username: root
-    password: it200024403355
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   mail:
