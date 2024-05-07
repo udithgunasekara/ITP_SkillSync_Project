@@ -38,11 +38,10 @@ export const FreelancerLoginComponent =  () => {
                 if (status === true) {
                     console.log("Account status accepted");
                     // If the account status is accepted, navigate to UserTestPage
-                    navigate.push('/UserTestPage');
+                    navigate.push('/FreelancerDashboard');
                 } else {
-                    console.log("Account status accepted");
                     // If the account status is not accepted, navigate to AccountNotAcceptedPage
-                    navigate.push('/InProgressPage');
+                    navigate.push(`/ReSubmission/${username}`);
                 }
                 console.log("Account status check function called successfully");
             }).catch((error) => {
