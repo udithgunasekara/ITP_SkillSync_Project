@@ -47,18 +47,13 @@ import DisplayQuestionAndAnswers from './layouts/ExamsManagment/Component/Displa
 import ClientDetails from './layouts/ProfileManagment/ClientDetails';
 import FreelancerDetails from './layouts/ProfileManagment/FreelancerDetails';
 import Message from './layouts/ProfileManagment/Message';
-import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
+import ListRatingComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ListRatingComponent'
+import RatingComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/RatingComponent'
+import ViewRatingComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ViewRatingComponent'
+import FreelancerAgrementComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/FreelancerAgrementComponent'
+import ClientAgrementComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ClientAgrementComponent'
+import ListProjectComponent from './layouts/DeliveringJobs&RatingManagement/deliveringJobsRatingSystemComponents/ListProjectComponent'
 
-import PaymentComponent from './layouts/PaymentManagement/components/PaymentComponent';
-import PaymentHistoryComponent from './layouts/PaymentManagement/components/PaymentHistoryComponent';
-import SelectPaymentType from './layouts/PaymentManagement/views/SelectPaymentType';
-import CardPaymentProceed from './layouts/PaymentManagement/views/CardPaymentProceed';
-import PayPalProceed from './layouts/PaymentManagement/views/PayPalProceed';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import PaymentDetailsFComponent from './layouts/PaymentManagement/components/PaymentDetailsFComponent';
-import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
-import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
-import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
 
 
 
@@ -86,6 +81,7 @@ export const App = () => {
             <Route path="/FreelancerMain" exact>
               <Navbar />
               <FreelancerHome />
+              <Footer />
             </Route>
             <Route path="/gig/:id">
               <Navbar />
@@ -229,10 +225,6 @@ export const App = () => {
               <UserTest/>
             </Route>
 
-            <Route path='/OTPVerificationPage' exact>
-              <OTPVerification/>
-            </Route>
-
             {/* Ending supeshala's files */}
 
             {/*Vaas file begin*/}
@@ -281,11 +273,6 @@ export const App = () => {
               <DisplayQuestionAndAnswers />
               <Footer />
             </Route>
-            <Route path="/add-interview">
-              <Navbar />
-              <SheduleInterviewComponent />
-              <Footer />
-            </Route>
             {/*Vaas files End*/}
             {/*vinuja's files */}
             <Route path="/clients/:username" >
@@ -304,62 +291,50 @@ export const App = () => {
             </Route>
             {/*vinuja's files end*/}
 
-
-            {/* starting nipuni's file */}
-            <Route path='/payment-details' >
+            {/*Nilmani's files */}
+            {/* //http://localhost:3000/ratings */}
+            <Route path="/ratings">
               <Navbar />
-              <SelectPaymentType />
+              <ListRatingComponent />
               <Footer />
             </Route>
-
-            <Route path='/payment' >
+            {/* //http://localhost:3000/add-rating */}
+            <Route path="/add-rating">
               <Navbar />
-              <PaymentHistoryComponent  />
+              <RatingComponent />
               <Footer />
             </Route>
-
-            <Route path='/make-payment' >
+            {/* //http://localhost:3000/edit-rating/1 */}
+            <Route path="/edit-rating/:id">
               <Navbar />
-              <PaymentComponent />
+              <RatingComponent />
               <Footer />
             </Route>
-
-            <Route path='/card-payment' >
+            {/* //http://localhost:3000/view-rating/1 */}
+            <Route path="/view-rating/:id">
               <Navbar />
-              <CardPaymentProceed  />
+              <ViewRatingComponent />
               <Footer />
             </Route>
-
-            <Route path='/paypal-payment' >
+            {/* //http://localhost:3000/freelancerAgreement */}
+            <Route path="/freelancerAgreement">
               <Navbar />
-              <PayPalProceed   />
+              <FreelancerAgrementComponent />
               <Footer />
             </Route>
-
-            <Route path='/details' >
+            {/* //http://localhost:3000/clientAgreement */}
+            <Route path="/clientAgreement">
               <Navbar />
-              <PaymentDetailsFComponent   />
+              <ClientAgrementComponent />
               <Footer />
             </Route>
-
-            <Route path='/edit-details/:id' >
+            {/* //http://localhost:3000/projects */}
+            <Route path="/projects">
               <Navbar />
-              <PaymentDetailsFComponent   />
+              <ListProjectComponent />
               <Footer />
             </Route>
-
-            <Route path='/viewDetails/:id' >
-              <Navbar />
-              <DetailsPage  />
-              <Footer />
-            </Route>
-
-            <Route path='/transaction-details' >
-              <Navbar />
-              <TransactionDetails />
-              <Footer />
-            </Route>
-            {/* End nipuni's file */}
+            {/*Nilmani's files end*/}
 
           </Switch>
         </div>
