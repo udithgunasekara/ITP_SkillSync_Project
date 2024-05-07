@@ -17,7 +17,11 @@ interface Errors {
     userId: string;
 }
 
-const RatingComponent: React.FC = () => {
+interface RatingComponentProps {
+    onNewRating?: (rating: Rating) => void;
+}
+
+const RatingComponent: React.FC<RatingComponentProps> = ({ onNewRating }) => {
     const [projectId, setProjectId] = useState<string>('');
     const [rate, setRate] = useState<number>(0);
     const [review, setReview] = useState<string>('');
@@ -49,7 +53,7 @@ const RatingComponent: React.FC = () => {
 
     const saveOrUpdateRating = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+    
         if (validateForm()) {
             const rating: Rating = {
                 projectId,
@@ -57,40 +61,50 @@ const RatingComponent: React.FC = () => {
                 review,
                 userId
             };
-
+    
             try {
                 if (id) {
-                    //await updateRating(id, rating);
-                    // Convert id to a number using parseInt
-                const numericId = parseInt(id, 10);
-                if (!isNaN(numericId)) {
-                    await updateRating(numericId, rating);
+                    // Update existing rating
+                    const numericId = parseInt(id, 10);
+                    if (!isNaN(numericId)) {
+                        console.log('Updating rating with ID:', numericId, 'with data:', rating);
+                        await updateRating(numericId, rating);
+                        console.log('Rating updated successfully');
+                    } else {
+                        console.error('Invalid ID:', id);
+                    }
                 } else {
-                    console.error('Invalid ID:', id);
-                }
-                } else {
-                    await createRating(rating);
+                    // Create new rating
+                    console.log('Creating new rating with data:', rating);
+                    const response = await createRating(rating);
+                    if (onNewRating) {
+                        console.log('Calling onNewRating with data:', response.data);
+                        onNewRating(response.data);
+                    }
+                    console.log('Rating created successfully');
                 }
                 // Redirect to the list of ratings after successful submission
                 navigator.push('/ratings');
             } catch (error) {
-                console.error(error);
+                console.error('Error during rating save or update:', error);
             }
         }
     };
+    
 
     function validateForm(): boolean {
         let valid = true;
         const errorsCopy: Errors = { ...errors };
 
-        // Form validation
-        if (!projectId || !projectId.trim()) {
-            errorsCopy.projectId = 'Project ID is required';
+        // Validate Project ID
+        if (!projectId || !/^\d+$/.test(projectId)) {
+            errorsCopy.projectId = 'Project ID is required and must be a number';
             valid = false;
         } else {
             errorsCopy.projectId = '';
         }
 
+        // Validate Review
         if (!review || !review.trim()) {
             errorsCopy.review = 'Review is required';
             valid = false;
@@ -98,8 +112,9 @@ const RatingComponent: React.FC = () => {
             errorsCopy.review = '';
         }
 
-        if (!userId || !userId.trim()) {
-            errorsCopy.userId = 'User ID is required';
+        // Validate User ID
+        if (!userId || !/^[a-zA-Z0-9]+$/.test(userId)) {
+            errorsCopy.userId = 'User ID is required and must contain only letters and numbers';
             valid = false;
         } else {
             errorsCopy.userId = '';
@@ -138,11 +153,10 @@ const RatingComponent: React.FC = () => {
             <br /> <br />
             <div className="row">
                 <div className="card col-md-6 offset-md-3 offset-md-3">
+                    <br />
                     <h2 className="text-center">{id ? 'Update Rating' : 'Add Rating'}</h2>
                     <hr />
-                    <h2 className="text-center">Rating Section</h2>
-                    <hr />
-                    <h2 className="text-center">Review Section</h2>
+                    
                     <div className="card-body">
                         <form onSubmit={saveOrUpdateRating}>
                             <div className="form-group mb-2">
@@ -189,6 +203,8 @@ const RatingComponent: React.FC = () => {
                                 {errors.userId && <div className="invalid-feedback"> {errors.userId} </div>}
                             </div>
 
+                            <br />
+                            <br />
                             <button className="btn btn-success" type="submit">
                                 Submit
                             </button>
