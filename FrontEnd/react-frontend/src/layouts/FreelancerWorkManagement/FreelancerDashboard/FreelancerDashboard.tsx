@@ -108,7 +108,7 @@ const FreelancerDashboard: React.FC = () => {
   };
 
   const gigChunks: Gig[][] = gigData.reduce((acc: Gig[][], curr: Gig, index: number) => {
-    const chunkIndex = Math.floor(index / 4);
+    const chunkIndex = Math.floor(index / 5);
     if (!acc[chunkIndex]) {
       acc[chunkIndex] = [];
     }
@@ -135,18 +135,18 @@ const FreelancerDashboard: React.FC = () => {
       <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
-            <Row xs={2} md={3} lg={5} className="g-4">
+            <Row xs={1} md={2} lg={5} className="g-4">
               {chunk.map((gig, gigIndex) => (
                 <Col key={gigIndex}>
-                  <Card className="h-100 shadow">
-                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '50%', objectFit: 'cover' }} />
+                  <Card className="h-100 shadow gig-card">
+                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} className="gig-card-image" />
                     <Card.Body>
                       <Card.Title className="mb-3">{gig.gigTitle}</Card.Title>
                       <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
-                      <Card.Text><strong>Time Taken:</strong> {minTimes[gig.gigId]}h</Card.Text>
+                      <Card.Text><strong>Time Taken:</strong> From {minTimes[gig.gigId]}h</Card.Text>
                       <Card.Text><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
-                      <div className="d-grid gap-2">
-                        <Button variant="primary" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
+                      <div className="mt-auto">
+                        <Button variant="primary" className="me-2" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
                         <Button variant="danger" onClick={() => handleDelete(gig.gigId)}>Delete</Button>
                       </div>
                     </Card.Body>

@@ -67,9 +67,9 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const buttonStyle: React.CSSProperties = {
-        padding: '0.75em 1.5em', 
-        borderRadius: '0.5em', 
-        fontSize: '1.25em', 
+        padding: '0.75em 1.5em',
+        borderRadius: '0.5em',
+        fontSize: '1.25em',
     };
 
     return (
@@ -146,10 +146,16 @@ export const CreateGigForm1: React.FC = () => {
                                     <option value="Graphic Design">Graphic Design</option>
                                     <option value="Web Development">Web Development</option>
                                     <option value="Content Writing">Content Writing</option>
-                                    <option value="Software Development">Software Development</option>
                                     <option value="Translation">Translation</option>
                                     <option value="Video Editing">Video Editing</option>
-                                    <option value="Others">Others</option>
+                                    <option value="Digital Marketing">Digital Marketing</option>
+                                    <option value="Data Entry">Data Entry</option>
+                                    <option value="Illustration">Illustration</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Music & Audio">Music & Audio</option>
+                                    <option value="Voice Talent">Voice Talent</option>
+                                    <option value="Virtual Assistant">Virtual Assistant</option>
+                                    <option value="Consulting">Consulting</option>
                                 </select>
                             </div>
                         </div>

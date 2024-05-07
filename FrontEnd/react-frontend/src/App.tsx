@@ -348,7 +348,7 @@ export const App = () => {
             </Route>
             {/* //http://localhost:3000/projects */}
             <Route path="/projects">
-
+            </Route>
             <Route path='/edit-details/:userName' >
               <Navbar />
               <ListProjectComponent />

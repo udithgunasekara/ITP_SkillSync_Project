@@ -35,8 +35,8 @@ const Orders: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchOrders(); 
-  }, []); 
+    fetchOrders();
+  }, []);
 
   const updateOrderStatus = async (orderId: number, newStatus: string) => {
     try {
@@ -76,11 +76,24 @@ const Orders: React.FC = () => {
               <td>{order.orderDateTime}</td>
               <td>{order.cusName}</td>
               <td>
-                <select className="form-select" style={{ fontSize: '1rem' }} onChange={(e) => updateOrderStatus(order.orderId, e.target.value)} value={order.orderStatus}>
-                  <option value="pending">Pending</option>
+                <select
+                  className="form-select"
+                  style={{ fontSize: '1rem' }}
+                  onChange={(e) => updateOrderStatus(order.orderId, e.target.value)}
+                  value={order.orderStatus}
+                >
+                  {order.orderStatus === 'pending' && (
+                    <option value="pending">Pending</option>
+                  )}
+                  {order.orderStatus !== 'pending' && (
+                    <option disabled value="pending">
+                      Pending
+                    </option>
+                  )}
                   <option value="accepted">Accepted</option>
                   <option value="completed">Completed</option>
                 </select>
+
               </td>
               <td>
                 {order.orderStatus === 'completed' && (
