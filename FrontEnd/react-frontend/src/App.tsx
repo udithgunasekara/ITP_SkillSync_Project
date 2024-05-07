@@ -74,6 +74,7 @@ import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
 import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
+import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 
 
 export const App = () => {
@@ -292,6 +293,11 @@ export const App = () => {
               <DisplayQuestionAndAnswers />
               <Footer />
             </Route>
+            <Route path="/add-interview">
+              <Navbar />
+              <SheduleInterviewComponent />
+              <Footer />
+            </Route>
             {/*Vaas files End*/}
             {/*vinuja's files */}
             <Route path="/clients/:username" >
@@ -348,7 +354,6 @@ export const App = () => {
               <Footer />
             </Route>
             {/* //http://localhost:3000/projects */}
-
             <Route path='/edit-details/:userName' >
               <Navbar />
               <ListProjectComponent />
