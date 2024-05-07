@@ -17,10 +17,10 @@ export const SupportNavBar = () => {
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul className="navbar-nav ">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to={"/support"}>Help desk</NavLink>
+                            <NavLink className="nav-link" to={"/support"}>Help Desk</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to={"/raiseticket"}>Rasie new Ticket</NavLink>
+                            <NavLink className="nav-link" to={"/raiseticket"}>Rasie New Ticket</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to={"/tickets"}>Your Tickets</NavLink>
@@ -32,32 +32,7 @@ export const SupportNavBar = () => {
                     </ul>
                 </div>
 
-                <div className="offcanvas offcanvas-end text-bg-dark" tabIndex={-1} id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div className="offcanvas-header p-2 bg-dark text-white">
-                        <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
-                        <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        <ul className="navbar-nav ">
-                            <li className="nav-item p-2">
-                                <a className="nav-link active mx-lg-2" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li className="nav-item p-2">
-                                <a className="nav-link text-dark mx-lg-2" href="#">About</a>
-                            </li>
-                            <li className="nav-item p-2">
-                                <a className="nav-link text-dark mx-lg-2" href="#">Services</a>
-                            </li>
-                            <li className="nav-item p-2">
-                                <a className="nav-link text-dark mx-lg-2" href="#">Portfolio</a>
-                            </li>
-                            <li className="nav-item p-2">
-                                <a className="nav-link text-dark mx-lg-2" href="#">Contact</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
+                
                 <a href="#" className="login-button">login</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span className="navbar-toggler-icon"></span>

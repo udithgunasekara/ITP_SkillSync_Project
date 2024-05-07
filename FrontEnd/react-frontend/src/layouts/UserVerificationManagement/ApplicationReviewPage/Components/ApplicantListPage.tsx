@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import  './ApplicationListPage.css'
+import logo from './Asset 3.png';
 
 // Define the type for the API response object
 interface Freelancer {
@@ -41,18 +42,34 @@ const ApplicantListPage: React.FC = () => {
     const data = filteredFreelancers.map(f => [
       f.workOn, f.firstName, f.lastName, f.userName, new Date(f.created_at).toLocaleDateString()
     ]);
-    let content = {
-      startY: 50,
-      head: headers,
-      body: data,
-      didDrawPage: function (data:any) {
-        doc.text(title, 40, 30);
-        doc.text(`Total Applicants: ${filteredFreelancers.length}`, 40, 40);
-      }
-    };
-    (doc as any).autoTable(content); 
-    doc.save("applicants_report.pdf");
-  };
+
+
+   // Fetch the logo from the public URL
+  fetch(logo)
+  .then(response => response.blob())
+    .then(blob => {
+      // Convert the blob to a data URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const logoData = reader.result as string;
+
+        let content = {
+          startY: 50,
+          head: headers,
+          body: data,
+          didDrawPage: function (data:any) {
+            // Add image
+            doc.addImage(logoData, 'PNG', data.settings.margin.left, 3, 50, 20);
+            doc.text(title, 40, 30);
+            doc.text(`Total Applicants: ${filteredFreelancers.length}`, 40, 40);
+          }
+        };
+        (doc as any).autoTable(content); 
+        doc.save("applicants_report.pdf");
+      };
+      reader.readAsDataURL(blob);
+    });
+};
 
   return (
     <div className='app_container my-5'>

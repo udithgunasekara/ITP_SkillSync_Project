@@ -1,6 +1,6 @@
 
 import { useRef, useState } from "react";
-import { AdminDashboard } from "./components/AdminDashboard";
+import { AdminDashboard } from "./components/AdminDashboard/AdminDashboard";
 import { AdminSideBar } from "./components/AdminSideBar";
 import { AdminNavbar } from "./components/AdminNavbar";
 
