@@ -53,7 +53,7 @@ const QualificationPage: FC = () => {
   };
 
   return (
-    <div className="qua_container">
+    <div className="qua_container" style={{ marginTop:'70px' }}>
       <h1 className="qua_title">Add your Qualifications</h1>
       <button type="button" className="qua_button-add" onClick={navigateToUploadPage}>Add Qualification</button>
       
@@ -77,7 +77,7 @@ const QualificationPage: FC = () => {
       
       <form className="qua_form">
         <div className="form-group">
-          <h1>Username is : {userName}</h1>
+          
           <label htmlFor="linkedIn" className="qua_label">LinkedIn Profile</label>
           <input type="text" className="form-control qua_input" id="linkedIn" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} placeholder="Optional" />
         </div>

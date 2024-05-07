@@ -25,7 +25,7 @@ export const ClientLoginComponent = () => {
             sessionStorage.setItem('role', 'client');
 
             alert('Login Successful!');
-            navigate.push(`/clients/${username}`);
+            navigate.push(`/FreelancerMain`);
             
         }).catch((error) => {
             console.error("Login error:", error.response || error);

@@ -91,12 +91,12 @@ const ClientRegComponent = () => {
 
 
     return (
-        <div className="container" style={{ maxWidth: '600px', margin: 'auto' }}>
-                <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
-                        <h1 style={{ color: '#AC69E2', textAlign: 'center' }}>SkillSync</h1>
-                        <h3 style={{ color: '#AC69E2', textAlign: 'center' }}>Client Registration</h3>
-                        <p style={{ textAlign: 'center', marginBottom: '30px' }}>Set up your information as a Client</p>
-                        <form onSubmit={saveClient} >
+        <div className="container" style={{ maxWidth: '900px', marginTop:'80px' }}>
+        <div style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+            <h1 style={{ color: '#AC69E2', textAlign: 'center', fontSize: '48px' }}>SkillSync</h1>
+            <h3 style={{ color: '#AC69E2', textAlign: 'center', fontSize: '24px' }}>Client Registration</h3>
+            <p style={{ textAlign: 'center', marginBottom: '10px', fontSize: '18px' }}>Set up your information as a Client</p>
+          <form onSubmit={saveClient} style={{padding: '15px'}}>
                                 <div className="row">
                                         <div className="col-md-6">
                                                 <div className="mb-3">
