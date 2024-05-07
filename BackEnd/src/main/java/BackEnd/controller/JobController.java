@@ -59,17 +59,17 @@ public class JobController {
         return ResponseEntity.ok("JobPosting deleted successfully!.");
     }
 
-//    @GetMapping("/search")
-//    public ResponseEntity<List<JobDto>> searchJobs(@RequestParam String query) {
-//        try {
-//            List<JobDto> jobs = jobService.searchJobs(query);
-//            return ResponseEntity.ok(jobs);
-//        } catch (Exception e) {
-//            // Log the error
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<List<JobDto>> searchJobs(@RequestParam String query) {
+        try {
+            List<JobDto> jobs = jobService.searchJobs(query);
+            return ResponseEntity.ok(jobs);
+        } catch (Exception e) {
+            // Log the error
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 
 }

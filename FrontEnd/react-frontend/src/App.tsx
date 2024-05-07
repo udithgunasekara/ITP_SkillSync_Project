@@ -60,7 +60,13 @@ import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
 
-
+import ViewJobPostComponent from './layouts/ClientSideJobListingManagement/Component/ViewJobPostComponent';
+import JobComponent from './layouts/ClientSideJobListingManagement/Component/JobComponent';
+import ListJobComponent from './layouts/ClientSideJobListingManagement/Component/ListJobComponent';
+import SearchJobComponent from './layouts/ClientSideJobListingManagement/Component/SearchJobComponent';
+import FreelancerViewComponent from './layouts/ClientSideJobListingManagement/Component/FreelancerViewComponent';
+import JobApplyForm from './layouts/ClientSideJobListingManagement/Component/JobApplyForm';
+import JobAcceptanceComponent from './layouts/ClientSideJobListingManagement/Component/JobAcceptanceComponent';
 
 export const App = () => {
   return (
@@ -360,6 +366,46 @@ export const App = () => {
               <Footer />
             </Route>
             {/* End nipuni's file */}
+
+            {/*Geesarani */}
+            <Route path='/view-jobpost/:id'>
+                <Navbar/>
+                <ViewJobPostComponent />
+                <Footer />
+              </Route> 
+              <Route path='/create-newJobPost'>
+                <JobComponent />
+                <Footer />
+              </Route>
+              <Route path='/jobs'>
+                <Navbar/>
+                <ListJobComponent />
+                <Footer />
+              </Route>
+              <Route path='/searchjobs'>
+                <SearchJobComponent />
+                <Footer />
+              </Route>
+              <Route path='/edit-jobpost/:id'>
+                <JobComponent />
+                <Footer />
+              </Route>
+              <Route path='/freelancerView-jobpost/:id'>
+                <Navbar/>
+                <FreelancerViewComponent />
+                <Footer />
+              </Route>
+              <Route path='/applyJobPost'>
+                <Navbar />
+                <JobApplyForm /> 
+                <Footer />
+              </Route>  
+              <Route path='/jobrequests'>
+                <Navbar />
+                <JobAcceptanceComponent /> 
+                <Footer />
+              </Route> 
+             {/*Geesarani*/}
 
           </Switch>
         </div>
