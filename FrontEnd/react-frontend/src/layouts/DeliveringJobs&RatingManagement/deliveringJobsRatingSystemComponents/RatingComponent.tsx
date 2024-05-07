@@ -25,7 +25,8 @@ const RatingComponent: React.FC<RatingComponentProps> = ({ onNewRating }) => {
     const [projectId, setProjectId] = useState<string>('');
     const [rate, setRate] = useState<number>(0);
     const [review, setReview] = useState<string>('');
-    const [userId, setUserId] = useState<string>('');
+    //const [userId, setUserId] = useState<string>('');
+    const [userId, setUserId] = useState<string>(sessionStorage.getItem('id')|| '');
     const { id } = useParams<{ id: string }>();
     const [errors, setErrors] = useState<Errors>({
         projectId: '',
