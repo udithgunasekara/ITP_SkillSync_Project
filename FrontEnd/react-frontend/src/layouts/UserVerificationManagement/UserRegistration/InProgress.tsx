@@ -2,10 +2,12 @@
 import React, { useEffect } from 'react';
 import { RequestEmail } from '../MailSender/emailService';
 import logo from './inprogressLogo.png';
+import { useHistory } from 'react-router-dom';
 
 interface InProgressProps {}
 
 const InProgress: React.FC<InProgressProps> = () => {
+  const navigate = useHistory();
   useEffect(() => {
     const username = sessionStorage.getItem('username');
 
@@ -18,6 +20,11 @@ const InProgress: React.FC<InProgressProps> = () => {
       RequestEmail(emailParams);
     }
   }, []); 
+
+  const handleBackToHome = () => {
+    // Redirect to home page
+    navigate.push('/FreelancerMain')
+  }
 
   return (
     <div className="container text-center d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
@@ -35,7 +42,7 @@ const InProgress: React.FC<InProgressProps> = () => {
         </p>
         <p> check your E-mail whether moderator request a resubmission</p>
         <div>
-          <button className='btn btn-primary mt-3'>Back To Home</button>
+          <button className='btn btn-primary mt-3'onClick={handleBackToHome}>Back To Home</button>
         </div>
       </div>
     </div>
