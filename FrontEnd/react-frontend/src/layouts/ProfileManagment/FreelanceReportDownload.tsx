@@ -52,7 +52,7 @@ const ReportGenerator: React.FC = () => {
             // Add title with logo
             doc.addImage(img, 'PNG', 80, 10, 50, 20); // Place logo at the top center
             doc.setFontSize(24);
-            doc.text("Freelancer Gigs Report", 105, 40, { align: 'center' });
+            doc.text("My Freelancer Gigs Report", 105, 40, { align: 'center' });
 
             // Header Section
             doc.setFontSize(14);
