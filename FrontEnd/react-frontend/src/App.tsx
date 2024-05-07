@@ -73,6 +73,8 @@ import PaymentDetailsFComponent from './layouts/PaymentManagement/components/Pay
 import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
+import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
+import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 
 
 export const App = () => {
@@ -289,6 +291,11 @@ export const App = () => {
             <Route path="/take-exam/:examIdPk">
               <Navbar />
               <DisplayQuestionAndAnswers />
+              <Footer />
+            </Route>
+            <Route path="/add-interview">
+              <Navbar />
+              <SheduleInterviewComponent />
               <Footer />
             </Route>
             {/*Vaas files End*/}
