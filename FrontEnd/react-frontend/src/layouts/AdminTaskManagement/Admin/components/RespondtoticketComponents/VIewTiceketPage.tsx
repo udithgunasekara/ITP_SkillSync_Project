@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import TicketModel from "../../../../../Model/TicketModel";
 import { SpinnerLoading } from "../../../../../utils/SpinnerLoading";
+import "./viewticketpage.css";
 import { stat } from "fs";
 import { Link } from "react-router-dom";
 
@@ -97,6 +98,7 @@ export const VIewTiceketPage = () => {
 
     return (
         <div className="d-flex flex-column align-items-center below-navbar-admin" >
+            <div className="background-image">
             <table className="table table-bordered border-primary  m-5" style={{ width: "95%", textAlign: "center" }}>
                 <thead className="table-dark border-primary">
                     <tr >
@@ -114,7 +116,7 @@ export const VIewTiceketPage = () => {
                 </thead>
                 <tbody>
                     {ticket.slice().reverse().map((element, index) => (
-                        <tr key={index}>
+                        <tr key={index} className="table-light">
                             <th scope="row">{index + 1}</th>
                             <td >{element.id}</td>
                             <td >{element.userId}</td>
@@ -137,6 +139,7 @@ export const VIewTiceketPage = () => {
 
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }

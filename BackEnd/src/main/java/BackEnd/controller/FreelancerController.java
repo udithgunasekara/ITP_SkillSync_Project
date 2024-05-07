@@ -79,6 +79,14 @@ public class FreelancerController {
         return ResponseEntity.ok(status);
     }
 
+    //url: http://localhost:8080/Freelancer/Allaccepted
+    @GetMapping("Allaccepted")
+    public ResponseEntity<List<FreelancerDTO>> getAllAcceptedFreelancers(){
+        List<FreelancerDTO> freelancer = freelancerService.getAllAcceptedFreelancers();
+        return ResponseEntity.ok(freelancer);
+
+    }
+
 
 
 }

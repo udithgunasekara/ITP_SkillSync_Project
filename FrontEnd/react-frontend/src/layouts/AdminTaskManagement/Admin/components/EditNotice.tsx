@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import "./RespondtoticketComponents/viewticketpage.css"
 import PublicNoticesModel from "../../../../Model/publicNoticesModel";
 import { SpinnerLoading } from "../../../../utils/SpinnerLoading";
 import { EditNoticeRow } from "./EditNoticeRow";
@@ -69,34 +70,36 @@ export const EditNotice = () => {
     console.log(data);
     return (
         <div className="below-navbar-admin d-flex flex-column align-items-center">
-            <h1 className="mt-3">All Notices</h1>
-            <table className="table table-bordered border-primary  m-5" style={{ width: "95%", textAlign: "center", marginBottom: "50px" }}>
-                <thead className="table-dark border-primary">
-                    <tr >
-                        <th scope="col">No</th>
-                        <th scope="col">NoticeId</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Audience</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Created Date</th>
-                        <th scope="col">Image link</th>
-                        <th scope="col">More Details</th>
-                        <th scope="col">action</th>
+            <div className="background-image" style={{textAlign:"center"}}>
+                <h1 className="mt-3 ">All Notices</h1>
+                <table className="table table-bordered border-primary  m-5" style={{ width: "95%", textAlign: "center", marginBottom: "50px" }}>
+                    <thead className="table-dark border-primary">
+                        <tr >
+                            <th scope="col">No</th>
+                            <th scope="col">NoticeId</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Audience</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Created Date</th>
+                            <th scope="col">Image link</th>
+                            <th scope="col">More Details</th>
+                            <th scope="col">action</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.slice().reverse().map((element, index) => (
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.slice().reverse().map((element, index) => (
 
-                        <EditNoticeRow element={element} key={index} index={index}
-                            onDelete={(noticeid) => {
-                                setData(data.filter((data) => data.id !== noticeid));
-                            }} />
+                            <EditNoticeRow element={element} key={index} index={index}
+                                onDelete={(noticeid) => {
+                                    setData(data.filter((data) => data.id !== noticeid));
+                                }} />
 
-                    ))}
+                        ))}
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     );

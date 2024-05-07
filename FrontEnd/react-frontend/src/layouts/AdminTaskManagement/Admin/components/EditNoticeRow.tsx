@@ -36,7 +36,7 @@ export const EditNoticeRow: React.FC<{ element: PublicNoticesModel, index: numbe
 
     return (
 
-        <tr>
+        <tr className="table-light">
             <th scope="row">{props.index + 1}</th>
             <th >{props.element.id}</th>
             <td>{props.element.title}</td>
