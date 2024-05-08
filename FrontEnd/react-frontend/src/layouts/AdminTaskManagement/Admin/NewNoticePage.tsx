@@ -17,8 +17,8 @@ export const NewNoticePage = () => {
         title: "",
         audience: "",
         description: "",
-        moreDetailsLink: null,
-        imagelink: null
+        moreDetailsLink: "",
+        imagelink: ""
     });
 
     const formRef = useRef<HTMLFormElement>(null);
@@ -41,8 +41,6 @@ export const NewNoticePage = () => {
 
     const uploadImage = async (e:any) => {
         e.preventDefault();
-
-
         const imageRef = ref(storage, `notice/${imageupload.name + v4()}`);
         console.log(imageRef);
         const uploadTask = uploadBytesResumable(imageRef, imageupload);
@@ -62,24 +60,11 @@ export const NewNoticePage = () => {
                     // Getting the URL of the uploaded image
                     console.log(url);
                     setImage(url);
+                    setFormData(prevState => ({...prevState, imagelink: url}));
                 });
             }
         );
-
-        // //upload the file to the firebase storage
-        // await uploadBytes(imageRef, imageUpload).then((snapshot) => {
-        //     getDownloadURL(snapshot.ref).then((url) => {
-        //         //getting the url of the uloaded image
-        //         console.log(url);
-        //         setImage(url);
-        //     })
-        // })
     }
-
-    // const handlefilechange = async (e:React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = e.target.files![0];        
-    //     setFormData(prevState => ({ ...prevState, imageLink: file }));
-    // }
 
     const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -98,8 +83,8 @@ export const NewNoticePage = () => {
                         title: "",
                         audience: "",
                         description: "",
-                        moreDetailsLink: null,
-                        imagelink: null
+                        moreDetailsLink: "",
+                        imagelink: ""
                     });
                     formRef.current?.reset();
 
@@ -162,10 +147,10 @@ export const NewNoticePage = () => {
                                 <label htmlFor="moredetails">Link for more details(optional)</label>
                             </div>
 
-                            <div className="form-floating mb-3">
+                            {/* <div className="form-floating mb-3">
                                 <input type="text" name="imagelink" className="form-control" id="imagelink" placeholder="more details link" onChange={handleChange} />
                                 <label htmlFor="imagelink">Image link (optional)</label>
-                            </div>
+                            </div> */}
 
                             <div className="mb-3">
                                 <label htmlFor="noticeimage" className="form-label text-light fw-bold">Upload any related images</label>
@@ -177,7 +162,6 @@ export const NewNoticePage = () => {
                                     <progress value ={uploadprogress} max={100} />
                                 </div>
                             </div>
-
 
 
                             <button type="submit" className="btn btn-primary">Submit</button>

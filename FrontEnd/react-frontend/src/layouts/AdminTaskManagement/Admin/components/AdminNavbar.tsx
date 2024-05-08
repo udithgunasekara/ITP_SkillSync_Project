@@ -25,7 +25,7 @@ export const AdminNavbar = () => {
                     
                     <div className="collapse navbar-collapse text-center" id="navbarSupportedContent">
                         
-                        <ul className="navbar-nav mx-auto">
+                        <ul className="navbar-nav mx-auto" style={{paddingTop:0}}>
                             <li className="nav-item ">                                
                                     <NavLink to={"/admin"} className="nav-link" exact >Overview</NavLink>
                             </li>

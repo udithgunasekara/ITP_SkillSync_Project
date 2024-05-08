@@ -8,6 +8,8 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './FreelancerDetails.css';
+import { listExams } from '../ExamsManagment/service/ExamsService';
+import { getUserResultByUserName } from '../ExamsManagment/service/UserResultService';
 
 
 
@@ -52,9 +54,26 @@ interface NewEducation {
   year: string;
 }
 
+interface Exam {
+  id: string;
+  examName: string;
+  examDescription: string;
+  noOfAttempts: string;
+  badgeName: string;
+  badge: File | null;
+  creditPoint: string;
+  timeLimit: string;
+}
 
+interface userResult {
+  userNamePk: string;
+  examIdPk: string;
+  result: string;
+}
 
 const FreelancerDetails: React.FC = () => {
+  const [exams, setExams] = useState<Exam[]>([]);
+  const [result, setResult] = useState<userResult[]>([]);
   const { username } = useParams<{ username: string }>();
   const registeruser = sessionStorage.getItem('username');
   const [freelancer, setFreelancer] = useState<Freelancer | null>(null);
@@ -74,7 +93,6 @@ const FreelancerDetails: React.FC = () => {
   const [ShowAboutme, setShowAboutme] = useState<boolean>(true);
   const [ShowReviews, setShowReviews] = useState<boolean>(false);
   const [ShowMyGigs, setShowMyGigs] = useState<boolean>(false);
-  const [ShowMyFreelancerdashboard, setShowMyFreelancerdashboard] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [neweducation, setNewEducation] = useState<NewEducation>({
     username: username,
@@ -102,6 +120,31 @@ const FreelancerDetails: React.FC = () => {
       console.error('Error fetching image:', error);
     }
   };
+
+  useEffect(() => {
+    getAllExam();
+    getAllResult()
+  }, []);
+
+  function getAllResult() {
+    getUserResultByUserName(username)
+      .then((response) => {
+        setResult(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function getAllExam() {
+    listExams()
+      .then((response) => {
+        setExams(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   useEffect(() => {
     const fetchFreelancerDetails = async () => {
@@ -190,19 +233,16 @@ const FreelancerDetails: React.FC = () => {
     setShowAboutme(true);
     setShowReviews(false);
     setShowMyGigs(false);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowReviewsButtonClick = () => {
     setShowAboutme(false);
     setShowReviews(true);
     setShowMyGigs(false);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowMyGigsButtonClick = () => {
     setShowAboutme(false);
     setShowReviews(false);
     setShowMyGigs(true);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowMyFreelancerdashboardButtonClick = () => {
     window.location.href = ('http://localhost:3000/FreelancerDashboard');
@@ -418,7 +458,14 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       <p className='detail-div-1'>Country: {client?.country}</p>
       <p className='detail-div-2'>Registered Date: {monthName} {year}</p>
 
-
+      <div>
+        {exams
+          .filter(exam => result.find(res => res.examIdPk === exam.id)) // Filter exams that are present in the result
+          .map((exam) => (
+            <img src={`data:image/jpeg;base64,${exam.badge}`} className="profile-image-msg" alt={exam.examName} style={{left: '300px'}}/>
+        ))}
+      </div>
+     
       
       {(registeruser!==username) && (<div>
           <ConversationForm/>

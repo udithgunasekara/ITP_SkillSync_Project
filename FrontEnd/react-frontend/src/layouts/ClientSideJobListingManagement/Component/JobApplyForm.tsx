@@ -7,6 +7,7 @@ interface JobRequest{
     freelancername: string;
     message: string;
     status:string;
+    username:string;
 }
 
 const styles = {
@@ -19,7 +20,7 @@ const styles = {
 };  
 
 const JobApplyForm: React.FC = () => {
-    const [freelancername, setFreelancerName] = useState<string>('');
+    const [freelancername, setFreelancerName] = useState<string>(sessionStorage.getItem('username') || '');
     const [message, setMessage] = useState<string>('');
     const [freelancerNameError, setFreelancerNameError] = useState('');
     const [messageError, setMessageError] = useState('');
@@ -82,18 +83,8 @@ const JobApplyForm: React.FC = () => {
                         <form className='needs-validation' noValidate onSubmit={saveJobRequest}>
                             <div className='form-group mb-2'>
                                 <label className='form-label'style={{ fontWeight: '600', 
-                                    textAlign: 'left' ,color: 'black'}}>Name:</label>
-                                <input
-                                    type="text"
-                                    placeholder='Enter your name'
-                                    name='freelancername'
-                                    className={`form-control ${freelancerNameError && 'is-invalid'}`}
-                                    id="freelancerName"
-                                    value={freelancername}
-                                    onChange={(e) => { handleName(e); }}
-                                    required
-                                    
-                                />
+                                    textAlign: 'left' ,color: 'black'}}>Name: {freelancername}</label>
+                                
                                 {freelancerNameError && <div className='invalid-feedback' style={{textAlign: 'center'}}>{freelancerNameError}</div>}
 
                             </div>

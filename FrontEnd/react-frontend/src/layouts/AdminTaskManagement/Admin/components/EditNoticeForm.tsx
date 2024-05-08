@@ -6,6 +6,9 @@ import { SpinnerLoading } from "../../../../utils/SpinnerLoading";
 import axios from "axios";
 import React from "react";
 import { AdminNavbar } from "./AdminNavbar";
+import { storage } from "../../../../utils/Firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 export const EditNoticeForm = () => {
     const { noticeId } = useParams<{ noticeId: string }>();
@@ -16,6 +19,9 @@ export const EditNoticeForm = () => {
     const history = useHistory();
     let response;
 
+    const [imageupload,setImageUpload] = useState<any>("");
+    const [image,setImage] = useState("");
+    const [uploadprogress, setUploadProgress] = useState(0);
 
     const [formData, setFormData] = useState({
         id: noticeId,
@@ -59,6 +65,33 @@ export const EditNoticeForm = () => {
         )
     }, []);
 
+    const uploadImage = async (e:any) => {
+        e.preventDefault();
+        const imageRef = ref(storage, `notice/${imageupload.name + v4()}`);
+        console.log(imageRef);
+        const uploadTask = uploadBytesResumable(imageRef, imageupload);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setUploadProgress(progress);
+            },
+            (error) => {
+                console.error(error);
+            },
+            () => {
+                // Upload completed successfully, now we can get the download URL
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    // Getting the URL of the uploaded image
+                    console.log(url);
+                    setImage(url);
+                    setFormData(prevState => ({...prevState, imagelink: url}));
+                });
+            }
+        );
+    }
+
     if (isloading) {
         return (
             <SpinnerLoading />
@@ -76,22 +109,22 @@ export const EditNoticeForm = () => {
         const { name, value } = e.target;
         let sanitizedInput: string = "";
         if (/[^a-zA-Z0-9\s]/.test(e.target.value)) {
-             sanitizedInput = e.target.value.replace(/[^\w\s]/g, '');
-        }else{
+            sanitizedInput = e.target.value.replace(/[^\w\s]/g, '');
+        } else {
             sanitizedInput = "ok";
         }
-        
-        if(sanitizedInput!==""){
+
+        if (sanitizedInput !== "") {
             setFormData(prevState => ({ ...prevState, [name]: value }));
             console.log(formData);
         }
 
-       
+
     };
 
-    const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {        
+    const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(formData.title!=="" || formData.audience!=="" || formData.description!==""){
+        if (formData.title !== "" || formData.audience !== "" || formData.description !== "") {
             try {
                 const response = await fetch(`http://localhost:8082/notices/updatenotice/${noticeId}`, {
                     method: "PUT",
@@ -110,21 +143,21 @@ export const EditNoticeForm = () => {
                         moreDetailsLink: "",
                         imagelink: ""
                     });
-    
+
                     formRef.current?.reset();
                     history.push("/admin/editnotice");
-    
-    
+
+
                 } else {
                     alert("Failed to update notice. Please try again");
                 }
             } catch (err) {
                 console.log(err);
             }
-        }else{
+        } else {
             alert("Please fill all the fields");
         }
-        
+
     }
 
 
@@ -152,7 +185,7 @@ export const EditNoticeForm = () => {
                     <div className="mb-3">
                         <label htmlFor="audience" className="form-label">Audience</label>
                         <select className={`form-select ${formData?.audience ? '' : 'is-invalid'}`} name="audience" id="audience" aria-label="Related To" value={formData?.audience} required onChange={handleChange}>
-                        <option selected disabled value="">select audience</option>
+                            <option selected disabled value="">select audience</option>
                             <option value="Freelancer">Freelancer</option>
                             <option value="client">Client</option>
                             <option value="all">All</option>
@@ -173,8 +206,14 @@ export const EditNoticeForm = () => {
                         <input type="text" className="form-control" value={formData?.moreDetailsLink} id="moreDetailsLink" name="moreDetailsLink" onChange={handleChange} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="moreDetailsLink" className="form-label">Image link</label>
-                        <input type="text" className="form-control" value={formData?.imagelink} id="imagelink" name="imagelink" onChange={handleChange} />
+                        <label htmlFor="noticeimage" className="form-label ">Upload any related images(if not changing the image do not upload any)</label>
+                        <input className="form-control" name="noticeimage" type="file" id="noticeimage" onChange={(e) => {
+                            setImageUpload(e.target.files![0])
+                        }} />
+                        <div>
+                            <button onClick={uploadImage} >Upload</button>
+                            <progress value={uploadprogress} max={100} />
+                        </div>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
