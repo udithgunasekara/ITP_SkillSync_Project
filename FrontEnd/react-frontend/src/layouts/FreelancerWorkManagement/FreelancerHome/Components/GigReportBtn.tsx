@@ -17,7 +17,11 @@ const GigReportButton: React.FC<GigReportButtonProps> = ({ gigData }) => {
   };
 
   return (
-    <button className="btn btn-primary" style={{ backgroundColor: 'white', color: 'black' }} onClick={handleGenerateReport}>Generate Freelancer Gigs Report</button>
+    <div className="container mb-4">
+      <div className="text-center">
+        <button className="btn btn-primary" style={{ backgroundColor: 'white', color: 'black' }} onClick={handleGenerateReport}>Generate Freelancer Gigs Report</button>
+      </div>
+    </div>
   );
 };
 

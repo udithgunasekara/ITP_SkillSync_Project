@@ -117,7 +117,7 @@ const CreateGigForm2: React.FC = () => {
         <div className="container" id="containerGigCreate" style={containerStyle}>
             <h2 className="text-center mb-4 text-danger">Upload Images</h2>
             <ul style={noteStyle}>
-                <li>*Please upload photos of your past projects.</li>
+                <li>*Upload images for the client to get an idea about your work : Upload past project photos if possible.</li>
                 <li>*Minimum of 2 images are required.</li>
                 <li>*Only JPG and PNG formats are accepted.</li>
             </ul>

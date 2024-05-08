@@ -67,10 +67,10 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const buttonStyle: React.CSSProperties = {
-        padding: '0.75em 1.5em',
+        padding: '0.5em 1em', // Adjusted padding
         borderRadius: '0.5em',
-        fontSize: '1.25em',
-    };
+        fontSize: '1em', // Adjusted font size
+    };    
 
     return (
         <div className="bg-light" style={backgroundStyle}>

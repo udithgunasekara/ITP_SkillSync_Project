@@ -13,7 +13,6 @@ interface PackageDetails {
 const CreateGigForm3: React.FC = () => {
 
     const { gigId } = useParams<{ gigId: string }>();
-    const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
 
     const [formData, setFormData] = useState<{ packageDetails: PackageDetails }>({
         packageDetails: {
@@ -25,9 +24,10 @@ const CreateGigForm3: React.FC = () => {
 
     const [agreed, setAgreed] = useState<boolean>(false);
     const [singlePackageMode, setSinglePackageMode] = useState<boolean>(true); // Default to single-package mode
+    const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
 
     const handleContentChange = (packageType: string, value: string) => {
-        const trimmedValue = value.slice(0,100);
+        const trimmedValue = value.slice(0, 200);
         setFormData(prevState => ({
             packageDetails: {
                 ...prevState.packageDetails,
@@ -73,7 +73,7 @@ const CreateGigForm3: React.FC = () => {
         }
 
         if (singlePackageMode) {
-            const packageType = 'Basic'; // Always submit the Basic package in single-package mode
+            const packageType = 'Basic';
 
             const packageDescription = formData.packageDetails[packageType].content.trim(); // Trim to remove leading/trailing whitespace
 
@@ -93,8 +93,11 @@ const CreateGigForm3: React.FC = () => {
             axios.post(`http://localhost:8082/freelancer-gigs/${gigId}/gig-packages`, payload)
                 .then(response => {
                     console.log(`Gig was published successfully!`);
-                    handleNextClick();
-                    // You can perform additional actions here if needed
+                    setShowSuccessMessage(true);
+                    setTimeout(() => {
+                        setShowSuccessMessage(false);
+                        handleNextClick();
+                    }, 3000); // Show message for 3 seconds and then redirect
                 })
                 .catch(error => {
                     console.error(`Error submitting ${packageType} package:`, error);
@@ -123,7 +126,11 @@ const CreateGigForm3: React.FC = () => {
                 axios.post(`http://localhost:8082/freelancer-gigs/${gigId}/gig-packages`, payload)
                     .then(response => {
                         console.log(`${packageType} package was published successfully!`);
-                        handleNextClick();
+                        setShowSuccessMessage(true);
+                        setTimeout(() => {
+                            setShowSuccessMessage(false);
+                            handleNextClick();
+                        }, 3000); // Show message for 3 seconds and then redirect
                     })
                     .catch(error => {
                         console.error(`Error submitting ${packageType} package:`, error);
@@ -142,6 +149,11 @@ const CreateGigForm3: React.FC = () => {
         <div>
             <section className="container mt-5 .below-navbar" id="containerGigCreate">
                 <h2 className="text-center mb-4 text-danger">Publish</h2>
+                {showSuccessMessage && (
+                    <div className="alert alert-success" role="alert">
+                        You have created the gig successfully!
+                    </div>
+                )}
                 {singlePackageMode ? (
                     <div className="row">
                         <div className="col">
@@ -275,7 +287,7 @@ const CreateGigForm3: React.FC = () => {
                 </div>
                 <div className="card mt-4 p-1 border-0">
                     <h2 className="card-title text-center mb-3">Agreement</h2>
-                    <p className="card-text mb-3" style={{ fontSize: '1em', paddingLeft:'1em' }}>
+                    <p className="card-text mb-3" style={{ fontSize: '1em', paddingLeft: '1em' }}>
                         "By submitting this gig, I agree to deliver the specified work within the agreed-upon
                         timeline and to the best of my ability. Payment terms are as agreed upon in our
                         communication. I retain the right to use this work as part of my portfolio, unless otherwise discussed."

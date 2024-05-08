@@ -108,7 +108,7 @@ const FreelancerDashboard: React.FC = () => {
   };
 
   const gigChunks: Gig[][] = gigData.reduce((acc: Gig[][], curr: Gig, index: number) => {
-    const chunkIndex = Math.floor(index / 5);
+    const chunkIndex = Math.floor(index / 4);
     if (!acc[chunkIndex]) {
       acc[chunkIndex] = [];
     }
@@ -135,19 +135,19 @@ const FreelancerDashboard: React.FC = () => {
       <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
-            <Row xs={1} md={2} lg={5} className="g-4">
+            <Row xs={1} md={2} lg={4} className="g-4 justify-content-center">
               {chunk.map((gig, gigIndex) => (
                 <Col key={gigIndex}>
-                  <Card className="h-100 shadow gig-card">
-                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} className="gig-card-image" />
-                    <Card.Body>
-                      <Card.Title className="mb-3">{gig.gigTitle}</Card.Title>
-                      <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
-                      <Card.Text><strong>Time Taken:</strong> From {minTimes[gig.gigId]}h</Card.Text>
-                      <Card.Text><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
-                      <div className="mt-auto">
-                        <Button variant="primary" className="me-2" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
-                        <Button variant="danger" onClick={() => handleDelete(gig.gigId)}>Delete</Button>
+                  <Card style={{ height: '380px', borderRadius: '15px' }} className="shadow gig-card-small">
+                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '150px', objectFit: 'cover', borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }} className="gig-card-image-small" />
+                    <Card.Body style={{ padding: '0.5rem', fontSize: '0.9rem', backgroundColor: '#f8f9fa', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px' }}>
+                      <Card.Title className="mb-2" style={{ fontSize: '1.15rem', color: '#333', fontWeight: 'bold' }}>{gig.gigTitle}</Card.Title>
+                      <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
+                      <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Time Taken:</strong> From {minTimes[gig.gigId]}h</Card.Text>
+                      <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
+                      <div className="mt-3 text-center">
+                        <Button variant="primary" className="me-2" size="sm" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
+                        <Button variant="danger" size="sm" onClick={() => handleDelete(gig.gigId)}>Delete</Button>
                       </div>
                     </Card.Body>
                   </Card>

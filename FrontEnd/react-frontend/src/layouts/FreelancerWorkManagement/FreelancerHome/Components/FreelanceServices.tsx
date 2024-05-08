@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { generateGigReport } from './GigsReportGeneration';
 import SearchSection from './SearchSection'; // Import SearchSection from the new file
+import { Footer } from '../../../navbar&footers/Footer';
 
 export interface Gig {
   gigId: number;
@@ -140,9 +141,8 @@ export const FreelanceServices: React.FC = () => {
             ))}
           </ul>
         </nav>
-        {/* Button to generate and download report */}
-        <button className="btn" onClick={() => generateGigReport(gigData)} >Generate Report</button>
       </section>
+      <Footer />
     </div>
   );
 };

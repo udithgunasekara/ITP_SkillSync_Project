@@ -39,15 +39,29 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ gigId }) => {
   }, [gigId]);
 
   return (
-    <div className="image-carousel-container">
-      <Carousel className="carousel-custom">
-        {images.map((image, index) => (
-          <Carousel.Item key={index}>
-            <img style={{ maxWidth: '100%', height: '400px' }} src={`data:image/jpeg;base64,${image.gigImage}`} alt={`Slide ${index}`} />
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </div>
+<div className="image-carousel-container" style={{ width: '700px', height: '495px', margin: 'auto' }}>
+  <Carousel className="carousel-custom" style={{ width: '100%', height: '100%' }}>
+    {images.map((image, index) => (
+      <Carousel.Item key={index}>
+        <img 
+          className="d-block w-100 rounded" // Ensure image fills the carousel width
+          src={`data:image/jpeg;base64,${image.gigImage}`} 
+          alt={`Slide ${index}`} 
+          style={{ 
+            width: '600px', 
+            height: '495px', 
+            objectFit: 'cover', 
+            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)', // Increase shadow intensity
+            transition: 'transform 0.5s ease', // Add animation transition
+            transform: 'scale(1)', // Initial scale
+          }} 
+          onMouseEnter={(e: React.MouseEvent<HTMLImageElement>) => (e.target as HTMLImageElement).style.transform = 'scale(1.05)'} // Scale up on hover
+          onMouseLeave={(e: React.MouseEvent<HTMLImageElement>) => (e.target as HTMLImageElement).style.transform = 'scale(1)'} // Scale back to normal on hover out
+        />
+      </Carousel.Item>
+    ))}
+  </Carousel>
+</div>
   );
 };
 
