@@ -93,7 +93,6 @@ const FreelancerDetails: React.FC = () => {
   const [ShowAboutme, setShowAboutme] = useState<boolean>(true);
   const [ShowReviews, setShowReviews] = useState<boolean>(false);
   const [ShowMyGigs, setShowMyGigs] = useState<boolean>(false);
-  const [ShowMyFreelancerdashboard, setShowMyFreelancerdashboard] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [neweducation, setNewEducation] = useState<NewEducation>({
     username: username,
@@ -234,19 +233,16 @@ const FreelancerDetails: React.FC = () => {
     setShowAboutme(true);
     setShowReviews(false);
     setShowMyGigs(false);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowReviewsButtonClick = () => {
     setShowAboutme(false);
     setShowReviews(true);
     setShowMyGigs(false);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowMyGigsButtonClick = () => {
     setShowAboutme(false);
     setShowReviews(false);
     setShowMyGigs(true);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowMyFreelancerdashboardButtonClick = () => {
     window.location.href = ('http://localhost:3000/FreelancerDashboard');
