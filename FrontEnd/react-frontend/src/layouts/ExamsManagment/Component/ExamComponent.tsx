@@ -29,10 +29,13 @@ const ExamComponent: React.FC = () => {
   const { id = '' } = useParams<{ id: string }>();
   const navigateInExam = useHistory();
   const role = sessionStorage.getItem('role');
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false); // State to manage delete confirmation
+  const [questionIdToDelete, setQuestionIdToDelete] = useState(''); // State to store the question id to delete
+
   useEffect(() => {
     validateUser(role);
   }, []);
-  
+
   function validateUser(role: string | null){
     if(role){
       if (role !== 'moderator') {
@@ -209,14 +212,31 @@ const ExamComponent: React.FC = () => {
     }
   }
 
-  function removeQuestion(id: string, examid: string) {
-    deleteQuestionById(id)
+  // Function to confirm question deletion
+  const confirmDelete = () => {
+    deleteQuestionById(questionIdToDelete)
       .then(() => {
-        getExamById(examid);
+        setDeleteConfirmation(false); // Hide delete confirmation popup
+        getExamById(id); // Refresh questions
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  // Function to cancel question deletion
+  const cancelDelete = () => {
+    setDeleteConfirmation(false); // Hide delete confirmation popup
+  };
+
+  // Function to set the question id to delete and show the confirmation popup
+  const showDeleteConfirmation = (questionId: string, examId: string) => {
+    setQuestionIdToDelete(questionId); // Set the question id to delete
+    setDeleteConfirmation(true); // Show delete confirmation popup
+  };
+
+  function removeQuestion(id: string, examid: string) {
+    showDeleteConfirmation(id, examid); // Show confirmation popup
   }
 
   function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
@@ -394,6 +414,26 @@ const ExamComponent: React.FC = () => {
         {questionDisplay()}
       </div>
       {!id && <><br></br><br></br><br></br><br></br><br></br><br></br></>}
+      {/* Delete confirmation modal */}
+      {deleteConfirmation && (
+        <div className="modal" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Confirmation</h4>
+                <button type="button" className="close" onClick={() => cancelDelete()}>&times;</button>
+              </div>
+              <div className="modal-body">
+                <p>Are you sure you want to delete this question?</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-danger" onClick={() => confirmDelete()}>Delete</button>
+                <button type="button" className="btn btn-secondary" onClick={() => cancelDelete()}>Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
