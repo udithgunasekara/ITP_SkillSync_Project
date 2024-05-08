@@ -93,11 +93,8 @@ const CreateGigForm3: React.FC = () => {
             axios.post(`http://localhost:8082/freelancer-gigs/${gigId}/gig-packages`, payload)
                 .then(response => {
                     console.log(`Gig was published successfully!`);
-                    setShowSuccessMessage(true);
-                    setTimeout(() => {
-                        setShowSuccessMessage(false);
-                        handleNextClick();
-                    }, 3000); // Show message for 3 seconds and then redirect
+                    alert("Gig was published successfully!");
+                    handleNextClick(); // Redirect
                 })
                 .catch(error => {
                     console.error(`Error submitting ${packageType} package:`, error);
@@ -126,18 +123,16 @@ const CreateGigForm3: React.FC = () => {
                 axios.post(`http://localhost:8082/freelancer-gigs/${gigId}/gig-packages`, payload)
                     .then(response => {
                         console.log(`${packageType} package was published successfully!`);
-                        setShowSuccessMessage(true);
-                        setTimeout(() => {
-                            setShowSuccessMessage(false);
-                            handleNextClick();
-                        }, 3000); // Show message for 3 seconds and then redirect
                     })
                     .catch(error => {
                         console.error(`Error submitting ${packageType} package:`, error);
                     });
             });
+            alert("All packages were published successfully!");
+            handleNextClick(); // Redirect
         }
     };
+
 
     const history = useHistory();
 
