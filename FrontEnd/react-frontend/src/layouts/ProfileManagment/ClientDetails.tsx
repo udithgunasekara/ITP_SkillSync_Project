@@ -123,7 +123,7 @@ const ClientDetails: React.FC = () => {
     if (freelancer && freelancer.email === client?.email) {
       window.location.href = `http://localhost:3000/freelancers/${username}`;
     } else {
-      window.location.href = 'http://localhost:3000/Freelancer/Login';
+      window.location.href = 'http://localhost:3000/Freelancer/Registration';
     }
   };
 

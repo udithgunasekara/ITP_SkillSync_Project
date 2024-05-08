@@ -107,7 +107,8 @@
   margin-right: 0.3125em;
 }
 .detail-card {
-  font-family: Arial, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   background-color: #f9f9f9;
   border-radius: 0.5em;
   box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
@@ -121,17 +122,22 @@
   padding-left: 46.25em;
   margin-top: -5.8em;
   padding-bottom: 0.625em;
-  color: #333;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   line-height: 1.6;
 }
 .detail-div-2 {
   padding-left: 46.25em;
   margin-top: 0;
   padding-bottom: 0.625em;
-  color: #333;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   line-height: 1.6;
 }
 .username {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+  font-weight: bolder;
   padding-left: 20em;
   padding-top: 1.25em;
 }
@@ -157,7 +163,7 @@
   margin-top: -1.5em;
 }
 .detail-card p, .detail-card h2 {
-  color: #333;
+  font-size: 1.25em;
   line-height: 1.6;
 }
 .delete-education, .delete-skill, .Delete-language {
@@ -202,6 +208,7 @@
 ul {
   list-style-type: none;
   padding: 0;
+  padding-top: 20px;
 }
 ul p {
   padding: 0.625em;

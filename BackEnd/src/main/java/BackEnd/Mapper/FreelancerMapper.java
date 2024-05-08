@@ -34,6 +34,7 @@ public class FreelancerMapper {
                     freelancer.getEmail(),
                     freelancer.getDob(),
                     freelancer.getNic(),
+                    freelancer.getLevel(),
                     freelancer.getPhone(),
                     freelancer.getUserName(),
                     freelancer.getPassword(),

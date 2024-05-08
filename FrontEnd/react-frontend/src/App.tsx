@@ -75,6 +75,7 @@ import TransactionDetails from './layouts/PaymentManagement/components/Transacti
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
 import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
 import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
+import HomePage from './layouts/Home/HomePage';
 
 
 export const App = () => {
@@ -83,6 +84,10 @@ export const App = () => {
       <div className='d-flex flex-column min-vh-100'>
         <div className='flex-grow-1'>
           <Switch>
+            <Route path="/HomePage">
+              <Navbar />
+              <HomePage />
+            </Route>
             <Route path="/CreateGigForm1">
               <Navbar />
               <CreateGigForm1 />
