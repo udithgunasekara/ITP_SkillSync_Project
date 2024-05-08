@@ -128,7 +128,7 @@ const CreateGigForm3: React.FC = () => {
                         console.error(`Error submitting ${packageType} package:`, error);
                     });
             });
-            alert("All packages were published successfully!");
+            alert("You have created the gig successfully!");
             handleNextClick(); // Redirect
         }
     };

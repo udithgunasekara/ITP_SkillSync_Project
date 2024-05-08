@@ -40,7 +40,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ gigId }) => {
 
   return (
 <div className="image-carousel-container" style={{ width: '700px', height: '495px', margin: 'auto' }}>
-  <Carousel className="carousel-custom" style={{ width: '100%', height: '100%' }}>
+  <Carousel className="carousel-custom" style={{ width: '100%', height: '100%' }} interval={2000}>
     {images.map((image, index) => (
       <Carousel.Item key={index}>
         <img 

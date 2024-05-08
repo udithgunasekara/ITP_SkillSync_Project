@@ -20,7 +20,7 @@ interface Package {
 const EditGig: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  
+
   // State for gig details and packages
   const [gigDetails, setGigDetails] = useState<GigDetails | null>(null);
   const [packages, setPackages] = useState<Package[]>([]);
@@ -185,12 +185,14 @@ const EditGig: React.FC = () => {
               id="description"
               value={gigDetails.gigDescription}
               onChange={(e) => handleGigDetailsChange('gigDescription', e.target.value)}
-              maxLength={200}
+              maxLength={300}
+              rows={7} 
             />
             <div className="text-danger">{gigDescriptionError}</div>
           </div>
         </div>
       )}
+
       {/* Package details form */}
       {packages.map((pkg, index) => (
         <div key={pkg.packageId} className="mb-4">
