@@ -29,6 +29,7 @@ public class Freelancer {
     private String password;
     private String nic;
     private String workOn;
+    private Long level;
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDate created_at;
