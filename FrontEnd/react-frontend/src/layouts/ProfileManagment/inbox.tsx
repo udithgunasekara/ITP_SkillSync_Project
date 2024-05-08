@@ -73,7 +73,7 @@ function Inbox() {
 
   return (
     <div className='inbox'>
-      <div>
+      <div className='people-text-div'>
         <h1 className='people-text'> People</h1>
         <hr/>
       </div>
