@@ -141,19 +141,19 @@ const FreelancerDetails: React.FC = () => {
   
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFile(e.target.files[0]);
+      const selectedFile = e.target.files[0];
+      // Check if the selected file is a PNG or JPEG
+      if (selectedFile.type === 'image/png' || selectedFile.type === 'image/jpeg') {
+        setFile(selectedFile);
+      } else {
+        alert('Please select a PNG or JPEG image file.');
+      }
     }
   };
-
+  
   const handleUpload = async () => {
     if (!file) {
       alert('Please select an image file.');
-      return;
-    }
-  
-    // Check if the selected file is an image
-    if (!file.type.startsWith('image/')) {
-      alert('Please select a valid image file.');
       return;
     }
   
@@ -167,7 +167,7 @@ const FreelancerDetails: React.FC = () => {
         },
       });
       alert('Image uploaded successfully.');
-      fetchImage(); // Refresh the image after upload
+      window.location.reload();
     } catch (error) {
       console.error('Error uploading image:', error);
       alert('Error uploading image. Please try again.');
