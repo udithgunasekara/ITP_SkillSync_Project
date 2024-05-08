@@ -33,7 +33,7 @@ export const SupportNavBar = () => {
                 </div>
 
                 
-                <a href="#" className="login-button">login</a>
+                {/* <a href="#" className="login-button">login</a> */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
