@@ -104,11 +104,13 @@ export default FreelancerAgreementComponent;*/
 
 import React, { useState } from 'react';
 import jsPDF from 'jspdf';
+import { useHistory } from 'react-router-dom';
 import logo from '../image/Asset 3.png';
 
 const FreelancerAgreementComponent: React.FC = () => {
     // Use useState to handle the checkbox state
     const [isChecked, setIsChecked] = useState<boolean>(false);
+    const navigate = useHistory();
 
     // Agreement text constant
     const agreementText: string = `
@@ -207,6 +209,12 @@ for legal and operational purposes.
         }
     };
 
+     // Function to handle the button click
+   const handleProceedToPayment = (): void => {
+    // If using useNavigate, navigate to the payment route
+    navigate.push('/payment-details');
+    };
+
     return (
         <div className="card" style={{ textAlign: 'center' }}>
             <div className="card-body" style={{ width: '500px', margin: '0 auto' }}>
@@ -215,7 +223,7 @@ for legal and operational purposes.
                 <br />
             {/* Headline styled as requested */}
             <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '2rem' }}>
-                AGREEMENT
+                CLIENT AGREEMENT
             </h1>
         </div>
                 <p>{agreementText}</p>
@@ -238,7 +246,7 @@ for legal and operational purposes.
                             onClick={handleSubmit}
                             style={{ marginRight: '10px' }}
                         >
-                            Submit
+                            Download PDF
                         </button>
                         <button
                             className="btn btn-danger"
@@ -246,6 +254,21 @@ for legal and operational purposes.
                         >
                             Cancel
                         </button>
+                        <br />
+                        <br />
+                        <br />
+                        <button
+                                className="btn btn-info btn-block"
+                                onClick={handleProceedToPayment} // Uncomment and implement the function if needed
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.boxShadow = '0px 8px 8px rgba(0, 0, 0, 0.2)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.boxShadow = '0px 4px 8px rgba(0, 0, 0, 0.2)';
+                                }}
+                            >
+                                Proceed to Payment
+                            </button>
                     </div>
                 </div>
             </div>
