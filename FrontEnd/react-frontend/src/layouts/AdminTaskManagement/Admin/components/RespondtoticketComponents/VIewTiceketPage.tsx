@@ -32,6 +32,7 @@ export const VIewTiceketPage = () => {
                 loadedtickets.push(
                     new TicketModel(
                         responsedata[element].id,
+                        responsedata[element].email,
                         responsedata[element].relatedTo,
                         {
                             userId: responsedata[element].user.userId,
@@ -106,6 +107,7 @@ export const VIewTiceketPage = () => {
                         <th scope="col">TicketId</th>
                         <th scope="col">UserId</th>
                         <th scope="col">UserName</th>
+                        <th scope="col">Email</th>
                         <th scope="col">related to</th>
                         <th scope="col">subject</th>
                         <th scope="col">description</th>
@@ -121,6 +123,7 @@ export const VIewTiceketPage = () => {
                             <td >{element.id}</td>
                             <td >{element.userId}</td>
                             <td >{element.username}</td>
+                            <td><a href={`mailto:${element.email}`}>{element.email == null || element.email.trim() == ""?"":"Email"}</a></td>
                             <td style={{ maxWidth: "250px" }}><p style={{ margin: "0", wordWrap: "break-word" }}>{element.relatedTo}</p></td>
                             <td style={{ maxWidth: "250px", margin: "0", wordWrap: "break-word" }} >{element.subject}</td>
                             <td >{element.description}</td>

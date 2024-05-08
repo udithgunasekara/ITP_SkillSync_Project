@@ -16,7 +16,7 @@ const PayPalProceed = () => {
 
   const paymentProceedHandler = () => {
     // Open PayPal gateway website in a new window/tab
-    window.open('https://www.paypal.com', '_blank');
+    window.open('https://www.paypal.com/signin?returnUri=https%3A%2F%2Fdeveloper.paypal.com%2Fdashboard%2F&intent=developer&ctxId=ul1bd54e6579e64a8ca546e4c01b6c04fa', '_blank');
   };
 
   return (
@@ -33,8 +33,8 @@ const PayPalProceed = () => {
           </div>
         </div>
         <div className="col-md-6 mt-5 offset-md-3 offset-md-3 d-flex justify-content-end">
-          <button onClick={() => {navigate.goBack()}}  className="bg-red main-btn mx-5">Back</button>
-          <button onClick={paymentProceedHandler} className="bg-blue main-btn">Pay with PayPal</button>
+          <button onClick={() => {navigate.goBack()}}  className="main-btn mx-5" style={{backgroundColor: 'red', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer'}}>Back</button>
+          <button onClick={paymentProceedHandler} className="main-btn" style={{backgroundColor: 'blue', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer'}}>Pay with PayPal</button>
         </div>
       </div>
     </div>

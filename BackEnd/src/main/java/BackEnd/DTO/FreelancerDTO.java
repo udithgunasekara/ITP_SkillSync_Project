@@ -26,6 +26,7 @@ public class FreelancerDTO {
     private String email;
     private String dob;
     private String nic;
+    private Long level;
     private Long phone;
     private String userName;
     private String password;

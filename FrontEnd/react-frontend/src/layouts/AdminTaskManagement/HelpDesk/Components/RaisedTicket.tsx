@@ -7,7 +7,7 @@ import { TicketCard } from './TicketCard';
 export const RaisedTicket = () => {
 
     // const userid = sessionStorage.getItem('id') 
-    const userid = 2;
+    const userid = 1;
 
     const [ticket, setTicket] = useState<TicketModel[]>([]);
     const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ export const RaisedTicket = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                respose = await axios.get("http://localhost:8082/ticket/getticket");
+                respose = await axios.get(`http://localhost:8082/ticket/alltickets/${userid}`);
 
             } catch (error) {
                 throw new Error("Error in fetching data in RaisedTicket.jsx");
@@ -33,6 +33,7 @@ export const RaisedTicket = () => {
                 loadedtickets.push(
                     new TicketModel(
                         responsedata[element].id,
+                        responsedata[element].email,
                         responsedata[element].relatedTo,
                         {
                             userId: responsedata[element].user.userId,

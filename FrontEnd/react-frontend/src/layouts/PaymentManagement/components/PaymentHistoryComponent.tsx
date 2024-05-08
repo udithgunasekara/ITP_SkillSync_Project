@@ -1,8 +1,8 @@
 import React, { useEffect, useState, KeyboardEvent, ChangeEvent } from 'react';
 import { listPayments } from '../services/PaymentHistoryService';
 import { notifyMessage } from '../util/communFunc';
-import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import logo from '../image/Asset 3.png'
 
 interface Payment {
   transactionID: string;
@@ -77,36 +77,34 @@ const PaymentHistoryComponent: React.FC = () => {
 
       {/* Search */}
       <div>
-        <input
-          value={searchTxt}
-          onKeyDown={handleKeyDown}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            if (e.target.value.trim() === '') {
-              getAllData();
-            }
-            setSearchTxt(e.target.value);
-          }}
-          className='mb-3 mt-5'
-          placeholder={'Search by Project ID'}
-        />
-        <button
-          className='btn btn-outline-success'
-          type='button'
-          style={{
-            backgroundColor: '#c585f7',
-            borderColor: '#c585f7',
-            color: 'white',
-            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-            transition: 'box-shadow 0.3s ease',
-          }}
-          onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) =>
-            (e.currentTarget.style.boxShadow = '0px 8px 8px rgba(0, 0, 0, 0.2)')
-          }
-          onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) =>
-            (e.currentTarget.style.boxShadow = '0px 4px 8px rgba(0, 0, 0, 0.2)')
-          }>
-          Search
-        </button>
+        <div className="input-group mb-3 mt-5">
+          <input
+            value={searchTxt}
+            onKeyDown={handleKeyDown}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              if (e.target.value.trim() === '') {
+                getAllData();
+              }
+              setSearchTxt(e.target.value);
+            }}
+            className='form-control'
+            placeholder={'Search by Project ID'}
+          />
+          <button
+            className='btn btn-outline-success'
+            type='button'
+            onClick={searchHandler}
+            style={{
+              backgroundColor: 'blue',
+              borderColor: 'blue',
+              color: 'white',
+            }}
+            onMouseEnter={(e) => (e.target as HTMLButtonElement).style.backgroundColor = 'darkblue'}
+            onMouseLeave={(e) => (e.target as HTMLButtonElement).style.backgroundColor = 'blue'}
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       {/* Download Report Button */}
@@ -121,20 +119,23 @@ const PaymentHistoryComponent: React.FC = () => {
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
                 transition: 'box-shadow 0.3s ease',
               }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.backgroundColor = 'darkblue'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.backgroundColor = '#007bff'}
             >
               {loading ? 'Generating Report...' : 'Download Report'}
             </button>
           )}
         </PDFDownloadLink>
+        <br/><br/>
 
       <table className='table table-striped table-bordered'>
         <thead>
           <tr>
-            <th>Transaction Id</th>
-            <th>Date</th>
-            <th>Payment Method</th>
-            <th>Project Id</th>
-            <th>Amount</th>
+            <th style={{ fontWeight: 'bold' }}>Transaction Id</th>
+            <th style={{ fontWeight: 'bold' }}>Date</th>
+            <th style={{ fontWeight: 'bold' }}>Payment Method</th>
+            <th style={{ fontWeight: 'bold' }}>Project Id</th>
+            <th style={{ fontWeight: 'bold' }}>Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -157,7 +158,9 @@ const TransactionPDF: React.FC<{ payments: Payment[] }> = ({ payments }) => (
   <Document>
     <Page style={styles.page}>
       <View style={styles.section}>
-        <Text style={styles.header}>Transaction History</Text>
+      <Image src={logo} style={styles.image} />
+        <Text style={styles.header}>Transaction History - Monthly Report</Text>
+      
         <View style={styles.table}>
           {/* Table Header */}
           <View style={styles.tableRow}>
@@ -199,8 +202,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   header: {
-    fontSize: 20,
+    fontSize: 25,
     marginBottom: 20,
+    textAlign: 'center',
   },
   table: {
     width: '100%', // Set width to 100% to fill the page
@@ -218,11 +222,13 @@ const styles = StyleSheet.create({
     width: '20%', // Set width for each column
     fontWeight: 'bold',
     padding: 5,
+    fontSize: 12,
   },
   tableCell: {
     borderWidth: 1,
     width: '20%', // Set width for each column
     padding: 5,
+    fontSize: 10,
   },
   footer: {
     position: 'absolute',
@@ -232,9 +238,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 8,
     marginBottom: 5,
   },
+  image: {
+    width: '100px', 
+    height: '50px',
+  }
 });
 
 export default PaymentHistoryComponent;

@@ -2,6 +2,16 @@ import { Link, NavLink, useHistory} from "react-router-dom";
 
 export const Navbar = () => {
     const history = useHistory();
+    const username = sessionStorage.getItem('username');
+    const role = sessionStorage.getItem('role');
+
+    const handleProfileClick = () =>{
+        if(role === 'freelancer'){
+            history.push(`/freelancers/${username}`);
+        }else{
+            history.push(`/clients/${username}`);
+        }
+    }
 
     const handleLogout = () => {
         // Clear the authentication token from local storage
@@ -52,7 +62,7 @@ export const Navbar = () => {
                                     alt="User Profile" />
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{position: "absolute", zIndex: 1005}}>
-                                <li><a className="dropdown-item " href="#">Profile</a></li>
+                                <li><a className="dropdown-item " onClick={handleProfileClick}>Profile</a></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/details'}>Billing and Information</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/payment'}>Transaction History</NavLink></li>
                                 <li><NavLink className="dropdown-item" activeClassName="active-toggle" to={'/support'}>Help Desk</NavLink></li>

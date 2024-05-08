@@ -99,7 +99,7 @@ const FreelancerGigsDetails: React.FC = () => {
   };
 
   return (
-    <div className='user-gigs'>
+    <div id='user-gigs'>
       <br />
       <div className='Search'>
         <form onSubmit={handleSubmit}>

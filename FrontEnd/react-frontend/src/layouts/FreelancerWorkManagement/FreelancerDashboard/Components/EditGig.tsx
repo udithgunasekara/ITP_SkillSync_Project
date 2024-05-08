@@ -127,8 +127,8 @@ const EditGig: React.FC = () => {
   const validatePackage = (pkg: Package, index: number) => {
     let error = '';
 
-    if (!/^[a-zA-Z\s]+$/.test(pkg.packageDescription) || pkg.packageDescription.trim() === '') {
-      error += 'Package description must contain only alphabetical letters and cannot be empty. ';
+    if (pkg.packageDescription.trim().length > 200) {
+      error += 'Package description cannot exceed 200 characters. ';
     }
 
     if (isNaN(parseFloat(pkg.packagePrice)) || parseFloat(pkg.packagePrice) <= 0) {
@@ -206,13 +206,12 @@ const EditGig: React.FC = () => {
           </div>
           <div className="mb-3">
             <label htmlFor={`packageDescription-${index}`} className="form-label">Package Description:</label>
-            <input
-              type="text"
+            <textarea
               className="form-control"
               id={`packageDescription-${index}`}
               value={pkg.packageDescription}
               onChange={(e) => handlePackageChange(index, 'packageDescription', e.target.value)}
-              maxLength={100}
+              maxLength={200}
             />
           </div>
           <div className="mb-3">
@@ -244,7 +243,7 @@ const EditGig: React.FC = () => {
       {/* Buttons */}
       <div className="d-flex justify-content-between">
         <button className="btn btn-danger" onClick={handleDiscardChanges}>Discard Changes</button>
-        <button className="btn btn-success"  onClick={handleSave}>Apply Changes</button>
+        <button className="btn btn-success" onClick={handleSave}>Apply Changes</button>
       </div>
     </div>
   );

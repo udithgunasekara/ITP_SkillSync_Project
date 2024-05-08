@@ -1,7 +1,6 @@
 package BackEnd.Mapper;
 
 import BackEnd.DTO.OTPRequestDTO;
-import BackEnd.DTO.OTPVerificationDTO;
 import BackEnd.entity.OTPRequest;
 
 public class OTPMapper {

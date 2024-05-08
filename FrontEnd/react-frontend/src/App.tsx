@@ -63,12 +63,31 @@ import FreelancerViewComponent from './layouts/ClientSideJobListingManagement/Co
 import JobApplyForm from './layouts/ClientSideJobListingManagement/Component/JobApplyForm';
 import JobAcceptanceComponent from './layouts/ClientSideJobListingManagement/Component/JobAcceptanceComponent';
 
+import PaymentComponent from './layouts/PaymentManagement/components/PaymentComponent';
+import PaymentHistoryComponent from './layouts/PaymentManagement/components/PaymentHistoryComponent';
+import SelectPaymentType from './layouts/PaymentManagement/views/SelectPaymentType';
+import CardPaymentProceed from './layouts/PaymentManagement/views/CardPaymentProceed';
+import PayPalProceed from './layouts/PaymentManagement/views/PayPalProceed';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PaymentDetailsFComponent from './layouts/PaymentManagement/components/PaymentDetailsFComponent';
+import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
+import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
+import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
+import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
+import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
+import HomePage from './layouts/Home/HomePage';
+
+
 export const App = () => {
   return (
     <Router>
       <div className='d-flex flex-column min-vh-100'>
         <div className='flex-grow-1'>
           <Switch>
+            <Route path="/HomePage">
+              <Navbar />
+              <HomePage />
+            </Route>
             <Route path="/CreateGigForm1">
               <Navbar />
               <CreateGigForm1 />
@@ -87,7 +106,6 @@ export const App = () => {
             <Route path="/FreelancerMain" exact>
               <Navbar />
               <FreelancerHome />
-              <Footer />
             </Route>
             <Route path="/gig/:id">
               <Navbar />
@@ -186,21 +204,28 @@ export const App = () => {
             </Route>
   
             <Route path='/Client/Login' exact>
+            <Navbar />
               <ClientLoginComponent/>
+              <Footer />
             </Route>
 
             <Route path='/Freelancer/Registration' exact>
+            <Navbar />
               <FreelancerRegComponent/>
+              <Footer />
             </Route>
 
             <Route path='/Client/Registration' exact>
+            <Navbar />
               <ClientRegComponent/>
+              <Footer />
             </Route>
 
             {/* dummy site */}
             {/* http://localhost:3000/Freelancer/QualificationUploader */}
             <Route path='/Freelancer/QualificationUploader'  exact>
               <QualificationComponent/>
+              
             </Route>
 
             <Route path='/upload-qualification'  exact>
@@ -212,23 +237,39 @@ export const App = () => {
             </Route>
 
             <Route path='/Applicant/Page'  exact>
+            <Navbar />
               <ApplicantListPage/>
+              <Footer />
             </Route>
 
             <Route path='/Applicant/review/:username'  exact>
+            <Navbar />
               <QualificationReview/>
+              <Footer />
             </Route>
 
             <Route path='/InProgressPage'  exact>
+            <Navbar />
               <InProgress/>
+              <Footer />
             </Route>
 
             <Route path='/ReSubmission/:username'  exact>
+            <Navbar />
               <ResubmissionUpload />
+              <Footer />
             </Route>
 
             <Route path='/UserTestPage' exact>
+            <Navbar />
               <UserTest/>
+              <Footer />
+            </Route>
+
+            <Route path='/OTPVerificationPage' exact>
+            <Navbar />
+            <OTPVerification/>
+            <Footer />
             </Route>
 
             {/* Ending supeshala's files */}
@@ -277,6 +318,11 @@ export const App = () => {
             <Route path="/take-exam/:examIdPk">
               <Navbar />
               <DisplayQuestionAndAnswers />
+              <Footer />
+            </Route>
+            <Route path="/add-interview">
+              <Navbar />
+              <SheduleInterviewComponent />
               <Footer />
             </Route>
             {/*Vaas files End*/}
@@ -336,6 +382,8 @@ export const App = () => {
             </Route>
             {/* //http://localhost:3000/projects */}
             <Route path="/projects">
+            </Route>
+            <Route path='/edit-details/:userName' >
               <Navbar />
               <ListProjectComponent />
               <Footer />
@@ -370,7 +418,7 @@ export const App = () => {
                 <FreelancerViewComponent />
                 <Footer />
               </Route>
-              <Route path='/applyJobPost/:customerUsername'>
+              <Route path='/applyJobPost'>
                 <Navbar />
                 <JobApplyForm /> 
                 <Footer />
@@ -381,6 +429,63 @@ export const App = () => {
                 <Footer />
               </Route> 
              {/*Geesarani*/}
+
+            {/* starting nipuni's file */}
+            <Route path='/payment-details' >
+              <Navbar />
+              <SelectPaymentType />
+              <Footer />
+            </Route>
+
+            <Route path='/payment' >
+              <Navbar />
+              <PaymentHistoryComponent  />
+              <Footer />
+            </Route>
+
+            <Route path='/make-payment' >
+              <Navbar />
+              <PaymentComponent />
+              <Footer />
+            </Route>
+
+            <Route path='/card-payment' >
+              <Navbar />
+              <CardPaymentProceed  />
+              <Footer />
+            </Route>
+
+            <Route path='/paypal-payment' >
+              <Navbar />
+              <PayPalProceed   />
+              <Footer />
+            </Route>
+
+            <Route path='/details' >
+              <Navbar />
+              <PaymentDetailsFComponent   />
+              <Footer />
+            </Route>
+
+            <Route path='/edit-details/:userName' >
+              <Navbar />
+              <PaymentDetailsFComponent   />
+              <Footer />
+            </Route>
+
+            <Route path='/viewDetails/:userName' >
+              <Navbar />
+              <DetailsPage  />
+              <Footer />
+            </Route>
+
+            <Route path='/transaction-details' >
+              <Navbar />
+              <TransactionDetails />
+              <Footer />
+            </Route>
+            {/* End nipuni's file */}
+
 
           </Switch>
         </div>

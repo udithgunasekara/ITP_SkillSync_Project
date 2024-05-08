@@ -16,6 +16,7 @@ public class FreelancerVMapper {
                 freelancer.getUserName(),
                 freelancer.getPassword(),
                 freelancer.getNic(),
+                freelancer.getLevel(),
                 freelancer.getWorkOn(),
                 freelancer.getCreated_at(),
                 freelancer.getApp_status(),
@@ -35,6 +36,7 @@ public class FreelancerVMapper {
                 freelancerVDTO.getPassword(),
                 freelancerVDTO.getNic(),
                 freelancerVDTO.getWorkOn(),
+                freelancerVDTO.getLevel(),
                 freelancerVDTO.getCreated_at(),
                 freelancerVDTO.getApp_status(),
                 freelancerVDTO.getInterviews()

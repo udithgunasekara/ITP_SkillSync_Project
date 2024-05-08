@@ -13,6 +13,7 @@
 
 .languages-list {
   list-style-type: none;
+  padding-top: 10px;
   padding: 0;
   margin: 0;
 }
@@ -21,6 +22,7 @@
   display: inline-block;
   color: black;
   font-size: 1.125em;
+  padding-top: 10px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: 400;
   margin-right: 0.625em; /* Adjust as needed */
@@ -123,17 +125,18 @@
   padding-left: 18em;
   padding-top: 1.25em;
   font-size: 1.75em;
+  font-weight: bold;
 }
 
 .detail-card p,
 .detail-card h2 {
   font-size: 1.25em;
-  color: #333;
   line-height: 1.6;
 }
 
 .detail-card {
-  font-family: Arial, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   background-color: #f9f9f9;
   border-radius: 0.5em;
   box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
@@ -148,7 +151,8 @@
   padding-left: 46.25em;
   margin-top: -3.4375em;
   padding-bottom: 0.625em;
-  color: #333;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   line-height: 1.6;
 }
 
@@ -156,7 +160,8 @@
   padding-left: 46.25em;
   margin-top: 0;
   padding-bottom: 0.625em;
-  color: #333;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   line-height: 1.6;
 }
 
@@ -196,6 +201,8 @@
 
 #detail-div-1 {
   display: flex;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   justify-content: space-between;
   margin-bottom: 0.625em;
 }

@@ -1,17 +1,24 @@
 
 import { useRef, useState } from "react";
+import { storage } from "../../../utils/Firebase"
+import { getDownloadURL,ref,uploadBytesResumable } from "firebase/storage";
 import { AdminDashboard } from "./components/AdminDashboard/AdminDashboard";
 import { AdminSideBar } from "./components/AdminSideBar";
 import { AdminNavbar } from "./components/AdminNavbar";
+import {v4} from "uuid"
 
 export const NewNoticePage = () => {
+
+    const [imageupload,setImageUpload] = useState<any>("");
+    const [image,setImage] = useState("");
+    const [uploadprogress, setUploadProgress] = useState(0);
 
     const [formData, setFormData] = useState({
         title: "",
         audience: "",
         description: "",
-        moreDetailsLink: null,
-        imagelink: null
+        moreDetailsLink: "",
+        imagelink: ""
     });
 
     const formRef = useRef<HTMLFormElement>(null);
@@ -32,10 +39,32 @@ export const NewNoticePage = () => {
 
     };
 
-    // const handlefilechange = async (e:React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = e.target.files![0];        
-    //     setFormData(prevState => ({ ...prevState, imageLink: file }));
-    // }
+    const uploadImage = async (e:any) => {
+        e.preventDefault();
+        const imageRef = ref(storage, `notice/${imageupload.name + v4()}`);
+        console.log(imageRef);
+        const uploadTask = uploadBytesResumable(imageRef, imageupload);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setUploadProgress(progress);
+            },
+            (error) => {
+                console.error(error);
+            },
+            () => {
+                // Upload completed successfully, now we can get the download URL
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    // Getting the URL of the uploaded image
+                    console.log(url);
+                    setImage(url);
+                    setFormData(prevState => ({...prevState, imagelink: url}));
+                });
+            }
+        );
+    }
 
     const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -54,8 +83,8 @@ export const NewNoticePage = () => {
                         title: "",
                         audience: "",
                         description: "",
-                        moreDetailsLink: null,
-                        imagelink: null
+                        moreDetailsLink: "",
+                        imagelink: ""
                     });
                     formRef.current?.reset();
 
@@ -118,11 +147,21 @@ export const NewNoticePage = () => {
                                 <label htmlFor="moredetails">Link for more details(optional)</label>
                             </div>
 
-                            <div className="form-floating mb-3">
+                            {/* <div className="form-floating mb-3">
                                 <input type="text" name="imagelink" className="form-control" id="imagelink" placeholder="more details link" onChange={handleChange} />
                                 <label htmlFor="imagelink">Image link (optional)</label>
-                            </div>
+                            </div> */}
 
+                            <div className="mb-3">
+                                <label htmlFor="noticeimage" className="form-label text-light fw-bold">Upload any related images</label>
+                                <input className="form-control" name="noticeimage" type="file" id="noticeimage"  onChange={(e) => {
+                                    setImageUpload(e.target.files![0])
+                                }}/>
+                                <div>
+                                    <button onClick={uploadImage} >Upload</button>
+                                    <progress value ={uploadprogress} max={100} />
+                                </div>
+                            </div>
 
 
                             <button type="submit" className="btn btn-primary">Submit</button>

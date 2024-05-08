@@ -30,6 +30,7 @@ export const FreelancerLoginComponent =  () => {
 
             alert('login successful ');
  
+            console.log("Account status check function calling ");
             /// Check account status after login
             checkAccountStatus(username).then((response) => {
                 // Assuming response.data is the boolean account status
@@ -37,12 +38,12 @@ export const FreelancerLoginComponent =  () => {
                 if (status === true) {
                     console.log("Account status accepted");
                     // If the account status is accepted, navigate to UserTestPage
-                    navigate.push('/UserTestPage');
+                    navigate.push('/FreelancerDashboard');
                 } else {
-                    console.log("Account status accepted");
                     // If the account status is not accepted, navigate to AccountNotAcceptedPage
-                    navigate.push('/InProgressPage');
+                    navigate.push(`/ReSubmission/${username}`);
                 }
+                console.log("Account status check function called successfully");
             }).catch((error) => {
                 console.error("Error checking account status:", error);
                
