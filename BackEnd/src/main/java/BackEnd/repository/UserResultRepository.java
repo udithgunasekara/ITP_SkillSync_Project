@@ -13,5 +13,5 @@ public interface UserResultRepository extends JpaRepository<UserResult, UserResu
     UserResult findUserResultByid(String userName, Long examId);
 
     @Query(value = "SELECT * FROM skillsync_db.user_result WHERE user_name_pk = ?", nativeQuery = true)
-    List<UserResult> findUserResultByUsername(String userName);
+    List<UserResult> findUserResultByusername(String userName);
 }
