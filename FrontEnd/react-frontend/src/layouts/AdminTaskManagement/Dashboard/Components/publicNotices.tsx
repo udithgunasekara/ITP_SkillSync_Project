@@ -72,7 +72,7 @@ export const PublicNotices = () => {
         <h1 className="display-5 fw-bold ms-4">Public Notices</h1>
         <Link 
         className="btn btn-lg main-color text-white p-3 d-flex align-items-center justify-content-center" 
-        style={{borderRadius:"50%", width: "60px", height: "60px"}} 
+        style={{borderRadius:"50%", width: "60px", height: "60px",backgroundColor:"purple"}} 
         to={`/dashboard/search`}>
 
            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">

@@ -15,7 +15,7 @@ export const SupportNavBar = () => {
                 </Link>
 
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul className="navbar-nav ">
+                    <ul className="navbar-nav " style={{paddingTop:0}}>
                         <li className="nav-item">
                             <NavLink className="nav-link" to={"/support"}>Help Desk</NavLink>
                         </li>

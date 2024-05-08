@@ -76,6 +76,14 @@ export const RaiseTicketForm = () => {
         
     }
 
+    const handleReset = () => {
+        setFormData(prevState => ({
+            ...prevState,
+            description: '',
+            subject:''
+        }));
+    };
+
 
 
     return (
@@ -116,7 +124,7 @@ export const RaiseTicketForm = () => {
                     </div> */}
 
                     <button type="submit" className="btn btn-primary me-5">Submit</button>
-                    <button type="reset" className="btn btn-danger">Reset</button>
+                    <button type="reset" className="btn btn-danger" onClick={handleReset} >Reset</button>
                 </form>
             </div>
         </div>
