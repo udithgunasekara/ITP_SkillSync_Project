@@ -20,7 +20,7 @@ export const AdminLoginComponent = () => {
         sessionStorage.setItem('role', 'admin');
 
         // alert('Login Successful!');
-        navigate.push(`/FreelancerMain`);
+        navigate.push(`/admin`);
     };
 
     const backgroundImageStyle = {

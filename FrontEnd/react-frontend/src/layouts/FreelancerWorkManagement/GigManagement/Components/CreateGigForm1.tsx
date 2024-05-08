@@ -19,12 +19,26 @@ export const CreateGigForm1: React.FC = () => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        let filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+        let filteredValue = value; // Initialize filtered value with the original value
+    
+        // Apply character limit and filtering based on input name
+        if (name === 'gigTitle') {
+            // Filter out non-alphabetical characters using regular expression
+            filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+            // Limit to 50 characters for gig title
+            filteredValue = filteredValue.slice(0, 50);
+        } else if (name === 'gigDescription') {
+            // Limit to 200 characters for gig description
+            filteredValue = value.slice(0, 200);
+        }
+    
         setFormData({
             ...formData,
             [name]: filteredValue
         });
     };
+    
+    
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -116,7 +130,7 @@ export const CreateGigForm1: React.FC = () => {
                                     id="gigDescription"
                                     name="gigDescription"
                                     placeholder="Enter gig description"
-                                    maxLength={200}
+                                    maxLength= {200}
                                     rows={7}
                                     value={formData.gigDescription}
                                     onChange={handleChange}

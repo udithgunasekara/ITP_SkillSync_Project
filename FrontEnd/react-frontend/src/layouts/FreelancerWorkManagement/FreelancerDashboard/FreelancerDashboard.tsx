@@ -4,7 +4,6 @@ import { Button, Card, Carousel, Container, Row, Col, Modal, Alert } from 'react
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import Orders from "./Components/Orders";
-import { Link } from "react-router-dom";
 
 export interface Gig {
   gigId: number;
@@ -135,15 +134,13 @@ const FreelancerDashboard: React.FC = () => {
       <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
-            <Row xs={1} md={2} lg={4} className="g-4 justify-content-center">
+            <Row className="justify-content-center gx-5">
               {chunk.map((gig, gigIndex) => (
-                <Col key={gigIndex}>
+                <Col key={gigIndex} md={3} className="mb-4">
                   <Card style={{ height: '380px', borderRadius: '15px' }} className="shadow gig-card-small">
                     <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '150px', objectFit: 'cover', borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }} className="gig-card-image-small" />
                     <Card.Body style={{ padding: '0.5rem', fontSize: '0.9rem', backgroundColor: '#f8f9fa', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px' }}>
-                      <Link to={`/gig/${gig.gigId}`}>
-                        <Card.Title className="mb-2" style={{ fontSize: '1.15rem', color: '#333', fontWeight: 'bold' }}>{gig.gigTitle}</Card.Title>
-                      </Link>
+                      <h5 className="mb-2" style={{ fontSize: '1.15rem', color: '#333', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => history.push(`/gig/${gig.gigId}`)}>{gig.gigTitle}</h5>
                       <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
                       <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Time Taken:</strong> From {minTimes[gig.gigId]}h</Card.Text>
                       <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
@@ -159,6 +156,8 @@ const FreelancerDashboard: React.FC = () => {
           </Carousel.Item>
         ))}
       </Carousel>
+
+
 
       <Row className="justify-content-center">
         <Col className="text-center">

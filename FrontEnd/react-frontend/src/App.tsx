@@ -201,13 +201,13 @@ export const App = () => {
             <Route path='/Freelancer/Login' exact>
             <Navbar />
               <FreelancerLoginComponent/>
-              <Footer />
+             
             </Route>
   
             <Route path='/Client/Login' exact>
             <Navbar />
               <ClientLoginComponent/>
-              <Footer />
+              
             </Route>
 
             <Route path='/Freelancer/Registration' exact>
@@ -276,7 +276,7 @@ export const App = () => {
             <Route path='/Admin/Login' exact>
             <Navbar />
             <AdminLoginComponent/>
-            <Footer />
+          
             </Route>
 
             {/* Ending supeshala's files */}

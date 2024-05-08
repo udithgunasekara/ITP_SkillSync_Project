@@ -15,7 +15,7 @@ export const SupportNavBar = () => {
                 </Link>
 
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul className="navbar-nav ">
+                    <ul className="navbar-nav " style={{paddingTop:0}}>
                         <li className="nav-item">
                             <NavLink className="nav-link" to={"/support"}>Help Desk</NavLink>
                         </li>
@@ -33,7 +33,7 @@ export const SupportNavBar = () => {
                 </div>
 
                 
-                <a href="#" className="login-button">login</a>
+                {/* <a href="#" className="login-button">login</a> */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
