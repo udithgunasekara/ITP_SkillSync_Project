@@ -30,8 +30,7 @@ export const Navbar = () => {
                             <NavLink className='nav-link' to={'/dashboard'}>Dashboard</NavLink>
                         </li>
                         <li className='nav-item' id="jobs">
-                            {/* <NavLink className='nav-link' to={'#'}>Jobs</NavLink> */}
-                            
+                            <NavLink className='nav-link' to={'/searchjobs'}>Jobs</NavLink> 
                         </li>
                         <li className='nav-item' id="gigs">
                             <NavLink className='nav-link' to={'/FreelancerMain'}> Gigs</NavLink>

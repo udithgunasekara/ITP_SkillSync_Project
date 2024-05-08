@@ -4,6 +4,7 @@ import { useHistory, useLocation} from 'react-router-dom';
 import moment from 'moment';
 import Dropdown from 'react-bootstrap/Dropdown';
 import jsPDF from 'jspdf';
+import logo from '../Image/logo.png';
 
 
 interface Job {
@@ -51,24 +52,82 @@ const ListJobComponent: React.FC = () => {
         }
     };
 
+    // const downloadReport = () => {
+    //     const doc = new jsPDF();
+
+    //     const img = new Image();
+    //     img.src = logo;
+    //     img.onload=()=>{
+
+    //         doc.addImage(img,'PNG',10,10,50,20);
+    //     }
+
+    //     doc.setFontSize(16); // Set font size for the heading
+    //     doc.text('Skillsync', doc.internal.pageSize.getWidth() / 2, 10, { align: 'center'}); // Centered heading
+    //     doc.setLineWidth(0.5); // Set border width
+    //     doc.rect(5, 5, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10); // Add page border
+    //     doc.setFontSize(12); // Reset font size for the content
+    //     const formattedData = jobs.map(job => job.jobTitle); // Use jobs directly
+    //     doc.text('Job types posted within given time range', 10, 20); // Adding "Job Report" as a subheading
+    //     formattedData.forEach((title, index) => {
+    //         doc.text(`${index + 1}. ${title}`, 10, 30 + index * 10);
+    //     });
+    //     doc.save('job_report.pdf');
+    
+    //     // Reset filteredJobs state after downloading
+    //     setFilteredJobs([]);
+    // };
+
     const downloadReport = () => {
         const doc = new jsPDF();
-
-        doc.setFontSize(16); // Set font size for the heading
-        doc.text('Skillsync', doc.internal.pageSize.getWidth() / 2, 10, { align: 'center'}); // Centered heading
-        doc.setLineWidth(0.5); // Set border width
-        doc.rect(5, 5, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10); // Add page border
-        doc.setFontSize(12); // Reset font size for the content
-        const formattedData = jobs.map(job => job.jobTitle); // Use jobs directly
-        doc.text('Job types posted within given time range', 10, 20); // Adding "Job Report" as a subheading
-        formattedData.forEach((title, index) => {
-            doc.text(`${index + 1}. ${title}`, 10, 30 + index * 10);
-        });
-        doc.save('job_report.pdf');
     
+        // Load the image
+        const img = new Image();
+        img.src = logo;
+        img.onload = () => {
+            const imgWidth = 50; // Width of the image
+            const imgHeight = 20; // Height of the image
+    
+            // Calculate coordinates to center the image horizontally
+            const x = (doc.internal.pageSize.getWidth() - imgWidth) / 2;
+            const y = 10; // You can adjust the vertical position as needed
+    
+            // Add the image to the PDF
+            doc.addImage(img, 'PNG', x, y, imgWidth, imgHeight);
+    
+            // Set other content after adding the image
+            const imgTextGap = 5; // Increase the gap between image and text
+            
+            doc.setLineWidth(0.5); // Set border width
+            doc.rect(5, 5, doc.internal.pageSize.getWidth() - 10, doc.internal.pageSize.getHeight() - 10); // Add page border
+            doc.setFontSize(12); // Reset font size for the content
+            const formattedData = jobs.map(job => job.jobTitle); // Use jobs directly
+            doc.text('Job types posted within given time range', 10, y + imgHeight + imgTextGap * 2); // Adding "Job Report" as a subheading
+            formattedData.forEach((title, index) => {
+                doc.text(`${index + 1}. ${title}`, 10, y + imgHeight + imgTextGap * 2 + 10 + index * 10);
+            });
+    
+            // Add current date in bottom left corner
+            const currentDate = new Date().toLocaleDateString();
+            doc.text(currentDate, 15, doc.internal.pageSize.getHeight() - 15);
+    
+            // Add signature line and label in bottom right corner
+            const signatureLineX = doc.internal.pageSize.getWidth() - 80; // Adjust position as needed
+            const signatureLineY = doc.internal.pageSize.getHeight() - 20;
+            doc.line(signatureLineX, signatureLineY, signatureLineX + 70, signatureLineY);
+            doc.text('Signature', signatureLineX + 25, signatureLineY + 5);
+    
+            // Save the PDF with the added image and text
+            doc.save('job_report.pdf');
+        };
+        
         // Reset filteredJobs state after downloading
         setFilteredJobs([]);
     };
+    
+    
+    
+
 
     useEffect(() => {
         getAllJobPosts();
@@ -84,6 +143,10 @@ const ListJobComponent: React.FC = () => {
 
     function createNewJobPost() {
         navigator.push('/create-newJobPost');
+    }
+
+    function jobrequests() {
+        navigator.push('/jobrequests');
     }
 
     function updateJobPosting(id: number) {
@@ -141,9 +204,22 @@ const ListJobComponent: React.FC = () => {
                         Post a Job
                     </button>
                 </div>
-                <div className='col-sm-6 d-flex justify-content-between align-items-center' style={{ width: '60%' }}>
+                <div className='col-sm-6 d-flex justify-content-between align-items-center' style={{ width: '40%' }}>
                     <h2 className='text-center' style={{ width: '100%' }}>My Job Posts</h2>
                 </div>
+
+                <div className='col-sm-3' style={{ width: '20%' }}>
+                    <button
+                        className='btn btn-primary mb-2'
+                        style={{
+                            borderRadius: '10px',
+                            width: '100%',
+                        }}
+                        onClick={jobrequests}>
+                        Requests
+                    </button>
+                </div>
+
                 <div className='col-sm-3' style={{ width: '20%' }}>
                     <button
                         className="btn btn-danger btn-block "
