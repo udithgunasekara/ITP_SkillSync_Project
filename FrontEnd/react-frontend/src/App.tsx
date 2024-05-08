@@ -76,6 +76,7 @@ import OTPVerification from './layouts/UserVerificationManagement/UserRegistrati
 import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
 import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 import HomePage from './layouts/Home/HomePage';
+import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginPage';
 
 
 export const App = () => {
@@ -200,13 +201,13 @@ export const App = () => {
             <Route path='/Freelancer/Login' exact>
             <Navbar />
               <FreelancerLoginComponent/>
-              <Footer />
+             
             </Route>
   
             <Route path='/Client/Login' exact>
             <Navbar />
               <ClientLoginComponent/>
-              <Footer />
+              
             </Route>
 
             <Route path='/Freelancer/Registration' exact>
@@ -270,6 +271,12 @@ export const App = () => {
             <Navbar />
             <OTPVerification/>
             <Footer />
+            </Route>
+
+            <Route path='/Admin/Login' exact>
+            <Navbar />
+            <AdminLoginComponent/>
+          
             </Route>
 
             {/* Ending supeshala's files */}

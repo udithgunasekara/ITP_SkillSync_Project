@@ -1,39 +1,26 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ClientLogin } from '../Service/LoginService'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './login.jpg';
 
-
-export const ClientLoginComponent = () => {
+export const AdminLoginComponent = () => {
     // Initializing state for login variables
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useHistory();
 
-    //setup session storage
+    // Setup session storage
     sessionStorage.setItem('username', username);
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // Including all state variables in the client object
-        const client = { username, password };
-        console.log(client); // For debug purposes
+        // Set session
+        sessionStorage.setItem('username', 'vass');
+        sessionStorage.setItem('id', '1');
+        sessionStorage.setItem('role', 'admin');
 
-        ClientLogin(client)
-            .then((response) => {
-                console.log("Login response:", response.data);
-                sessionStorage.setItem('id', response.data);
-                sessionStorage.setItem('role', 'client');
-
-                // alert('Login Successful!');
-                navigate.push(`/FreelancerMain`);
-            })
-            .catch((error) => {
-                console.error("Login error:", error.response || error);
-                alert('Login Failed!');
-            });
+        // alert('Login Successful!');
+        navigate.push(`/admin`);
     };
 
     const backgroundImageStyle = {
@@ -47,7 +34,7 @@ export const ClientLoginComponent = () => {
         <div className="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center" style={backgroundImageStyle}>
             <div className="container" style={{ maxWidth: '600px', margin: 'auto' }}>
                 <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
-                    <h2 style={{ color: '#ffff', textAlign: 'center', fontSize: '60px', fontWeight: '300px'  }}>Client Portal</h2>
+                    <h2 style={{ color: '#ffff', textAlign: 'center', fontSize: '60px', fontWeight: '300px' }}>Moderator Portal</h2>
 
                     <form onSubmit={handleLogin}>
                         <div className="mb-3">
@@ -68,4 +55,4 @@ export const ClientLoginComponent = () => {
     );
 };
 
-export default ClientLoginComponent;
+export default AdminLoginComponent;

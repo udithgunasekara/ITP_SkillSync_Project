@@ -24,7 +24,7 @@ export const Navbar = () => {
         sessionStorage.removeItem('role');
         sessionStorage.removeItem('email');
 
-        history.push('/FreelancerMain');
+        history.push('/HomePage');
     };
 
 
