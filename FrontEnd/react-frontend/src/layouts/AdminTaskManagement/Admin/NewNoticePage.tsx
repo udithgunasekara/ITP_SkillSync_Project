@@ -1,17 +1,18 @@
 
 import { useRef, useState } from "react";
 import { storage } from "../../../utils/Firebase"
-import { getDownloadURL,ref,uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { AdminDashboard } from "./components/AdminDashboard/AdminDashboard";
 import { AdminSideBar } from "./components/AdminSideBar";
 import { AdminNavbar } from "./components/AdminNavbar";
-import {v4} from "uuid"
+import { v4 } from "uuid"
 
 export const NewNoticePage = () => {
 
-    const [imageupload,setImageUpload] = useState<any>("");
-    const [image,setImage] = useState("");
+    const [imageupload, setImageUpload] = useState<any>("");
+    const [image, setImage] = useState("");
     const [uploadprogress, setUploadProgress] = useState(0);
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const [formData, setFormData] = useState({
         title: "",
@@ -39,7 +40,26 @@ export const NewNoticePage = () => {
 
     };
 
-    const uploadImage = async (e:any) => {
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedfile = e.target.files && e.target.files[0];
+        if (selectedfile) {
+            validateAndSetImage(selectedfile);
+        }
+    }
+
+    const validateAndSetImage = (file: File) => {
+        const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
+        const allowedSize = 8 * 1024 * 1024; // 1MB
+
+        if (file && allowedTypes.includes(file.type) && file.size <= allowedSize) {
+            setImageUpload(file);
+            setErrorMessage('');
+        } else {
+            setErrorMessage('Please select a JPEG or PNG file less than 8MB.');
+        }
+    }
+
+    const uploadImage = async (e: any) => {
         e.preventDefault();
         const imageRef = ref(storage, `notice/${imageupload.name + v4()}`);
         console.log(imageRef);
@@ -60,7 +80,7 @@ export const NewNoticePage = () => {
                     // Getting the URL of the uploaded image
                     console.log(url);
                     setImage(url);
-                    setFormData(prevState => ({...prevState, imagelink: url}));
+                    setFormData(prevState => ({ ...prevState, imagelink: url }));
                 });
             }
         );
@@ -114,32 +134,41 @@ export const NewNoticePage = () => {
                         <form className="ticketform" ref={formRef} onSubmit={handlesubmt}>
 
                             <div className="form-floating mb-3">
-                                <input type="text" name="title" className={`form-control ${formData?.title ? '' : 'is-invalid'}`} id="noticetitle" placeholder="title" value={formData?.title} onChange={handleChange} required />
+                                <input type="text" name="title" className={`form-control ${formData?.title ? '' : 'is-invalid'}`} 
+                                id="noticetitle" placeholder="title" 
+                                value={formData?.title} 
+                                onChange={handleChange} 
+                                required
+                                 />
+
                                 <label htmlFor="noticetitle">Title</label>
-                                <div className="invalid-feedback" >
-                                    Please provide a Title.
-                                </div>
+
                             </div>
 
                             <div className="form-floating mb-3">
-                                <select className={`form-select ${formData?.audience ? '' : 'is-invalid'}`} name="audience" id="audience" aria-label="Related To" value={formData?.audience} required aria-placeholder="select option" onChange={handleChange}>
+                                <select className={`form-select ${formData?.audience ? '' : 'is-invalid'}`} 
+                                name="audience" id="audience" aria-label="Related To" 
+                                value={formData?.audience} 
+                                required aria-placeholder="select option" 
+                                onChange={handleChange}>
                                     <option selected disabled value="">select audience</option>
                                     <option value="Freelancer">Freelancer</option>
                                     <option value="client">client</option>
                                     <option value="payment">all</option>
                                 </select>
-                                <div className="invalid-feedback">
-                                    select a audience
-                                </div>
+
                                 <label htmlFor="audience" className="form-label">Audience</label>
                             </div>
 
                             <div className="form-floating mb-3">
-                                <textarea className={`form-control ${formData?.description ? '' : 'is-invalid'}`} name="description" id="description" rows={6} placeholder="Enter description" value={formData?.description} required style={{ height: "200px" }} onChange={handleChange} />
+                                <textarea className={`form-control ${formData?.description ? '' : 'is-invalid'}`} 
+                                name="description" id="description" rows={6} 
+                                placeholder="Enter description" 
+                                value={formData?.description} 
+                                required style={{ height: "200px" }} 
+                                onChange={handleChange} />
                                 <label htmlFor="description" className="form-label">Description</label>
-                                <div className="invalid-feedback">
-                                    Please provide description.
-                                </div>
+
                             </div>
 
                             <div className="form-floating mb-3">
@@ -153,18 +182,31 @@ export const NewNoticePage = () => {
                             </div> */}
 
                             <div className="mb-3">
-                                <label htmlFor="noticeimage" className="form-label text-light fw-bold">Upload any related images</label>
-                                <input className="form-control" name="noticeimage" type="file" id="noticeimage"  onChange={(e) => {
-                                    setImageUpload(e.target.files![0])
-                                }}/>
+                                <label htmlFor="noticeimage" className="form-label text-light fw-bold">Upload any related images(only png, jpeg, jpg are supported)</label>
+                                <input className="form-control" name="noticeimage" type="file" id="noticeimage"
+                                    // onChange={(e) => {
+                                    //     setImageUpload(e.target.files![0])
+                                    // }}
+                                    onChange={handleFileChange}
+
+                                />
+                                {errorMessage && <div className="text-danger">{errorMessage}</div>}
                                 <div>
-                                    <button onClick={uploadImage} >Upload</button>
-                                    <progress value ={uploadprogress} max={100} />
+                                    {/* <button onClick={uploadImage} >Upload</button> */}
+                                    <button className="btn btn-success  mt-2 me-2" onClick={uploadImage} disabled={!imageupload || Boolean(errorMessage)}>Upload</button>
+                                    <progress value={uploadprogress} max={100} style={{
+                                        width: '100%',
+                                        height: '10px',
+                                        borderRadius: '10px',
+                                        border: '1px solid #ccc',
+                                        boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)'
+                                    }} />
                                 </div>
                             </div>
 
 
                             <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="reset" className="btn btn-danger">Reset</button>
                         </form>
                     </div>
                 </div>
