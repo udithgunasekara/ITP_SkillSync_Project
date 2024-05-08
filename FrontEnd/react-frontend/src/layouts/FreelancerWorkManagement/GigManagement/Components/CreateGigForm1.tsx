@@ -23,13 +23,13 @@ export const CreateGigForm1: React.FC = () => {
     
         // Apply character limit and filtering based on input name
         if (name === 'gigTitle') {
-            filteredValue = value.slice(0, 50); // Limit to 50 characters for gig title
+            // Filter out non-alphabetical characters using regular expression
+            filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+            // Limit to 50 characters for gig title
+            filteredValue = filteredValue.slice(0, 50);
         } else if (name === 'gigDescription') {
-            filteredValue = value.slice(0, 200); // Limit to 200 characters for gig description
-        } 
-        // Apply additional filtering for gig title to allow only letters, spaces, and some special characters
-        if (name === 'gigTitle') {
-            filteredValue = filteredValue.replace(/[^a-zA-Z\s\d\.,!@#$%^&*()-_+=<>?/\\'"`~:;{}\[\]]/g, '');
+            // Limit to 200 characters for gig description
+            filteredValue = value.slice(0, 200);
         }
     
         setFormData({
@@ -37,6 +37,7 @@ export const CreateGigForm1: React.FC = () => {
             [name]: filteredValue
         });
     };
+    
     
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
