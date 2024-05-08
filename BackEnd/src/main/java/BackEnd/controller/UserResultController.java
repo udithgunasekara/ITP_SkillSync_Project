@@ -35,4 +35,11 @@ public class UserResultController {
         List<UserResultDTO> userResultDTO = userResultService.getSavedResultByExamId();
         return ResponseEntity.ok(userResultDTO);
     }
+
+    @GetMapping("{username}")
+    public ResponseEntity<List<UserResultDTO>> getUserResultByuserName(@PathVariable("username") String userName){
+        List<UserResultDTO> userResultDTO = userResultService.getSavedResultByUserName(userName);
+        return ResponseEntity.ok(userResultDTO);
+    }
+
 }

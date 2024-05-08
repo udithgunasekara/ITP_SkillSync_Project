@@ -110,10 +110,10 @@ export const RaiseTicketForm = () => {
                         <label htmlFor="description" className="form-label">Description</label>
                     </div>
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="formFileMultiple" className="form-label text-light fw-bold">Upload any related images</label>
                         <input className="form-control" name="imageLink" type="file" id="formFileMultiple" multiple />
-                    </div>
+                    </div> */}
 
                     <button type="submit" className="btn btn-primary me-5">Submit</button>
                     <button type="reset" className="btn btn-danger">Reset</button>

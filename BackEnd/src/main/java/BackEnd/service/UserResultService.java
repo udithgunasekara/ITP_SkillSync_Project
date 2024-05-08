@@ -10,5 +10,7 @@ public interface UserResultService {
 
     List<UserResultDTO> getSavedResultByExamId();
 
+    List<UserResultDTO> getSavedResultByUserName(String userName);
+
     UserResultDTO getSavedResultById(String userName, Long examId);
 }
