@@ -13,6 +13,22 @@ const OptionsComponent: React.FC = () => {
     examId: string;
     optionId: string;
   }>();
+  const role = sessionStorage.getItem('role');
+  useEffect(() => {
+    validateUser(role);
+  }, []);
+  
+  function validateUser(role: string | null){
+    if(role){
+      if (role !== 'moderator') {
+        navigationInOption.push('/');
+        alert('Restricted!')
+      }
+    } else {
+      navigationInOption.push('/');
+      alert('Restricted!')
+    }
+  }
 
   useEffect(() => {
     if (optionId) {
@@ -96,7 +112,7 @@ const OptionsComponent: React.FC = () => {
                   onChange={(e) => setOptionTxt(e.target.value)}
                 />
                 {errors.optionTxt && <div className='invalid-feedback'>{errors.optionTxt}</div>}
-              </div>
+              </div><br></br>
               <button className='btn btn-success' type='submit'>
                 Submit
               </button>

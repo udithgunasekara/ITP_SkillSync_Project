@@ -25,12 +25,25 @@ const ExamComponent: React.FC = () => {
   const [badgeURL, setBadgeURL] = useState<string>('');
   const [creditPoint, setCreditPoint] = useState('');
   const [badgeName, setBadgeName] = useState('');
-
   const [questions, setQuestions] = useState<Question[]>([]);
-
   const { id = '' } = useParams<{ id: string }>();
-
   const navigateInExam = useHistory();
+  const role = sessionStorage.getItem('role');
+  useEffect(() => {
+    validateUser(role);
+  }, []);
+  
+  function validateUser(role: string | null){
+    if(role){
+      if (role !== 'moderator') {
+        navigateInExam.push('/');
+        alert('Restricted!')
+      }
+    } else {
+      navigateInExam.push('/');
+      alert('Restricted!')
+    }
+  }
 
   const [errors, setErrors] = useState({
     examName: '',
@@ -38,6 +51,7 @@ const ExamComponent: React.FC = () => {
     noOfAttempts: '',
     timeLimit: '',
     creditPoint: '',
+    badge: ''
   });
 
   useEffect(() => {
@@ -124,7 +138,7 @@ const ExamComponent: React.FC = () => {
     const timeLimitString = String(timeLimit);
     const creditPointsString = String(creditPoint);
     const examNameRegex = /^[a-zA-Z\s]*$/;
-
+  
     if (examName.trim() && examNameRegex.test(examName)) {
       errorsCopy.examName = '';
     } else {
@@ -135,51 +149,57 @@ const ExamComponent: React.FC = () => {
       }
       valid = false;
     }
-
+  
     if (examDescription.trim()) {
       errorsCopy.examDescription = '';
     } else {
       errorsCopy.examDescription = 'Exam Description is required!';
       valid = false;
     }
-
+  
     if (attemptsString.trim() && parseInt(attemptsString) > 0) {
       errorsCopy.noOfAttempts = '';
     } else {
       if (attemptsString.trim()) {
-        errorsCopy.noOfAttempts = 'No Of Attempts must be grater than 0!';
+        errorsCopy.noOfAttempts = 'No Of Attempts must be greater than 0!';
       } else {
         errorsCopy.noOfAttempts = 'No Of Attempts is required!';
       }
       valid = false;
     }
-
-    if (timeLimitString.trim() && parseInt(timeLimitString) > 0) {
+  
+    if (timeLimitString.trim() && !isNaN(parseInt(timeLimitString)) && parseInt(timeLimitString) >= 0) {
       errorsCopy.timeLimit = '';
     } else {
-      if (attemptsString.trim()) {
-        errorsCopy.timeLimit = 'Time Limt must be grater than 0!';
+      if (timeLimitString.trim()) {
+        errorsCopy.timeLimit = 'Time Limit must be a number and greater than or equal to 0!';
       } else {
         errorsCopy.timeLimit = 'Time Limit is required!';
       }
       valid = false;
     }
-
-    if (creditPointsString.trim() && parseInt(creditPointsString) >= 0) {
+  
+    if (creditPointsString.trim() && !isNaN(parseInt(creditPointsString)) && parseInt(creditPointsString) >= 0) {
       errorsCopy.creditPoint = '';
     } else {
       if (creditPoint.trim()) {
-        errorsCopy.creditPoint = 'Credit Point must be grater than or equal to 0!';
+        errorsCopy.creditPoint = 'Credit Point must be a number and greater than or equal to 0!';
       } else {
         errorsCopy.creditPoint = 'Credit Point is required!';
       }
       valid = false;
     }
-
+  
+    if(!badge){
+      errorsCopy.badge = "badge is required!";
+      valid = false;
+    }
+  
     setErrors(errorsCopy);
-
+  
     return valid;
   }
+  
 
   function pageTitle(): JSX.Element {
     if (id) {
@@ -198,6 +218,17 @@ const ExamComponent: React.FC = () => {
         console.error(error);
       });
   }
+
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files.length > 0) {
+      setBadge(e.target.files[0]);
+    } else {
+      setBadge(badge); // Set badge to the badgeURL fetched from the database
+    }
+  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   function questionDisplay(): JSX.Element | null {
     if (id) {
@@ -264,16 +295,8 @@ const ExamComponent: React.FC = () => {
     return null;
   }
 
-  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
-  if (e.target.files && e.target.files.length > 0) {
-    setBadge(e.target.files[0]);
-  } else {
-    setBadge(badge); // Set badge to the badgeURL fetched from the database
-  }
-}
-
   return (
-    <div className='container'>
+    <div className='container' style={{ overflowY: 'hidden' }}>
       <br></br><br></br><br></br><br></br>
       <div className='row'>
         <div className='card col-md-6 offset-md-3 0ffset-md-3'>
@@ -352,23 +375,24 @@ const ExamComponent: React.FC = () => {
                   type='file'
                   accept='image/*'
                   onChange={handleFileChange}
-                  className={`form-control`}
+                  className={`form-control ${errors.badge ? 'is-invalid' : ''}`}
                 />
+                {errors.badge && <div className='invalid-feedback'>{errors.badge}</div>}
               </div>
               {badgeURL && (
                 <div className="form-group mb-2">
                   <img src={badgeURL} alt={badgeName} style={{ width: '100px' }} />
                 </div>
               )}
-
+              <br></br>
               <button className='btn btn-success' type='submit'>
                 Submit
               </button>
             </form>
           </div>
         </div>
+        {questionDisplay()}
       </div>
-      {questionDisplay()}
       {!id && <><br></br><br></br><br></br><br></br><br></br><br></br></>}
     </div>
   );

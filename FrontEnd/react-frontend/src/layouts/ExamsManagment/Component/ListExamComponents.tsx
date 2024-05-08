@@ -3,7 +3,7 @@ import { deleteExam, listExams } from '../service/ExamsService';
 import skillexam from '../Image/skillExam.jpg';
 import jsPDF from 'jspdf';
 import { listUserResult } from '../service/UserResultService';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 interface Exam {
   id: string;
@@ -29,13 +29,28 @@ interface jsPDFWithAutoTable extends jsPDF {
 const ListExamComponents: React.FC = () => {
   const [exams, setExams] = useState<Exam[]>([]);
   const [userResults, setUserResult] = useState<UserResult[]>([]);
-  let role = 'moderator';
-  sessionStorage.setItem('role', role);
+  const role = sessionStorage.getItem('role');
   const [showServices, setShowServices] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const navigationInListComponent = useHistory()
+  useEffect(() => {
+    validateUser(role);
+  }, []);
+  
+  function validateUser(role: string | null){
+    if(role){
+      if (role !== 'moderator' && role !== 'freelancer') {
+        navigationInListComponent.push('/Freelancer/Login');
+        alert('Restricted! please log in')
+      }
+    } else {
+      navigationInListComponent.push('/Freelancer/Login');
+      alert('Restricted! please log in')
+    }
+  }
 
   useEffect(() => {
     if (showServices && servicesRef.current) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserResultById } from '../service/UserResultService';
 import { getExam } from '../service/ExamsService';
 import { getUserAttemptsById, saveUserAttempts, updateUserAttempts } from '../service/UserAttemptsService';
@@ -17,6 +17,23 @@ const AttemptExamComponent: React.FC = () => {
     const [canAttempt, setCanAttempt] = useState<boolean>();
     const examId = examIdPk;
     const userName = userNamePk;
+    const navigatInAttempt = useHistory();
+    const role = sessionStorage.getItem('role');
+    useEffect(() => {
+      validateUser(role);
+    }, []);
+    
+    function validateUser(role: string | null){
+      if(role){
+        if (role !== 'moderator' && role !== 'freelancer') {
+          navigatInAttempt.push('/Freelancer/Login');
+          alert('Restricted! please log in')
+        }
+      } else {
+        navigatInAttempt.push('/Freelancer/Login');
+        alert('Restricted! please log in')
+      }
+    }
 
     getExam(examIdPk)
     .then((response) => {

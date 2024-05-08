@@ -17,6 +17,22 @@ const QuestionsComponent: React.FC = () => {
   const [errors, setErrors] = useState({
     questionTxt: ''
   });
+  const role = sessionStorage.getItem('role');
+  useEffect(() => {
+    validateUser(role);
+  }, []);
+  
+  function validateUser(role: string | null){
+    if(role){
+      if (role !== 'moderator') {
+        navigationInQuestion.push('/');
+        alert('Restricted!')
+      }
+    } else {
+      navigationInQuestion.push('/');
+      alert('Restricted!')
+    }
+  }
 
   useEffect(() => {
     getQuestions(questionId);
@@ -164,7 +180,7 @@ const QuestionsComponent: React.FC = () => {
                   onChange={(e) => setQuestionTxt(e.target.value)}
                 ></input>
                 {errors.questionTxt && <div className='invalid-feedback'>{errors.questionTxt}</div>}
-              </div>
+              </div><br></br>
               <button type='submit' className='btn btn-success'>
                 Submit
               </button>

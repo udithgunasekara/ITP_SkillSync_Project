@@ -29,6 +29,22 @@ const DisplayQuestionAndAnswers: React.FC = () => {
     const result = "pending";
     sessionStorage.setItem('examIdPk', examIdPk);
     const navigationInDisplayQuestion = useHistory();
+    const role = sessionStorage.getItem('role');
+    useEffect(() => {
+      validateUser(role);
+    }, []);
+    
+    function validateUser(role: string | null){
+      if(role){
+        if (role !== 'moderator' && role !== 'freelancer') {
+          navigationInDisplayQuestion.push('/Freelancer/Login');
+          alert('Restricted! please log in')
+        }
+      } else {
+        navigationInDisplayQuestion.push('/Freelancer/Login');
+        alert('Restricted! please log in')
+      }
+    }
 
     useEffect(() => {
       getQuestionByExamId(examIdPk);
