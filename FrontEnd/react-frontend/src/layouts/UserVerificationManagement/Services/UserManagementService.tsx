@@ -26,4 +26,4 @@ export const reUploadQualification = (username: string, title: string, formData:
 export const OTPSending = (email: String) => axios.post(REST_API_OTP_SENDING, { email });
 export const OTPVerify =   (otp:String, email:String) => axios.post(REST_API_OTP_VERIFY, {otp,email});
 
-export const checkAccountStatus = (username: string) => axios.get(`${REST_API_CHECK_ACCOUNT_STATUS}${username}`);
+export const checkAccountStatus = (username: String) => axios.get<boolean>(`${REST_API_CHECK_ACCOUNT_STATUS}/${username}`);

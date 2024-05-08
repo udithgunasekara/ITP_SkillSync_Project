@@ -88,22 +88,22 @@ const FreelancerRegComponent = () => {
     }
 
     return (
-        <div className="container" style={{ maxWidth: '600px', margin: 'auto' }}>
-            <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
-                <h1 style={{ color: '#AC69E2', textAlign: 'center' }}>SkillSync</h1>
-                <h3 style={{ color: '#AC69E2', textAlign: 'center' }}>Freelancer Registration</h3>
-                <p style={{ textAlign: 'center', marginBottom: '30px' }}>Set up your information as a Freelancer</p>
-                <form onSubmit={saveFreelancer}>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="firstName" className="form-label">First Name</label>
-                                <input type="text" className="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required value={firstName} onChange={(e) => {
-                                    setFirstName(e.target.value);
-                                    setFirstNameError(validateName(e.target.value) ? '' : 'Invalid first name');
-                                }} />
-                                <div style={{ color: 'red' }}>{firstNameError}</div>
-                            </div>
+        <div className="container" style={{ maxWidth: '900px', marginTop:'80px' }}>
+    <div style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <h1 style={{ color: '#AC69E2', textAlign: 'center', fontSize: '48px' }}>SkillSync</h1>
+        <h3 style={{ color: '#AC69E2', textAlign: 'center', fontSize: '24px' }}>Freelancer Registration</h3>
+        <p style={{ textAlign: 'center', marginBottom: '10px', fontSize: '18px' }}>Set up your information as a Freelancer</p>
+        <form onSubmit={saveFreelancer} style={{padding: '15px'}}>
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="mb-3">
+                        <label htmlFor="firstName" className="form-label" >First Name</label>
+                        <input type="text" className="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required value={firstName} onChange={(e) => {
+                            setFirstName(e.target.value);
+                            setFirstNameError(validateName(e.target.value) ? '' : 'Invalid first name');
+                        }} />
+                        <div style={{ color: 'red' }}>{firstNameError}</div>
+                    </div>
                             <div className="mb-3">
                                 <label htmlFor="nic" className="form-label">NIC</label>
                                 <input type="text" className="form-control" id="nic" name="nic" placeholder="Enter NIC" required value={nic} onChange={(e) => setNic(e.target.value)} />

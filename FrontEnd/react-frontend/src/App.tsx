@@ -199,21 +199,28 @@ export const App = () => {
             </Route>
   
             <Route path='/Client/Login' exact>
+            <Navbar />
               <ClientLoginComponent/>
+              <Footer />
             </Route>
 
             <Route path='/Freelancer/Registration' exact>
+            <Navbar />
               <FreelancerRegComponent/>
+              <Footer />
             </Route>
 
             <Route path='/Client/Registration' exact>
+            <Navbar />
               <ClientRegComponent/>
+              <Footer />
             </Route>
 
             {/* dummy site */}
             {/* http://localhost:3000/Freelancer/QualificationUploader */}
             <Route path='/Freelancer/QualificationUploader'  exact>
               <QualificationComponent/>
+              
             </Route>
 
             <Route path='/upload-qualification'  exact>
@@ -225,23 +232,39 @@ export const App = () => {
             </Route>
 
             <Route path='/Applicant/Page'  exact>
+            <Navbar />
               <ApplicantListPage/>
+              <Footer />
             </Route>
 
             <Route path='/Applicant/review/:username'  exact>
+            <Navbar />
               <QualificationReview/>
+              <Footer />
             </Route>
 
             <Route path='/InProgressPage'  exact>
+            <Navbar />
               <InProgress/>
+              <Footer />
             </Route>
 
             <Route path='/ReSubmission/:username'  exact>
+            <Navbar />
               <ResubmissionUpload />
+              <Footer />
             </Route>
 
             <Route path='/UserTestPage' exact>
+            <Navbar />
               <UserTest/>
+              <Footer />
+            </Route>
+
+            <Route path='/OTPVerificationPage' exact>
+            <Navbar />
+            <OTPVerification/>
+            <Footer />
             </Route>
 
             {/* Ending supeshala's files */}

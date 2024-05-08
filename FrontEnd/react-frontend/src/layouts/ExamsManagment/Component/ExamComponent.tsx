@@ -49,12 +49,16 @@ const ExamComponent: React.FC = () => {
 
   async function fetchBadgeImage(examId: string) {
     try {
-      const badgeURL = await getExamImage(examId);
-      setBadgeURL(badgeURL);
+      const badgeImageData = await getExamImage(examId);
+      const badgeFile = new File([badgeImageData.imageBytes], 'badge.jpg', { type: 'image/jpeg' });
+  
+      setBadgeURL(badgeImageData.imageURL);
+      setBadge(badgeFile);
     } catch (error) {
       console.error('Error fetching badge image:', error);
     }
   }
+  
 
   function getExamById(id: string) {
     if (id) {
@@ -65,7 +69,6 @@ const ExamComponent: React.FC = () => {
           setNoOfAttempts(response.data.noOfAttempts);
           setTime(response.data.timeLimit);
           setCreditPoint(response.data.creditPoint);
-          setBadgeName(response.data.badgeName);
           if (response.data.questions) {
             setQuestions(response.data.questions);
           } else {
@@ -84,7 +87,8 @@ const ExamComponent: React.FC = () => {
       const exam = { id, examName, examDescription, noOfAttempts, questions, creditPoint, badge, badgeName, timeLimit };
       console.log(exam);
       if (id) {
-        updateExam(id, exam)
+        if (badge) {
+          updateExam(id, exam, badge)
           .then((response) => {
             console.log(response);
             navigateInExam.push("/exams");
@@ -92,6 +96,9 @@ const ExamComponent: React.FC = () => {
           .catch((error) => {
             console.error(error);
           });
+        } else {
+          console.error("Badge is required!");
+        }
       } else {
         if (badge) {
           createExam(exam, badge)
@@ -102,6 +109,7 @@ const ExamComponent: React.FC = () => {
             .catch((error) => {
               console.error(error);
             });
+            console.log(badge);
         } else {
           console.error("Badge is required!");
         }
@@ -114,6 +122,7 @@ const ExamComponent: React.FC = () => {
     const errorsCopy = { ...errors };
     const attemptsString = String(noOfAttempts);
     const timeLimitString = String(timeLimit);
+    const creditPointsString = String(creditPoint);
     const examNameRegex = /^[a-zA-Z\s]*$/;
 
     if (examName.trim() && examNameRegex.test(examName)) {
@@ -156,7 +165,7 @@ const ExamComponent: React.FC = () => {
       valid = false;
     }
 
-    if (creditPoint.trim() && parseInt(creditPoint) >= 0) {
+    if (creditPointsString.trim() && parseInt(creditPointsString) >= 0) {
       errorsCopy.creditPoint = '';
     } else {
       if (creditPoint.trim()) {
@@ -256,10 +265,12 @@ const ExamComponent: React.FC = () => {
   }
 
   function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.files && e.target.files.length > 0) {
-      setBadge(e.target.files[0]);
-    }
+  if (e.target.files && e.target.files.length > 0) {
+    setBadge(e.target.files[0]);
+  } else {
+    setBadge(badge); // Set badge to the badgeURL fetched from the database
   }
+}
 
   return (
     <div className='container'>

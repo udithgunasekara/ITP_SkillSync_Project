@@ -73,8 +73,8 @@ public class FreelancerController {
     }
 
     //check the account status when freelancer login
-    @GetMapping("/checkAccountStatus")
-    public ResponseEntity<Boolean> checkAccountStatus(@RequestParam("username") String username){
+    @GetMapping("/checkAccountStatus/{username}")
+    public ResponseEntity<Boolean> checkAccountStatus(@PathVariable("username") String username){
         boolean status = freelancerService.checkAccountStatus(username);
         return ResponseEntity.ok(status);
     }

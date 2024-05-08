@@ -3,7 +3,6 @@ package BackEnd.Mapper;
 import BackEnd.DTO.ExamsDTO;
 import BackEnd.entity.Exams;
 
-
 public class ExamsMapper {
 
     public static ExamsDTO mapToExamsDTO(Exams exams){
