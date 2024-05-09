@@ -7,8 +7,6 @@ import { validateEmail, validatePassword, validateName, validateUsername, valida
 const FreelancerRegComponent = () => {
     const navigate = useHistory();
 
-
-
     // Initializing state for each backend variable
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -38,39 +36,6 @@ const FreelancerRegComponent = () => {
     function saveFreelancer(e: any) {
         e.preventDefault();
 
-        // Validate email
-        if (!validateEmail(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-
-        // Validate password
-        if (!validatePassword(password)) {
-            alert('Password must have at least one number, one lowercase, one uppercase letter, and at least 8 characters.');
-            return;
-        }
-
-        if (!validateName(firstName) || !validateName(lastName)) {
-            alert('Invalid name');
-            return;
-        }
-        
-        if (!validateDOB(dob)) {
-            alert('Age must be between 13 and 99 years');
-            return;
-        }
-
-        if (!validateUsername(userName)) {
-            alert('Username must contain only lowercase letters and numbers');
-            return;
-        }
-        if(!validatePhone(phone)){
-            alert('Invalid phone number');
-            return;
-        }
-
-
-
         // Including all state variables in the employee object
         const freelancer = { firstName, lastName, email, dob, nic, phone, userName, password, workOn };
         console.log(freelancer);
@@ -85,9 +50,87 @@ const FreelancerRegComponent = () => {
             console.log(response.data);
             navigate.push('/QualificationPage', { state: { userName: userName } });
         });
+
+       
     }
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        let sanitizedInput = '';
+
+        // Input sanitization logic
+        if (name === 'firstName' || name === 'lastName') {
+            sanitizedInput = value.replace(/[^a-zA-Z\s]/g, ''); // Allow only alphabetic characters and whitespace
+        }else if (name === 'username') {
+            sanitizedInput = value.replace(/[^a-zA-Z0-9_]/g, ''); // Allow only alphabetic characters, digits and '_' no whitespaces
+        }
+        
+        
+        else if (name === 'phone') {
+                sanitizedInput = value.replace(/[^0-9]/g, ''); // Allow only digits
+                sanitizedInput = sanitizedInput.slice(0, 10); // Limit input to 10 characters
+                       
+        }else if (name === 'nic'){
+                sanitizedInput = value.replace(/[^0-9Vv]/g, ''); // Allow only digits and 'V'/'v'
+                sanitizedInput = sanitizedInput.slice(0, 12); // Limit input to 12 characters
+        }else if (name === 'email') {
+            sanitizedInput = value.replace(/[^a-zA-Z0-9@._-]/g, ''); // Allow only alphanumeric characters, '@', '.', '_', and '-'
+        }else if (name === 'dob') {
+                const birthDate = new Date(value);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+            
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                  age--;
+                }
+            
+                if (age < 13 || age > 99) {
+                        setDobError('Age must be between 13 and 99');
+                } else {
+                        setDobError('');
+                  setDob(value);
+                }
+        }
+        else {
+            sanitizedInput = value; // For other fields, no sanitization needed
+        }
+  
+         // Update state based on the input field
+         switch (name) {
+                case 'firstName':
+                    setFirstName(sanitizedInput);
+                    break;
+                case 'lastName':
+                    setLastName(sanitizedInput);
+                    break;
+                case 'email':
+                    setEmail(sanitizedInput);
+                    break;
+                
+                case 'nic':
+                    setNic(sanitizedInput);
+                    break;
+                case 'phone':
+                    setPhone(sanitizedInput);
+                    break;
+                case 'username':
+                    setUserName(sanitizedInput);
+                    break;
+                case 'password':
+                    setPassword(sanitizedInput);
+                    break;
+                default:
+                    break;
+            }
+
+
+};
+
+   
+
     return (
+        
         <div className="container" style={{ maxWidth: '900px', marginTop:'80px' }}>
     <div style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <h1 style={{ color: '#AC69E2', textAlign: 'center', fontSize: '48px' }}>SkillSync</h1>
@@ -98,58 +141,40 @@ const FreelancerRegComponent = () => {
                 <div className="col-md-6">
                     <div className="mb-3">
                         <label htmlFor="firstName" className="form-label" >First Name</label>
-                        <input type="text" className="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required value={firstName} onChange={(e) => {
-                            setFirstName(e.target.value);
-                            setFirstNameError(validateName(e.target.value) ? '' : 'Invalid first name');
-                        }} />
+                        <input type="text" className="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required value={firstName} onChange={handleChange} />
                         <div style={{ color: 'red' }}>{firstNameError}</div>
                     </div>
                             <div className="mb-3">
                                 <label htmlFor="nic" className="form-label">NIC</label>
-                                <input type="text" className="form-control" id="nic" name="nic" placeholder="Enter NIC" required value={nic} onChange={(e) => setNic(e.target.value)} />
+                                <input type="text" className="form-control" id="nic" name="nic" placeholder="Enter NIC" required value={nic} onChange={handleChange} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">Email</label>
-                                <input type="email" className="form-control" id="email" name="email" placeholder="Enter Email" required value={email} onChange={(e) => {
-                                    setEmail(e.target.value);
-                                    setEmailError(validateEmail(e.target.value) ? '' : 'Invalid email format');
-                                }} />
+                                <input type="email" className="form-control" id="email" name="email" placeholder="Enter Email" required value={email} onChange={handleChange} />
                                 <div style={{ color: 'red' }}>{emailError}</div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="dob" className="form-label">Date of Birth</label>
-                                <input type="date" className="form-control" id="dob" name="dob" required value={dob} onChange={(e) => {
-                                    setDob(e.target.value);
-                                    setDobError(validateDOB(e.target.value) ? '' : 'Age must be between 13 and 99 years');
-                                }} />
+                                <input type="date" className="form-control" id="dob" name="dob" required value={dob} onChange={handleChange} />
                                 <div style={{ color: 'red' }}>{dobError}</div>
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="mb-3">
                                 <label htmlFor="lastName" className="form-label">Last Name</label>
-                                <input type="text" className="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required value={lastName} onChange={(e) => {
-                                    setLastName(e.target.value);
-                                    setLastNameError(validateName(e.target.value) ? '' : 'Invalid last name');
-                                }} />
+                                <input type="text" className="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required value={lastName} onChange={handleChange} />
                                 <div style={{ color: 'red' }}>{lastNameError}</div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="phone" className="form-label">Phone Number</label>
                                 <div className="input-group">
                                     <span className="input-group-text" id="basic-addon1">+94</span>
-                                    <input type="tel" className="form-control" id="phone" name="phone" placeholder="Enter Phone Number" required value={phone} onChange={(e) => {
-                                        setPhone(e.target.value);
-                                        setPhoneError(validatePhone(e.target.value) ? '' : 'Invalid phone number');
-                                    }} />
+                                    <input type="tel" className="form-control" id="phone" name="phone" placeholder="Enter Phone Number" required value={phone} onChange={handleChange} />
                                 </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="username" className="form-label">Username</label>
-                                <input type="text" className="form-control" id="username" name="userName" placeholder="Enter Username" required value={userName} onChange={(e) => {
-                                    setUserName(e.target.value);
-                                    setUsernameError(validateUsername(e.target.value) ? '' : 'Username must contain only lowercase letters and numbers');
-                                }} />
+                                <input type="text" className="form-control" id="username" name="username" placeholder="Enter Username" required value={userName} onChange={handleChange} />
                                 <div style={{ color: 'red' }}>{usernameError}</div>
                             </div>
                             <div className="mb-3">
@@ -171,10 +196,7 @@ const FreelancerRegComponent = () => {
                         <div className="col-md-6">
                             <div className="mb-3">
                                 <label htmlFor="password" className="form-label">Password</label>
-                                <input type="password" className="form-control" id="password" name="password" placeholder="Enter Password" required value={password} onChange={(e) => {
-                                    setPassword(e.target.value);
-                                    setPasswordError(validatePassword(e.target.value) ? '' : 'Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number.');
-                                }} />
+                                <input type="password" className="form-control" id="password" name="password" placeholder="Enter Password" required value={password} onChange={handleChange} />
                             </div>
                             <div style={{ color: 'red' }}>{passwordError}</div>
                         </div>
@@ -189,6 +211,7 @@ const FreelancerRegComponent = () => {
                 </form>
             </div>
         </div>
+        
     );
 }
 
