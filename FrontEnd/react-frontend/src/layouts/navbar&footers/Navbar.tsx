@@ -1,3 +1,4 @@
+import { Session } from "inspector";
 import { Link, NavLink, useHistory } from "react-router-dom";
 
 // const userrole = sessionStorage.getItem('role') 
@@ -40,6 +41,12 @@ export const Navbar = () => {
 
                 <div className='collapse navbar-collapse justify-content-between' id='navbarNavDropdown'>
                     <ul className='navbar-nav' style={{paddingTop:0}}>
+
+                         {(role !== 'client' && role !== 'freelancer' && role !== 'admin') && (
+                            <NavLink className='nav-link' to={'/User/Registration'}>Sign Up</NavLink>
+                        )}  
+
+
                         <li className='nav-item ' id="dash" >
                             <NavLink className='nav-link' to={'/dashboard'}>Dashboard</NavLink>
                         </li>
@@ -61,6 +68,7 @@ export const Navbar = () => {
                             <NavLink className='nav-link' to={'/admin'}>Admin</NavLink>
                         </li> */}
 
+                        
                     </ul>
                     <ul className='navbar-nav ms-auto' style={{paddingTop:0}}>
                         <li className="nav-item dropdown ">

@@ -244,9 +244,15 @@ const FreelancerDetails: React.FC = () => {
     setShowReviews(false);
     setShowMyGigs(true);
   };
+  
   const ShowMyFreelancerdashboardButtonClick = () => {
     window.location.href = ('http://localhost:3000/FreelancerDashboard');
   };
+
+  const handleApplyExam = () => {
+    window.location.href = ('http://localhost:3000/exams');
+  };
+
   const handleLanguageEditClick = () => {
     setShowLang(true);
   };
@@ -341,14 +347,13 @@ const FreelancerDetails: React.FC = () => {
   };
 
   
-
+  
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   const inputValue = e.target.value;
   if (/^[a-zA-Z+#\s]*$/.test(inputValue)) {
     setSkill(inputValue);
   }
 };
-
 
   const handleSkillSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -454,15 +459,15 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       
       <p>Name: {freelancer.firstName} {freelancer.lastName}</p>
       <hr/>
-      <p>level: {freelancer.level}</p>
+      <p>level: {freelancer.level}    <button className='exam-apply-profile' onClick={handleApplyExam}>apply exam</button></p>
       <p className='detail-div-1'>Country: {client?.country}</p>
       <p className='detail-div-2'>Registered Date: {monthName} {year}</p>
 
-      <div>
+      <div className='badge-prof-disp'>
         {exams
           .filter(exam => result.find(res => res.examIdPk === exam.id && res.result === 'pass')) // Filter exams that are present in the result
           .map((exam) => (
-            <img src={`data:image/jpeg;base64,${exam.badge}`} className="profile-image-msg" alt={exam.examName} style={{left: '300px'}}/>
+            <img src={`data:image/jpeg;base64,${exam.badge}`} className="profile-badge" alt={exam.examName} style={{left: '300px'}}/>
         ))}
       </div>
      
@@ -536,10 +541,10 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     {languages && languages.length > 0 ? (
       languages.map((language, index) => (
         <span id='lang-list-free' key={language.id || index}>
-          {language.language}{' '}
-          <button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language'>
+          {language.language}{'   '}
+          {(registeruser===username) && (<button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language'>
             <MDBIcon fas icon="trash-alt" />
-          </button>
+          </button>)}
         </span>
       ))
     ) : (
@@ -578,7 +583,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 {skills && skills.length > 0 ? (
 skills.map((skill, index) => ( // Using index as fallback key
   <span id='skill-free-list' key={skill.id || index}>
-    {skill.skill} <button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>
+    {skill.skill} {(registeruser===username) && (<button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>)}
   </span>
 ))
 ) : (
@@ -664,7 +669,7 @@ skills.map((skill, index) => ( // Using index as fallback key
     education.map((edu) => (
       <li id='edu-list' key={edu.id}>
         <hr/>
-        <p>{edu.institute} - {edu.title} {edu.major}    <button onClick={() => handleDeleteEducation(edu.id)} className='delete-education'><MDBIcon fas icon="trash-alt" /></button></p>
+        <p>{edu.institute} - {edu.title} {edu.major}    {(registeruser===username) && (<button onClick={() => handleDeleteEducation(edu.id)} className='delete-education'><MDBIcon fas icon="trash-alt" /></button>)}</p>
         <p>Graduated on {edu.year}</p>
       </li>
     ))

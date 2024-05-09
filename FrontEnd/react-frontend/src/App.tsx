@@ -77,6 +77,8 @@ import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
 import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 import HomePage from './layouts/Home/HomePage';
 import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginPage';
+import RegisterPager from './layouts/Home/RegisterPage';
+import { AdminNavbar } from './layouts/AdminTaskManagement/Admin/components/AdminNavbar';
 
 
 export const App = () => {
@@ -239,6 +241,7 @@ export const App = () => {
 
             <Route path='/Applicant/Page'  exact>
             <Navbar />
+            <AdminNavbar/>
               <ApplicantListPage/>
               <Footer />
             </Route>
@@ -276,7 +279,11 @@ export const App = () => {
             <Route path='/Admin/Login' exact>
             <Navbar />
             <AdminLoginComponent/>
-          
+            </Route>
+
+            <Route path='/User/Registration' exact>
+            <Navbar />
+            <RegisterPager/>
             </Route>
 
             {/* Ending supeshala's files */}
