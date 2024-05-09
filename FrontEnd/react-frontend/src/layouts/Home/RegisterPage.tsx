@@ -10,9 +10,14 @@ const RegisterPager: React.FC = () => {
     history.push('/Freelancer/Registration'); // Redirect to freelancer reg page
   };
 
-  const handleClientLogin = () => {
+  const handleLogin = () => {
     history.push('/HomePage'); // Redirect to client reg page
   };
+
+  const handleClientLogin = () => {
+    history.push('/Client/Registration'); // Redirect to client reg page
+  };
+
 
   const backgroundImageStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${reqback})`, // Add a linear gradient with opacity
@@ -50,7 +55,7 @@ const RegisterPager: React.FC = () => {
       <button
           type="button"
           className="btn btn btn-secondary btn-lg mx-3 rounded-pill mt-5" // Rounded outline light button
-          onClick={handleClientLogin}
+          onClick={handleLogin}
         >
           Log In
         </button>
