@@ -1,13 +1,13 @@
 import { Link, NavLink, useHistory } from "react-router-dom";
 
 // const userrole = sessionStorage.getItem('role') 
-const userrole = "freelancer"; //change this to change user
+// const userrole = "freelancer"; //change this to change user
 
 export const Navbar = () => {
     const history = useHistory();
     const username = sessionStorage.getItem('username');
     const role = sessionStorage.getItem('role');
-    const role2 = 'admin'
+    // const role2 = 'admin'
 
     const handleProfileClick = () => {
         if (role === 'freelancer') {
@@ -52,7 +52,7 @@ export const Navbar = () => {
                         <li className='nav-item' id="cources">
                             <a className='nav-link' href='#'> Courses</a>
                         </li>
-                        {role2 === 'admin' && (
+                        {role === 'admin' && (
                             <li className='nav-item' id="admin">
                                 <NavLink className='nav-link' to={'/admin'}>Admin</NavLink>
                             </li>

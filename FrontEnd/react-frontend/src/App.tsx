@@ -413,10 +413,12 @@ export const App = () => {
                 <Footer />
               </Route>
               <Route path='/searchjobs'>
+                <Navbar/>
                 <SearchJobComponent />
                 <Footer />
               </Route>
               <Route path='/edit-jobpost/:id'>
+                <Navbar/>
                 <JobComponent />
                 <Footer />
               </Route>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Page, Text, Image, Document, StyleSheet, View } from "@react-pdf/renderer";
+import logo from "../../../../images/Asset 3.png"
 import { title } from "process";
 import { text } from "stream/consumers";
 import TicketResponseModel from "../../../../Model/TicketResponseModel";
@@ -77,6 +78,7 @@ export const Report: React.FC<{ ticketdata: any, ticketresponse?: TicketResponse
     return (
         <Document>
             <Page style={styles.body}>
+                <Image src={logo} style={{ width: 100, height: 100 }} />
                 <Text style={styles.header} fixed>
                     Ticket ID: {props.ticketdata.id} {'\n'}
                     {props.ticketdata.subject}
