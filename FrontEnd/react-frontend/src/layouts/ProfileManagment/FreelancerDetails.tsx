@@ -250,7 +250,7 @@ const FreelancerDetails: React.FC = () => {
   };
 
   const handleApplyExam = () => {
-    window.location.href = ('http://localhost:3000/exams');
+    window.location.href = ('http://localhost:3000/FreelancerDashboard');
   };
 
   const handleLanguageEditClick = () => {
@@ -391,11 +391,24 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   
   const handleEduChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setNewEducation(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+    
+    const onlyStringRegex = /^[a-zA-Z\s]*$/;
+    
+    if (name !== "year" && onlyStringRegex.test(value)) {
+        setNewEducation(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    } else if (name !== "year") {
+        console.log('Invalid input. Only string characters are allowed.');
+    } else {
+        setNewEducation(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+};
+
 
   
   const handleEduSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -459,13 +472,13 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       
       <p>Name: {freelancer.firstName} {freelancer.lastName}</p>
       <hr/>
-      <p>level: {freelancer.level}    <button className='exam-apply-profile' onClick={handleApplyExam}>apply exam</button></p>
+      <p>level: {freelancer.level}    {(registeruser===username) && (<button className='exam-apply-profile' onClick={handleApplyExam}>apply exam</button>)}</p>
       <p className='detail-div-1'>Country: {client?.country}</p>
       <p className='detail-div-2'>Registered Date: {monthName} {year}</p>
 
       <div className='badge-prof-disp'>
         {exams
-          .filter(exam => result.find(res => res.examIdPk === exam.id && res.result === 'pass')) // Filter exams that are present in the result
+          .filter(exam => result.find(res => res.examIdPk === exam.id)) // Filter exams that are present in the result
           .map((exam) => (
             <img src={`data:image/jpeg;base64,${exam.badge}`} className="profile-badge" alt={exam.examName} style={{left: '300px'}}/>
         ))}
@@ -531,7 +544,6 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       />
       <br/>
       <button type="submit" className='add-language-btn'>Add Language</button>
-      {/* Assuming handleLanguageEditCancelClick is defined somewhere */}
       <button onClick={handleLanguageEditCancelClick} className='cancel-language'>cancel</button>
     </form>
         </div>
@@ -581,7 +593,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 {!showskill && (
 <ul>
 {skills && skills.length > 0 ? (
-skills.map((skill, index) => ( // Using index as fallback key
+skills.map((skill, index) => ( 
   <span id='skill-free-list' key={skill.id || index}>
     {skill.skill} {(registeruser===username) && (<button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>)}
   </span>
