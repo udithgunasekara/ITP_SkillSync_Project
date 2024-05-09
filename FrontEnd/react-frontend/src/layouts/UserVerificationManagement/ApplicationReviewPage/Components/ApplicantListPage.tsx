@@ -74,6 +74,7 @@ const ApplicantListPage: React.FC = () => {
 
   return (
     
+    <div className="below-navbar-admin " id='dashboardpage' style={{ width: "100vw" }}>
     <div className='app_container my-5' 
    // style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
     >
@@ -107,6 +108,7 @@ const ApplicantListPage: React.FC = () => {
           <div className="app_no_results text-center w-100">No freelancers found matching your criteria.</div>
         )}
       </div>
+    </div>
     </div>
   );
 }
