@@ -20,7 +20,7 @@ interface Package {
 const EditGig: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  
+
   // State for gig details and packages
   const [gigDetails, setGigDetails] = useState<GigDetails | null>(null);
   const [packages, setPackages] = useState<Package[]>([]);
@@ -113,12 +113,7 @@ const EditGig: React.FC = () => {
       setGigTitleError('');
     }
 
-    if (!/^[a-zA-Z\s]+$/.test(gigDetails.gigDescription) || gigDetails.gigDescription.trim() === '') {
-      setGigDescriptionError('Gig description must contain only alphabetical letters and cannot be empty.');
-      isValid = false;
-    } else {
-      setGigDescriptionError('');
-    }
+    // No validation needed for gig description
 
     return isValid;
   };
@@ -185,12 +180,13 @@ const EditGig: React.FC = () => {
               id="description"
               value={gigDetails.gigDescription}
               onChange={(e) => handleGigDetailsChange('gigDescription', e.target.value)}
-              maxLength={200}
+              rows={7} 
             />
-            <div className="text-danger">{gigDescriptionError}</div>
+            {/* No error message for gig description */}
           </div>
         </div>
       )}
+
       {/* Package details form */}
       {packages.map((pkg, index) => (
         <div key={pkg.packageId} className="mb-4">

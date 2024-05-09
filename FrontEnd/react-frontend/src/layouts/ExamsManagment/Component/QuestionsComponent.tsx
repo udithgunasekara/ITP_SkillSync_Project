@@ -17,6 +17,25 @@ const QuestionsComponent: React.FC = () => {
   const [errors, setErrors] = useState({
     questionTxt: ''
   });
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [optionIdToDelete, setOptionIdToDelete] = useState('');
+
+  const role = sessionStorage.getItem('role');
+  useEffect(() => {
+    validateUser(role);
+  }, []);
+
+  function validateUser(role: string | null) {
+    if (role) {
+      if (role !== 'moderator') {
+        navigationInQuestion.push('/');
+        alert('Restricted!')
+      }
+    } else {
+      navigationInQuestion.push('/');
+      alert('Restricted!')
+    }
+  }
 
   useEffect(() => {
     getQuestions(questionId);
@@ -37,7 +56,7 @@ const QuestionsComponent: React.FC = () => {
 
   function saveOrUpdateQuestions(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if(validateForm()){
+    if (validateForm()) {
       const question = { questionId, questionTxt, options, examId };
       console.log(question);
 
@@ -65,7 +84,6 @@ const QuestionsComponent: React.FC = () => {
 
   function validateForm(): boolean {
     let valid = true;
-
     const errorsCopy = { ...errors };
 
     if (questionTxt.trim()) {
@@ -80,16 +98,28 @@ const QuestionsComponent: React.FC = () => {
     return valid;
   }
 
+  // Function to delete an option
   function removeOption(optionId: string, questionId: string) {
-    console.log(optionId);
+    // Show confirmation popup
+    setOptionIdToDelete(optionId);
+    setDeleteConfirmation(true);
+  }
 
-    deleteOptionById(optionId)
+  // Function to confirm option deletion
+  function confirmDelete() {
+    deleteOptionById(optionIdToDelete)
       .then(() => {
-        getQuestions(questionId);
+        setDeleteConfirmation(false); // Hide delete confirmation popup
+        getQuestions(questionId); // Refresh options
       })
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  // Function to cancel option deletion
+  function cancelDelete() {
+    setDeleteConfirmation(false); // Hide delete confirmation popup
   }
 
   function pageTitle(): JSX.Element {
@@ -106,9 +136,9 @@ const QuestionsComponent: React.FC = () => {
         <div className='container'>
           <h2 className='text-center'>Manage answers</h2>
           <Link to={`/add-Option/${examId}/${questionId}`}>
-          <button className='btn btn-primary mb-2'>
-            Add Option
-          </button>
+            <button className='btn btn-primary mb-2'>
+              Add Option
+            </button>
           </Link>
           <table className='table table-striped table-bordered'>
             <thead>
@@ -123,9 +153,9 @@ const QuestionsComponent: React.FC = () => {
                   <td>{option.optionTxt}</td>
                   <td>
                     <Link to={`/edit-Option/${examId}/${option.questionId}/${option.optionId}`}>
-                    <button className='btn btn-info'>
-                      Update
-                    </button>
+                      <button className='btn btn-info'>
+                        Update
+                      </button>
                     </Link>
                     <button
                       className='btn btn-danger'
@@ -164,7 +194,7 @@ const QuestionsComponent: React.FC = () => {
                   onChange={(e) => setQuestionTxt(e.target.value)}
                 ></input>
                 {errors.questionTxt && <div className='invalid-feedback'>{errors.questionTxt}</div>}
-              </div>
+              </div><br></br>
               <button type='submit' className='btn btn-success'>
                 Submit
               </button>
@@ -173,6 +203,26 @@ const QuestionsComponent: React.FC = () => {
         </div>
       </div>
       {DisplayAnswers()}
+      {/* Delete confirmation modal */}
+      {deleteConfirmation && (
+        <div className="modal" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Confirmation</h4>
+                <button type="button" className="close" onClick={() => cancelDelete()}>&times;</button>
+              </div>
+              <div className="modal-body">
+                <p>Are you sure you want to delete this option?</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-danger" onClick={() => confirmDelete()}>Delete</button>
+                <button type="button" className="btn btn-secondary" onClick={() => cancelDelete()}>Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {!questionId && <><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></>}
     </div>
   );

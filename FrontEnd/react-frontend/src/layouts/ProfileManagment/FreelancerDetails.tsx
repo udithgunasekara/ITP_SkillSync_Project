@@ -465,7 +465,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
       <div className='badge-prof-disp'>
         {exams
-          .filter(exam => result.find(res => res.examIdPk === exam.id)) // Filter exams that are present in the result
+          .filter(exam => result.find(res => res.examIdPk === exam.id && res.result === 'pass')) // Filter exams that are present in the result
           .map((exam) => (
             <img src={`data:image/jpeg;base64,${exam.badge}`} className="profile-badge" alt={exam.examName} style={{left: '300px'}}/>
         ))}

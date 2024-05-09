@@ -46,6 +46,9 @@ export const AdminNavbar = () => {
                             <li className="nav-item">
                             <NavLink to={"/Applicant/Page"} className="nav-link">Applications</NavLink>
                             </li>
+                            <li className="nav-item">
+                            <NavLink to={"/exams"} className="nav-link">Manage Exams</NavLink>
+                            </li>
                         </ul>
                         
                     </div>

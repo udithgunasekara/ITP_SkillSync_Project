@@ -5,7 +5,7 @@ export const WelcometoSite = () => {
                 <div>
                     <h1 className="display-5 fw-bold">Welcome to SkillSync</h1>
                     <p className="col-md-8 fs-4">Tell our Freelancers whats on your mind. They will do it for you</p>
-                    <a className="btn main-color btn-lg text-white rounded-pill" type="button" href="#">Post your Project</a>                               
+                    {/* <a className="btn main-color btn-lg text-white rounded-pill" type="button" href="#">Post your Project</a>                                */}
                 </div>
             </div>
         </div>

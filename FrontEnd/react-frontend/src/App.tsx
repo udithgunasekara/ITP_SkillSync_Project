@@ -76,6 +76,9 @@ import OTPVerification from './layouts/UserVerificationManagement/UserRegistrati
 import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
 import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
 import HomePage from './layouts/Home/HomePage';
+import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginPage';
+import RegisterPager from './layouts/Home/RegisterPage';
+import { AdminNavbar } from './layouts/AdminTaskManagement/Admin/components/AdminNavbar';
 
 
 export const App = () => {
@@ -200,13 +203,13 @@ export const App = () => {
             <Route path='/Freelancer/Login' exact>
             <Navbar />
               <FreelancerLoginComponent/>
-              <Footer />
+             
             </Route>
   
             <Route path='/Client/Login' exact>
             <Navbar />
               <ClientLoginComponent/>
-              <Footer />
+              
             </Route>
 
             <Route path='/Freelancer/Registration' exact>
@@ -238,6 +241,7 @@ export const App = () => {
 
             <Route path='/Applicant/Page'  exact>
             <Navbar />
+            <AdminNavbar/>
               <ApplicantListPage/>
               <Footer />
             </Route>
@@ -270,6 +274,16 @@ export const App = () => {
             <Navbar />
             <OTPVerification/>
             <Footer />
+            </Route>
+
+            <Route path='/Admin/Login' exact>
+            <Navbar />
+            <AdminLoginComponent/>
+            </Route>
+
+            <Route path='/User/Registration' exact>
+            <Navbar />
+            <RegisterPager/>
             </Route>
 
             {/* Ending supeshala's files */}
@@ -406,10 +420,12 @@ export const App = () => {
                 <Footer />
               </Route>
               <Route path='/searchjobs'>
+                <Navbar/>
                 <SearchJobComponent />
                 <Footer />
               </Route>
               <Route path='/edit-jobpost/:id'>
+                <Navbar/>
                 <JobComponent />
                 <Footer />
               </Route>
