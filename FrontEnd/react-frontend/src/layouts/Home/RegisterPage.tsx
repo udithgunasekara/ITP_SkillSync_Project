@@ -11,7 +11,7 @@ const RegisterPager: React.FC = () => {
   };
 
   const handleClientLogin = () => {
-    history.push('/Client/Registration'); // Redirect to client reg page
+    history.push('/HomePage'); // Redirect to client reg page
   };
 
   const backgroundImageStyle = {
