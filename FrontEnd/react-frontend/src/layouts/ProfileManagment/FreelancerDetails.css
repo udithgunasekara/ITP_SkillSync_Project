@@ -176,6 +176,40 @@
   margin-left: 0.625em;
   transition: background-color 0.3s;
 }
+.exam-apply-profile{
+  background-color: #8436C2;
+  color: white;
+  top: 10.625em;
+  height: 40px;
+  font-size: 14px;
+  width: 120px;
+  border: none;
+  padding: 0.9375em 1.25em;
+  margin-left: 0em;
+  border-radius: 0.3125em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.badge-prof-disp{
+  width: 400px;
+  height: 100px;
+  padding-left: 80px;
+  overflow: scroll;
+}
+.profile-badge{
+  max-width: 45px; 
+    max-height: 45px; 
+    border-radius: 50%;
+    object-fit:contain;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 20px;
+    margin-left: -40px;
+    display: block;
+    border-radius: 50%;
+    border: solid;
+    border-width: thin;
+}
 .Add-education, .Add-skill, .Add-language, .Add-description {
   background-color: #8436C2;
   color: white;
