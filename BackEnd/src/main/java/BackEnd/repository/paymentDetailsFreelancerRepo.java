@@ -7,5 +7,5 @@ public interface paymentDetailsFreelancerRepo extends JpaRepository<paymentDetai
     paymentDetailsFreelancer findByUserName(String userName);
 
 
-    paymentDetailsFreelancer deleteByUserName(String userName);
+    void deleteByUserName(String userName);
 }

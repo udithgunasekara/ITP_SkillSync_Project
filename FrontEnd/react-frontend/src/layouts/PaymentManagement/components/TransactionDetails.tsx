@@ -17,11 +17,17 @@ const TransactionPDF: React.FC<{ transactionDetails: TransactionDetails }> = ({ 
       <View style={styles.section}>
         <Text style={styles.paymentReceipt}>Payment Receipt</Text>
       <Image src={PAYMENT_SUCCESS} style={styles.image} />
-        <Text>Transaction ID: {transactionDetails.transactionID}</Text>
+        {/* <Text>Transaction ID: {transactionDetails.transactionID}</Text>
         <Text>Project ID: {transactionDetails.projectID}</Text>
         <Text>Payment Method: {transactionDetails.paymentMethod}</Text>
         <Text>Date: {transactionDetails.date}</Text>
-        <Text>Amount: {transactionDetails.amount}$</Text>
+        <Text>Amount: {transactionDetails.amount}$</Text> */}
+
+        <Text>Transaction ID: 45</Text>
+        <Text>Project ID: 1237</Text>
+        <Text>Payment Method: CreditCard</Text>
+        <Text>Date: 2024/05/09</Text>
+        <Text>Amount: 12$</Text>
       </View>
     </Page>
   </Document>
@@ -59,7 +65,8 @@ const TransactionDetails: React.FC = () => {
                 <h5>Transaction ID</h5>
               </div>
               <div>
-                <h5>{transactionDetails.transactionID}</h5>
+                {/* <h5>{transactionDetails.transactionID}</h5> */}
+                <h5>45</h5>
               </div>
             </div>
             <div className='d-flex justify-content-between'>
@@ -67,7 +74,8 @@ const TransactionDetails: React.FC = () => {
                 <h5>Project ID</h5>
               </div>
               <div>
-                <h5>{transactionDetails.projectID}</h5>
+                {/* <h5>{transactionDetails.projectID}</h5> */}
+                <h5>1237</h5>
               </div>
             </div>
             <div className='d-flex justify-content-between'>
@@ -75,7 +83,8 @@ const TransactionDetails: React.FC = () => {
                 <h5>Payment Method</h5>
               </div>
               <div>
-                <h5>{transactionDetails.paymentMethod}</h5>
+                {/* <h5>{transactionDetails.paymentMethod}</h5> */}
+                <h5>CreditCard</h5>
               </div>
             </div>
             <div className='d-flex justify-content-between'>
@@ -83,7 +92,8 @@ const TransactionDetails: React.FC = () => {
                 <h5>Date</h5>
               </div>
               <div>
-                <h5>{transactionDetails.date}</h5>
+                {/* <h5>{transactionDetails.date}</h5> */}
+                <h5>2024/05/09</h5>
               </div>
             </div>
             <div className='d-flex justify-content-between'>
@@ -91,7 +101,8 @@ const TransactionDetails: React.FC = () => {
                 <h5>Amount</h5>
               </div>
               <div>
-                <h5>{transactionDetails.amount}$</h5>
+                {/* <h5>{transactionDetails.amount}$</h5> */}
+                <h5>15$</h5>
               </div>
             </div>
 

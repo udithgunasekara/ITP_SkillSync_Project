@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { notifyMessage } from "../util/communFunc";
+import visa from "../image/Visa.jpg";
+import mastercard from "../image/mastercard.jpg";
+import amex from "../image/amex.png";
 
 interface ApiResponse {
     transactionID: any;
@@ -9,6 +12,8 @@ interface ApiResponse {
     projectID: any;
     amount: any;
 }
+
+
 
 const CardPaymentProceed = () => {
     const navigate = useHistory();
@@ -21,29 +26,37 @@ const CardPaymentProceed = () => {
         projectId: queryParams.get('projectId')
     };
 
-    // State variables for input fields and validation errors
-    const [cardNumber, setCardNumber] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [securityCode, setSecurityCode] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-
-    const [cardNumberError, setCardNumberError] = useState('');
-    const [expiryDateError, setExpiryDateError] = useState('');
-    const [securityCodeError, setSecurityCodeError] = useState('');
-    const [firstNameError, setFirstNameError] = useState('');
-    const [lastNameError, setLastNameError] = useState('');
+     // State variables for input fields and validation errors
+     const [cardNumber, setCardNumber] = useState('');
+     const [expiryDate, setExpiryDate] = useState('');
+     const [securityCode, setSecurityCode] = useState('');
+     const [firstName, setFirstName] = useState('');
+     const [lastName, setLastName] = useState('');
+     const [cardType, setCardType] = useState('');
+ 
+     const [cardNumberError, setCardNumberError] = useState('');
+     const [expiryDateError, setExpiryDateError] = useState('');
+     const [securityCodeError, setSecurityCodeError] = useState('');
+     const [firstNameError, setFirstNameError] = useState('');
+     const [lastNameError, setLastNameError] = useState('');
 
     // Validation functions
-    const validateCardNumber = () => {
-        const cardNumberRegex = /^\d{12}$/; // 12-digit card number
-        if (!cardNumberRegex.test(cardNumber)) {
-            setCardNumberError("Enter a valid card number");
-            return false;
-        }
-        setCardNumberError('');
-        return true;
-    };
+const validateCardNumber = () => {
+    let cardNumberLength = 0;
+    if (cardType === 'visa' || cardType === 'mastercard') {
+        cardNumberLength = 12;
+    } else if (cardType === 'amex') {
+        cardNumberLength = 15;
+    }
+
+    const cardNumberRegex = new RegExp(`^\\d{${cardNumberLength}}$`); // Dynamic regex based on card type
+    if (!cardNumberRegex.test(cardNumber)) {
+        setCardNumberError(`Enter a valid ${cardType.toUpperCase()} card number`);
+        return false;
+    }
+    setCardNumberError('');
+    return true;
+};
 
     const validateExpiryDate = () => {
         const expiryDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/; // MM/YY format
@@ -171,6 +184,20 @@ const CardPaymentProceed = () => {
 
                 <div className="card col-md-6 mt-5 px-5 pt-3 pb-5 offset-md-3" style={{ background: 'linear-gradient(to right, #dbb2ce, #f9f2fa )' }}>
                     <h6>Credit/Debit Card</h6>
+                    <div className="input-group-append" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <input type="radio" name="cardType" value="visa" />
+                            <img src={visa} alt="Visa" className="card-image" style={{ width: '50px', height: 'auto', margin: '0 10px' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <input type="radio" name="cardType" value="mastercard" />
+                            <img src={mastercard} alt="Mastercard" className="card-image" style={{ width: '50px', height: 'auto', margin: '0 10px' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <input type="radio" name="cardType" value="amex" />
+                            <img src={amex} alt="AMEX" className='card-image' style={{ width: '50px', height: 'auto', margin: '0 10px' }} />
+                        </div>
+                    </div>
                     <div className="card-body mt-2 mx-5">
                         <h6 className="mt-3">Amount: {propsData.amount ?? 0}$</h6>
 
@@ -182,7 +209,8 @@ const CardPaymentProceed = () => {
                                 // Ensure only numeric characters are entered
                                 const input = e.target.value.replace(/\D/g, '');
                                 // Limit input to 12 characters
-                                const truncatedInput = input.slice(0, 12);
+                                //const truncatedInput = input.slice(0, 12);
+                                const truncatedInput = input.slice(0, cardType === 'amex' ? 15 : 12);
                                 setCardNumber(truncatedInput);
                             }}
                             onBlur={validateCardNumber}

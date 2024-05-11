@@ -5,7 +5,7 @@ const REST_API_BASE_URL = 'http://localhost:8082/details';
 
 // Define an interface for the detail object
 interface Detail {
-  id: string;
+  userName: string;
   // Add more properties as needed
 }
 
@@ -18,9 +18,9 @@ export const addDetails = (detail: Detail) => {
 }
 
 // Function to fetch details by ID
-export const getDetails = async (detailId: string) => {
+export const getDetails = async (detailUserName: string) => {
     try {
-      const response = await axios.get(`${REST_API_BASE_URL}/${detailId}`);
+      const response = await axios.get(`${REST_API_BASE_URL}/${detailUserName}`);
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
@@ -34,12 +34,12 @@ export const getDetails = async (detailId: string) => {
   }
 
 // Function to update details by ID
-export const updateDetails = (detailId: string, detail: any) => {
-  return axios.put(`${REST_API_BASE_URL}/${detailId}`, detail);
+export const updateDetails = (detailUserName: string, detail: any) => {
+  return axios.put(`${REST_API_BASE_URL}/${detailUserName}`, detail);
 }
 
 // Function to delete details by ID
-export const deleteDetails = (detailId: string) => {
-  return axios.delete(`${REST_API_BASE_URL}/${detailId}`);
+export const deleteDetails = (detailUserName: string) => {
+  return axios.delete(`${REST_API_BASE_URL}/${detailUserName}`);
 }
 
