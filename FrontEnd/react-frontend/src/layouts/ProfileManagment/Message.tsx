@@ -147,7 +147,7 @@ function Message() {
             <div className='msg-profile-div'>
               {imageURL ? (<img src={imageURL} alt="Uploaded" style={{ maxWidth: '100%' }} className='profile-image-msg' />):(<img src={defaultImageUrl} alt="Uploaded" style={{ maxWidth: '100%' }} className='profile-image-msg' />)}
               <h2 className='user2-username'>@{username2}</h2>
-              <hr />
+              <hr className='horizontel' />
             </div>
             <div className='message-dispaly' ref={messageDisplayRef}>
               {messages.map((message) => (

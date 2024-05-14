@@ -8,6 +8,8 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './FreelancerDetails.css';
+import { listExams } from '../ExamsManagment/service/ExamsService';
+import { getUserResultByUserName } from '../ExamsManagment/service/UserResultService';
 
 
 
@@ -52,9 +54,26 @@ interface NewEducation {
   year: string;
 }
 
+interface Exam {
+  id: string;
+  examName: string;
+  examDescription: string;
+  noOfAttempts: string;
+  badgeName: string;
+  badge: File | null;
+  creditPoint: string;
+  timeLimit: string;
+}
 
+interface userResult {
+  userNamePk: string;
+  examIdPk: string;
+  result: string;
+}
 
 const FreelancerDetails: React.FC = () => {
+  const [exams, setExams] = useState<Exam[]>([]);
+  const [result, setResult] = useState<userResult[]>([]);
   const { username } = useParams<{ username: string }>();
   const registeruser = sessionStorage.getItem('username');
   const [freelancer, setFreelancer] = useState<Freelancer | null>(null);
@@ -74,7 +93,6 @@ const FreelancerDetails: React.FC = () => {
   const [ShowAboutme, setShowAboutme] = useState<boolean>(true);
   const [ShowReviews, setShowReviews] = useState<boolean>(false);
   const [ShowMyGigs, setShowMyGigs] = useState<boolean>(false);
-  const [ShowMyFreelancerdashboard, setShowMyFreelancerdashboard] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [neweducation, setNewEducation] = useState<NewEducation>({
     username: username,
@@ -102,6 +120,31 @@ const FreelancerDetails: React.FC = () => {
       console.error('Error fetching image:', error);
     }
   };
+
+  useEffect(() => {
+    getAllExam();
+    getAllResult()
+  }, []);
+
+  function getAllResult() {
+    getUserResultByUserName(username)
+      .then((response) => {
+        setResult(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function getAllExam() {
+    listExams()
+      .then((response) => {
+        setExams(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   useEffect(() => {
     const fetchFreelancerDetails = async () => {
@@ -141,19 +184,19 @@ const FreelancerDetails: React.FC = () => {
   
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFile(e.target.files[0]);
+      const selectedFile = e.target.files[0];
+      // Check if the selected file is a PNG or JPEG
+      if (selectedFile.type === 'image/png' || selectedFile.type === 'image/jpeg') {
+        setFile(selectedFile);
+      } else {
+        alert('Please select a PNG or JPEG image file.');
+      }
     }
   };
-
+  
   const handleUpload = async () => {
     if (!file) {
       alert('Please select an image file.');
-      return;
-    }
-  
-    // Check if the selected file is an image
-    if (!file.type.startsWith('image/')) {
-      alert('Please select a valid image file.');
       return;
     }
   
@@ -167,7 +210,7 @@ const FreelancerDetails: React.FC = () => {
         },
       });
       alert('Image uploaded successfully.');
-      fetchImage(); // Refresh the image after upload
+      window.location.reload();
     } catch (error) {
       console.error('Error uploading image:', error);
       alert('Error uploading image. Please try again.');
@@ -179,7 +222,7 @@ const FreelancerDetails: React.FC = () => {
     if (client && client.email === freelancer?.email) {
       window.location.href = `http://localhost:3000/clients/${username}`;
     } else {
-      window.location.href = 'http://localhost:3000/Client/Login'; 
+      window.location.href = 'http://localhost:3000/Client/Registration'; 
     }
   };
 
@@ -190,23 +233,26 @@ const FreelancerDetails: React.FC = () => {
     setShowAboutme(true);
     setShowReviews(false);
     setShowMyGigs(false);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowReviewsButtonClick = () => {
     setShowAboutme(false);
     setShowReviews(true);
     setShowMyGigs(false);
-    setShowMyFreelancerdashboard(false);
   };
   const ShowMyGigsButtonClick = () => {
     setShowAboutme(false);
     setShowReviews(false);
     setShowMyGigs(true);
-    setShowMyFreelancerdashboard(false);
   };
+  
   const ShowMyFreelancerdashboardButtonClick = () => {
     window.location.href = ('http://localhost:3000/FreelancerDashboard');
   };
+
+  const handleApplyExam = () => {
+    window.location.href = ('http://localhost:3000/FreelancerDashboard');
+  };
+
   const handleLanguageEditClick = () => {
     setShowLang(true);
   };
@@ -301,14 +347,13 @@ const FreelancerDetails: React.FC = () => {
   };
 
   
-
+  
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   const inputValue = e.target.value;
   if (/^[a-zA-Z+#\s]*$/.test(inputValue)) {
     setSkill(inputValue);
   }
 };
-
 
   const handleSkillSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -346,11 +391,24 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   
   const handleEduChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setNewEducation(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+    
+    const onlyStringRegex = /^[a-zA-Z\s]*$/;
+    
+    if (name !== "year" && onlyStringRegex.test(value)) {
+        setNewEducation(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    } else if (name !== "year") {
+        console.log('Invalid input. Only string characters are allowed.');
+    } else {
+        setNewEducation(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+};
+
 
   
   const handleEduSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -414,11 +472,18 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       
       <p>Name: {freelancer.firstName} {freelancer.lastName}</p>
       <hr/>
-      <p>level: {freelancer.level}</p>
+      <p>level: {freelancer.level}    {(registeruser===username) && (<button className='exam-apply-profile' onClick={handleApplyExam}>apply exam</button>)}</p>
       <p className='detail-div-1'>Country: {client?.country}</p>
       <p className='detail-div-2'>Registered Date: {monthName} {year}</p>
 
-
+      <div className='badge-prof-disp'>
+        {exams
+          .filter(exam => result.find(res => res.examIdPk === exam.id)) // Filter exams that are present in the result
+          .map((exam) => (
+            <img src={`data:image/jpeg;base64,${exam.badge}`} className="profile-badge" alt={exam.examName} style={{left: '300px'}}/>
+        ))}
+      </div>
+     
       
       {(registeruser!==username) && (<div>
           <ConversationForm/>
@@ -479,7 +544,6 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       />
       <br/>
       <button type="submit" className='add-language-btn'>Add Language</button>
-      {/* Assuming handleLanguageEditCancelClick is defined somewhere */}
       <button onClick={handleLanguageEditCancelClick} className='cancel-language'>cancel</button>
     </form>
         </div>
@@ -489,10 +553,10 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     {languages && languages.length > 0 ? (
       languages.map((language, index) => (
         <span id='lang-list-free' key={language.id || index}>
-          {language.language}{' '}
-          <button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language'>
+          {language.language}{'   '}
+          {(registeruser===username) && (<button onClick={() => handleDeleteLanguage(language.language)} className='Delete-language'>
             <MDBIcon fas icon="trash-alt" />
-          </button>
+          </button>)}
         </span>
       ))
     ) : (
@@ -529,9 +593,9 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 {!showskill && (
 <ul>
 {skills && skills.length > 0 ? (
-skills.map((skill, index) => ( // Using index as fallback key
+skills.map((skill, index) => ( 
   <span id='skill-free-list' key={skill.id || index}>
-    {skill.skill} <button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>
+    {skill.skill} {(registeruser===username) && (<button onClick={() => handleDeleteSkill(skill.skill)} className='delete-skill'><MDBIcon fas icon="trash-alt" /></button>)}
   </span>
 ))
 ) : (
@@ -617,7 +681,7 @@ skills.map((skill, index) => ( // Using index as fallback key
     education.map((edu) => (
       <li id='edu-list' key={edu.id}>
         <hr/>
-        <p>{edu.institute} - {edu.title} {edu.major}    <button onClick={() => handleDeleteEducation(edu.id)} className='delete-education'><MDBIcon fas icon="trash-alt" /></button></p>
+        <p>{edu.institute} - {edu.title} {edu.major}    {(registeruser===username) && (<button onClick={() => handleDeleteEducation(edu.id)} className='delete-education'><MDBIcon fas icon="trash-alt" /></button>)}</p>
         <p>Graduated on {edu.year}</p>
       </li>
     ))

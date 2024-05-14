@@ -25,7 +25,7 @@ export const AdminNavbar = () => {
                     
                     <div className="collapse navbar-collapse text-center" id="navbarSupportedContent">
                         
-                        <ul className="navbar-nav mx-auto">
+                        <ul className="navbar-nav mx-auto" style={{paddingTop:0}}>
                             <li className="nav-item ">                                
                                     <NavLink to={"/admin"} className="nav-link" exact >Overview</NavLink>
                             </li>
@@ -37,10 +37,17 @@ export const AdminNavbar = () => {
                                 <ul className="dropdown-menu " aria-labelledby="navbarDropdown">
                                     <li><NavLink to={"/admin/newnotice"} className="dropdown-item" activeClassName="active-toggle" >New Notice</NavLink></li>
                                     <li><NavLink to={"/admin/editnotice"} className="dropdown-item " activeClassName="active-toggle">Edit Notice</NavLink></li>
+                                   
                                 </ul>
                             </li>
                             <li className="nav-item">
                             <NavLink to={"/admin/ticketrespond"} className="nav-link">Respond to ticket</NavLink>
+                            </li>
+                            <li className="nav-item">
+                            <NavLink to={"/Applicant/Page"} className="nav-link">Applications</NavLink>
+                            </li>
+                            <li className="nav-item">
+                            <NavLink to={"/exams"} className="nav-link">Manage Exams</NavLink>
                             </li>
                         </ul>
                         

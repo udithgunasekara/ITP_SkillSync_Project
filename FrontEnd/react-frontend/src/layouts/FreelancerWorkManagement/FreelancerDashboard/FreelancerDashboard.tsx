@@ -131,23 +131,22 @@ const FreelancerDashboard: React.FC = () => {
           <Button variant="primary" size="lg" onClick={() => history.push("/CreateGigForm1")}>+ Create New Gig</Button>
         </Col>
       </Row>
-
       <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} interval={null} className="mb-5">
         {gigChunks.map((chunk, chunkIndex) => (
           <Carousel.Item key={chunkIndex}>
-            <Row xs={2} md={3} lg={5} className="g-4">
+            <Row className="justify-content-center gx-5">
               {chunk.map((gig, gigIndex) => (
-                <Col key={gigIndex}>
-                  <Card className="h-100 shadow">
-                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '50%', objectFit: 'cover' }} />
-                    <Card.Body>
-                      <Card.Title className="mb-3">{gig.gigTitle}</Card.Title>
-                      <Card.Text><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
-                      <Card.Text><strong>Time Taken:</strong> {minTimes[gig.gigId]}h</Card.Text>
-                      <Card.Text><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
-                      <div className="d-grid gap-2">
-                        <Button variant="primary" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
-                        <Button variant="danger" onClick={() => handleDelete(gig.gigId)}>Delete</Button>
+                <Col key={gigIndex} md={3} className="mb-4">
+                  <Card style={{ height: '380px', borderRadius: '15px' }} className="shadow gig-card-small">
+                    <Card.Img variant="top" src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'} style={{ height: '150px', objectFit: 'cover', borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }} className="gig-card-image-small" />
+                    <Card.Body style={{ padding: '0.5rem', fontSize: '0.9rem', backgroundColor: '#f8f9fa', borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px' }}>
+                      <h5 className="mb-2" style={{ fontSize: '1.15rem', color: '#333', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => history.push(`/gig/${gig.gigId}`)}>{gig.gigTitle}</h5>
+                      <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Price:</strong> ${minPrices[gig.gigId]} onwards</Card.Text>
+                      <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Time Taken:</strong> From {minTimes[gig.gigId]}h</Card.Text>
+                      <Card.Text style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: '#555' }}><strong>Freelancer:</strong> @{loggedInUser.username}</Card.Text>
+                      <div className="mt-3 text-center">
+                        <Button variant="primary" className="me-2" size="sm" onClick={() => handleEdit(gig.gigId)}>Edit</Button>
+                        <Button variant="danger" size="sm" onClick={() => handleDelete(gig.gigId)}>Delete</Button>
                       </div>
                     </Card.Body>
                   </Card>
@@ -157,6 +156,8 @@ const FreelancerDashboard: React.FC = () => {
           </Carousel.Item>
         ))}
       </Carousel>
+
+
 
       <Row className="justify-content-center">
         <Col className="text-center">

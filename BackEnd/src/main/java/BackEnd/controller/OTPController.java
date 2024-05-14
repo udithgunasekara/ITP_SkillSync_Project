@@ -1,7 +1,6 @@
 package BackEnd.controller;
 
 import BackEnd.DTO.OTPRequestDTO;
-import BackEnd.DTO.OTPVerificationDTO;
 import BackEnd.service.OTPService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -107,7 +107,8 @@
   margin-right: 0.3125em;
 }
 .detail-card {
-  font-family: Arial, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   background-color: #f9f9f9;
   border-radius: 0.5em;
   box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
@@ -121,18 +122,23 @@
   padding-left: 46.25em;
   margin-top: -5.8em;
   padding-bottom: 0.625em;
-  color: #333;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   line-height: 1.6;
 }
 .detail-div-2 {
   padding-left: 46.25em;
   margin-top: 0;
   padding-bottom: 0.625em;
-  color: #333;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   line-height: 1.6;
 }
 .username {
-  padding-left: 18em;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+  font-weight: bolder;
+  padding-left: 20em;
   padding-top: 1.25em;
 }
 .switch-btn {
@@ -157,7 +163,7 @@
   margin-top: -1.5em;
 }
 .detail-card p, .detail-card h2 {
-  color: #333;
+  font-size: 1.25em;
   line-height: 1.6;
 }
 .delete-education, .delete-skill, .Delete-language {
@@ -169,6 +175,42 @@
   cursor: pointer;
   margin-left: 0.625em;
   transition: background-color 0.3s;
+}
+.exam-apply-profile{
+  background-color: #8436C2;
+  color: white;
+  top: 10.625em;
+  height: 40px;
+  font-size: 14px;
+  width: 120px;
+  border: none;
+  padding: 0.9375em 1.25em;
+  margin-left: 0em;
+  border-radius: 0.3125em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.badge-prof-disp{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 400px;
+  height: 100px;
+  overflow: scroll;
+}
+.profile-badge{
+  max-width: 45px; 
+    max-height: 45px; 
+    border-radius: 50%;
+    object-fit:contain;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 20px;
+    margin-right: 50px;
+    display: block;
+    border-radius: 50%;
+    border: solid;
+    border-width: thin;
 }
 .Add-education, .Add-skill, .Add-language, .Add-description {
   background-color: #8436C2;
@@ -202,6 +244,7 @@
 ul {
   list-style-type: none;
   padding: 0;
+  padding-top: 20px;
 }
 ul p {
   padding: 0.625em;
@@ -258,7 +301,7 @@ ul p {
   padding: 0.625em 1.25em;
   margin-left: 3.75em;
   margin-top: -1.25em;
-  border-radius: 0.3125em;
+  border-radius: 40%;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -283,8 +326,9 @@ ul p {
   padding: 0.5em 1em;
   background-color: #8436c2;
   color: white;
+  font-size: small;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .add-language-btn:hover {
@@ -294,10 +338,11 @@ ul p {
   padding: 0.5em 1em;
   background-color: #8436c2;
   color: white;
+  font-size: small;
   border: none;
   margin-left: 12.5em;
   margin-top: -2.625em;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .cancel-language:hover {
@@ -320,22 +365,24 @@ ul p {
 .add-education-btn {
   background-color: #8436C2;
   color: white;
+  font-size: small;
   padding: 0.625em 1.25em;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .add-education-btn:hover {
   background-color: #45a049;
 }
 .cancel-Edu {
-  padding: 0.5em 1em;
+  padding: 0.625em 1.25em;
   background-color: #8436c2;
   margin-left: 8.125em;
-  margin-top: -2.5em;
+  margin-top: -2.8em;
   color: white;
+  font-size: small;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .cancel-Edu:hover {
@@ -355,8 +402,9 @@ ul p {
   padding: 0.5em 1em;
   background-color: #8436c2;
   color: white;
+  font-size: small;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .add-skill-btn:hover {
@@ -365,11 +413,12 @@ ul p {
 .cancel-skill {
   padding: 0.5em 1em;
   background-color: #8436c2;
-  margin-left: 8.75em;
+  margin-left: 6.75em;
   margin-top: -2.5em;
+  font-size: small;
   color: white;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .cancel-skill:hover {

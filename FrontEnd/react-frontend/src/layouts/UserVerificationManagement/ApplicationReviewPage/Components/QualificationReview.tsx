@@ -146,23 +146,23 @@ const QualificationReview = () => {
   }, [username]);
 
   return (
-    <div className="rev_form container">
+    <div className="rev_form container pt-5">
       <h1 className="rev_heading">Qualification Review</h1>
 
       <div className="rev_card w-75 p-3 rounded border">
         <div className="rev_card-header">
-          <h2>User Details</h2>
+          <h2 className='text-center'>User Details</h2>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
   {user ? (
     <>
-      <div style={{ flex: '1 0 50%' }}>
+      <div style={{ flex: '1 0 50%' , fontSize: '20px'}}>
         <p>Username: {user.userName}</p>
         <p>Full Name: {user.firstName} {user.lastName}</p>
         <p>Email: {user.email}</p>
         <p>Date of Birth: {user.dob}</p>
       </div>
-      <div style={{ flex: '1 0 50%' }}>
+      <div style={{ flex: '1 0 50%', fontSize: '20px' }}>
         <p>NIC: {user.nic}</p>
         <p>Phone: {user.phone}</p>
         <p>Work On: {user.workOn}</p>

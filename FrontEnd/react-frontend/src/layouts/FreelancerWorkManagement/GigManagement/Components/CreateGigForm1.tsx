@@ -19,12 +19,26 @@ export const CreateGigForm1: React.FC = () => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        let filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+        let filteredValue = value; // Initialize filtered value with the original value
+    
+        // Apply character limit and filtering based on input name
+        if (name === 'gigTitle') {
+            // Filter out non-alphabetical characters using regular expression
+            filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+            // Limit to 50 characters for gig title
+            filteredValue = filteredValue.slice(0, 50);
+        } else if (name === 'gigDescription') {
+            // Limit to 200 characters for gig description
+            filteredValue = value.slice(0, 200);
+        }
+    
         setFormData({
             ...formData,
             [name]: filteredValue
         });
     };
+    
+    
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -67,10 +81,10 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const buttonStyle: React.CSSProperties = {
-        padding: '0.75em 1.5em', 
-        borderRadius: '0.5em', 
-        fontSize: '1.25em', 
-    };
+        padding: '0.5em 1em', // Adjusted padding
+        borderRadius: '0.5em',
+        fontSize: '1em', // Adjusted font size
+    };    
 
     return (
         <div className="bg-light" style={backgroundStyle}>
@@ -116,7 +130,7 @@ export const CreateGigForm1: React.FC = () => {
                                     id="gigDescription"
                                     name="gigDescription"
                                     placeholder="Enter gig description"
-                                    maxLength={200}
+                                    maxLength= {200}
                                     rows={7}
                                     value={formData.gigDescription}
                                     onChange={handleChange}
@@ -146,10 +160,16 @@ export const CreateGigForm1: React.FC = () => {
                                     <option value="Graphic Design">Graphic Design</option>
                                     <option value="Web Development">Web Development</option>
                                     <option value="Content Writing">Content Writing</option>
-                                    <option value="Software Development">Software Development</option>
                                     <option value="Translation">Translation</option>
                                     <option value="Video Editing">Video Editing</option>
-                                    <option value="Others">Others</option>
+                                    <option value="Digital Marketing">Digital Marketing</option>
+                                    <option value="Data Entry">Data Entry</option>
+                                    <option value="Illustration">Illustration</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Music & Audio">Music & Audio</option>
+                                    <option value="Voice Talent">Voice Talent</option>
+                                    <option value="Virtual Assistant">Virtual Assistant</option>
+                                    <option value="Consulting">Consulting</option>
                                 </select>
                             </div>
                         </div>

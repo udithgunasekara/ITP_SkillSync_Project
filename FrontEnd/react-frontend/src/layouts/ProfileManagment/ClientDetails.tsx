@@ -85,20 +85,26 @@ const ClientDetails: React.FC = () => {
   }, [username]);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0]);
+    if (e.target.files) {
+      const selectedFile = e.target.files[0];
+      // Check if the selected file is a PNG or JPEG
+      if (selectedFile.type === 'image/png' || selectedFile.type === 'image/jpeg') {
+        setFile(selectedFile);
+      } else {
+        alert('Please select a PNG or JPEG image file.');
+      }
     }
   };
-
+  
   const handleUpload = async () => {
     if (!file) {
       alert('Please select an image file.');
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('file', file);
-
+  
     try {
       await axios.post(`http://localhost:8082/api/images/upload/${username}`, formData, {
         headers: {
@@ -106,7 +112,7 @@ const ClientDetails: React.FC = () => {
         },
       });
       alert('Image uploaded successfully.');
-      fetchImage(); 
+      window.location.reload();
     } catch (error) {
       console.error('Error uploading image:', error);
       alert('Error uploading image. Please try again.');
@@ -117,7 +123,7 @@ const ClientDetails: React.FC = () => {
     if (freelancer && freelancer.email === client?.email) {
       window.location.href = `http://localhost:3000/freelancers/${username}`;
     } else {
-      window.location.href = 'http://localhost:3000/Freelancer/Login';
+      window.location.href = 'http://localhost:3000/Freelancer/Registration';
     }
   };
 

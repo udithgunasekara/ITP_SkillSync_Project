@@ -31,6 +31,12 @@ public class UserResultServiceIMPL implements UserResultService {
     }
 
     @Override
+    public List<UserResultDTO> getSavedResultByUserName(String userName) {
+        List<UserResult> userResults = userResultRepository.findUserResultByusername(userName);
+        return userResults.stream().map((result) -> UserResultMapper.mapToUserResultDTO(result)).collect(Collectors.toList());
+    }
+
+    @Override
     public UserResultDTO getSavedResultById(String userName, Long examId) {
         UserResult userResult = userResultRepository.findUserResultByid(userName, examId);
         if (userResult == null) {

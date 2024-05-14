@@ -5,6 +5,7 @@ import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import  './ApplicationListPage.css'
 import logo from './Asset 3.png';
+import backgroundimg from './backim2.jpg'
 
 // Define the type for the API response object
 interface Freelancer {
@@ -72,8 +73,12 @@ const ApplicantListPage: React.FC = () => {
 };
 
   return (
-    <div className='app_container my-5'>
-      <h2 className='app_header text-center mb-4'>Applicants Dashboard</h2>
+    
+    <div className="below-navbar-admin " id='dashboardpage' style={{ width: "100vw" }}>
+    <div className='app_container my-5' 
+    style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
+    >
+      <h2 className='app_header text-center mb-4' style={{fontSize: '40px', color: "white"}}>Applicants Dashboard</h2>
       <input
         type="text"
         className="app_input form-control mb-4"
@@ -82,7 +87,7 @@ const ApplicantListPage: React.FC = () => {
         value={searchTerm}
       />
       
-      <button className="app_button btn btn-success mb-4" onClick={downloadPdf}>Download PDF Report</button>
+      <button className="app_button btn btn-primary mb-4" onClick={downloadPdf}>Download PDF Report</button>
 
       <div className="app_card_container d-flex flex-column align-items-center">
         {filteredFreelancers.map((freelancer, index) => (
@@ -103,6 +108,7 @@ const ApplicantListPage: React.FC = () => {
           <div className="app_no_results text-center w-100">No freelancers found matching your criteria.</div>
         )}
       </div>
+    </div>
     </div>
   );
 }

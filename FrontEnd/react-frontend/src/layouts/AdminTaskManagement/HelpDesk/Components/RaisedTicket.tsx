@@ -18,11 +18,16 @@ export const RaisedTicket = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                respose = await axios.get("http://localhost:8082/ticket/getticket");
-
-            } catch (error) {
-                throw new Error("Error in fetching data in RaisedTicket.jsx");
+            console.log(userid);
+            if (userid === null) {
+                throw new Error("You don't have any raised tickets");
+            }else{
+                try {
+                    respose = await axios.get(`http://localhost:8082/ticket/alltickets/${userid}`);
+    
+                } catch (error) {
+                    throw new Error("Error in fetching data in RaisedTicket.jsx");
+                }
             }
 
             const responsedata = respose.data;
@@ -33,6 +38,7 @@ export const RaisedTicket = () => {
                 loadedtickets.push(
                     new TicketModel(
                         responsedata[element].id,
+                        responsedata[element].email,
                         responsedata[element].relatedTo,
                         {
                             userId: responsedata[element].user.userId,

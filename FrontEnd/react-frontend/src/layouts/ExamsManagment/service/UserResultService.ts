@@ -13,3 +13,5 @@ export const saveUserResult = (userResult: userResult): Promise<AxiosResponse<us
 export const getUserResultById = (userNamePk: string, examIdPk: string): Promise<AxiosResponse<userResult>> => axios.get<userResult>(`${REST_API_BASE_URL_USERRESULT}/${userNamePk}/${examIdPk}`);
 
 export const listUserResult = (): Promise<AxiosResponse<userResult[]>> => axios.get<userResult[]>(REST_API_BASE_URL_USERRESULT);
+
+export const getUserResultByUserName = (userNamePk: string): Promise<AxiosResponse<userResult[]>> => axios.get<userResult[]>(`${REST_API_BASE_URL_USERRESULT}/${userNamePk}`);

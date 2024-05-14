@@ -73,6 +73,12 @@ import PaymentDetailsFComponent from './layouts/PaymentManagement/components/Pay
 import DetailsPage from './layouts/PaymentManagement/components/DetailsPage';
 import TransactionDetails from './layouts/PaymentManagement/components/TransactionDetails';
 import OTPVerification from './layouts/UserVerificationManagement/UserRegistration/OTPVerification';
+import TestComponent from './layouts/ExamsManagment/Component/TestComponent';
+import SheduleInterviewComponent from './layouts/ExamsManagment/Component/SheduleInterviewComponent';
+import HomePage from './layouts/Home/HomePage';
+import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginPage';
+import RegisterPager from './layouts/Home/RegisterPage';
+import { AdminNavbar } from './layouts/AdminTaskManagement/Admin/components/AdminNavbar';
 
 
 export const App = () => {
@@ -81,6 +87,10 @@ export const App = () => {
       <div className='d-flex flex-column min-vh-100'>
         <div className='flex-grow-1'>
           <Switch>
+            <Route path="/HomePage">
+              <Navbar />
+              <HomePage />
+            </Route>
             <Route path="/CreateGigForm1">
               <Navbar />
               <CreateGigForm1 />
@@ -99,7 +109,6 @@ export const App = () => {
             <Route path="/FreelancerMain" exact>
               <Navbar />
               <FreelancerHome />
-              <Footer />
             </Route>
             <Route path="/gig/:id">
               <Navbar />
@@ -194,25 +203,32 @@ export const App = () => {
             <Route path='/Freelancer/Login' exact>
             <Navbar />
               <FreelancerLoginComponent/>
-              <Footer />
+             
             </Route>
   
             <Route path='/Client/Login' exact>
+            <Navbar />
               <ClientLoginComponent/>
+              
             </Route>
 
             <Route path='/Freelancer/Registration' exact>
+            <Navbar />
               <FreelancerRegComponent/>
+              <Footer />
             </Route>
 
             <Route path='/Client/Registration' exact>
+            <Navbar />
               <ClientRegComponent/>
+              <Footer />
             </Route>
 
             {/* dummy site */}
             {/* http://localhost:3000/Freelancer/QualificationUploader */}
             <Route path='/Freelancer/QualificationUploader'  exact>
               <QualificationComponent/>
+              
             </Route>
 
             <Route path='/upload-qualification'  exact>
@@ -224,23 +240,50 @@ export const App = () => {
             </Route>
 
             <Route path='/Applicant/Page'  exact>
+            <Navbar />
+            <AdminNavbar/>
               <ApplicantListPage/>
+              <Footer />
             </Route>
 
             <Route path='/Applicant/review/:username'  exact>
+            <Navbar />
               <QualificationReview/>
+              <Footer />
             </Route>
 
             <Route path='/InProgressPage'  exact>
+            <Navbar />
               <InProgress/>
+              <Footer />
             </Route>
 
             <Route path='/ReSubmission/:username'  exact>
+            <Navbar />
               <ResubmissionUpload />
+              <Footer />
             </Route>
 
             <Route path='/UserTestPage' exact>
+            <Navbar />
               <UserTest/>
+              <Footer />
+            </Route>
+
+            <Route path='/OTPVerificationPage' exact>
+            <Navbar />
+            <OTPVerification/>
+            <Footer />
+            </Route>
+
+            <Route path='/Admin/Login' exact>
+            <Navbar />
+            <AdminLoginComponent/>
+            </Route>
+
+            <Route path='/User/Registration' exact>
+            <Navbar />
+            <RegisterPager/>
             </Route>
 
             {/* Ending supeshala's files */}
@@ -289,6 +332,11 @@ export const App = () => {
             <Route path="/take-exam/:examIdPk">
               <Navbar />
               <DisplayQuestionAndAnswers />
+              <Footer />
+            </Route>
+            <Route path="/add-interview">
+              <Navbar />
+              <SheduleInterviewComponent />
               <Footer />
             </Route>
             {/*Vaas files End*/}
@@ -348,7 +396,7 @@ export const App = () => {
             </Route>
             {/* //http://localhost:3000/projects */}
             <Route path="/projects">
-
+            </Route>
             <Route path='/edit-details/:userName' >
               <Navbar />
               <ListProjectComponent />
@@ -372,10 +420,12 @@ export const App = () => {
                 <Footer />
               </Route>
               <Route path='/searchjobs'>
+                <Navbar/>
                 <SearchJobComponent />
                 <Footer />
               </Route>
               <Route path='/edit-jobpost/:id'>
+                <Navbar/>
                 <JobComponent />
                 <Footer />
               </Route>

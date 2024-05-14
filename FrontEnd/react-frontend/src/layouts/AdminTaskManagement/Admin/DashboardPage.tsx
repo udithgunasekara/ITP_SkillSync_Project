@@ -7,7 +7,7 @@ export const DashboardPage = () => {
     return (
         <div style={{height:"100vh"}}>
             <AdminNavbar/>
-            <AdminDashboard/>
+            <AdminDashboard  />
             {/* <SampleDashboard/> */}
         </div>
     );
