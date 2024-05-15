@@ -27,7 +27,7 @@ import { GigOrder } from './layouts/FreelancerWorkManagement/GigOrder/GigOrder';
 import { FormGenerate } from './layouts/AdminTaskManagement/HelpDesk/formGenerate/FormGenerate';
 import { FreelancerLoginComponent } from './layouts/UserVerificationManagement/UserLogin/Components/FreelancerLoginComponent';
 import { ClientLoginComponent } from './layouts/UserVerificationManagement/UserLogin/Components/ClientLoginComponent';
-import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginComponent';
+// import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginComponent';
 import FreelancerRegComponent from './layouts/UserVerificationManagement/UserRegistration/FreelancerRegComponent'
 import ClientRegComponent from './layouts/UserVerificationManagement/UserRegistration/ClientRegComponent'
 import QualificationComponent from './layouts/UserVerificationManagement/QualificationUpload/QualificationComponent'
