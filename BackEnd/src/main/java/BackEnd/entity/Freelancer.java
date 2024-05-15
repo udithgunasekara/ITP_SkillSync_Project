@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Setter
@@ -28,9 +29,13 @@ public class Freelancer {
     private String password;
     private String nic;
     private String workOn;
+    private Long level;
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDate created_at;
     @Column(name= "app_status")
     private String app_status = "In Progress";
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "freelancer_fk")
+    private List<Interview> interviews;
 }

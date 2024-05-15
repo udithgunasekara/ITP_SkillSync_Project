@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { generateGigReport } from './GigsReportGeneration';
 import SearchSection from './SearchSection'; // Import SearchSection from the new file
+import { Footer } from '../../../navbar&footers/Footer';
 
 export interface Gig {
   gigId: number;
@@ -20,7 +21,6 @@ export const FreelanceServices: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const gigsPerPage = 8;
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [minPrices, setMinPrices] = useState<{ [key: number]: string }>({});
   const [minTimes, setMinTimes] = useState<{ [key: number]: string }>({});
   const [showNoResults, setShowNoResults] = useState(false); // State to control displaying no results message
@@ -30,10 +30,6 @@ export const FreelanceServices: React.FC = () => {
       try {
         const response = await axios.get<Gig[]>('http://localhost:8082/freelancer-gigs');
         setGigData(response.data);
-        // Fetch images for all gigs
-        const imagePromises = response.data.map(gig => fetchFirstImage(gig.gigId));
-        const imageUrls = await Promise.all(imagePromises);
-        setImageUrls(imageUrls);
 
         const minPricePromises = response.data.map(gig => fetchMinPrice(gig.gigId));
         const minPrices = await Promise.all(minPricePromises);
@@ -52,24 +48,6 @@ export const FreelanceServices: React.FC = () => {
 
     fetchGigData();
   }, []);
-
-  const fetchFirstImage = async (gigId: number): Promise<string> => {
-    try {
-      const response = await axios.get<any[]>(`http://localhost:8082/freelancer-gigs/${gigId}/gig-images/my-gig-images`);
-      if (response.data.length > 0) {
-        // Get the first image URL
-        const imageUrl = response.data[0].gigImagePath; // Access gigImagePath property
-        console.log('Fetched image URL for gig ID', gigId, ':', imageUrl);
-        return imageUrl;
-      } else {
-        // If no images found for the gig, return a placeholder or empty string
-        return ''; // or return a placeholder image URL
-      }
-    } catch (error) {
-      console.error('Error fetching first image:', error);
-      return ''; // Return empty string if there's an error
-    }
-  };
 
   const fetchMinPrice = async (gigId: number): Promise<string> => {
     try {
@@ -128,24 +106,25 @@ export const FreelanceServices: React.FC = () => {
           No results found for '{searchQuery}'
         </div>
       )}
-      <section className="containerx" style={{ marginLeft: '50px' }}>
+      <section className="containerx" style={{marginRight: '3.4375em'}}>
         <div className="row">
-          {currentGigs.map((gig: Gig, index: number) => (
-            <div key={gig.gigId} className="col-lg-3 col-md-4 col-sm-6 mb-4" style={{ width: '400px', padding: '30px' }}>
+          {currentGigs.map((gig: Gig) => (
+            <div key={gig.gigId} className="col-lg-3 col-md-4 col-sm-6 mb-7" style={{ maxWidth: '100%', height: '100%' }}>
               <div className="card shadow">
                 <img
-                  src={imageUrls[index]}
+                  src={process.env.PUBLIC_URL + '/Images/GigWallpaper.jpg'}
                   className="card-img-top"
                   alt="Service Image"
-                  style={{ maxWidth: '100%', height: '200px' }}
+                  style={{ maxWidth: '100%', height: '100%' }}
                 />
+
                 <div className="card border-0">
-                  <div className="card-body d-flex flex-column align-items-center" style={{ lineHeight: '1' }}>
+                <div className="card-body d-flex flex-column align-items-center" style={{ lineHeight: '1', padding: '1.5rem' }}>
                     <h5 className="card-title" style={{ maxWidth: '100%', height: '55px' }}>{gig.gigTitle}</h5>
                     <p className="card-text fs-6">Price: ${minPrices[gig.gigId]} onwards</p>
                     <p className="card-text fs-6">Time Taken: {minTimes[gig.gigId]}h</p>
                     <p className="card-text fs-6">@{gig.freelancerUsername}</p>
-                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{ backgroundColor: '#641C9E' }}>View Details</Link>
+                    <Link to={`/gig/${gig.gigId}`} className="btn btn-primary mt-auto " style={{ backgroundColor: '#641C9E' }}>View Details {'>>'}</Link>
                   </div>
                 </div>
               </div>
@@ -162,9 +141,9 @@ export const FreelanceServices: React.FC = () => {
             ))}
           </ul>
         </nav>
-        {/* Button to generate and download report */}
-        <button className="btn" onClick={() => generateGigReport(gigData)} >Generate Report</button>
       </section>
+      <Footer />
     </div>
   );
 };
+

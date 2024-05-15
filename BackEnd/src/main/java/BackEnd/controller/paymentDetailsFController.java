@@ -22,26 +22,27 @@ public class paymentDetailsFController {
         return new ResponseEntity<>(savedPayDetailsF, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<paymentDetailsFreelancerDTO> getDetailsById(@PathVariable("id") Long id){
-        paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO = paymentDetailsFreelancerService.getDetailsById(id);
+    @GetMapping("/{userName}")
+    public ResponseEntity<paymentDetailsFreelancerDTO> getDetailsByUserName(@PathVariable("userName") String userName){
+        paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO = paymentDetailsFreelancerService.getDetailsByUserName(userName);
         return ResponseEntity.ok(paymentDetailsFreelancerDTO);
     }
 
 
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<paymentDetailsFreelancerDTO> updateDetails(@PathVariable("id") Long id,
+    @PutMapping("/{userName}")
+    public ResponseEntity<paymentDetailsFreelancerDTO> updateDetails(@PathVariable("userName") String userName,
                                                                      @RequestBody paymentDetailsFreelancerDTO updatedDetails){
-        paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO = paymentDetailsFreelancerService.updateDetails(id, updatedDetails);
+        paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO = paymentDetailsFreelancerService.updateDetails(userName, updatedDetails);
 
         return ResponseEntity.ok(paymentDetailsFreelancerDTO);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDetails(@PathVariable("id") Long id){
-        paymentDetailsFreelancerService.deleteDetails(id);
+    //delete details
+    @DeleteMapping("/{userName}")
+    public ResponseEntity<String> deleteDetails(@PathVariable("userName") String userName){
+        paymentDetailsFreelancerService.deleteDetails(userName);
         return ResponseEntity.ok("Details deleted sucessfully!");
     }
 

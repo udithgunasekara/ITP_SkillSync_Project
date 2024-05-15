@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class paymentDetailsFreelancerDTO {
     private Long id;
+    private String userName;
     private String fullName;
     private String country;
     private String state;
@@ -18,6 +19,8 @@ public class paymentDetailsFreelancerDTO {
     private String city;
     private Integer postalCode;
     private String paypalAddress;
+
+
 
 
 }

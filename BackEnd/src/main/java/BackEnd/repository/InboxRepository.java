@@ -14,8 +14,10 @@ public interface InboxRepository extends JpaRepository<Inbox,Long> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Inbox i SET i.isRead = true WHERE i.id = :id")
-    int markAsRead(@Param("id") Long id);
+    @Query("UPDATE Inbox i SET i.isRead = true WHERE i.conversationId = :id and i.username= :username")
+    int markAsRead(@Param("id") Long conversationId,@Param("username") String username);
 
     Inbox findByConversationIdAndUsername(Long conversationId, String username);
+
+    List<Inbox> findByconversationId(Long conversationId);
 }

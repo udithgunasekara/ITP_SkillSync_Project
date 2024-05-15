@@ -8,6 +8,7 @@ public class paymentDetailsFreelancerMapper {
     public static paymentDetailsFreelancerDTO mapTopaymentDetailsFreelancerDTO(paymentDetailsFreelancer paymentDetailsFreelancer){
         return new paymentDetailsFreelancerDTO(
                 paymentDetailsFreelancer.getId(),
+                paymentDetailsFreelancer.getUserName(),
                 paymentDetailsFreelancer.getFullName(),
                 paymentDetailsFreelancer.getCountry(),
                 paymentDetailsFreelancer.getState(),
@@ -20,7 +21,8 @@ public class paymentDetailsFreelancerMapper {
 
     public static paymentDetailsFreelancer mapTopaymentDetailsFreelancer(paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO){
         return new paymentDetailsFreelancer(
-                paymentDetailsFreelancerDTO.getId(), // Manually assign the ID from DTO
+                paymentDetailsFreelancerDTO.getId(),
+                paymentDetailsFreelancerDTO.getUserName(),
                 paymentDetailsFreelancerDTO.getFullName(),
                 paymentDetailsFreelancerDTO.getCountry(),
                 paymentDetailsFreelancerDTO.getState(),
@@ -28,6 +30,7 @@ public class paymentDetailsFreelancerMapper {
                 paymentDetailsFreelancerDTO.getCity(),
                 paymentDetailsFreelancerDTO.getPostalCode(),
                 paymentDetailsFreelancerDTO.getPaypalAddress()
+
         );
     }
 

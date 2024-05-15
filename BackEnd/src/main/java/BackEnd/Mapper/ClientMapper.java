@@ -15,7 +15,8 @@ public class ClientMapper {
                 client.getPassword(),
                 client.getPhone(),
                 client.getUserName(),
-                client.getCountry()
+                client.getCountry(),
+                client.getCreated_at()
         );
     }
 
@@ -30,6 +31,7 @@ public class ClientMapper {
         client.setPhone(clientDTO.getPhone());
         client.setUserName(clientDTO.getUserName());
         client.setCountry(clientDTO.getCountry());
+        client.setCreated_at(clientDTO.getCreated_at());
         //ignoring created_at and role
         return client;
     }

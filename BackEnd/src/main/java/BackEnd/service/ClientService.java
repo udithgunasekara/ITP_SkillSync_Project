@@ -3,8 +3,12 @@ package BackEnd.service;
 import BackEnd.DTO.ClientDTO;
 import BackEnd.DTO.LoginDTO;
 
+import java.util.List;
+
 public interface ClientService {
     ClientDTO createClient(ClientDTO clientDTO);
 
-    boolean validateLogin(LoginDTO loginDTO);
+    Long validateLogin(LoginDTO loginDTO);
+
+    List<ClientDTO> getAllClients();
 }

@@ -40,6 +40,9 @@ public class Orders {
     @Column(name = "order_gig_id")
     private String orderGigId;
 
+    @Column(name = "order_freelancer_username")
+    private String orderFreelancerUsername;
+
     @PrePersist
     public void prePersist() {
         orderDateTime = LocalDateTime.now();

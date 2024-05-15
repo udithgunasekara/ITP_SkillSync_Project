@@ -30,6 +30,10 @@ const GigDetails: React.FC = () => {
     fetchGigDetail();
   }, [id]);
 
+  const handleContactBtn = async()=>{
+    window.location.href = `http://localhost:3000/freelancers/${gig?.freelancerUsername}`;
+  }
+
   if (!gig) {
     return <div>Loading...</div>;
   }
@@ -40,8 +44,9 @@ const GigDetails: React.FC = () => {
         <Col xs={12} md={6} className="align-self-start">
           <div className="p-4">
             <h1 className="mb-3 display-3" style={{ wordWrap: 'break-word' }}>{gig.gigTitle}</h1>
-            <h5 className="text-muted">@{gig.freelancerUsername}</h5>
             <h5 className="text-muted">Category: {gig.gigCategory}</h5>
+            <h5 className="text-muted">@{gig.freelancerUsername}</h5>
+            <button className='btn btn-primary mt-4' onClick={handleContactBtn}>Contact me</button>
             <div className="border p-4 mt-4" style={{ wordWrap: 'break-word' }}>
               <h2 className="text-center mb-4">Description</h2>
               <p>{gig.gigDescription}</p>
@@ -49,8 +54,7 @@ const GigDetails: React.FC = () => {
           </div>
         </Col>
         <Col xs={12} md={6} className="text-center">
-          <div className='my-carousel' style={{ maxWidth: '650px', marginLeft: '100px' }}>
-            {/* Pass gigId as a prop */}
+          <div className="my-4" style={{ maxWidth: '650px', margin: '0 auto' }}>
             <ImageCarousel gigId={id} />
           </div>
         </Col>

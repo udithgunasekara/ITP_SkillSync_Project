@@ -6,6 +6,7 @@ import BackEnd.Mapper.paymentDetailsFreelancerMapper;
 import BackEnd.entity.paymentDetailsFreelancer;
 import BackEnd.repository.paymentDetailsFreelancerRepo;
 import BackEnd.service.paymentDetailsFreelancerService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,30 +16,31 @@ import org.springframework.stereotype.Service;
 
 public class paymentDetailsFServiceImpl implements paymentDetailsFreelancerService {
 
-    private final paymentDetailsFreelancerRepo paymentDetailsFreelancerRepo;
-
     @Autowired
-    public paymentDetailsFServiceImpl(paymentDetailsFreelancerRepo paymentDetailsFreelancerRepo) {
-        this.paymentDetailsFreelancerRepo = paymentDetailsFreelancerRepo;
-    }
+    private paymentDetailsFreelancerRepo paymentDetailsFreelancerRepo;
+
+//    @Autowired
+//    public paymentDetailsFServiceImpl(paymentDetailsFreelancerRepo paymentDetailsFreelancerRepo) {
+//        this.paymentDetailsFreelancerRepo = paymentDetailsFreelancerRepo;
+//    }
 
     @Override
-    public paymentDetailsFreelancerDTO addDetails(paymentDetailsFreelancerDTO paymentDetailsFreelancerDTO) {
+    public paymentDetailsFreelancerDTO addDetails(paymentDetailsFreelancerDTO paymentDTO) {
 
-        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerMapper.mapTopaymentDetailsFreelancer(paymentDetailsFreelancerDTO);
+        paymentDetailsFreelancer paymentFreelancer = paymentDetailsFreelancerMapper.mapTopaymentDetailsFreelancer(paymentDTO);
 
-        //Manually Assign an ID
-        paymentDetailsFreelancer.setId(paymentDetailsFreelancerDTO.getId());
-        paymentDetailsFreelancer savedPayDetailsF = paymentDetailsFreelancerRepo.save(paymentDetailsFreelancer);
+//        //Manually Assign an ID
+//        paymentDetailsFreelancer.setId(paymentDetailsFreelancerDTO.getId());
+        paymentDetailsFreelancer savedPayDetailsF = paymentDetailsFreelancerRepo.save(paymentFreelancer);
 
         return paymentDetailsFreelancerMapper.mapTopaymentDetailsFreelancerDTO(savedPayDetailsF);
     }
 
     @Override
-    public paymentDetailsFreelancerDTO getDetailsById(Long id) {
-        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFound("Details is not exists with given id : " + id));
+    public paymentDetailsFreelancerDTO getDetailsByUserName(String userName) {
+        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findByUserName(userName);
+//                .orElseThrow(() ->
+//                        new ResourceNotFound("Details is not exists with given user name : " + userName));
         return paymentDetailsFreelancerMapper.mapTopaymentDetailsFreelancerDTO(paymentDetailsFreelancer);
     }
 
@@ -47,13 +49,14 @@ public class paymentDetailsFServiceImpl implements paymentDetailsFreelancerServi
 
 
     @Override
-    public paymentDetailsFreelancerDTO updateDetails(Long id, paymentDetailsFreelancerDTO updatedDetails) {
-        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findById(id).orElseThrow(
-                () -> new ResourceNotFound("Details not found with given id: " + id)
+    public paymentDetailsFreelancerDTO updateDetails(String userName, paymentDetailsFreelancerDTO updatedDetails) {
+        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findByUserName(userName);
+//        .orElseThrow(
+//                () -> new ResourceNotFound("Details not found with given id: " + userName)
 
-        );
 
-        paymentDetailsFreelancer.setId(id);
+
+        paymentDetailsFreelancer.setUserName(userName);
         paymentDetailsFreelancer.setFullName(updatedDetails.getFullName());
         paymentDetailsFreelancer.setCountry(updatedDetails.getCountry());
         paymentDetailsFreelancer.setState(updatedDetails.getState());
@@ -69,13 +72,13 @@ public class paymentDetailsFServiceImpl implements paymentDetailsFreelancerServi
     }
 
     @Override
-    public void deleteDetails(Long id) {
+    @Transactional
+    public void deleteDetails(String userName) {
 
-        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findById(id).orElseThrow(
-                () -> new ResourceNotFound("Details not found with given id: " + id)
+        paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findByUserName(userName);
+        //error handling
 
-        );
 
-        paymentDetailsFreelancerRepo.deleteById(id);
+        paymentDetailsFreelancerRepo.deleteByUserName(userName);
     }
 }

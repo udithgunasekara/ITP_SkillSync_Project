@@ -13,8 +13,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketDto {
+
     private Long id;
-//  private byte[] attachments;
+    private String email;
+//    private byte[] attachments;
     private String relatedTo;
     private String Subject;
     private String Description;
@@ -22,4 +24,5 @@ public class TicketDto {
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
     private String status;
+
 }

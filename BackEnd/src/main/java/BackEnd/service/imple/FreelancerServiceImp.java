@@ -18,6 +18,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,16 +104,32 @@ public class FreelancerServiceImp implements FreelancerService {
 
     //freelancer Login checking
     @Override
-    public boolean validateLogin(LoginDTO loginDTO) {
+    public Long validateLogin(LoginDTO loginDTO) {
         Freelancer freelancer = freelancerRepo.findByUserName(loginDTO.getUsername());
+        long userid = freelancer.getId();
         if (freelancer != null && freelancer.getPassword().equals(loginDTO.getPassword())) {
-            return true;
+            return userid;
         }
-        return false;
+        return null ;
     }
 
+    @Override
+    public Boolean checkAccountStatus(String username) {
+        String result = freelancerRepo.findAcceptedFreelancer(username);
+        if(Objects.equals(result, "Accept")){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
-
+    @Override
+    public List<FreelancerDTO> getAllAcceptedFreelancers() {
+        List<Freelancer> freelancers = freelancerRepo.findAllAcceptedFreelancers();
+        return freelancers.stream()
+                .map(FreelancerMapper::mapToFreelancerDTO)
+                .collect(Collectors.toList());
+    }
 
 
 }

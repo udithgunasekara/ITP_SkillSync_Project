@@ -46,20 +46,28 @@ public class InboxServiceImp implements InboxService {
 
 
         existingInbox.setMessage(newInbox.getMessage());
+        existingInbox.setRead(newInbox.getRead());
 
         Inbox savedInbox = inboxRepository.save(existingInbox);
 
         return InboxMapper.mapToInboxDTO(savedInbox);
     }
 
+
     @Override
-    public InboxDTO changeIsRead(Long id) {
-        int updatedCount = inboxRepository.markAsRead(id);
+    public InboxDTO changeIsRead(Long id, String username) {
+        int updatedCount = inboxRepository.markAsRead(id,username);
         if (updatedCount > 0) {
-            Inbox inbox = inboxRepository.findById(id).orElse(null);
+            Inbox inbox = inboxRepository.findByConversationIdAndUsername(id, username);
             return InboxMapper.mapToInboxDTO(inbox);
 
         }
         return null;
+    }
+
+    @Override
+    public List<InboxDTO> getAllInboxMessagesByconversationId(Long conversationId) {
+        List<Inbox> inbox = inboxRepository.findByconversationId(conversationId);
+        return inbox.stream().map(InboxMapper::mapToInboxDTO).collect(Collectors.toList());
     }
 }

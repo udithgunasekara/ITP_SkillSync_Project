@@ -14,5 +14,8 @@ public interface InboxService {
     public InboxDTO saveInboxMessageByConversationId(Long conversationId, String username, Inbox newInbox);
 
 
-    public InboxDTO changeIsRead(Long id);
+
+    InboxDTO changeIsRead(Long id, String username);
+
+    List<InboxDTO> getAllInboxMessagesByconversationId(Long conversationId);
 }

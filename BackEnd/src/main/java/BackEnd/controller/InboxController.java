@@ -27,6 +27,12 @@ public class InboxController {
         return inboxService.getAllInboxMessagesByUser(username);
     }
 
+    @GetMapping("/conversation/{conversationId}")
+    public List<InboxDTO> getInboxByconversationId(@PathVariable Long conversationId) {
+        return inboxService.getAllInboxMessagesByconversationId(conversationId);
+    }
+
+
     @PostMapping
     public InboxDTO saveInboxMessage(@RequestBody Inbox inbox) {
         return inboxService.saveInboxMessage(inbox);
@@ -42,9 +48,9 @@ public class InboxController {
         }
     }
 
-    @PatchMapping("/changeIsRead/{conversationId}")
-    public ResponseEntity<InboxDTO> changeIsRead(@PathVariable Long conversationId) {
-        InboxDTO updatedInbox = inboxService.changeIsRead(conversationId);
+    @PatchMapping("/changeIsRead/{conversationId}/{username}")
+    public ResponseEntity<InboxDTO> changeIsRead(@PathVariable Long conversationId,@PathVariable String username) {
+        InboxDTO updatedInbox = inboxService.changeIsRead(conversationId,username);
         return updatedInbox != null ? ResponseEntity.ok(updatedInbox) : ResponseEntity.notFound().build();
     }
 }

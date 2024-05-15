@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -19,7 +21,7 @@ public class TicketController {public TicketServices ticketServices;
 
     //url : http://localhost:8082/ticket/alltickets/12323
     @GetMapping("/alltickets/{userid}")
-    public ResponseEntity<List<TicketDto>> getAllTickets(@PathVariable Long userid){
+    public ResponseEntity<List<TicketDto>> getAllTicketsByuserid(@PathVariable Long userid){
         System.out.println("userid: "+userid);
         List<TicketDto> ticketlist = ticketServices.getAllTicketsById(userid);
         return ResponseEntity.ok(ticketlist);
@@ -31,6 +33,10 @@ public class TicketController {public TicketServices ticketServices;
         TicketDto newTicket = ticketServices.raiseTicket(ticketdto);
         return new ResponseEntity<>(newTicket, HttpStatus.CREATED);
     }
+
+
+
+
 
     //url: http://localhost:8082/ticket/findticket/1
     @GetMapping("/findticket/{id}")

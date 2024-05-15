@@ -18,6 +18,7 @@ export const UserTicketResponsepage = () => {
     const [updated, setUpdated] = useState(false);
     const [ticket, setTicket] = useState<any>({
         id: "",
+        email:"",
         relatedTo: "",
         user: {
             userId: "",
@@ -58,6 +59,7 @@ export const UserTicketResponsepage = () => {
 
             const loadedticket = {
                 id: responseTiceket.id,
+                email: responseTiceket.email,
                 relatedTo: responseTiceket.relatedTo,
                 user: {
                     userId: responseTiceket.user.userId,
@@ -267,9 +269,12 @@ export const UserTicketResponsepage = () => {
                                     <h5>
                                         User ID: {ticket.user.userId} <br />
                                         <hr />
+                                        Email: {ticket.email} <br/>
+                                        <hr />
                                         User Name: {ticket.user.userName}
                                         <hr />
                                         Relate to: {ticket.relatedTo}
+                                        
                                     </h5>
 
                                 </div>

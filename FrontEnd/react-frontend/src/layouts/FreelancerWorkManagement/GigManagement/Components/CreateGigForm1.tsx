@@ -17,30 +17,41 @@ export const CreateGigForm1: React.FC = () => {
         gigCategory: '',
     });
 
-    // Modified handleChange function to filter input
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        let filteredValue = value.replace(/[^a-zA-Z\s]/g, ''); 
+        let filteredValue = value; // Initialize filtered value with the original value
+    
+        // Apply character limit and filtering based on input name
+        if (name === 'gigTitle') {
+            // Filter out non-alphabetical characters using regular expression
+            filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+            // Limit to 50 characters for gig title
+            filteredValue = filteredValue.slice(0, 50);
+        } else if (name === 'gigDescription') {
+            // Limit to 200 characters for gig description
+            filteredValue = value.slice(0, 200);
+        }
+    
         setFormData({
             ...formData,
             [name]: filteredValue
         });
     };
     
-    // Modified handleSubmit function to include logged-in user's info
+    
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            // Here you will get the logged-in user's information from the authentication system
-            const loggedInUser = getUserInfo(); // Implement this function to get logged-in user info
-            
-            // Include logged-in user's username with gig data
+            const loggedInUser = getUserInfo();
+            // Check if user is logged in as a freelancer
+            if (!loggedInUser) {
+                alert('You have to login as a freelancer to create a gig.');
+                history.push('/Freelancer/Login');
+                return;
+            }
             const gigData = { ...formData, freelancerUsername: loggedInUser.username };
-            
-            // Send gig creation request to backend
             const response = await axios.post<{ gigId: string }>('http://localhost:8082/freelancer-gigs', gigData);
-            
-            // Redirect to next page after successful gig creation
             const gigId = response.data.gigId;
             console.log('Data sent successfully:', response.data);
             handleNextClick(gigId);
@@ -54,12 +65,30 @@ export const CreateGigForm1: React.FC = () => {
     };
 
     const getUserInfo = () => {
-        return { username: 'laxaayome' }; // Replace with actual logged-in user info
+        return { username: sessionStorage.getItem('username') };
     };
 
+    const backgroundStyle: React.CSSProperties = {
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f0f0f0',
+    };
+
+    const containerStyle: React.CSSProperties = {
+        maxWidth: '56.25em', // 900px converted to em units
+    };
+
+    const buttonStyle: React.CSSProperties = {
+        padding: '0.5em 1em', // Adjusted padding
+        borderRadius: '0.5em',
+        fontSize: '1em', // Adjusted font size
+    };    
+
     return (
-        <div className="bg-light vh-100 d-flex align-items-center justify-content-center">
-            <div className="container" id="containerGigCreate" style={{ maxWidth: '900px' }}>
+        <div className="bg-light" style={backgroundStyle}>
+            <div className="container" id="containerGigCreate" style={containerStyle}>
                 <h2 className="text-center mb-4" style={{ color: 'red' }}>Create a Gig</h2>
                 <form className="row g-3" onSubmit={handleSubmit}>
                     <div className="row g-3">
@@ -86,7 +115,6 @@ export const CreateGigForm1: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Gig Description */}
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">
@@ -102,7 +130,7 @@ export const CreateGigForm1: React.FC = () => {
                                     id="gigDescription"
                                     name="gigDescription"
                                     placeholder="Enter gig description"
-                                    maxLength={200}
+                                    maxLength= {200}
                                     rows={7}
                                     value={formData.gigDescription}
                                     onChange={handleChange}
@@ -111,7 +139,6 @@ export const CreateGigForm1: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Gig Category */}
                     <div className="row g-3">
                         <div className="col-md-6">
                             <div className="form-group">
@@ -133,17 +160,22 @@ export const CreateGigForm1: React.FC = () => {
                                     <option value="Graphic Design">Graphic Design</option>
                                     <option value="Web Development">Web Development</option>
                                     <option value="Content Writing">Content Writing</option>
-                                    <option value="Software Development">Software Development</option>
                                     <option value="Translation">Translation</option>
                                     <option value="Video Editing">Video Editing</option>
-                                    <option value="Others">Others</option>
+                                    <option value="Digital Marketing">Digital Marketing</option>
+                                    <option value="Data Entry">Data Entry</option>
+                                    <option value="Illustration">Illustration</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Music & Audio">Music & Audio</option>
+                                    <option value="Voice Talent">Voice Talent</option>
+                                    <option value="Virtual Assistant">Virtual Assistant</option>
+                                    <option value="Consulting">Consulting</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    {/* Submit Button */}
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate" >Next</button>
+                        <button type="submit" className="btn btn-primary btn-lg" id="btnPrimaryGigCreate" style={buttonStyle}>Next</button>
                     </div>
                 </form>
             </div>

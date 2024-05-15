@@ -34,7 +34,7 @@ const PackageSelection: React.FC<{ setSelectedPackage: (packageId: number, packa
   return (
     <div className="card-container d-flex flex-wrap justify-content-center">
       {packages.map((pack: Package) => (
-        <div key={pack.packageId} className='card shadow mx-2 mb-4 bg-body rounded' style={{ width: '300px', height: '350px' }}>
+        <div key={pack.packageId} className='card shadow mx-2 mb-4 bg-body rounded' style={{ width: '300px', height: '370px' }}>
           <div className='card-body d-flex flex-column justify-content-between'>
             <div>
               <h2 className='card-title' style={{ textAlign: 'center', color: 'red', paddingBottom: '10px' }}>{pack.packageName}</h2>

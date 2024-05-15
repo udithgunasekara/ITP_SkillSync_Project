@@ -1,9 +1,9 @@
 package BackEnd.service.imple;
 
 import BackEnd.DTO.RatingDto;
-import BackEnd.entity.Rating;
 import BackEnd.Exceptions.ResourceNotFound;
 import BackEnd.Mapper.RatingMapper;
+import BackEnd.entity.Rating;
 import BackEnd.repository.RatingRepository;
 import BackEnd.service.RatingService;
 import lombok.AllArgsConstructor;
@@ -49,6 +49,11 @@ public class RatingServiceImpl implements RatingService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<RatingDto> searchReviewsByKeyword(String keyword) {
+        List<Rating> ratings = ratingRepository.findReviewsByKeyword(keyword);
+        return ratings.stream().map(RatingMapper::mapToRatingDto).collect(Collectors.toList());
+    }
 
     @Override
     public RatingDto updateRating(Long ratingId, RatingDto updateRating) {
@@ -80,6 +85,50 @@ public class RatingServiceImpl implements RatingService {
 
     }
 
+   /* @Override
+    public String generatePDFReport(String userID) {
+        // Step 1: Fetch data for the specified userID
+        List<RatingDto> ratings = getAllRatingsByuserID(userID);
+
+        // Define the output file path
+        String outputFilePath = "user_ratings_report_" + userID + ".pdf";
+
+        // Step 2: Create a new PDF document
+        try (Document doc = new Document(PageSize.A4, 10, 10, 10, 10);
+             FileOutputStream stream = new FileOutputStream(outputFilePath)) {
+
+            // Initialize the PDF writer
+            PdfWriter.getInstance(doc, stream);
+
+            // Open the document
+            doc.open();
+
+            // Step 3: Add content to the PDF
+            Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
+            doc.add(new Paragraph("User Ratings Report", titleFont));
+            doc.add(new Paragraph("User ID: " + userID));
+            doc.add(new Paragraph("\n"));
+
+            Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 12);
+            for (RatingDto rating : ratings) {
+                doc.add(new Paragraph("Rating ID: " + rating.getId(), contentFont));
+                doc.add(new Paragraph("Project ID: " + rating.getProjectID(), contentFont));
+                doc.add(new Paragraph("Rating: " + rating.getRating(), contentFont));
+                doc.add(new Paragraph("Review: " + rating.getReview(), contentFont));
+                doc.add(new Paragraph("Star Rating: " + rating.getStarRating(), contentFont));
+                doc.add(new Paragraph("\n"));
+            }
+
+            // Step 4: Close the document
+            doc.close();
+
+            // Return the file path of the generated PDF
+            return outputFilePath;
+
+        } catch (DocumentException | IOException e) {
+            throw new RuntimeException("Failed to generate PDF report", e);
+        }
+    }*/
 
 }
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import TicketModel from "../../../../../Model/TicketModel";
 import { SpinnerLoading } from "../../../../../utils/SpinnerLoading";
+import "./viewticketpage.css";
 import { stat } from "fs";
 import { Link } from "react-router-dom";
 
@@ -31,6 +32,7 @@ export const VIewTiceketPage = () => {
                 loadedtickets.push(
                     new TicketModel(
                         responsedata[element].id,
+                        responsedata[element].email,
                         responsedata[element].relatedTo,
                         {
                             userId: responsedata[element].user.userId,
@@ -97,6 +99,7 @@ export const VIewTiceketPage = () => {
 
     return (
         <div className="d-flex flex-column align-items-center below-navbar-admin" >
+            <div className="background-image">
             <table className="table table-bordered border-primary  m-5" style={{ width: "95%", textAlign: "center" }}>
                 <thead className="table-dark border-primary">
                     <tr >
@@ -104,6 +107,7 @@ export const VIewTiceketPage = () => {
                         <th scope="col">TicketId</th>
                         <th scope="col">UserId</th>
                         <th scope="col">UserName</th>
+                        <th scope="col">Email</th>
                         <th scope="col">related to</th>
                         <th scope="col">subject</th>
                         <th scope="col">description</th>
@@ -114,11 +118,12 @@ export const VIewTiceketPage = () => {
                 </thead>
                 <tbody>
                     {ticket.slice().reverse().map((element, index) => (
-                        <tr key={index}>
+                        <tr key={index} className="table-light">
                             <th scope="row">{index + 1}</th>
                             <td >{element.id}</td>
                             <td >{element.userId}</td>
                             <td >{element.username}</td>
+                            <td><a href={`mailto:${element.email}`}>{element.email == null || element.email.trim() == ""?"":"Email"}</a></td>
                             <td style={{ maxWidth: "250px" }}><p style={{ margin: "0", wordWrap: "break-word" }}>{element.relatedTo}</p></td>
                             <td style={{ maxWidth: "250px", margin: "0", wordWrap: "break-word" }} >{element.subject}</td>
                             <td >{element.description}</td>
@@ -137,6 +142,7 @@ export const VIewTiceketPage = () => {
 
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }

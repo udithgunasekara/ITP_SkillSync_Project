@@ -61,6 +61,7 @@ public class TicketServicesImpl implements TicketServices {
             ticket.setSubject(updateinfo.getSubject());
             ticket.setDescription(updateinfo.getDescription());
             ticket.setStatus(updateinfo.getStatus());
+            ticket.setEmail(updateinfo.getEmail());
             Ticket updatedTicket = ticketRepo.save(ticket);
             return modelMapper.map(updatedTicket, TicketDto.class);
         }else{

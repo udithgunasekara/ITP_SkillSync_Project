@@ -1,70 +1,81 @@
 package BackEnd.service.imple;
+
+import BackEnd.Config.ImageUtils;
 import BackEnd.DTO.GigImagesDTO;
-import BackEnd.Mapper.GigImagesMapper;
-import BackEnd.entity.FreelancerGigs;
+import BackEnd.Exceptions.ResourceNotFound;
 import BackEnd.entity.GigImages;
-import BackEnd.repository.FreelancerGigsRepo;
 import BackEnd.repository.GigImageRepo;
 import BackEnd.service.GigImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class GigImageServiceImp implements GigImageService {
-    private static final String UPLOAD_DIR = "/Users/drldasanayake/ITP_SkillSync_Project/BackEnd/src/main/resources/gigImages/";
-    private static final String IMAGE_URL_PREFIX = "/gigImages/";
-
-    private final GigImageRepo gigImageRepo;
-    private final FreelancerGigsRepo freelancerGigsRepository;
-
 
     @Autowired
-    public GigImageServiceImp(GigImageRepo gigImageRepo, FreelancerGigsRepo freelancerGigsRepository) {
-        this.gigImageRepo = gigImageRepo;
-        this.freelancerGigsRepository = freelancerGigsRepository;
-    }
+    private GigImageRepo gigImageRepo;
 
-    public void uploadImages(MultipartFile file, Long gigId) throws IOException {
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                Path directory = Paths.get(UPLOAD_DIR + gigId);
-                Files.createDirectories(directory);
-                Path filePath = directory.resolve(Objects.requireNonNull(file.getOriginalFilename()));
-                Files.write(filePath, bytes);
+    @Override
+    public String uploadGigImages(Long gigId, MultipartFile file) {
+        try {
+            byte[] gigImageData = ImageUtils.compressImage(file.getBytes());
+            GigImagesDTO gigImagesDTO = new GigImagesDTO(null, gigImageData);
+            GigImages gigImages = new GigImages(gigImagesDTO.getGigImageId(), gigImagesDTO.getGigImage(), gigId);
+            gigImages = gigImageRepo.save(gigImages);
+            return "Gig Image uploaded successfully!";
 
-                FreelancerGigs gig = freelancerGigsRepository.findById(gigId)
-                        .orElseThrow(() -> new IllegalArgumentException("Gig not found"));
-
-                GigImages gigImages = new GigImages();
-                gigImages.setGigImagePath(filePath.toString());
-                gigImages.setGigId(gig);
-                gigImageRepo.save(gigImages);
-            } catch (IOException e) {
-                throw new IOException("Failed to upload image");
-            }
+        } catch (IOException e) {
+            throw new ResourceNotFound("Image saver Error");
         }
     }
 
     @Override
-    public List<GigImagesDTO> getImagesByGigId(Long gigId) {
-        List<GigImages> gigImagesList = gigImageRepo.findByGigId(gigId);
-        return gigImagesList.stream()
-                .map(GigImagesMapper::mapToGigImagesDTO)
-                .collect(Collectors.toList());
+    public Map<String, List<byte[]>> displayGigImages(Long gigId) {
+        List<GigImages> gigImageData = gigImageRepo.findByGigId(gigId);
+        if (gigImageData.isEmpty()) {
+            throw new ResourceNotFound("No image data found for gig: " + gigId);
+        }
+
+        Map<String, List<byte[]>> gigImagesById = new HashMap<>();
+        for (GigImages gigImages : gigImageData) {
+            byte[] compressedImage = gigImages.getGigImage();
+            byte[] decompressedImage = ImageUtils.decompressImage(compressedImage);
+            gigImagesById.computeIfAbsent(gigImages.getGigImageId().toString(), k -> new ArrayList<>()).add(decompressedImage);
+        }
+
+        return gigImagesById;
     }
 
     @Override
-    public void deleteImagesByGigId(Long gigId) {
-        List<GigImages> gigImagesList = gigImageRepo.findByGigId(gigId);
-        gigImageRepo.deleteAll(gigImagesList);
+    public byte[] displayFirstImage(Long gigId) {
+        List<GigImages> gigImageData = gigImageRepo.findByGigId(gigId);
+
+        if (gigImageData.isEmpty()) {
+            throw new ResourceNotFound("No image data found for gig: " + gigId);
+        }
+
+        GigImages firstImage = gigImageData.get(0);
+        byte[] compressedImage = firstImage.getGigImage();
+
+        return ImageUtils.decompressImage(compressedImage);
     }
+
+    @Override
+    public String deleteGigImages(Long gigId) {
+        List<GigImages> gigImages = gigImageRepo.findByGigId(gigId);
+        if (gigImages.isEmpty()) {
+            throw new ResourceNotFound("No image data found for gig: " + gigId);
+        }
+
+        gigImageRepo.deleteAll(gigImages);
+        return "Gig Images deleted successfully!";
+    }
+
 }

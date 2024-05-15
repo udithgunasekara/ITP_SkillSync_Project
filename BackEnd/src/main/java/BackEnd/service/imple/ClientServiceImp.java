@@ -3,6 +3,7 @@ package BackEnd.service.imple;
 import BackEnd.DTO.ClientDTO;
 import BackEnd.DTO.LoginDTO;
 import BackEnd.Mapper.ClientMapper;
+import BackEnd.Mapper.FreelancerMapper;
 import BackEnd.Mapper.UserControllerMapper;
 import BackEnd.entity.Freelancer;
 import BackEnd.entity.UserCredential;
@@ -13,6 +14,9 @@ import BackEnd.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -35,12 +39,22 @@ public class ClientServiceImp implements ClientService {
     }
 
     @Override
-    public boolean validateLogin(LoginDTO loginDTO) {
+    public Long validateLogin(LoginDTO loginDTO) {
         Client client = clientRepo.findByUserName(loginDTO.getUsername());
+        long userid = client.getId();
         if (client != null && client.getPassword().equals(loginDTO.getPassword())) {
-            return true;
+            return userid;
         }
-        return false;
+        return null ;
+    }
+
+    @Override
+    public List<ClientDTO> getAllClients() {
+        List<Client> clients = clientRepo.findAll();
+        return clients.stream()
+                .map(ClientMapper::mapToClientDTO)
+                .collect(Collectors.toList());
+
     }
 
 }
