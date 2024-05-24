@@ -17,9 +17,19 @@ const CreateGigForm2: React.FC = () => {
             return;
         }
 
+        const uniqueImageFiles = getUniqueImages(imageFiles);
+
+        if (uniqueImageFiles.length !== imageFiles.length) {
+            window.alert('You have uploaded duplicate images. Please upload unique images.');
+            return;
+        }
+
         const formData = new FormData();
-        imageFiles.forEach((file) => {
-            formData.append('image', file); // Append each file with the key "image"
+        uniqueImageFiles.forEach((file, index) => {
+            // Generate a unique identifier for each image
+            const uniqueFileName = `${file.name}_${Date.now()}_${index}`;
+            // Append each file with the key "image"
+            formData.append('image', file, uniqueFileName);
         });
 
         try {
@@ -57,6 +67,16 @@ const CreateGigForm2: React.FC = () => {
 
     const handleNextClick = (gigId: string) => {
         history.push(`/CreateGigForm3/${gigId}`);
+    };
+
+    const getUniqueImages = (files: File[]) => {
+        const uniqueFiles: File[] = [];
+        files.forEach(file => {
+            if (!uniqueFiles.some(uniqueFile => uniqueFile.name === file.name)) {
+                uniqueFiles.push(file);
+            }
+        });
+        return uniqueFiles;
     };
 
     const containerStyle: React.CSSProperties = {
