@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 interface LocationState {
   amount: number;
-  // Add other properties if needed
+  
 }
 
 const PayPalProceed = () => {
@@ -20,7 +20,7 @@ const PayPalProceed = () => {
   };
 
   return (
-    <div className="main-section">
+    <div className="main-section" style={{ background: 'linear-gradient(to right, #f9f2fa, #dbb2ce)' }}>
       <div className='row'>
         <h2 className='text-center mt-5'>Pay with PayPal</h2>
         <div className='card col-md-6 mt-5 px-5 pt-3 offset-md-3 offset-md-3'>

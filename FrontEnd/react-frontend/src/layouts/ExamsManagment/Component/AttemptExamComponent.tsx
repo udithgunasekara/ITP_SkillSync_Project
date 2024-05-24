@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserResultById } from '../service/UserResultService';
-import { getExam } from '../service/ExamsService';
+import { getExam, getExamImage } from '../service/ExamsService';
 import { getUserAttemptsById, saveUserAttempts, updateUserAttempts } from '../service/UserAttemptsService';
 
 const AttemptExamComponent: React.FC = () => {
@@ -13,10 +13,47 @@ const AttemptExamComponent: React.FC = () => {
     const [examDescription, setExamDescription] = useState('');
     const [noOfExamAttempts, setNoOfExamAttempts] = useState('');
     const [timeLimt, setTimeLimit] = useState('');
+    const [badge, setBadge] = useState<File | null>(null);
+    const [badgeName, setBadgeName] = useState('');
+    const [badgeURL, setBadgeURL] = useState<string>('');
     const [noOfUserAttempts, setNoOfUserAttempts] = useState('');
     const [canAttempt, setCanAttempt] = useState<boolean>();
     const examId = examIdPk;
     const userName = userNamePk;
+    const navigatInAttempt = useHistory();
+    const role = sessionStorage.getItem('role');
+    useEffect(() => {
+      validateUser(role);
+    }, []);
+    
+    function validateUser(role: string | null){
+      if(role){
+        if (role !== 'moderator' && role !== 'freelancer') {
+          navigatInAttempt.push('/Freelancer/Login');
+          alert('Restricted! please log in')
+        }
+      } else {
+        navigatInAttempt.push('/Freelancer/Login');
+        alert('Restricted! please log in')
+      }
+    }
+    useEffect(() => {
+      if (examId) {
+        fetchBadgeImage(examId);
+      }
+    }, [examId]);
+
+    async function fetchBadgeImage(examId: string) {
+      try {
+        const badgeImageData = await getExamImage(examId);
+        const badgeFile = new File([badgeImageData.imageBytes], 'badge.jpg', { type: 'image/jpeg' });
+    
+        setBadgeURL(badgeImageData.imageURL);
+        setBadge(badgeFile);
+      } catch (error) {
+        console.error('Error fetching badge image:', error);
+      }
+    }
 
     getExam(examIdPk)
     .then((response) => {
@@ -101,13 +138,30 @@ const AttemptExamComponent: React.FC = () => {
         <div className="col-lg-6">
           <div className="card">
             <div className="card-body text-center">
-              <h1>{examName}</h1>
-              <h5>{examDescription}</h5>
-              {noOfUserAttempts? 
-              <p>No Attempts Left : {parseInt(noOfExamAttempts) - parseInt(noOfUserAttempts)}</p>
-              :<p>No Attempts Left : {parseInt(noOfExamAttempts) - 0}</p>}
-              
-              <p>Time Limit : {timeLimt}</p>
+            {result === 'pass' ? (
+              <><div className="form-group mb-2">
+                <h3>You passed the exam!</h3>
+                {badgeURL && (
+                  <img src={badgeURL} alt={badgeName} className="profile-image-msg" style={{ left: '270px' }} />
+                )}
+              </div><br></br>
+              <Link to={`/freelancers/${userName}`}>
+              <button className="btn btn-danger">
+                view badge in profile
+              </button>
+            </Link><br></br><br></br></>
+            ) : (
+              <>
+                <h1>{examName}</h1>
+                <h5>{examDescription}</h5>
+                {noOfUserAttempts ? (
+                  <p>No Attempts Left : {parseInt(noOfExamAttempts) - parseInt(noOfUserAttempts)}</p>
+                ) : (
+                  <p>No Attempts Left : {parseInt(noOfExamAttempts) - 0}</p>
+                )}
+                <p>Time Limit : {timeLimt}</p>
+              </>
+            )}
               {enrolledExam ? (
                 <div>
                   {enrolledExam !== examIdPk ? (

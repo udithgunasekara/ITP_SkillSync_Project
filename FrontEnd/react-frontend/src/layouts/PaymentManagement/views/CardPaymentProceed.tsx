@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { notifyMessage } from "../util/communFunc";
+import visa from "../image/Visa.jpg";
+import mastercard from "../image/mastercard.jpg";
+import amex from "../image/amex.png";
 
 interface ApiResponse {
     transactionID: any;
@@ -27,6 +30,7 @@ const CardPaymentProceed = () => {
     const [securityCode, setSecurityCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [cardType, setCardType] = useState('');
 
     const [cardNumberError, setCardNumberError] = useState('');
     const [expiryDateError, setExpiryDateError] = useState('');
@@ -36,9 +40,16 @@ const CardPaymentProceed = () => {
 
     // Validation functions
     const validateCardNumber = () => {
-        const cardNumberRegex = /^\d{12}$/; // 12-digit card number
+        let cardNumberLength = 0;
+        if (cardType === 'visa' || cardType === 'mastercard') {
+            cardNumberLength = 12;
+        } else if (cardType === 'amex') {
+            cardNumberLength = 15;
+        }
+
+        const cardNumberRegex = new RegExp(`^\\d{${cardNumberLength}}$`); // Dynamic regex based on card type
         if (!cardNumberRegex.test(cardNumber)) {
-            setCardNumberError("Enter a valid card number");
+            setCardNumberError(`Enter a valid ${cardType.toUpperCase()} card number`);
             return false;
         }
         setCardNumberError('');
@@ -117,16 +128,16 @@ const CardPaymentProceed = () => {
         const formattedDate = today.toISOString().slice(0, 10);
         const amount = propsData.amount ?? '0';
         const projectID = propsData.projectId;
-    
+
         const apiUrl = 'http://localhost:8082/payment/create';
-    
+
         const postData = {
             date: formattedDate,
             paymentMethod: "CreditCard",
             projectID: projectID,
             amount: amount
         };
-    
+
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -135,13 +146,13 @@ const CardPaymentProceed = () => {
                 },
                 body: JSON.stringify(postData)
             });
-    
+
             console.log("RESPONSE", response);
-    
+
             const result: ApiResponse = await response.json();
             console.log("API RESPONSE", result);
             console.log("Success:", result);
-    
+
             if (result.transactionID) {
                 notifyMessage("Payment Successful", 1);
                 // Navigate to transaction details page
@@ -162,7 +173,6 @@ const CardPaymentProceed = () => {
             notifyMessage("Payment Failed", 0);
         }
     };
-    
 
     return (
         <div className="main-section" style={{ background: 'linear-gradient(to right, #f9f2fa, #dbb2ce)' }}>
@@ -171,6 +181,35 @@ const CardPaymentProceed = () => {
 
                 <div className="card col-md-6 mt-5 px-5 pt-3 pb-5 offset-md-3" style={{ background: 'linear-gradient(to right, #dbb2ce, #f9f2fa )' }}>
                     <h6>Credit/Debit Card</h6>
+                    <div className="input-group-append" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <input 
+                                type="radio" 
+                                name="cardType" 
+                                value="visa" 
+                                onChange={() => setCardType('visa')}
+                            />
+                            <img src={visa} alt="Visa" className="card-image" style={{ width: '50px', height: 'auto', margin: '0 10px' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <input 
+                                type="radio" 
+                                name="cardType" 
+                                value="mastercard" 
+                                onChange={() => setCardType('mastercard')}
+                            />
+                            <img src={mastercard} alt="Mastercard" className="card-image" style={{ width: '50px', height: 'auto', margin: '0 10px' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <input 
+                                type="radio" 
+                                name="cardType" 
+                                value="amex" 
+                                onChange={() => setCardType('amex')}
+                            />
+                            <img src={amex} alt="AMEX" className='card-image' style={{ width: '50px', height: 'auto', margin: '0 10px' }} />
+                        </div>
+                    </div>
                     <div className="card-body mt-2 mx-5">
                         <h6 className="mt-3">Amount: {propsData.amount ?? 0}$</h6>
 
@@ -181,14 +220,13 @@ const CardPaymentProceed = () => {
                             onChange={(e) => {
                                 // Ensure only numeric characters are entered
                                 const input = e.target.value.replace(/\D/g, '');
-                                // Limit input to 12 characters
-                                const truncatedInput = input.slice(0, 12);
+                                // Limit input to the appropriate number of characters based on card type
+                                const truncatedInput = cardType === 'amex' ? input.slice(0, 15) : input.slice(0, 12);
                                 setCardNumber(truncatedInput);
                             }}
                             onBlur={validateCardNumber}
                             className={`form-control ${cardNumberError ? 'is-invalid' : ''}`}
                             placeholder="Card Number"
-                            pattern="\d{12}"
                         />
                         {cardNumberError && (
                             <div className="invalid-feedback">
@@ -252,20 +290,20 @@ const CardPaymentProceed = () => {
                         </div>
 
                         {/* Security code input with error display */}
-                            <input
-                                type="text" 
-                                value={securityCode}
-                                onChange={(e) => {
-                                    // Allow only numeric characters
-                                    const input = e.target.value.replace(/\D/g, '');
-                                    // Limit input to 3 characters
-                                    const truncatedInput = input.slice(0, 3);
-                                    setSecurityCode(truncatedInput);
-                                }}
-                                onBlur={validateSecurityCode}
-                                className={`form-control mt-3 ${securityCodeError ? 'is-invalid' : ''}`}
-                                placeholder="CVV"
-                            />
+                        <input
+                            type="text" 
+                            value={securityCode}
+                            onChange={(e) => {
+                                // Allow only numeric characters
+                                const input = e.target.value.replace(/\D/g, '');
+                                // Limit input to 3 characters
+                                const truncatedInput = input.slice(0, 3);
+                                setSecurityCode(truncatedInput);
+                            }}
+                            onBlur={validateSecurityCode}
+                            className={`form-control mt-3 ${securityCodeError ? 'is-invalid' : ''}`}
+                            placeholder="CVV"
+                        />
 
                         {securityCodeError && (
                             <div className="invalid-feedback">

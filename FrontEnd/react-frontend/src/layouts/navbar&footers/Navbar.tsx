@@ -1,13 +1,14 @@
+import { Session } from "inspector";
 import { Link, NavLink, useHistory } from "react-router-dom";
 
 // const userrole = sessionStorage.getItem('role') 
-const userrole = "freelancer"; //change this to change user
+// const userrole = "freelancer"; //change this to change user
 
 export const Navbar = () => {
     const history = useHistory();
     const username = sessionStorage.getItem('username');
     const role = sessionStorage.getItem('role');
-    const role2 = 'admin'
+    // const role2 = 'admin'
 
     const handleProfileClick = () => {
         if (role === 'freelancer') {
@@ -40,6 +41,12 @@ export const Navbar = () => {
 
                 <div className='collapse navbar-collapse justify-content-between' id='navbarNavDropdown'>
                     <ul className='navbar-nav' style={{paddingTop:0}}>
+
+                         {(role !== 'client' && role !== 'freelancer' && role !== 'admin') && (
+                            <NavLink className='nav-link' to={'/User/Registration'}>Sign Up</NavLink>
+                        )}  
+
+
                         <li className='nav-item ' id="dash" >
                             <NavLink className='nav-link' to={'/dashboard'}>Dashboard</NavLink>
                         </li>
@@ -52,7 +59,7 @@ export const Navbar = () => {
                         <li className='nav-item' id="cources">
                             <a className='nav-link' href='#'> Courses</a>
                         </li>
-                        {role2 === 'admin' && (
+                        {role === 'admin' && (
                             <li className='nav-item' id="admin">
                                 <NavLink className='nav-link' to={'/admin'}>Admin</NavLink>
                             </li>
@@ -61,6 +68,7 @@ export const Navbar = () => {
                             <NavLink className='nav-link' to={'/admin'}>Admin</NavLink>
                         </li> */}
 
+                        
                     </ul>
                     <ul className='navbar-nav ms-auto' style={{paddingTop:0}}>
                         <li className="nav-item dropdown ">

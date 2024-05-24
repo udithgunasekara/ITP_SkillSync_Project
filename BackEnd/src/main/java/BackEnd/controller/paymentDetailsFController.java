@@ -39,6 +39,7 @@ public class paymentDetailsFController {
         return ResponseEntity.ok(paymentDetailsFreelancerDTO);
     }
 
+    //delete details
     @DeleteMapping("/{userName}")
     public ResponseEntity<String> deleteDetails(@PathVariable("userName") String userName){
         paymentDetailsFreelancerService.deleteDetails(userName);

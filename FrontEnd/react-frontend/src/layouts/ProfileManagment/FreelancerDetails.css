@@ -176,6 +176,42 @@
   margin-left: 0.625em;
   transition: background-color 0.3s;
 }
+.exam-apply-profile{
+  background-color: #8436C2;
+  color: white;
+  top: 10.625em;
+  height: 40px;
+  font-size: 14px;
+  width: 120px;
+  border: none;
+  padding: 0.9375em 1.25em;
+  margin-left: 0em;
+  border-radius: 0.3125em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.badge-prof-disp{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 400px;
+  height: 100px;
+  overflow: scroll;
+}
+.profile-badge{
+  max-width: 45px; 
+    max-height: 45px; 
+    border-radius: 50%;
+    object-fit:contain;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 20px;
+    margin-right: 50px;
+    display: block;
+    border-radius: 50%;
+    border: solid;
+    border-width: thin;
+}
 .Add-education, .Add-skill, .Add-language, .Add-description {
   background-color: #8436C2;
   color: white;
@@ -265,7 +301,7 @@ ul p {
   padding: 0.625em 1.25em;
   margin-left: 3.75em;
   margin-top: -1.25em;
-  border-radius: 0.3125em;
+  border-radius: 40%;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -290,8 +326,9 @@ ul p {
   padding: 0.5em 1em;
   background-color: #8436c2;
   color: white;
+  font-size: small;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .add-language-btn:hover {
@@ -301,10 +338,11 @@ ul p {
   padding: 0.5em 1em;
   background-color: #8436c2;
   color: white;
+  font-size: small;
   border: none;
   margin-left: 12.5em;
   margin-top: -2.625em;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .cancel-language:hover {
@@ -327,22 +365,24 @@ ul p {
 .add-education-btn {
   background-color: #8436C2;
   color: white;
+  font-size: small;
   padding: 0.625em 1.25em;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .add-education-btn:hover {
   background-color: #45a049;
 }
 .cancel-Edu {
-  padding: 0.5em 1em;
+  padding: 0.625em 1.25em;
   background-color: #8436c2;
   margin-left: 8.125em;
-  margin-top: -2.5em;
+  margin-top: -2.8em;
   color: white;
+  font-size: small;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .cancel-Edu:hover {
@@ -362,8 +402,9 @@ ul p {
   padding: 0.5em 1em;
   background-color: #8436c2;
   color: white;
+  font-size: small;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .add-skill-btn:hover {
@@ -372,11 +413,12 @@ ul p {
 .cancel-skill {
   padding: 0.5em 1em;
   background-color: #8436c2;
-  margin-left: 8.75em;
+  margin-left: 6.75em;
   margin-top: -2.5em;
+  font-size: small;
   color: white;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 40%;
   cursor: pointer;
 }
 .cancel-skill:hover {

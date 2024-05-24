@@ -6,6 +6,7 @@ import BackEnd.Mapper.paymentDetailsFreelancerMapper;
 import BackEnd.entity.paymentDetailsFreelancer;
 import BackEnd.repository.paymentDetailsFreelancerRepo;
 import BackEnd.service.paymentDetailsFreelancerService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +72,7 @@ public class paymentDetailsFServiceImpl implements paymentDetailsFreelancerServi
     }
 
     @Override
+    @Transactional
     public void deleteDetails(String userName) {
 
         paymentDetailsFreelancer paymentDetailsFreelancer = paymentDetailsFreelancerRepo.findByUserName(userName);

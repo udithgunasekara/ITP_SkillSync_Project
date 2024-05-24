@@ -3,7 +3,7 @@ import "./RaiseTicketFormstyle.css";
 import { useHistory } from "react-router-dom";
 export const RaiseTicketForm = () => {
 
-    const userid = sessionStorage.getItem('id') 
+    const userid = sessionStorage.getItem('id')
     // const userid = "1"; //change this to change user
 
     const history = useHistory();
@@ -25,62 +25,66 @@ export const RaiseTicketForm = () => {
         const { name, value } = e.target;
         let sanitizedInput: string = "";
         if (/[^a-zA-Z0-9\s]/.test(e.target.value)) {
-             sanitizedInput = e.target.value.replace(/[^\w\s]/g, '');
-        }else{
+            sanitizedInput = e.target.value.replace(/[^\w\s]/g, '');
+        } else {
             sanitizedInput = "ok";
         }
-        if(sanitizedInput!==""){
+        if (sanitizedInput !== "") {
             setFormData(prevState => ({ ...prevState, [name]: value }));
             console.log(e.target.value);
         }
 
-        
+
     };
 
     const handlesubmt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(formData.email !== "" || formData.relatedTo !== "" || formData.subject !== "" || formData.description !== "") {
-            try {
-                const response = await fetch("http://localhost:8082/ticket/addticket", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData)
-                });
-                if (response.ok) {
-                    alert("Ticket Raised successfully");
-                    setFormData({
-                        email: "",
-                        user: {
-                            userId: userid
+        if (formData.email !== "" || formData.relatedTo !== "" || formData.subject !== "" || formData.description !== "") {
+            if (userid === null) {
+                alert("You are not logged in. Please login to raise a ticket");
+            } else {
+                try {
+                    const response = await fetch("http://localhost:8082/ticket/addticket", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
                         },
-                        relatedTo: "",
-                        status: "pending",
-                        subject: "",
-                        description: "",
-                        imageLink: ""
+                        body: JSON.stringify(formData)
                     });
-                    history.push("/tickets");
-                    formRef.current?.reset();
-    
-                } else {
-                    alert("Failed to Raise Ticket. Please try again");
+                    if (response.ok) {
+                        alert("Ticket Raised successfully");
+                        setFormData({
+                            email: "",
+                            user: {
+                                userId: userid
+                            },
+                            relatedTo: "",
+                            status: "pending",
+                            subject: "",
+                            description: "",
+                            imageLink: ""
+                        });
+                        history.push("/tickets");
+                        formRef.current?.reset();
+
+                    } else {
+                        alert("Failed to Raise Ticket. Please try again");
+                    }
+                } catch (err) {
+                    console.log(err);
                 }
-            } catch (err) {
-                console.log(err);
             }
-        }else{
+        } else {
             alert("Please fill all the fields");
         }
-        
+
     }
 
     const handleReset = () => {
         setFormData(prevState => ({
             ...prevState,
             description: '',
-            subject:''
+            subject: ''
         }));
     };
 
@@ -92,14 +96,14 @@ export const RaiseTicketForm = () => {
                 <h1 className="d-flex justify-content-center text-dark pt-5">Raise New Ticket</h1>
                 <form className="ticketform" onSubmit={handlesubmt}>
                     <div className="form-floating mb-3">
-                        <input type="email" className={`form-control ${formData?.email ? '' : 'is-invalid'}`}  name="email" id="form-control" required placeholder="name@example.com" onChange={handleChange} />
+                        <input type="email" className={`form-control ${formData?.email ? '' : 'is-invalid'}`} name="email" id="form-control" required placeholder="name@example.com" onChange={handleChange} />
                         <label htmlFor="form-control">Email address</label>
                         <p className="text-light fw-bold">Make sure you enter a valid email that we can contact you if needed</p>
                     </div>
 
                     <div className="form-floating mb-3">
                         <select className={`form-select ${formData?.relatedTo ? '' : 'is-invalid'}`} id="relatedTo" name="relatedTo" value={formData?.relatedTo} aria-label="Related To" required aria-placeholder="select option" onChange={handleChange}>
-                        <option selected disabled value="">select what you have concerns with</option>
+                            <option selected disabled value="">select what you have concerns with</option>
                             <option value="Freelancer related">Freelancer related</option>
                             <option value="client related">client related</option>
                             <option value="payment related">payment related</option>

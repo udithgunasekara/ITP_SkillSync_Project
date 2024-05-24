@@ -5,7 +5,7 @@ import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import  './ApplicationListPage.css'
 import logo from './Asset 3.png';
-//import backgroundimg from './backgroundRev.jpg'
+import backgroundimg from './backim2.jpg'
 
 // Define the type for the API response object
 interface Freelancer {
@@ -74,8 +74,9 @@ const ApplicantListPage: React.FC = () => {
 
   return (
     
+    <div className="below-navbar-admin " id='dashboardpage' style={{ width: "100vw" }}>
     <div className='app_container my-5' 
-   // style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
+    style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
     >
       <h2 className='app_header text-center mb-4' style={{fontSize: '40px', color: "white"}}>Applicants Dashboard</h2>
       <input
@@ -107,6 +108,7 @@ const ApplicantListPage: React.FC = () => {
           <div className="app_no_results text-center w-100">No freelancers found matching your criteria.</div>
         )}
       </div>
+    </div>
     </div>
   );
 }

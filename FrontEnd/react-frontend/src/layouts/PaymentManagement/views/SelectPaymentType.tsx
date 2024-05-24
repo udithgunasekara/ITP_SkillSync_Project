@@ -78,7 +78,8 @@ const SelectPaymentType = () => {
                                     <h5>Amount</h5>
                                 </div>
                                 <div>
-                                    <h5>{amount}$</h5>
+                                    {/* <h5>{amount}$</h5> */}
+                                    <h5>12$</h5>
                                 </div>
                             </div>
 
@@ -87,7 +88,8 @@ const SelectPaymentType = () => {
                                     <h5>Tax</h5>
                                 </div>
                                 <div>
-                                    <h5>{tax}%</h5>
+                                    {/* <h5>{tax}%</h5> */}
+                                    <h5>3%</h5>
                                 </div>
                             </div>
 
@@ -96,7 +98,8 @@ const SelectPaymentType = () => {
                                     <h5>Total Payment</h5>
                                 </div>
                                 <div>
-                                    <h5>{total}$</h5>
+                                    {/* <h5>{total}$</h5> */}
+                                    <h5>15$</h5>
                                 </div>
                             </div>
                         </div>

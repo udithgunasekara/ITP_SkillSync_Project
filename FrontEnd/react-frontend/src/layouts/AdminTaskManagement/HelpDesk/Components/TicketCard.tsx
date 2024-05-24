@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const TicketCard: React.FC<{ ticket: TicketModel, key: number; onDelete: (ticketId: number) => void }> = (props) => {
 
     const userid = sessionStorage.getItem('id') 
-    // const userid = 1; //change this to change user
+    // const userid = 3; //change this to change user
     const [expanded, setExpanded] = useState(false);
 
     
