@@ -6,8 +6,8 @@ import { TicketCard } from './TicketCard';
 
 export const RaisedTicket = () => {
 
-    // const userid = sessionStorage.getItem('id') 
-    const userid = 2;
+    const userid = sessionStorage.getItem('id') 
+    // const userid = 2;
 
     const [ticket, setTicket] = useState<TicketModel[]>([]);
     const [error, setError] = useState(null);

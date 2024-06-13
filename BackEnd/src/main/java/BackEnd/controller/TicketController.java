@@ -17,7 +17,8 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/ticket")
-public class TicketController {public TicketServices ticketServices;
+public class TicketController {
+    public TicketServices ticketServices;
 
     //url : http://localhost:8082/ticket/alltickets/12323
     @GetMapping("/alltickets/{userid}")
