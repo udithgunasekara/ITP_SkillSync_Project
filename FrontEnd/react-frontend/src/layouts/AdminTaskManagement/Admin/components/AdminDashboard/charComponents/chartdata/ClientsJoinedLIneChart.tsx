@@ -133,7 +133,7 @@ export const ClientsJoinedLineChart = () => {
             },
             title: {
                 display: true,
-                text: 'Freelancers joined within weeks',
+                text: 'Clients joined within weeks',
                 color: 'Black',
                 font: {
                     size: 26,
