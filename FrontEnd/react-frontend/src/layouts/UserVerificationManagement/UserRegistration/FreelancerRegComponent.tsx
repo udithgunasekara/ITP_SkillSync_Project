@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { OTPSending, createFreelancer } from '../Services/UserManagementService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory, useLocation } from 'react-router-dom';
 import { validateEmail, validatePassword, validateName, validateUsername, validateDOB, validatePhone } from './FormValidation';
+import FreelancerContext from '../Context/Context';
+
+
+//first page that freelancer has to fill their bio data
 
 const FreelancerRegComponent = () => {
     const navigate = useHistory();
+    const [freelancerUserName, setFreelancerUserName] = useState("");
 
     // Initializing state for each backend variable
     const [firstName, setFirstName] = useState('');
@@ -27,34 +32,41 @@ const FreelancerRegComponent = () => {
     const [passwordError, setPasswordError] = useState('');
     const [phoneError, setPhoneError] = useState('');
 
-
     //set up session storage
     sessionStorage.setItem('username', userName);
     sessionStorage.setItem('email', email );
     sessionStorage.setItem('role', 'freelancer');
 
+    //Context
+    const {setFreelancerCon} :any = useContext(FreelancerContext);
+    const {setFreelancerEmail} :any = useContext(FreelancerContext);
+
+
     function saveFreelancer(e: any) {
         e.preventDefault();
 
-        // Including all state variables in the employee object
+        // Ref the Freelancer bio data
         const freelancer = { firstName, lastName, email, dob, nic, phone, userName, password, workOn };
-        console.log(freelancer);
+        
+        //Context
+        setFreelancerEmail(email);
+        setFreelancerCon(userName);
+        console.log("Did the context for Freelancer");
 
          //sending email
        OTPSending(email).then((response) => {
         console.log(response.data);
        });
 
-
         createFreelancer(freelancer).then((response) => {
             console.log(response.data);
-            navigate.push('/QualificationPage', { state: { userName: userName } });
+            navigate.push('/QualificationPage');
         });
 
        
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e:any) => {
         const { name, value } = e.target;
         let sanitizedInput = '';
 

@@ -1,10 +1,14 @@
-import React, { useState, useEffect, FC } from 'react';
-// CSS file
+import React, { useState, useEffect, FC, useContext } from 'react';
+
+
+//2nd page: QualificationPage getting social links and show card of qualifications
 import './QualificationPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory, useLocation } from 'react-router-dom';
 import { createSocialLink, createQualification } from '../Services/UserManagementService';
 import { useQualifications } from '../QualificationUpload/QualificationsContext';
+import FreelancerContext from '../Context/Context';
+
 
 interface Qualification {
   title: string;
@@ -24,6 +28,7 @@ interface LocationState {
   userName: string;
 }
 
+
 const QualificationPage: FC = () => {
   const { qualifications, setQualifications, socialLinks, setSocialLinks } = useQualifications();
   const navigate = useHistory();
@@ -36,6 +41,22 @@ const QualificationPage: FC = () => {
   const [behance, setBehance] = useState<string>('');
   const [linkedIn, setLinkedIn] = useState<string>('');
   const [portfolio, setPortfolio] = useState<string>('');
+
+  
+
+
+
+
+  
+//access context of freelancer
+const {freelancerCon}:any= useContext(FreelancerContext); //asking the data
+console.log("Hereeeeeee the freelancer: ", freelancerCon);
+
+
+
+
+
+
 
 
   const navigateToUploadPage = (): void => {

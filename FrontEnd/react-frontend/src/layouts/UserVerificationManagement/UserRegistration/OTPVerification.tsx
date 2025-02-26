@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { OTPVerify } from '../Services/UserManagementService';
 import { useHistory } from 'react-router-dom';
+import FreelancerContext from '../Context/Context';
 
 const OTPVerification: React.FC = () => {
     // Use the email from session storage or an empty string as a fallback
-    const [email, setEmail] = useState<string>(sessionStorage.getItem('email') || '');
     const [role, setRole] = useState<string>(sessionStorage.getItem('role') || ''); 
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const Navigate = useHistory();
+
+
+    //access Context
+    const {freelancerEmail}:any = useContext(FreelancerContext);
+    console.log("Context with email", freelancerEmail);
+
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -29,7 +36,7 @@ const OTPVerification: React.FC = () => {
             console.log("OTP Submitted: ", otp);
 
             try {
-                const response = await OTPVerify(otp, email);
+                const response = await OTPVerify(otp, freelancerEmail);
                 console.log(response.data);
                 setSuccessMessage('OTP verified successfully.');
 

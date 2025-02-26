@@ -30,7 +30,7 @@ import { ClientLoginComponent } from './layouts/UserVerificationManagement/UserL
 // import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginComponent';
 import FreelancerRegComponent from './layouts/UserVerificationManagement/UserRegistration/FreelancerRegComponent'
 import ClientRegComponent from './layouts/UserVerificationManagement/UserRegistration/ClientRegComponent'
-import QualificationComponent from './layouts/UserVerificationManagement/QualificationUpload/QualificationComponent'
+//import QualificationComponent from './layouts/UserVerificationManagement/QualificationUpload/QualificationComponent'
 import QualificationPage from './layouts/UserVerificationManagement/QualficationPage/QualificationPage'
 import QualificationUploadPage from './layouts/UserVerificationManagement/QualificationUpload/QualificationUploadPage'
 import ApplicantListPage from './layouts/UserVerificationManagement/ApplicationReviewPage/Components/ApplicantListPage'
@@ -79,10 +79,14 @@ import HomePage from './layouts/Home/HomePage';
 import AdminLoginComponent from './layouts/UserVerificationManagement/UserLogin/Components/AdminLoginPage';
 import RegisterPager from './layouts/Home/RegisterPage';
 import { AdminNavbar } from './layouts/AdminTaskManagement/Admin/components/AdminNavbar';
+//import { FreelancerContext } from './layouts/UserVerificationManagement/Context/Context';
+import FreelancerContextProvider from './layouts/UserVerificationManagement/Context/ContextProvider';
 
 
 export const App = () => {
   return (
+    
+    <FreelancerContextProvider>
     <Router>
       <div className='d-flex flex-column min-vh-100'>
         <div className='flex-grow-1'>
@@ -230,10 +234,10 @@ export const App = () => {
 
             {/* dummy site */}
             {/* http://localhost:3000/Freelancer/QualificationUploader */}
-            <Route path='/Freelancer/QualificationUploader'  exact>
+            {/* <Route path='/Freelancer/QualificationUploader'  exact>
               <QualificationComponent/>
               
-            </Route>
+            </Route> */}
 
             <Route path='/upload-qualification'  exact>
               <QualificationUploadPage/> 
@@ -512,6 +516,7 @@ export const App = () => {
         </div>
       </div>
     </Router>
+    </FreelancerContextProvider>
   );
 }
 

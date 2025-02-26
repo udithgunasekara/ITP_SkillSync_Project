@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+
+//This is the page that handle the context of the qualificaiton docs
 interface SocialLinks {
   linkedIn: string;
   behance: string;

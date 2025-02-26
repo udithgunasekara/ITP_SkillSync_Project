@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FreelancerLogin } from '../Service/LoginService'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { checkAccountStatus } from '../../Services/UserManagementService';
+import FreelancerContext from '../../Context/Context';
 
 export const FreelancerLoginComponent =  () => {
     // Initializing state for login variables
@@ -10,6 +11,7 @@ export const FreelancerLoginComponent =  () => {
     const [password, setPassword] = useState('');
     //const [id, setId] = useState(''); // [1
     const navigate = useHistory();
+    const {setFreelancerCon}:any = useContext(FreelancerContext);
 
 
     //setup session storage
@@ -27,6 +29,9 @@ export const FreelancerLoginComponent =  () => {
             //set id
             sessionStorage.setItem('id', response.data)
             sessionStorage.setItem('role', 'freelancer')
+
+            
+            setFreelancerCon(username);
 
            // alert('login successful ');
  

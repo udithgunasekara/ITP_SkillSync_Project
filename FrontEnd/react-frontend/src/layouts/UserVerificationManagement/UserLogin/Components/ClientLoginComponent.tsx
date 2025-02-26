@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ClientLogin } from '../Service/LoginService'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './login.jpg';
+import FreelancerContext from '../../Context/Context';
 
 
 export const ClientLoginComponent = () => {
@@ -10,6 +11,7 @@ export const ClientLoginComponent = () => {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useHistory();
+    const {setFreelancerCon}:any = useContext(FreelancerContext);
 
     //setup session storage
     sessionStorage.setItem('username', username);
@@ -26,6 +28,10 @@ export const ClientLoginComponent = () => {
                 console.log("Login response:", response.data);
                 sessionStorage.setItem('id', response.data);
                 sessionStorage.setItem('role', 'client');
+
+                //add user name context
+                setFreelancerCon(username);
+
 
                 // alert('Login Successful!');
                 navigate.push(`/FreelancerMain`);

@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useQualifications } from './QualificationsContext';
 import { createQualification } from '../Services/UserManagementService';
 //import './QualificationUploadPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { validateStartDate, validateEndDate, validateImageUpload } from '../UserRegistration/FormValidation';
+import FreelancerContext from '../Context/Context';
+
+
+//This is the page that getting the qualification details (title, dates and images)
 
 interface LocationState {
   userName: string;
@@ -25,6 +29,9 @@ const QualificationUploadPage = () => {
   //const { qualifications, setQualifications } = useQualifications();
   //const [userName, setUserName] = useState('');
   const [userName, setUserName] = useState<string>(sessionStorage.getItem('username') || '');
+
+  //getting username from context
+  const {freelancerCon}:any = useContext(FreelancerContext);
 
 
   
@@ -60,7 +67,7 @@ const QualificationUploadPage = () => {
     //const userName = 'kamal12'
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('username', userName); //adding sample user name
+    formData.append('username', freelancerCon); //adding sample user name
     formData.append('startDate', startDate);
     formData.append('endDate', endDate);
 
@@ -102,7 +109,7 @@ const QualificationUploadPage = () => {
               <form className="form-horizontal" onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
                   <label htmlFor="title" className="form-label">
-                    Qualification Title:
+                    Qualificationnnnn Title:
                   </label>
                   <input
                     type="text"
