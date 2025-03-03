@@ -8,13 +8,19 @@ import logo from './Asset 3.png';
 import backgroundimg from './backim2.jpg'
 
 // Define the type for the API response object
-interface Freelancer {
+export interface Freelancer {
   workOn: string;
   firstName: string;
   lastName: string;
   userName: string;
   created_at: string;
 }
+
+export type Freenum = {
+  work: string;
+  wewe: string;
+}
+
 
 const ApplicantListPage: React.FC = () => {
   const [freelancers, setFreelancers] = useState<Freelancer[]>([]);

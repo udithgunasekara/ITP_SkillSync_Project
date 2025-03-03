@@ -7,7 +7,7 @@ type FreelancerContextType = {
       setFreelancerCon: React.Dispatch<React.SetStateAction<string>>
       freelancerEmail:string,
       setFreelancerEmail: React.Dispatch<React.SetStateAction<string>>
-
+      
 
 }
 

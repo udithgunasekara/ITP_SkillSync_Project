@@ -13,6 +13,7 @@ import BackEnd.repository.ClientRepo;
 import BackEnd.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class ClientServiceImp implements ClientService {
+
     private ClientRepo clientRepo;
    private UserCredentialRepo userCredentialRepo;
     private ModelMapper modelMapper;

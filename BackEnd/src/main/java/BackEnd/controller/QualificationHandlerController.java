@@ -106,12 +106,21 @@ public class QualificationHandlerController {
         }
 
         Map<String, List<String>> titleBase64ImagesMap = new HashMap<>();
+
+        //Without doing byte to string:
+            //Use URLs to images. save images into cloud base: NOT REC learning curve and time management.
+            //Use Multipart
+
         titleImagesMap.forEach((title, images) -> {
             List<String> base64Images = images.stream()
                     .map(image -> Base64.getEncoder().encodeToString(image))
                     .collect(Collectors.toList());
             titleBase64ImagesMap.put(title, base64Images);
         });
+
+
+
+
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)

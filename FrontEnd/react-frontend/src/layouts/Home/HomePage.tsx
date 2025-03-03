@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import { useHistory } from 'react-router-dom';
+import { ThemeContext } from '../UserVerificationManagement/Context/themeContext';
 
 const HomePage: React.FC = () => {
   const history = useHistory();
+
+  const theme = useContext(ThemeContext);
 
   const handleFreelancerLogin = () => {
     history.push('/Freelancer/Login'); // Redirect to freelancer login page

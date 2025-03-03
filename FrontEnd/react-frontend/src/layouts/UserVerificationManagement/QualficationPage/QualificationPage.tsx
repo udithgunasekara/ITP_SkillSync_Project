@@ -43,20 +43,9 @@ const QualificationPage: FC = () => {
   const [portfolio, setPortfolio] = useState<string>('');
 
   
-
-
-
-
-  
 //access context of freelancer
 const {freelancerCon}:any= useContext(FreelancerContext); //asking the data
 console.log("Hereeeeeee the freelancer: ", freelancerCon);
-
-
-
-
-
-
 
 
   const navigateToUploadPage = (): void => {

@@ -1,5 +1,7 @@
 import { Session } from "inspector";
+import { useContext } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
+import FreelancerContext from "../UserVerificationManagement/Context/Context";
 
 // const userrole = sessionStorage.getItem('role') 
 // const userrole = "freelancer"; //change this to change user
@@ -9,6 +11,8 @@ export const Navbar = () => {
     const username = sessionStorage.getItem('username');
     const role = sessionStorage.getItem('role');
     // const role2 = 'admin'
+
+    const {setFreelancerCon,setFreelancerEmail} : any= useContext(FreelancerContext);
 
     const handleProfileClick = () => {
         if (role === 'freelancer') {
@@ -24,6 +28,12 @@ export const Navbar = () => {
         sessionStorage.removeItem('id');
         sessionStorage.removeItem('role');
         sessionStorage.removeItem('email');
+
+        //Context Null
+        setFreelancerCon(null);
+        setFreelancerEmail(null);
+
+        
 
         history.push('/HomePage');
     };

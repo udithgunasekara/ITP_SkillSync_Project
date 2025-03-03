@@ -126,6 +126,7 @@ const QualificationReview = () => {
       try {
         const response = await fetch(`http://localhost:8082/qualification/images/${username}`);
         const imagesData = await response.json();
+        
         const imagesByTitle: Record<string, QualificationImage> = {}; // Add index signature
 
         Object.keys(imagesData).forEach((title) => {
